@@ -1,972 +1,3 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Rootine">
-    <meta name="theme-color" content="#D97C46">
-    <meta name="description" content="Планировщик жизни по фазам цикла. Спорт, питание, работа — в согласии с твоим телом.">
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='44' fill='%23D97C46'/%3E%3Ctext x='96' y='124' font-size='110' text-anchor='middle'%3E🐝%3C/text%3E%3C/svg%3E">
-    <title>Rootine</title>
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-    <style>
-        :root {
-            --bg: #F4F7F0;
-            --card: #FFFFFF;
-            --text: #3A322C;
-            --text-secondary: #8B7E74;
-            --seed: #C8A882;
-            --sprout: #9CBA7F;
-            --bloom: #E8B4BC;
-            --fruit: #D4956E;
-            --accent: #9CBA7F;
-            --honey: #E8B86D;
-            --radius-xl: 32px;
-            --radius-lg: 24px;
-            --radius-md: 18px;
-            --radius-sm: 14px;
-            --shadow-sm: 0 1px 8px rgba(58, 50, 44, 0.04);
-            --shadow: 0 2px 16px rgba(58, 50, 44, 0.06);
-            --shadow-lg: 0 4px 24px rgba(58, 50, 44, 0.1);
-            --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            --transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1.2);
-        }
-
-        .onboarding-slides .slide { display: none; }
-        .onboarding-slides .slide.active { display: block; }
-        .onboarding-slide-icon { font-size: 60px; margin-bottom: 16px; }
-        .onboarding-slide-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
-        .onboarding-slide-text { font-size: 14px; color: var(--text-secondary); line-height: 1.5; }
-        .onboarding-dot { width: 8px; height: 8px; border-radius: 50%; background: #DDD; }
-        .onboarding-dot.active { background: var(--accent); }
-        .add-task-btn svg,
-        .nav-item.add svg { display: block; }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: var(--font);
-            background: var(--bg);
-            color: var(--text);
-            max-width: 430px;
-            margin: 0 auto;
-            min-height: 100vh;
-            min-height: 100dvh;
-            padding: 20px 20px 110px;
-            -webkit-tap-highlight-color: transparent;
-            user-select: none;
-            -webkit-user-select: none;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-        }
-
-        /* Шапка */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-        }
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .logo-icon {
-            width: 38px;
-            height: 38px;
-            background: var(--bloom);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            box-shadow: 0 4px 12px rgba(232, 180, 188, 0.4);
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .logo-icon:active {
-            transform: scale(.93);
-            box-shadow: 0 2px 8px rgba(232, 180, 188, 0.3);
-        }
-        .header-actions { display: flex; gap: 10px; }
-        .icon-btn {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            background: var(--card);
-            border: none;
-            font-size: 18px;
-            cursor: pointer;
-            box-shadow: var(--shadow-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .icon-btn:active {
-            transform: scale(.93);
-            box-shadow: var(--shadow);
-        }
-
-        /* Карточка фазы */
-        .phase-card {
-            background: var(--card);
-            border-radius: var(--radius-xl);
-            padding: 24px 24px 20px;
-            margin-bottom: 18px;
-            box-shadow: var(--shadow);
-            position: relative;
-            overflow: hidden;
-            border-left: 5px solid var(--fruit);
-            transition: border-color 0.5s, box-shadow 0.3s;
-        }
-        .phase-card.seed { border-left-color: var(--seed); }
-        .phase-card.sprout { border-left-color: var(--sprout); }
-        .phase-card.bloom { border-left-color: var(--bloom); }
-        .phase-card.fruit { border-left-color: var(--fruit); }
-        .phase-emoji {
-            font-size: 44px;
-            margin-bottom: 6px;
-            display: block;
-        }
-        .phase-name {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 4px;
-            word-break: break-word;
-        }
-        .phase-day { font-size: 14px; color: var(--text-secondary); }
-        .phase-watercolor {
-            position: absolute;
-            top: -30px;
-            right: -30px;
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            opacity: 0.1;
-            pointer-events: none;
-            transition: background 0.5s;
-            filter: blur(4px);
-        }
-        .phase-card.seed .phase-watercolor { background: var(--seed); }
-        .phase-card.sprout .phase-watercolor { background: var(--sprout); }
-        .phase-card.bloom .phase-watercolor { background: var(--bloom); }
-        .phase-card.fruit .phase-watercolor { background: var(--fruit); }
-
-        /* Календарь недели */
-        .week-calendar {
-            background: var(--card);
-            border-radius: var(--radius-lg);
-            padding: 20px 18px;
-            margin-bottom: 18px;
-            box-shadow: var(--shadow-sm);
-        }
-        .week-label {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-bottom: 14px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .week-row { display: flex; justify-content: space-between; gap: 2px; }
-        .week-day-col {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            padding: 4px 0;
-            border-radius: 14px;
-            background: transparent;
-            transition: background 0.2s;
-            outline: none;
-            -webkit-tap-highlight-color: transparent;
-            box-shadow: none;
-        }
-        .week-day-col:active { background: #F2F5ED; }
-        .week-day-name { font-size: 11px; color: var(--text-secondary); font-weight: 500; }
-        .week-dot {
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        .week-dot.seed-1 { background: #E8D9C8; }
-        .week-dot.seed-2 { background: #D9C4A9; }
-        .week-dot.seed-3 { background: #C8A882; }
-        .week-dot.seed-4 { background: #B89260; }
-        .week-dot.seed-5 { background: #A67C42; }
-
-        .week-dot.sprout-1 { background: #D4E4CC; }
-        .week-dot.sprout-2 { background: #B8CFA8; }
-        .week-dot.sprout-3 { background: #9CBA7F; }
-        .week-dot.sprout-4 { background: #7FA562; }
-        .week-dot.sprout-5 { background: #6B8E4E; }
-        .week-dot.sprout-6 { background: #5C7A3F; }
-        .week-dot.sprout-7 { background: #4E6832; }
-        .week-dot.sprout-8 { background: #3F5626; }
-        .week-dot.sprout-9 { background: #2F441B; }
-
-        .week-dot.bloom-1 { background: #F2D0D5; }
-        .week-dot.bloom-2 { background: #E8B4BC; }
-        .week-dot.bloom-3 { background: #D4888C; }
-
-        .week-dot.fruit-1 { background: #F0D5C0; }
-        .week-dot.fruit-2 { background: #E8C0A0; }
-        .week-dot.fruit-3 { background: #D4956E; }
-        .week-dot.fruit-4 { background: #C07C4A; }
-        .week-dot.fruit-5 { background: #A86836; }
-        .week-dot.fruit-6 { background: #8F5225; }
-        .week-dot.fruit-7 { background: #753F18; }
-        .week-dot.fruit-8 { background: #5C2E0F; }
-        .week-dot.fruit-9 { background: #441F08; }
-        .week-dot.fruit-10 { background: #2E1203; }
-        .week-dot.fruit-11 { background: #1A0800; }
-
-        .week-dot.today {
-            box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--accent);
-            transform: scale(1.08);
-        }
-        .week-date { font-size: 10px; color: var(--text-secondary); margin-top: 2px; }
-
-        /* Ресурсы */
-        .resources-card {
-            background: var(--card);
-            border-radius: var(--radius-lg);
-            padding: 22px 20px;
-            margin-bottom: 18px;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.4s ease;
-            overflow: hidden;
-        }
-        .resources-card.saved { padding: 14px 20px; }
-        .resources-card.saved .resources-title,
-        .resources-card.saved .resource-row,
-        .resources-card.saved .sliders-container { display: none; }
-        .saved-header {
-            display: none;
-            align-items: center;
-            gap: 6px;
-            font-size: 14px;
-        }
-        .resources-card.saved .saved-header { display: flex; }
-        .saved-dot { color: var(--accent); font-weight: 700; }
-        .saved-edit {
-            color: var(--accent);
-            cursor: pointer;
-            font-weight: 500;
-            text-decoration: underline;
-        }
-        .saved-edit:hover { opacity: 0.8; }
-        .resources-title {
-            font-size: 15px;
-            font-weight: 600;
-            margin-bottom: 18px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            text-align: center;
-        }
-        .sliders-container { display: block; }
-        .resource-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 14px;
-        }
-        .resource-emoji { font-size: 22px; width: 28px; text-align: center; }
-        .resource-label { font-size: 13px; color: var(--text-secondary); width: 55px; font-weight: 500; }
-        .resource-slider-bg {
-            flex: 1;
-            height: 10px;
-            background: #EDE8E2;
-            border-radius: 10px;
-            position: relative;
-            cursor: pointer;
-            overflow: visible;
-            touch-action: none;
-        }
-        .resource-slider-fill {
-            height: 100%;
-            border-radius: 10px;
-            transition: width 0.35s cubic-bezier(0.25, 0.8, 0.25, 1.2);
-            position: relative;
-        }
-        .resource-slider-fill.physical { background: var(--sprout); }
-        .resource-slider-fill.cognitive { background: var(--honey); }
-        .resource-slider-fill.emotional { background: var(--bloom); }
-        .resource-thumb {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: white;
-            border: 3px solid;
-            position: absolute;
-            right: -14px;
-            top: -9px;
-            cursor: grab;
-            transition: transform 0.15s, border-color 0.4s, box-shadow 0.2s;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-            z-index: 2;
-        }
-        .resource-thumb.dragging {
-            transform: scale(1.2);
-            cursor: grabbing;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-        }
-        .resource-thumb.physical { border-color: var(--sprout); }
-        .resource-thumb.cognitive { border-color: var(--honey); }
-        .resource-thumb.emotional { border-color: var(--bloom); }
-        .resource-value { font-size: 15px; font-weight: 700; width: 26px; text-align: right; }
-
-        /* Рекомендация */
-        .recommendation {
-            background: var(--card);
-            border-radius: var(--radius-lg);
-            padding: 18px 20px;
-            margin-bottom: 18px;
-            box-shadow: var(--shadow-sm);
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-        }
-        .recommendation-icon { font-size: 28px; flex-shrink: 0; margin-top: 1px; }
-        .recommendation-text { font-size: 14px; line-height: 1.6; color: var(--text); }
-
-        /* Задачи */
-        .tasks-card {
-            background: var(--card);
-            border-radius: var(--radius-lg);
-            padding: 20px;
-            margin-bottom: 18px;
-            box-shadow: var(--shadow-sm);
-        }
-        .tasks-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-        .tasks-title { font-size: 15px; font-weight: 600; }
-        .add-task-btn {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background-color: #9CBA7F;
-            color: white;
-            border: none;
-            font-size: 26px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-            padding: 0;
-            box-shadow: 0 4px 12px rgba(156, 186, 127, 0.35);
-        }
-        .add-task-btn:active { transform: scale(0.9); background-color: #7a9a6f; }
-        .task-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 14px 4px;
-            border-bottom: 1px solid #F5F1EB;
-            transition: background 0.2s;
-            border-radius: 8px;
-        }
-        .task-item:last-child { border-bottom: none; }
-        .task-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
-        .task-dot.green { background: #7A9A7E; }
-        .task-dot.yellow { background: #E8B86D; }
-        .task-dot.red { background: #D97C5B; }
-        .task-info { flex: 1; min-width: 0; }
-        .task-name {
-            font-size: 14px;
-            font-weight: 500;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .task-project { font-size: 12px; color: var(--text-secondary); }
-        .task-badges {
-            display: flex;
-            gap: 6px;
-            font-size: 11px;
-            color: var(--text-secondary);
-            flex-shrink: 0;
-        }
-        .empty-state { text-align: center; padding: 30px 10px; color: var(--text-secondary); }
-        .empty-state-emoji { font-size: 40px; margin-bottom: 10px; }
-        .empty-state-text { font-size: 14px; line-height: 1.5; }
-
-        /* Экран ритма */
-        .rhythm-screen { display: none; }
-        .rhythm-screen.active { display: block; }
-        .rhythm-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
-        .rhythm-back {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: var(--card);
-            border: none;
-            font-size: 18px;
-            cursor: pointer;
-            box-shadow: var(--shadow-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .rhythm-title { font-size: 18px; font-weight: 700; }
-
-        .month-calendar {
-            background: var(--card);
-            border-radius: var(--radius-lg);
-            padding: 20px 18px;
-            margin-bottom: 18px;
-            box-shadow: var(--shadow-sm);
-        }
-        .month-name { text-align: center; font-size: 14px; font-weight: 600; margin-bottom: 14px; color: var(--text); }
-        .month-days-header {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            text-align: center;
-            font-size: 10px;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        .month-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px 0; text-align: center; }
-        .month-dot-cell {
-            padding: 6px 0;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2px;
-        }
-        .month-dot-cell .dot-mini {
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            transition: all 0.2s;
-        }
-        .month-dot-cell.selected .dot-mini {
-            box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--accent);
-            transform: scale(1.1);
-        }
-        .month-dot-cell .dot-num { font-size: 9px; color: var(--text-secondary); }
-
-        .dot-mini.seed-1 { background: #E8D9C8; }
-        .dot-mini.seed-2 { background: #D9C4A9; }
-        .dot-mini.seed-3 { background: #C8A882; }
-        .dot-mini.seed-4 { background: #B89260; }
-        .dot-mini.seed-5 { background: #A67C42; }
-        .dot-mini.sprout-1 { background: #D4E4CC; }
-        .dot-mini.sprout-2 { background: #B8CFA8; }
-        .dot-mini.sprout-3 { background: #9CBA7F; }
-        .dot-mini.sprout-4 { background: #7FA562; }
-        .dot-mini.sprout-5 { background: #6B8E4E; }
-        .dot-mini.sprout-6 { background: #5C7A3F; }
-        .dot-mini.sprout-7 { background: #4E6832; }
-        .dot-mini.sprout-8 { background: #3F5626; }
-        .dot-mini.sprout-9 { background: #2F441B; }
-        .dot-mini.bloom-1 { background: #F2D0D5; }
-        .dot-mini.bloom-2 { background: #E8B4BC; }
-        .dot-mini.bloom-3 { background: #D4888C; }
-        .dot-mini.fruit-1 { background: #F0D5C0; }
-        .dot-mini.fruit-2 { background: #E8C0A0; }
-        .dot-mini.fruit-3 { background: #D4956E; }
-        .dot-mini.fruit-4 { background: #C07C4A; }
-        .dot-mini.fruit-5 { background: #A86836; }
-        .dot-mini.fruit-6 { background: #8F5225; }
-        .dot-mini.fruit-7 { background: #753F18; }
-        .dot-mini.fruit-8 { background: #5C2E0F; }
-        .dot-mini.fruit-9 { background: #441F08; }
-        .dot-mini.fruit-10 { background: #2E1203; }
-        .dot-mini.fruit-11 { background: #1A0800; }
-        .dot-mini.empty { background: transparent; }
-
-        /* Волны */
-        .waves-card {
-            background: var(--card);
-            border-radius: var(--radius-lg);
-            padding: 20px 18px;
-            margin-bottom: 18px;
-            box-shadow: var(--shadow-sm);
-        }
-        .waves-title {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-bottom: 16px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            text-align: center;
-        }
-        .waves-legend { display: flex; justify-content: center; gap: 16px; margin-bottom: 10px; font-size: 11px; }
-        .waves-legend span { display: flex; align-items: center; gap: 4px; }
-        .legend-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
-        .legend-dot.cog { background: var(--honey); }
-        .legend-dot.phys { background: var(--sprout); }
-        .legend-dot.emo { background: var(--bloom); }
-        .waves-svg { width: 100%; height: 100px; margin-bottom: 8px; }
-        .waves-labels { display: flex; justify-content: space-between; font-size: 9px; color: var(--text-secondary); padding: 0 4px; }
-
-        /* Инфо о дне в ритме */
-        .rhythm-day-info {
-            background: var(--card);
-            border-radius: var(--radius-lg);
-            padding: 16px 20px;
-            margin-bottom: 18px;
-            box-shadow: var(--shadow-sm);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            justify-content: center;
-        }
-        .rhythm-day-info .info-phase { font-size: 13px; color: var(--text-secondary); }
-        .rhythm-day-info .info-values { display: flex; gap: 10px; font-size: 14px; font-weight: 600; }
-
-        /* Toast вверху */
-        #toast {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #3A322C;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 13px;
-            z-index: 300;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
-            white-space: nowrap;
-        }
-
-        /* Нижняя навигация */
-        .bottom-nav {
-            position: fixed;
-            bottom: 18px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: calc(100% - 36px);
-            max-width: 394px;
-            background: var(--card);
-            border-radius: var(--radius-xl);
-            display: flex;
-            justify-content: space-around;
-            align-items: flex-end;
-            padding: 10px 6px 14px;
-            box-shadow: 0 -2px 24px rgba(58, 50, 44, 0.1);
-            z-index: 100;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 3px;
-            font-size: 10px;
-            color: var(--text-secondary);
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 6px 12px;
-            border-radius: 16px;
-            transition: all 0.2s;
-            font-family: var(--font);
-            font-weight: 500;
-        }
-        .nav-item.active { color: var(--accent); font-weight: 700; }
-        .nav-item .nav-emoji { font-size: 22px; transition: transform 0.2s; }
-        .nav-item:active .nav-emoji { transform: scale(0.85); }
-        .nav-item.add { position: relative; top: -36px; }
-        .nav-item.add .nav-emoji {
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            background-color: #9CBA7F;
-            color: white;
-            border: none;
-            font-size: 26px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-            padding: 0;
-        }
-        .nav-item.add:active .nav-emoji { transform: scale(0.9); }
-
-        /* Модалки */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.45);
-            z-index: 200;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
-        }
-        .modal-overlay.open { opacity: 1; pointer-events: auto; }
-        .modal {
-            background: white;
-            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-            padding: 28px 22px 36px;
-            width: 100%;
-            max-width: 430px;
-            max-height: 85vh;
-            overflow-y: auto;
-            transform: translateY(40px);
-            transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-        .modal-overlay.open .modal { transform: translateY(0); }
-        .modal-handle {
-            width: 40px;
-            height: 4px;
-            background: #DDD8D1;
-            border-radius: 2px;
-            margin: 0 auto 22px;
-        }
-        .modal-title { font-size: 22px; font-weight: 700; margin-bottom: 22px; letter-spacing: -0.3px; }
-        .modal-input {
-            width: 100%;
-            padding: 15px 16px;
-            border: 1.5px solid #E8E3DC;
-            border-radius: var(--radius-md);
-            font-size: 15px;
-            font-family: var(--font);
-            margin-bottom: 12px;
-            background: #FAFAF8;
-            transition: border-color 0.2s, box-shadow 0.2s;
-            -webkit-appearance: none;
-            appearance: none;
-        }
-        .modal-input:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(212, 165, 165, 0.1);
-        }
-        select.modal-input {
-            cursor: pointer;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238B7E74' fill='none' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 16px center;
-            padding-right: 40px;
-        }
-        .modal-label { font-size: 13px; color: var(--text-secondary); margin-bottom: 6px; margin-top: 10px; font-weight: 500; }
-        .slider-pair { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
-        .slider-pair span { font-size: 12px; color: var(--text-secondary); width: 20px; text-align: center; }
-        .slider-pair input[type="range"] { flex: 1; accent-color: var(--accent); height: 6px; cursor: pointer; }
-        .modal-save {
-            width: 100%;
-            padding: 16px;
-            background: var(--accent);
-            color: white;
-            border: none;
-            border-radius: var(--radius-md);
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 24px;
-            transition: background 0.2s, transform 0.15s;
-            font-family: var(--font);
-            letter-spacing: -0.2px;
-        }
-        .modal-save:active { background: #b88; transform: scale(0.98); }
-        .modal-close {
-            position: static;
-            margin: 12px auto 0;
-            width: 100%;
-            background: transparent;
-            font-size: 14px;
-            color: var(--text-secondary);
-            border: none;
-            cursor: pointer;
-        }
-
-        /* Кнопки авторизации */
-        .auth-btn {
-            width: 100%;
-            padding: 14px;
-            border: 1.5px solid #E8E3DC;
-            border-radius: var(--radius-md);
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: white;
-            transition: background 0.2s;
-        }
-        .auth-btn.google { border-color: #4285F4; color: #4285F4; }
-        .auth-btn.email { border-color: var(--text); color: var(--text); }
-        .auth-btn.anonymous { background: #F5F2EC; border-color: transparent; color: var(--text-secondary); }
-        .auth-btn:active { background: #f0f0f0; }
-
-        /* Недельные дни для повторов */
-        .week-days-select { display: flex; gap: 6px; flex-wrap: wrap; }
-        .week-day-chip {
-            padding: 6px 10px;
-            border-radius: 20px;
-            background: #F2EFE9;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: none;
-            font-family: var(--font);
-        }
-        .week-day-chip.active { background: var(--accent); color: white; }
-
-        /* Адаптив */
-        @media (max-width: 380px) {
-            body { padding: 14px 14px 105px; }
-            .week-dot { width: 28px; height: 28px; }
-            .phase-emoji { font-size: 36px; }
-            .phase-name { font-size: 19px; }
-        }
-    </style>
-</head>
-<body>
-
-<!-- ==================== ОСНОВНОЙ ЭКРАН ==================== -->
-<div id="mainScreen">
-
-    <!-- Шапка -->
-    <div class="header">
-        <div class="logo">
-            <div class="logo-icon" id="profileBtn" title="Профиль">🐝</div>
-            Rootine
-        </div>
-        <div class="header-actions">
-            <button class="icon-btn" id="settingsBtn" title="Настройки">⚙️</button>
-            <button class="icon-btn" id="notificationsBtn" title="Уведомления">🔔</button>
-        </div>
-    </div>
-
-    <!-- Карточка фазы -->
-    <div class="phase-card" id="phaseCard">
-        <div class="phase-watercolor"></div>
-        <span class="phase-emoji" id="phaseEmoji">🌸</span>
-        <div class="phase-name" id="phaseName">Расцветай, Ева</div>
-        <div class="phase-day" id="phaseDay">День 16 из 28</div>
-    </div>
-
-    <!-- Календарь недели -->
-    <div class="week-calendar">
-        <div class="week-label">📅 Твоя неделя</div>
-        <div class="week-row" id="weekRow"></div>
-    </div>
-
-    <!-- Настройка цикла -->
-    <div id="cycleSetupCard" style="margin-bottom:18px; padding:14px; background:white; border-radius:18px; box-shadow:var(--shadow-sm); text-align:center; font-size:14px;">
-        🌱 Сейчас показывается пример цикла.
-        <br><br>
-        <button class="modal-save" style="margin-top:0" onclick="setupCycle()">Настроить цикл под себя</button>
-    </div>
-
-    <!-- Ресурсы -->
-    <div class="resources-card" id="resourcesCard">
-        <div class="saved-header" id="savedHeader">
-            <span class="saved-dot">✓ Сохранено</span>
-            <span style="color:var(--text-secondary)">·</span>
-            <span class="saved-edit" id="editMoodLink">Изменить</span>
-        </div>
-        <div class="resources-title">✨ Как ты себя чувствуешь?</div>
-        <div class="sliders-container">
-            <div class="resource-row">
-                <span class="resource-emoji">⚡️</span>
-                <span class="resource-label">Тело</span>
-                <div class="resource-slider-bg" id="sliderBgPhysical">
-                    <div class="resource-slider-fill physical" id="sliderFillPhysical" style="width:70%;">
-                        <div class="resource-thumb physical" id="thumbPhysical"></div>
-                    </div>
-                </div>
-                <span class="resource-value" id="valPhysical">7</span>
-            </div>
-            <div class="resource-row">
-                <span class="resource-emoji">🧩</span>
-                <span class="resource-label">Разум</span>
-                <div class="resource-slider-bg" id="sliderBgCognitive">
-                    <div class="resource-slider-fill cognitive" id="sliderFillCognitive" style="width:90%;">
-                        <div class="resource-thumb cognitive" id="thumbCognitive"></div>
-                    </div>
-                </div>
-                <span class="resource-value" id="valCognitive">9</span>
-            </div>
-            <div class="resource-row">
-                <span class="resource-emoji">❤️</span>
-                <span class="resource-label">Эмоции</span>
-                <div class="resource-slider-bg" id="sliderBgEmotional">
-                    <div class="resource-slider-fill emotional" id="sliderFillEmotional" style="width:50%;">
-                        <div class="resource-thumb emotional" id="thumbEmotional"></div>
-                    </div>
-                </div>
-                <span class="resource-value" id="valEmotional">5</span>
-            </div>
-        </div>
-    </div>
-
-    <button id="saveMoodBtn" class="modal-save" style="margin-top:10px; margin-bottom:8px;">Сохранить состояние</button>
-
-    <!-- Рекомендация -->
-    <div class="recommendation" id="recommendationBox">
-        <span class="recommendation-icon">🐝</span>
-        <span class="recommendation-text" id="recommendationText">Расцветай. Ты на пике обаяния — назначай важные встречи и переговоры.</span>
-    </div>
-
-    <!-- Задачи -->
-    <div class="tasks-card">
-        <div class="tasks-header">
-            <span class="tasks-title">📋 Задачи на сегодня</span>
-            <button class="add-task-btn" onclick="openModal()" aria-label="Добавить задачу">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 5V19M5 12H19" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-                </svg>
-            </button>
-        </div>
-        <div id="tasksList"></div>
-    </div>
-</div>
-
-<!-- ==================== ЭКРАН РИТМА ==================== -->
-<div class="rhythm-screen" id="rhythmScreen">
-    <div class="rhythm-header">
-        <button class="rhythm-back" id="rhythmBackBtn">←</button>
-        <div class="rhythm-title">📊 Ритм</div>
-    </div>
-
-    <!-- Календарь месяца -->
-    <div class="month-calendar" id="monthCalendar">
-        <div class="month-name" id="monthName">Июнь 2026</div>
-        <div class="month-days-header">
-            <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
-        </div>
-        <div class="month-grid" id="monthGrid"></div>
-    </div>
-
-    <!-- Волны показателей -->
-    <div class="waves-card">
-        <div class="waves-title">🌊 Показатели за месяц</div>
-        <div class="waves-legend">
-            <span><span class="legend-dot cog"></span> Разум</span>
-            <span><span class="legend-dot phys"></span> Тело</span>
-            <span><span class="legend-dot emo"></span> Эмоции</span>
-        </div>
-        <svg class="waves-svg" id="wavesSvg" viewBox="0 0 360 100" preserveAspectRatio="none"></svg>
-        <div class="waves-labels" id="wavesLabels"></div>
-    </div>
-
-    <!-- Инфо о выбранном дне -->
-    <div class="rhythm-day-info" id="rhythmDayInfo">
-        <span class="info-phase" id="infoPhase">🌸 Расцветай</span>
-        <span style="color:var(--text-secondary)">·</span>
-        <span class="info-values" id="infoValues">🧠8 💪3 ❤️7</span>
-    </div>
-</div>
-
-<!-- ==================== НИЖНЯЯ НАВИГАЦИЯ ==================== -->
-<div class="bottom-nav" id="bottomNav">
-    <button class="nav-item active" data-tab="today"><span class="nav-emoji">🏠</span>Сегодня</button>
-    <button class="nav-item" data-tab="projects"><span class="nav-emoji">📋</span>Проекты</button>
-    <button class="nav-item add" onclick="openModal()" aria-label="Добавить задачу">
-        <span class="nav-emoji">
-            <svg width="23" height="23" viewBox="0 0 24 24" fill="none">
-                <path d="M12 5V19M5 12H19" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-            </svg>
-        </span>
-    </button>
-    <button class="nav-item" data-tab="rhythm"><span class="nav-emoji">📊</span>Ритм</button>
-    <button class="nav-item" data-tab="inbox"><span class="nav-emoji">📥</span>Копилка</button>
-</div>
-
-<!-- ==================== МОДАЛКИ ==================== -->
-<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
-    <div class="modal" onclick="event.stopPropagation()">
-        <div class="modal-handle"></div>
-        <div class="modal-title">🌱 Новая задача</div>
-        <input class="modal-input" type="text" placeholder="Название задачи" id="taskNameInput" autocomplete="off">
-        <select class="modal-input" id="taskProjectInput">
-            <option value="Копилка">📥 Копилка (без проекта)</option>
-            <option value="Разум">🧠 Разум</option>
-            <option value="Тело">⚡️ Тело</option>
-            <option value="Душа">❤️ Душа</option>
-        </select>
-        <div class="modal-label">🧠 Умственная сложность: <strong id="cogVal">5</strong></div>
-        <div class="slider-pair">
-            <span>1</span>
-            <input type="range" min="1" max="10" value="5" id="taskCognitive" oninput="document.getElementById('cogVal').textContent=this.value">
-            <span>10</span>
-        </div>
-        <div class="modal-label">💪 Физическая сложность: <strong id="physVal">5</strong></div>
-        <div class="slider-pair">
-            <span>1</span>
-            <input type="range" min="1" max="10" value="5" id="taskPhysical" oninput="document.getElementById('physVal').textContent=this.value">
-            <span>10</span>
-        </div>
-        <div class="modal-label">❤️ Моральная нагрузка: <strong id="moralVal">5</strong> <span style="opacity:0.6; font-size:11px;">(не влияет на подбор)</span></div>
-        <div class="slider-pair">
-            <span>1</span>
-            <input type="range" min="1" max="10" value="5" id="taskMoral" oninput="document.getElementById('moralVal').textContent=this.value" style="opacity:0.5;">
-            <span>10</span>
-        </div>
-        <label style="display:flex; align-items:center; gap:8px; margin-top:8px; font-size:14px;">
-            <input type="checkbox" id="taskCyclic"> Повторять еженедельно
-        </label>
-        <div id="cyclicDays" style="display:none; margin-top:8px;">
-            <div class="week-days-select" id="weekDaysSelect"></div>
-        </div>
-        <button class="modal-save" onclick="addTask()">✨ Сохранить задачу</button>
-        <button class="modal-close" onclick="closeModal()">Отмена</button>
-    </div>
-</div>
-
-<div class="modal-overlay" id="authModalOverlay" onclick="closeAuthModalOutside(event)">
-    <div class="modal" onclick="event.stopPropagation()">
-        <div class="modal-handle"></div>
-        <div class="modal-title">🐝 Войти или попробовать</div>
-        <button class="auth-btn google" onclick="alert('Google Auth (демо)')">G Войти через Google</button>
-        <button class="auth-btn email" onclick="alert('Email Auth (демо)')">✉️ Войти через почту</button>
-        <button class="auth-btn anonymous" onclick="startAnonymous()">👤 Попробовать без регистрации</button>
-        <p style="font-size:12px; color:var(--text-secondary); text-align:center; margin-top:12px;">Без регистрации данные не сохранятся после закрытия</p>
-    </div>
-</div>
-
-<!-- Toast -->
-<div id="toast"></div>
-
-<!-- Онбординг -->
-<div class="modal-overlay" id="onboardingOverlay">
-    <div class="modal" style="text-align:center; padding-top:40px;">
-        <div class="onboarding-slides" id="onboardingSlides"></div>
-        <div style="display:flex; justify-content:center; gap:8px; margin:20px 0;" id="onboardingDots"></div>
-        <button class="modal-save" id="onboardingNext">Далее</button>
-        <button class="modal-close" style="position:static; margin:8px auto 0; width:auto; background:transparent; font-size:14px;" onclick="closeOnboarding()">Пропустить</button>
-    </div>
-</div>
-
 <script>
     // ===== FIREBASE =====
     const firebaseConfig = {
@@ -1007,7 +38,7 @@
     let tasks = [];
     let userName = 'Ева';
     let isAnonymous = true;
-    let selectedMoodDate = null;
+    let moodSavedForActiveDate = false;
     let rhythmSelectedDay = new Date().getDate();
 
     const defaultTasks = [
@@ -1060,28 +91,97 @@
         return ((diff % cycleLength) + cycleLength) % cycleLength + 1;
     }
 
+    function getActiveCheckinDate() {
+        return centerDate.toISOString().split('T')[0];
+    }
+
+    function isMoodSavedForDate(dateStr) {
+        const history = JSON.parse(localStorage.getItem('checkins') || '[]');
+        return history.some(item => item.date === dateStr);
+    }
+
+    function loadMoodForDate(dateStr) {
+        const history = JSON.parse(localStorage.getItem('checkins') || '[]');
+        const checkin = history.find(item => item.date === dateStr);
+        if (checkin) {
+            resources.physical = checkin.physical;
+            resources.cognitive = checkin.cognitive;
+            resources.emotional = checkin.emotional;
+            updateResourceSliders();
+        }
+    }
+
+    // ===== ПЕРЕКЛЮЧЕНИЕ ЭКРАНОВ =====
+    function showTab(tab) {
+        // Скрываем все экраны
+        document.getElementById('mainScreen').style.display = 'none';
+        document.getElementById('rhythmScreen').classList.remove('active');
+        document.getElementById('bottomNav').style.display = 'none';
+
+        // Сбрасываем активные кнопки навигации
+        document.querySelectorAll('.nav-item[data-tab]').forEach(b => b.classList.remove('active'));
+
+        // Показываем нужный экран
+        if (tab === 'rhythm') {
+            document.getElementById('rhythmScreen').classList.add('active');
+            rhythmSelectedDay = new Date().getDate();
+            renderRhythm();
+        } else if (tab === 'inbox') {
+            document.getElementById('mainScreen').style.display = 'block';
+            document.getElementById('bottomNav').style.display = 'flex';
+            const inboxTasks = tasks.filter(t => t.project === 'Копилка');
+            if (inboxTasks.length === 0) {
+                showToast('📥 Копилка пуста — добавляй задачи без проекта');
+            } else {
+                const taskList = inboxTasks.map(t => '• ' + t.name).join('\n');
+                alert('📥 Копилка (' + inboxTasks.length + ' задач):\n\n' + taskList);
+            }
+        } else if (tab === 'projects') {
+            document.getElementById('mainScreen').style.display = 'block';
+            document.getElementById('bottomNav').style.display = 'flex';
+            const projects = [...new Set(tasks.map(t => t.project))];
+            if (projects.length === 0) {
+                showToast('Пока проектов нет');
+            } else {
+                const projectInfo = projects.map(p => {
+                    const count = tasks.filter(t => t.project === p).length;
+                    return '📁 ' + p + ' (' + count + ' задач)';
+                }).join('\n');
+                alert('Проекты:\n\n' + projectInfo);
+            }
+        } else {
+            // today
+            document.getElementById('mainScreen').style.display = 'block';
+            document.getElementById('bottomNav').style.display = 'flex';
+            updateUI();
+        }
+
+        // Подсвечиваем активную кнопку
+        const activeBtn = document.querySelector(`.nav-item[data-tab="${tab}"]`);
+        if (activeBtn) activeBtn.classList.add('active');
+    }
+
     // ===== ОБНОВЛЕНИЕ UI =====
     function updateUI() {
         const phase = getCurrentPhase();
         const card = document.getElementById('phaseCard');
         card.className = 'phase-card ' + phase.id;
         document.getElementById('phaseEmoji').textContent = phase.emoji;
-    
+
         const phaseNameEl = document.getElementById('phaseName');
         if (userName && userName.trim() !== '') {
             phaseNameEl.textContent = phase.title + ', ' + userName;
         } else {
             phaseNameEl.textContent = phase.title;
         }
-    
+
         const shownDay = demoCycle ? 6 : currentDay;
         document.getElementById('phaseDay').textContent = `День ${shownDay} из ${cycleLength} · ${phase.name}`;
         document.getElementById('recommendationText').textContent = beePhrases[phase.id];
-    
+
         renderWeekCalendar();
         updateResourceSliders();
         renderTasks();
-        updateMoodFromHistory();  // ← ДОБАВЛЯЕМ ЭТУ СТРОКУ
         updateMoodUI();
         saveData();
     }
@@ -1120,6 +220,12 @@
                 centerDate = new Date(d);
                 currentDay = cycleDay;
                 demoCycle = false;
+                // Загружаем настроение для выбранной даты
+                const dateStr = getActiveCheckinDate();
+                moodSavedForActiveDate = isMoodSavedForDate(dateStr);
+                if (moodSavedForActiveDate) {
+                    loadMoodForDate(dateStr);
+                }
                 updateUI();
                 showToast(`День ${currentDay} · ${getCurrentPhase().title}`);
             });
@@ -1139,43 +245,15 @@
     function updateMoodUI() {
         const card = document.getElementById('resourcesCard');
         const saveBtn = document.getElementById('saveMoodBtn');
-        const checkDate = getCurrentCheckinDate();
-        const today = new Date().toISOString().split('T')[0];
-        const history = JSON.parse(localStorage.getItem('checkins') || '[]');
-        const existing = history.find(item => item.date === checkDate);
-    
-        if (existing) {
-            // Для этого дня уже сохранено настроение
+
+        if (moodSavedForActiveDate) {
             card.classList.add('saved');
             saveBtn.style.display = 'none';
-    
-            // Если это НЕ сегодня — показываем что данные сохранены, но кнопку не прячем
-            if (checkDate !== today) {
-                card.classList.add('saved');
-                saveBtn.style.display = 'none';
-                // Загружаем сохранённые значения в слайдеры
-                resources.physical = existing.physical;
-                resources.cognitive = existing.cognitive;
-                resources.emotional = existing.emotional;
-                updateResourceSliders();
-            }
-            selectedMoodDate = checkDate;
         } else {
-            // Для этого дня ещё нет сохранённого настроения
             card.classList.remove('saved');
             saveBtn.style.display = 'block';
-            selectedMoodDate = null;
-    
-            // Если это не сегодня — сбрасываем слайдеры на дефолт
-            if (checkDate !== today) {
-                resources.physical = 5;
-                resources.cognitive = 5;
-                resources.emotional = 5;
-                updateResourceSliders();
-            }
         }
     }
-
 
     function renderTasks() {
         const container = document.getElementById('tasksList');
@@ -1240,24 +318,12 @@
             } catch (e) {
                 resetData();
             }
-            updateMoodFromHistory();
         } else {
             resetData();
         }
-    }
-
-    function updateMoodFromHistory() {
-    // Проверяем сохранено ли настроение для ТЕКУЩЕГО выбранного дня
-    const checkDate = getCurrentCheckinDate();
-    const history = JSON.parse(localStorage.getItem('checkins') || '[]');
-    const existing = history.find(item => item.date === checkDate);
-    selectedMoodDate = existing ? checkDate : null;
-    }
-
-    function getCurrentCheckinDate() {
-    // Возвращает дату, которая сейчас активна в календаре
-    const center = new Date(centerDate);
-    return center.toISOString().split('T')[0];
+        // Проверяем сохранено ли настроение на сегодня
+        const todayStr = new Date().toISOString().split('T')[0];
+        moodSavedForActiveDate = isMoodSavedForDate(todayStr);
     }
 
     function resetData() {
@@ -1535,22 +601,7 @@
                 showRhythmScreen();
                 return;
             }
-
-            document.querySelectorAll('.nav-item[data-tab]').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            if (tab === 'projects') {
-                const projects = [...new Set(tasks.map(t => t.project))];
-                showToast(projects.length ? 'Проекты: ' + projects.join(', ') : 'Пока проектов нет');
-            } else if (tab === 'inbox') {
-                const inboxTasks = tasks.filter(t => t.project === 'Копилка');
-                if (inboxTasks.length === 0) {
-                    showToast('📥 Копилка пуста — добавляй задачи без проекта');
-                } else {
-                    const taskList = inboxTasks.map(t => '• ' + t.name).join('\n');
-                    alert('📥 Копилка (' + inboxTasks.length + ' задач):\n\n' + taskList);
-                }
-            }
+            showTab(tab);
         });
     });
 
@@ -1638,29 +689,29 @@
 
     // ===== СОХРАНЕНИЕ НАСТРОЕНИЯ =====
     document.getElementById('saveMoodBtn').addEventListener('click', () => {
-        const checkDate = getCurrentCheckinDate();
-        const todayCheckin = {
-            date: checkDate,
+        const dateStr = getActiveCheckinDate();
+        const checkin = {
+            date: dateStr,
             cycleDay: currentDay,
             physical: resources.physical,
             cognitive: resources.cognitive,
             emotional: resources.emotional
         };
         const history = JSON.parse(localStorage.getItem('checkins') || '[]');
-        const existingIndex = history.findIndex(item => item.date === checkDate);
+        const existingIndex = history.findIndex(item => item.date === dateStr);
         if (existingIndex >= 0) {
-            history[existingIndex] = todayCheckin;
+            history[existingIndex] = checkin;
         } else {
-            history.push(todayCheckin);
+            history.push(checkin);
         }
         localStorage.setItem('checkins', JSON.stringify(history));
-        selectedMoodDate = checkDate;
+        moodSavedForActiveDate = true;
         updateUI();
-        showToast('Спасибо! Прогноз будет становиться точнее 💛');
+        showToast('Состояние сохранено 💛');
     });
 
     document.getElementById('editMoodLink').addEventListener('click', () => {
-        selectedMoodDate = null;
+        moodSavedForActiveDate = false;
         updateUI();
         showToast('Можешь изменить оценку ✨');
     });
@@ -1678,5 +729,3 @@
         });
     }
 </script>
-</body>
-</html>
