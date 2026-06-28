@@ -631,36 +631,6 @@
         }
         .month-dot-cell .dot-num { font-size: 9px; color: var(--text-secondary); }
 
-        .dot-mini.seed-1 { background: #E8D9C8; }
-        .dot-mini.seed-2 { background: #D9C4A9; }
-        .dot-mini.seed-3 { background: #C8A882; }
-        .dot-mini.seed-4 { background: #B89260; }
-        .dot-mini.seed-5 { background: #A67C42; }
-        .dot-mini.sprout-1 { background: #D4E4CC; }
-        .dot-mini.sprout-2 { background: #B8CFA8; }
-        .dot-mini.sprout-3 { background: #9CBA7F; }
-        .dot-mini.sprout-4 { background: #7FA562; }
-        .dot-mini.sprout-5 { background: #6B8E4E; }
-        .dot-mini.sprout-6 { background: #5C7A3F; }
-        .dot-mini.sprout-7 { background: #4E6832; }
-        .dot-mini.sprout-8 { background: #3F5626; }
-        .dot-mini.sprout-9 { background: #2F441B; }
-        .dot-mini.bloom-1 { background: #F2D0D5; }
-        .dot-mini.bloom-2 { background: #E8B4BC; }
-        .dot-mini.bloom-3 { background: #D4888C; }
-        .dot-mini.fruit-1 { background: #F0D5C0; }
-        .dot-mini.fruit-2 { background: #E8C0A0; }
-        .dot-mini.fruit-3 { background: #D4956E; }
-        .dot-mini.fruit-4 { background: #C07C4A; }
-        .dot-mini.fruit-5 { background: #A86836; }
-        .dot-mini.fruit-6 { background: #8F5225; }
-        .dot-mini.fruit-7 { background: #753F18; }
-        .dot-mini.fruit-8 { background: #5C2E0F; }
-        .dot-mini.fruit-9 { background: #441F08; }
-        .dot-mini.fruit-10 { background: #2E1203; }
-        .dot-mini.fruit-11 { background: #1A0800; }
-        .dot-mini.empty { background: transparent; }
-
         /* Волны */
         .waves-card {
             background: var(--card);
@@ -1352,14 +1322,6 @@
     ];
 
     // ===== УТИЛИТЫ =====
-    function getCurrentPhase(day) {
-        if (!day) day = currentDay;
-        var result = phaseData[3];
-        phaseData.forEach(function(p) {
-            if (p.days.indexOf(day) !== -1) result = p;
-        });
-        return result;
-    }
 
     function getTaskStatus(task) {
         if (task.forced) return 'green';
@@ -1724,6 +1686,10 @@
                 }
             }
 
+            var phaseInfo = getPhaseInfo(cycleDay);
+            var colorIndex = getHarmonicColorIndex(phaseInfo.dayInPhase, phaseInfo.totalDays, 20);
+            var dotClass = phaseInfo.id + '-' + colorIndex;
+
             var cell = document.createElement('div');
             cell.className = 'month-dot-cell' + (d === rhythmSelectedDay ? ' selected' : '');
             cell.innerHTML = '<div class="dot-mini ' + dotClass + '"></div><div class="dot-num">' + d + '</div>';
@@ -1787,40 +1753,39 @@
         updateHistoFilter(activeHistoFilter);
     }
 
-    function updateHistoFilter(filter) {
+        function updateHistoFilter(filter) {
         activeHistoFilter = filter;
 
         document.querySelectorAll('.histo-filter').forEach(function(btn) {
             btn.classList.toggle('active', btn.dataset.filter === filter);
         });
 
-        var histogram = document.getElementById('histogram');
-        var wavesSvg = document.getElementById('wavesSvg');
-        var wavesLabels = document.getElementById('wavesLabels');
-
-        document.querySelectorAll('.histo-bar').forEach(function(bar) {
+        // Замени .histo-bar на .histo-mini-bar
+        document.querySelectorAll('.histo-mini-bar').forEach(function(bar) {
             bar.classList.remove('dimmed');
         });
 
-        if (filter === 'all') {
-            if (histogram) histogram.style.display = 'flex';
-            if (wavesSvg) wavesSvg.style.display = 'none';
-            if (wavesLabels) wavesLabels.style.display = 'none';
-        } else {
-            var barMap = { cognitive: 'histoCog', physical: 'histoPhys', emotional: 'histoEmo' };
-            document.querySelectorAll('.histo-bar').forEach(function(bar) {
-                if (bar.id !== barMap[filter]) {
+        if (filter !== 'all') {
+            var typeMap = { cognitive: 'cog', physical: 'phys', emotional: 'emo' };
+            document.querySelectorAll('.histo-mini-bar').forEach(function(bar) {
+                if (!bar.classList.contains(typeMap[filter])) {
                     bar.classList.add('dimmed');
                 }
             });
+        }
 
-            if (histogram) histogram.style.display = 'flex';
+        var wavesSvg = document.getElementById('wavesSvg');
+        var wavesLabels = document.getElementById('wavesLabels');
+
+        if (filter === 'all') {
+            if (wavesSvg) wavesSvg.style.display = 'none';
+            if (wavesLabels) wavesLabels.style.display = 'none';
+        } else {
             if (wavesSvg) wavesSvg.style.display = 'block';
             if (wavesLabels) wavesLabels.style.display = 'flex';
             renderSingleWave(filter);
         }
     }
-
     function renderSingleWave(filter) {
         var year = now.getFullYear();
         var month = now.getMonth();
@@ -2301,7 +2266,7 @@
             navigator.serviceWorker.register('sw.js').catch(function() {});
         });
     }
-</script>
+
 
 <!-- Модалка настройки цикла -->
 <div class="modal-overlay" id="cycleSetupOverlay">
@@ -2341,7 +2306,10 @@
         <button class="modal-close" onclick="document.getElementById('cycleSetupOverlay').classList.remove('open')">Отмена</button>
     </div>
 </div>
+
+</script>
 <!-- Градиентная подложка под навигацией -->
 <div class="nav-gradient"></div>
+</script>
 </body>
 </html>
