@@ -1270,6 +1270,45 @@
     </div>
 </div>
 
+<!-- Модалка настройки цикла -->
+<div class="modal-overlay" id="cycleSetupOverlay">
+    <div class="modal" onclick="event.stopPropagation()">
+        <div class="modal-handle"></div>
+        <div class="modal-title">🩸 Настройка цикла</div>
+
+        <div class="modal-label">🗓 Первый день месячных</div>
+        <input class="modal-input" type="date" id="firstPeriodDate">
+
+        <div class="modal-label">🗓 Последний день месячных</div>
+        <input class="modal-input" type="date" id="lastPeriodDateInput">
+
+        <div class="modal-label" style="margin-top:8px;">📏 Длина менструации: <strong id="periodLenVal">5</strong> дней</div>
+        <div class="slider-pair">
+            <span>2</span>
+            <input type="range" min="2" max="10" value="5" id="periodLenSlider" oninput="document.getElementById('periodLenVal').textContent=this.value">
+            <span>10</span>
+        </div>
+
+        <button class="add-period-btn" id="addMoreDatesBtn" style="margin-top:10px;">📎 Добавить ещё даты для точности</button>
+        <div id="extraDatesContainer" style="display:none; margin-top:8px;"></div>
+
+        <div class="modal-label" style="margin-top:14px;">⚙️ Особые случаи</div>
+        <label style="display:flex;align-items:center;gap:8px;font-size:14px;margin-top:6px;">
+            <input type="checkbox" id="irregularCycle"> У меня нерегулярный цикл
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;font-size:14px;margin-top:4px;">
+            <input type="checkbox" id="pregnantCheck"> Я беременна
+        </label>
+
+        <div id="cyclePreview" style="margin-top:14px;padding:12px;background:#F9F7F4;border-radius:12px;font-size:13px;display:none;">
+            📊 <strong id="calcResult"></strong>
+        </div>
+
+        <button class="modal-save" onclick="saveCycleSetup()">💾 Сохранить</button>
+        <button class="modal-close" onclick="document.getElementById('cycleSetupOverlay').classList.remove('open')">Отмена</button>
+    </div>
+</div>
+    
 <script>
     // ===== FIREBASE =====
     const firebaseConfig = {
@@ -2268,45 +2307,6 @@
     }
 
 </script>
-    
-<!-- Модалка настройки цикла -->
-<div class="modal-overlay" id="cycleSetupOverlay">
-    <div class="modal" onclick="event.stopPropagation()">
-        <div class="modal-handle"></div>
-        <div class="modal-title">🩸 Настройка цикла</div>
-
-        <div class="modal-label">🗓 Первый день месячных</div>
-        <input class="modal-input" type="date" id="firstPeriodDate">
-
-        <div class="modal-label">🗓 Последний день месячных</div>
-        <input class="modal-input" type="date" id="lastPeriodDateInput">
-
-        <div class="modal-label" style="margin-top:8px;">📏 Длина менструации: <strong id="periodLenVal">5</strong> дней</div>
-        <div class="slider-pair">
-            <span>2</span>
-            <input type="range" min="2" max="10" value="5" id="periodLenSlider" oninput="document.getElementById('periodLenVal').textContent=this.value">
-            <span>10</span>
-        </div>
-
-        <button class="add-period-btn" id="addMoreDatesBtn" style="margin-top:10px;">📎 Добавить ещё даты для точности</button>
-        <div id="extraDatesContainer" style="display:none; margin-top:8px;"></div>
-
-        <div class="modal-label" style="margin-top:14px;">⚙️ Особые случаи</div>
-        <label style="display:flex;align-items:center;gap:8px;font-size:14px;margin-top:6px;">
-            <input type="checkbox" id="irregularCycle"> У меня нерегулярный цикл
-        </label>
-        <label style="display:flex;align-items:center;gap:8px;font-size:14px;margin-top:4px;">
-            <input type="checkbox" id="pregnantCheck"> Я беременна
-        </label>
-
-        <div id="cyclePreview" style="margin-top:14px;padding:12px;background:#F9F7F4;border-radius:12px;font-size:13px;display:none;">
-            📊 <strong id="calcResult"></strong>
-        </div>
-
-        <button class="modal-save" onclick="saveCycleSetup()">💾 Сохранить</button>
-        <button class="modal-close" onclick="document.getElementById('cycleSetupOverlay').classList.remove('open')">Отмена</button>
-    </div>
-</div>
 
 <!-- Градиентная подложка под навигацией -->
 <div class="nav-gradient"></div>
