@@ -740,13 +740,197 @@
         }
         .week-day-chip.active { background: var(--accent); color: white; }
 
+                /* Гистограмма */
+        .histogram {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 20px;
+            height: 120px;
+            padding: 0 20px;
+            margin-bottom: 16px;
+        }
+
+        .histo-bar-wrapper {
+            flex: 1;
+            max-width: 60px;
+            height: 100%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .histo-bar {
+            width: 100%;
+            max-width: 50px;
+            border-radius: 25px 25px 0 0;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+            position: relative;
+            min-height: 4px;
+        }
+
+        .histo-bar.histo-cog {
+            background: linear-gradient(to top, #D4A843, #E8B86D);
+        }
+
+        .histo-bar.histo-phys {
+            background: linear-gradient(to top, #7FA562, #9CBA7F);
+        }
+
+        .histo-bar.histo-emo {
+            background: linear-gradient(to top, #D4888C, #E8B4BC);
+        }
+
+        .histo-value {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        /* Фильтры */
+        .histo-filters {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+
+        .histo-filter {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: 1.5px solid #E8E3DC;
+            background: white;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: var(--font);
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .histo-filter.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .histo-filter:active {
+            transform: scale(0.95);
+        }
+
+        /* Прозрачность для неактивных столбиков */
+        .histo-bar.dimmed {
+            opacity: 0.25;
+        }
+
+        /* Toast */
+        #toast {
+            max-width: 90vw;
+            white-space: normal;
+            text-align: center;
+            word-wrap: break-word;
+        }
+
         /* Адаптив */
         @media (max-width: 380px) {
             body { padding: 14px 14px 105px; }
             .week-dot { width: 28px; height: 28px; }
             .phase-emoji { font-size: 36px; }
             .phase-name { font-size: 19px; }
+
+            .histogram {
+                height: 90px;
+                gap: 12px;
+                padding: 0 10px;
+            }
+            .histo-bar {
+                max-width: 40px;
+                border-radius: 20px 20px 0 0;
+            }
+            .histo-value {
+                font-size: 10px;
+                top: -16px;
+            }
+            .histo-filter {
+                font-size: 10px;
+                padding: 4px 10px;
+            }
+            .waves-svg {
+                height: 70px;
+            }
+            .resource-row { gap: 6px; }
+            .resource-emoji { font-size: 18px; width: 22px; }
+            .resource-label { font-size: 11px; width: 45px; }
+            .resource-value { font-size: 13px; width: 22px; }
+            .resource-thumb { width: 22px; height: 22px; right: -11px; top: -6px; }
+            .tasks-card { padding: 14px; }
+            .task-name { font-size: 12px; }
+            .task-badges { font-size: 9px; gap: 4px; }
+            .nav-item { font-size: 8px; padding: 4px 8px; }
+            .nav-item .nav-emoji { font-size: 18px; }
+            .nav-item.add { top: -28px; }
+            .nav-item.add .nav-emoji { width: 44px; height: 44px; font-size: 22px; }
+            .bottom-nav { padding: 8px 4px 12px; bottom: 12px; }
+            .month-dot-cell .dot-mini { width: 18px; height: 18px; }
+            .month-days-header { font-size: 8px; }
+            .rhythm-day-info { padding: 12px 14px; font-size: 12px; }
+            .recommendation { padding: 14px; }
+            .recommendation-icon { font-size: 22px; }
+            .recommendation-text { font-size: 12px; }
+            .modal { padding: 22px 16px 28px; }
+            .modal-title { font-size: 18px; }
+            .modal-input { padding: 12px 14px; font-size: 14px; }
+            .week-calendar { padding: 14px 10px; }
         }
+
+        @media (max-width: 340px) {
+            .week-dot { width: 20px; height: 20px; }
+            .week-row { gap: 1px; }
+            .week-day-col { gap: 2px; padding: 2px 0; }
+            .week-day-name { font-size: 8px; }
+            .week-date { font-size: 7px; }
+            .nav-item { font-size: 7px; padding: 2px 6px; }
+            .nav-item .nav-emoji { font-size: 16px; }
+            .nav-item.add { top: -24px; }
+            .nav-item.add .nav-emoji { width: 38px; height: 38px; font-size: 20px; }
+            .logo { font-size: 20px; }
+            .logo-icon { width: 32px; height: 32px; font-size: 16px; }
+            .icon-btn { width: 36px; height: 36px; font-size: 16px; }
+            .phase-card { padding: 14px 12px 12px; }
+            .phase-emoji { font-size: 28px; }
+            .phase-name { font-size: 16px; }
+            .phase-day { font-size: 12px; }
+            .resources-card { padding: 14px 12px; }
+            .resource-row { gap: 4px; margin-bottom: 10px; }
+            .resource-emoji { font-size: 16px; width: 18px; }
+            .resource-label { font-size: 10px; width: 38px; }
+            .resource-value { font-size: 11px; width: 18px; }
+            .resource-thumb { width: 18px; height: 18px; right: -9px; top: -4px; }
+            .resource-slider-bg { height: 6px; }
+            .add-task-btn { width: 36px !important; height: 36px !important; font-size: 22px !important; }
+            .tasks-title { font-size: 13px; }
+            .task-item { padding: 10px 2px; gap: 8px; }
+            .task-name { font-size: 11px; }
+            .task-project { font-size: 10px; }
+            .task-badges { font-size: 8px; gap: 3px; }
+            .task-dot { width: 10px; height: 10px; }
+            .month-dot-cell .dot-mini { width: 14px; height: 14px; }
+            .month-dot-cell .dot-num { font-size: 7px; }
+            .month-days-header { font-size: 7px; }
+            .histogram { height: 70px; gap: 8px; padding: 0 5px; }
+            .histo-bar { max-width: 30px; border-radius: 15px 15px 0 0; }
+            .histo-value { font-size: 8px; top: -14px; }
+            .histo-filter { font-size: 8px; padding: 3px 8px; }
+            .waves-svg { height: 50px; }
+            .rhythm-day-info { padding: 10px 12px; gap: 6px; font-size: 12px; }
+        }
+    </style>
+        
     </style>
 </head>
 <body>
@@ -867,25 +1051,41 @@
         <div class="month-grid" id="monthGrid"></div>
     </div>
 
-    <!-- Волны показателей -->
+        <!-- Показатели (гистограмма + волны) -->
     <div class="waves-card">
         <div class="waves-title">🌊 Показатели за месяц</div>
-        <div class="waves-legend">
-            <span><span class="legend-dot cog"></span> Разум</span>
-            <span><span class="legend-dot phys"></span> Тело</span>
-            <span><span class="legend-dot emo"></span> Эмоции</span>
-        </div>
-        <svg class="waves-svg" id="wavesSvg" viewBox="0 0 360 100" preserveAspectRatio="none"></svg>
-        <div class="waves-labels" id="wavesLabels"></div>
-    </div>
 
-    <!-- Инфо о выбранном дне -->
-    <div class="rhythm-day-info" id="rhythmDayInfo">
-        <span class="info-phase" id="infoPhase">🌸 Расцветай</span>
-        <span style="color:var(--text-secondary)">·</span>
-        <span class="info-values" id="infoValues">🧠8 💪3 ❤️7</span>
+        <!-- Гистограмма -->
+        <div class="histogram" id="histogram">
+            <div class="histo-bar-wrapper">
+                <div class="histo-bar histo-cog" id="histoCog" style="height: 0%;">
+                    <div class="histo-value">🧠 0</div>
+                </div>
+            </div>
+            <div class="histo-bar-wrapper">
+                <div class="histo-bar histo-phys" id="histoPhys" style="height: 0%;">
+                    <div class="histo-value">💪 0</div>
+                </div>
+            </div>
+            <div class="histo-bar-wrapper">
+                <div class="histo-bar histo-emo" id="histoEmo" style="height: 0%;">
+                    <div class="histo-value">❤️ 0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Кнопки-фильтры -->
+        <div class="histo-filters" id="histoFilters">
+            <button class="histo-filter active" data-filter="all">Все</button>
+            <button class="histo-filter" data-filter="cognitive">🧠 Разум</button>
+            <button class="histo-filter" data-filter="physical">💪 Тело</button>
+            <button class="histo-filter" data-filter="emotional">❤️ Эмоции</button>
+        </div>
+
+        <!-- SVG для плавной волны (появляется при фильтрации) -->
+        <svg class="waves-svg" id="wavesSvg" viewBox="0 0 360 100" preserveAspectRatio="none" style="display:none;"></svg>
+        <div class="waves-labels" id="wavesLabels" style="display:none;"></div>
     </div>
-</div>
 
 <!-- ==================== НИЖНЯЯ НАВИГАЦИЯ ==================== -->
 <div class="bottom-nav" id="bottomNav">
@@ -981,82 +1181,89 @@
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
-    db.enablePersistence().catch(() => {});
+    db.enablePersistence().catch(function() {});
 
     // ===== ДАННЫЕ =====
-    const phaseData = [
+    var phaseData = [
         { id: 'seed', name: 'Менструальная', title: 'Отдыхай', emoji: '🪷', color: '#C8A882', days: [1,2,3,4,5] },
         { id: 'sprout', name: 'Фолликулярная', title: 'Расти', emoji: '🌱', color: '#9CBA7F', days: [6,7,8,9,10,11,12,13,14] },
         { id: 'bloom', name: 'Овуляция', title: 'Расцветай', emoji: '🌸', color: '#E8B4BC', days: [15,16,17] },
         { id: 'fruit', name: 'Лютеиновая', title: 'Заземляйся', emoji: '🍃', color: '#D4956E', days: [18,19,20,21,22,23,24,25,26,27,28] }
     ];
 
-    const beePhrases = {
+    var beePhrases = {
         seed: 'Отдыхай. Сейчас не время для рекордов — закрой старые задачи и дай телу восстановиться 💛.',
         sprout: 'Расти. Самое время начать новые проекты с новой силой! ✨',
         bloom: 'Расцветай. Ты на пике обаяния — назначай важные встречи и переговоры 💅',
-        fruit: 'Заземляйся. Завершай начатое, наводи порядок, никаких импульсивных решений 💛',
+        fruit: 'Заземляйся. Завершай начатое, наводи порядок, никаких импульсивных решений 💛'
     };
 
-    let currentDay = 6;
-    let centerDate = new Date();
-    let cycleLength = 28;
-    let lastPeriodDate = null;
-    let demoCycle = true;
-    let resources = { physical: 7, cognitive: 9, emotional: 5 };
-    let tasks = [];
-    let userName = 'Ева';
-    let isAnonymous = true;
-    let moodSavedForActiveDate = false;
-    let rhythmSelectedDay = new Date().getDate();
+    var currentDay = 6;
+    var centerDate = new Date();
+    var cycleLength = 28;
+    var lastPeriodDate = null;
+    var demoCycle = true;
+    var resources = { physical: 7, cognitive: 9, emotional: 5 };
+    var tasks = [];
+    var userName = 'Ева';
+    var isAnonymous = true;
+    var moodSavedForActiveDate = false;
+    var rhythmSelectedDay = new Date().getDate();
+    var activeHistoFilter = 'all';
+    var now = new Date();
 
-    const defaultTasks = [
+    var defaultTasks = [
         { name: 'Презентация для клиента', project: 'Разум', cognitive: 8, physical: 1, moral: 6, cyclic: false, days: [], forced: false },
         { name: 'HIIT тренировка', project: 'Тело', cognitive: 3, physical: 9, moral: 3, cyclic: true, days: [3,6], forced: false },
-        { name: 'Разобрать почту', project: 'Копилка', cognitive: 3, physical: 1, moral: 2, cyclic: false, days: [], forced: false },
+        { name: 'Разобрать почту', project: 'Копилка', cognitive: 3, physical: 1, moral: 2, cyclic: false, days: [], forced: false }
     ];
 
     // ===== УТИЛИТЫ =====
-    function getCurrentPhase(day = currentDay) {
-        return phaseData.find(p => p.days.includes(day)) || phaseData[3];
+    function getCurrentPhase(day) {
+        if (!day) day = currentDay;
+        var result = phaseData[3];
+        phaseData.forEach(function(p) {
+            if (p.days.indexOf(day) !== -1) result = p;
+        });
+        return result;
     }
 
     function getTaskStatus(task) {
         if (task.forced) return 'green';
-        const physMatch = resources.physical >= task.physical;
-        const cogMatch = resources.cognitive >= task.cognitive;
+        var physMatch = resources.physical >= task.physical;
+        var cogMatch = resources.cognitive >= task.cognitive;
         if (physMatch && cogMatch) return 'green';
         if (physMatch || cogMatch) return 'yellow';
         return 'red';
     }
 
     function getIconOpacity(mainVal, otherVal) {
-        const diff = Math.abs(mainVal - otherVal);
+        var diff = Math.abs(mainVal - otherVal);
         if (diff <= 1) return { main: 1, other: 1 };
         if (mainVal > otherVal) return { main: 1, other: 0.3 };
         return { main: 0.3, other: 1 };
     }
 
     function showToast(msg) {
-        const t = document.getElementById('toast');
+        var t = document.getElementById('toast');
         t.textContent = msg;
         t.style.opacity = '1';
         clearTimeout(t._timeout);
-        t._timeout = setTimeout(() => { t.style.opacity = '0'; }, 2000);
+        t._timeout = setTimeout(function() { t.style.opacity = '0'; }, 2000);
     }
 
     function escapeHTML(str) {
-        const div = document.createElement('div');
+        var div = document.createElement('div');
         div.textContent = str;
         return div.innerHTML;
     }
 
     function getCycleDayForDate(date) {
         if (demoCycle || !lastPeriodDate) {
-            const diff = Math.floor((date - new Date(2026, 5, 1)) / 86400000);
+            var diff = Math.floor((date - new Date(2026, 5, 1)) / 86400000);
             return ((diff % cycleLength) + cycleLength) % cycleLength + 1;
         }
-        const diff = Math.floor((date - lastPeriodDate) / 86400000);
+        var diff = Math.floor((date - lastPeriodDate) / 86400000);
         return ((diff % cycleLength) + cycleLength) % cycleLength + 1;
     }
 
@@ -1065,13 +1272,13 @@
     }
 
     function isMoodSavedForDate(dateStr) {
-        const history = JSON.parse(localStorage.getItem('checkins') || '[]');
-        return history.some(item => item.date === dateStr);
+        var history = JSON.parse(localStorage.getItem('checkins') || '[]');
+        return history.some(function(item) { return item.date === dateStr; });
     }
 
     function loadMoodForDate(dateStr) {
-        const history = JSON.parse(localStorage.getItem('checkins') || '[]');
-        const checkin = history.find(item => item.date === dateStr);
+        var history = JSON.parse(localStorage.getItem('checkins') || '[]');
+        var checkin = history.find(function(item) { return item.date === dateStr; });
         if (checkin) {
             resources.physical = checkin.physical;
             resources.cognitive = checkin.cognitive;
@@ -1082,15 +1289,14 @@
 
     // ===== ПЕРЕКЛЮЧЕНИЕ ЭКРАНОВ =====
     function showTab(tab) {
-        // Скрываем все экраны
         document.getElementById('mainScreen').style.display = 'none';
         document.getElementById('rhythmScreen').classList.remove('active');
         document.getElementById('bottomNav').style.display = 'none';
 
-        // Сбрасываем активные кнопки навигации
-        document.querySelectorAll('.nav-item[data-tab]').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.nav-item[data-tab]').forEach(function(b) {
+            b.classList.remove('active');
+        });
 
-        // Показываем нужный экран
         if (tab === 'rhythm') {
             document.getElementById('rhythmScreen').classList.add('active');
             rhythmSelectedDay = new Date().getDate();
@@ -1098,54 +1304,55 @@
         } else if (tab === 'inbox') {
             document.getElementById('mainScreen').style.display = 'block';
             document.getElementById('bottomNav').style.display = 'flex';
-            const inboxTasks = tasks.filter(t => t.project === 'Копилка');
+            var inboxTasks = tasks.filter(function(t) { return t.project === 'Копилка'; });
             if (inboxTasks.length === 0) {
                 showToast('📥 Копилка пуста — добавляй задачи без проекта');
             } else {
-                const taskList = inboxTasks.map(t => '• ' + t.name).join('\n');
+                var taskList = inboxTasks.map(function(t) { return '• ' + t.name; }).join('\n');
                 alert('📥 Копилка (' + inboxTasks.length + ' задач):\n\n' + taskList);
             }
         } else if (tab === 'projects') {
             document.getElementById('mainScreen').style.display = 'block';
             document.getElementById('bottomNav').style.display = 'flex';
-            const projects = [...new Set(tasks.map(t => t.project))];
+            var projects = [];
+            tasks.forEach(function(t) {
+                if (projects.indexOf(t.project) === -1) projects.push(t.project);
+            });
             if (projects.length === 0) {
                 showToast('Пока проектов нет');
             } else {
-                const projectInfo = projects.map(p => {
-                    const count = tasks.filter(t => t.project === p).length;
+                var projectInfo = projects.map(function(p) {
+                    var count = tasks.filter(function(t) { return t.project === p; }).length;
                     return '📁 ' + p + ' (' + count + ' задач)';
                 }).join('\n');
                 alert('Проекты:\n\n' + projectInfo);
             }
         } else {
-            // today
             document.getElementById('mainScreen').style.display = 'block';
             document.getElementById('bottomNav').style.display = 'flex';
             updateUI();
         }
 
-        // Подсвечиваем активную кнопку
-        const activeBtn = document.querySelector(`.nav-item[data-tab="${tab}"]`);
+        var activeBtn = document.querySelector('.nav-item[data-tab="' + tab + '"]');
         if (activeBtn) activeBtn.classList.add('active');
     }
 
     // ===== ОБНОВЛЕНИЕ UI =====
     function updateUI() {
-        const phase = getCurrentPhase();
-        const card = document.getElementById('phaseCard');
+        var phase = getCurrentPhase();
+        var card = document.getElementById('phaseCard');
         card.className = 'phase-card ' + phase.id;
         document.getElementById('phaseEmoji').textContent = phase.emoji;
 
-        const phaseNameEl = document.getElementById('phaseName');
+        var phaseNameEl = document.getElementById('phaseName');
         if (userName && userName.trim() !== '') {
             phaseNameEl.textContent = phase.title + ', ' + userName;
         } else {
             phaseNameEl.textContent = phase.title;
         }
 
-        const shownDay = demoCycle ? 6 : currentDay;
-        document.getElementById('phaseDay').textContent = `День ${shownDay} из ${cycleLength} · ${phase.name}`;
+        var shownDay = demoCycle ? 6 : currentDay;
+        document.getElementById('phaseDay').textContent = 'День ' + shownDay + ' из ' + cycleLength + ' · ' + phase.name;
         document.getElementById('recommendationText').textContent = beePhrases[phase.id];
 
         renderWeekCalendar();
@@ -1156,48 +1363,49 @@
     }
 
     function renderWeekCalendar() {
-        const row = document.getElementById('weekRow');
+        var row = document.getElementById('weekRow');
         row.innerHTML = '';
-        const center = new Date(centerDate);
-        const dow = center.getDay();
-        const dayNames = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+        var center = new Date(centerDate);
+        var dow = center.getDay();
+        var dayNames = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
 
-        for (let i = 0; i < 7; i++) {
-            const off = i - 3;
-            const d = new Date(center);
+        for (var i = 0; i < 7; i++) {
+            var off = i - 3;
+            var d = new Date(center);
             d.setDate(d.getDate() + off);
-            const cycleDay = getCycleDayForDate(d);
+            var cycleDay = getCycleDayForDate(d);
 
-            let dotPhase = 'seed';
-            let dayInPhase = 1;
-            for (const p of phaseData) {
-                if (p.days.includes(cycleDay)) {
-                    dotPhase = p.id;
-                    dayInPhase = p.days.indexOf(cycleDay) + 1;
+            var dotPhase = 'seed';
+            var dayInPhase = 1;
+            for (var j = 0; j < phaseData.length; j++) {
+                if (phaseData[j].days.indexOf(cycleDay) !== -1) {
+                    dotPhase = phaseData[j].id;
+                    dayInPhase = phaseData[j].days.indexOf(cycleDay) + 1;
                     break;
                 }
             }
 
-            const col = document.createElement('div');
+            var col = document.createElement('div');
             col.className = 'week-day-col';
-            col.innerHTML = `
-                <div class="week-day-name">${dayNames[(dow + off + 7) % 7]}</div>
-                <div class="week-dot ${dotPhase}-${dayInPhase}${off === 0 ? ' today' : ''}"></div>
-                <div class="week-date">${d.getDate()}</div>
-            `;
-            col.addEventListener('click', () => {
-                centerDate = new Date(d);
-                currentDay = cycleDay;
-                demoCycle = false;
-                // Загружаем настроение для выбранной даты
-                const dateStr = getActiveCheckinDate();
-                moodSavedForActiveDate = isMoodSavedForDate(dateStr);
-                if (moodSavedForActiveDate) {
-                    loadMoodForDate(dateStr);
-                }
-                updateUI();
-                showToast(`День ${currentDay} · ${getCurrentPhase().title}`);
-            });
+            col.innerHTML = '<div class="week-day-name">' + dayNames[(dow + off + 7) % 7] + '</div>' +
+                '<div class="week-dot ' + dotPhase + '-' + dayInPhase + (off === 0 ? ' today' : '') + '"></div>' +
+                '<div class="week-date">' + d.getDate() + '</div>';
+
+            (function(d, cycleDay) {
+                col.addEventListener('click', function() {
+                    centerDate = new Date(d);
+                    currentDay = cycleDay;
+                    demoCycle = false;
+                    var dateStr = getActiveCheckinDate();
+                    moodSavedForActiveDate = isMoodSavedForDate(dateStr);
+                    if (moodSavedForActiveDate) {
+                        loadMoodForDate(dateStr);
+                    }
+                    updateUI();
+                    showToast('День ' + currentDay + ' · ' + getCurrentPhase().title);
+                });
+            })(d, cycleDay);
+
             row.appendChild(col);
         }
     }
@@ -1212,9 +1420,8 @@
     }
 
     function updateMoodUI() {
-        const card = document.getElementById('resourcesCard');
-        const saveBtn = document.getElementById('saveMoodBtn');
-
+        var card = document.getElementById('resourcesCard');
+        var saveBtn = document.getElementById('saveMoodBtn');
         if (moodSavedForActiveDate) {
             card.classList.add('saved');
             saveBtn.style.display = 'none';
@@ -1225,57 +1432,56 @@
     }
 
     function renderTasks() {
-        const container = document.getElementById('tasksList');
-        const todayTasks = tasks.filter(t => {
-            if (t.cyclic && t.days.length > 0) return t.days.includes(new Date().getDay());
+        var container = document.getElementById('tasksList');
+        var todayTasks = tasks.filter(function(t) {
+            if (t.cyclic && t.days.length > 0) return t.days.indexOf(new Date().getDay()) !== -1;
             return true;
         });
 
         if (todayTasks.length === 0) {
-            container.innerHTML = `<div class="empty-state"><div class="empty-state-emoji">📋</div><div class="empty-state-text">Пока задач нет.<br>Нажми <strong>+</strong> чтобы добавить</div></div>`;
+            container.innerHTML = '<div class="empty-state"><div class="empty-state-emoji">📋</div><div class="empty-state-text">Пока задач нет.<br>Нажми <strong>+</strong> чтобы добавить</div></div>';
             return;
         }
 
         container.innerHTML = '';
-        todayTasks.forEach(task => {
-            const status = getTaskStatus(task);
-            const opacity = getIconOpacity(task.cognitive, task.physical);
-            container.innerHTML += `
-                <div class="task-item">
-                    <div class="task-dot ${status}"></div>
-                    <div class="task-info">
-                        <div class="task-name">${escapeHTML(task.name)}${task.cyclic ? ' 🔄' : ''}${task.forced ? ' 🛡️' : ''}</div>
-                        <div class="task-project">${escapeHTML(task.project)}</div>
-                    </div>
-                    <div class="task-badges">
-                        <span style="opacity:${opacity.main}">🧠${task.cognitive}</span>
-                        <span style="opacity:${opacity.other}">💪${task.physical}</span>
-                        <span style="opacity:0.4">❤️${task.moral || 0}</span>
-                    </div>
-                </div>`;
+        todayTasks.forEach(function(task) {
+            var status = getTaskStatus(task);
+            var opacity = getIconOpacity(task.cognitive, task.physical);
+            container.innerHTML += '<div class="task-item">' +
+                '<div class="task-dot ' + status + '"></div>' +
+                '<div class="task-info">' +
+                '<div class="task-name">' + escapeHTML(task.name) + (task.cyclic ? ' 🔄' : '') + (task.forced ? ' 🛡️' : '') + '</div>' +
+                '<div class="task-project">' + escapeHTML(task.project) + '</div>' +
+                '</div>' +
+                '<div class="task-badges">' +
+                '<span style="opacity:' + opacity.main + '">🧠' + task.cognitive + '</span>' +
+                '<span style="opacity:' + opacity.other + '">💪' + task.physical + '</span>' +
+                '<span style="opacity:0.4">❤️' + (task.moral || 0) + '</span>' +
+                '</div>' +
+                '</div>';
         });
     }
 
     // ===== СОХРАНЕНИЕ ДАННЫХ =====
     function saveData() {
-        const data = {
-            currentDay,
-            cycleLength,
-            resources,
-            tasks,
-            userName,
-            isAnonymous,
-            demoCycle,
+        var data = {
+            currentDay: currentDay,
+            cycleLength: cycleLength,
+            resources: resources,
+            tasks: tasks,
+            userName: userName,
+            isAnonymous: isAnonymous,
+            demoCycle: demoCycle,
             lastPeriodDate: lastPeriodDate ? lastPeriodDate.toISOString() : null
         };
         localStorage.setItem('rootine_data', JSON.stringify(data));
     }
 
     function loadData() {
-        const raw = localStorage.getItem('rootine_data');
+        var raw = localStorage.getItem('rootine_data');
         if (raw) {
             try {
-                const data = JSON.parse(raw);
+                var data = JSON.parse(raw);
                 currentDay = data.currentDay || 16;
                 cycleLength = data.cycleLength || 28;
                 resources = data.resources || { physical: 7, cognitive: 9, emotional: 5 };
@@ -1290,29 +1496,28 @@
         } else {
             resetData();
         }
-        // Проверяем сохранено ли настроение на сегодня
-        const todayStr = new Date().toISOString().split('T')[0];
+        var todayStr = new Date().toISOString().split('T')[0];
         moodSavedForActiveDate = isMoodSavedForDate(todayStr);
     }
 
     function resetData() {
-        tasks = defaultTasks.map(t => ({ ...t }));
+        tasks = defaultTasks.map(function(t) { return Object.assign({}, t); });
         saveData();
     }
 
     // ===== СЛАЙДЕРЫ =====
     function setupSlider(bgId, fillId, thumbId, valId, key) {
-        const bg = document.getElementById(bgId);
-        const fill = document.getElementById(fillId);
-        const thumb = document.getElementById(thumbId);
-        const val = document.getElementById(valId);
-        let dragging = false;
+        var bg = document.getElementById(bgId);
+        var fill = document.getElementById(fillId);
+        var thumb = document.getElementById(thumbId);
+        var val = document.getElementById(valId);
+        var dragging = false;
 
         function setValue(clientX) {
-            const rect = bg.getBoundingClientRect();
-            let pct = (clientX - rect.left) / rect.width;
+            var rect = bg.getBoundingClientRect();
+            var pct = (clientX - rect.left) / rect.width;
             pct = Math.max(0, Math.min(1, pct));
-            const v = Math.round(pct * 10);
+            var v = Math.round(pct * 10);
             if (v === resources[key]) return;
             resources[key] = v;
             fill.style.width = (v * 10) + '%';
@@ -1320,25 +1525,25 @@
             updateUI();
         }
 
-        thumb.addEventListener('pointerdown', e => {
+        thumb.addEventListener('pointerdown', function(e) {
             dragging = true;
             thumb.setPointerCapture(e.pointerId);
             e.preventDefault();
         });
 
-        bg.addEventListener('pointerdown', e => {
+        bg.addEventListener('pointerdown', function(e) {
             dragging = true;
             bg.setPointerCapture(e.pointerId);
             setValue(e.clientX);
             e.preventDefault();
         });
 
-        window.addEventListener('pointermove', e => {
+        window.addEventListener('pointermove', function(e) {
             if (!dragging) return;
             setValue(e.clientX);
         });
 
-        window.addEventListener('pointerup', () => {
+        window.addEventListener('pointerup', function() {
             dragging = false;
         });
     }
@@ -1360,117 +1565,204 @@
     }
 
     function renderRhythm() {
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = now.getMonth();
-        const monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+        now = new Date();
+        var year = now.getFullYear();
+        var month = now.getMonth();
+        var monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
         document.getElementById('monthName').textContent = monthNames[month] + ' ' + year;
 
-        const grid = document.getElementById('monthGrid');
+        var grid = document.getElementById('monthGrid');
         grid.innerHTML = '';
 
-        const firstDay = new Date(year, month, 1).getDay() || 7;
-        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        var firstDay = new Date(year, month, 1).getDay() || 7;
+        var daysInMonth = new Date(year, month + 1, 0).getDate();
 
-        // Пустые ячейки перед первым днём
-        for (let i = 1; i < firstDay; i++) {
-            const empty = document.createElement('div');
+        for (var i = 1; i < firstDay; i++) {
+            var empty = document.createElement('div');
             empty.className = 'month-dot-cell';
             empty.innerHTML = '<div class="dot-mini empty"></div><div class="dot-num"></div>';
             grid.appendChild(empty);
         }
 
-        // Дни месяца
-        for (let d = 1; d <= daysInMonth; d++) {
-            const date = new Date(year, month, d);
-            const cycleDay = getCycleDayForDate(date);
-            let dotPhase = 'seed';
-            let dayInPhase = 1;
-            for (const p of phaseData) {
-                if (p.days.includes(cycleDay)) {
-                    dotPhase = p.id;
-                    dayInPhase = p.days.indexOf(cycleDay) + 1;
+        for (var d = 1; d <= daysInMonth; d++) {
+            var date = new Date(year, month, d);
+            var cycleDay = getCycleDayForDate(date);
+            var dotPhase = 'seed';
+            var dayInPhase = 1;
+            for (var j = 0; j < phaseData.length; j++) {
+                if (phaseData[j].days.indexOf(cycleDay) !== -1) {
+                    dotPhase = phaseData[j].id;
+                    dayInPhase = phaseData[j].days.indexOf(cycleDay) + 1;
                     break;
                 }
             }
 
-            const cell = document.createElement('div');
+            var cell = document.createElement('div');
             cell.className = 'month-dot-cell' + (d === rhythmSelectedDay ? ' selected' : '');
-            cell.innerHTML = `<div class="dot-mini ${dotPhase}-${dayInPhase}"></div><div class="dot-num">${d}</div>`;
-            cell.addEventListener('click', () => {
-                rhythmSelectedDay = d;
-                renderRhythm();
-            });
+            cell.innerHTML = '<div class="dot-mini ' + dotPhase + '-' + dayInPhase + '"></div><div class="dot-num">' + d + '</div>';
+
+            (function(d) {
+                cell.addEventListener('click', function() {
+                    rhythmSelectedDay = d;
+                    renderRhythm();
+                });
+            })(d);
+
             grid.appendChild(cell);
         }
 
-        renderWaves(year, month, daysInMonth);
         updateRhythmDayInfo(year, month);
-    }
-
-    function renderWaves(year, month, daysInMonth) {
-        const history = JSON.parse(localStorage.getItem('checkins') || '[]');
-        const svg = document.getElementById('wavesSvg');
-        const labels = document.getElementById('wavesLabels');
-        const w = 360;
-        const h = 100;
-        const pad = 20;
-        const usableW = w - 2 * pad;
-        const usableH = h - 2 * pad;
-
-        const pointsCog = [];
-        const pointsPhys = [];
-        const pointsEmo = [];
-
-        for (let d = 1; d <= daysInMonth; d++) {
-            const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-            const checkin = history.find(c => c.date === dateStr);
-            const x = pad + (d - 1) / (daysInMonth - 1) * usableW;
-
-            if (checkin) {
-                pointsCog.push({ x, y: pad + usableH - (checkin.cognitive / 10) * usableH });
-                pointsPhys.push({ x, y: pad + usableH - (checkin.physical / 10) * usableH });
-                pointsEmo.push({ x, y: pad + usableH - (checkin.emotional / 10) * usableH });
-            }
-        }
-
-        let svgInner = '';
-        svgInner += `<line x1="${pad}" y1="${pad}" x2="${pad}" y2="${pad + usableH}" stroke="#EDE8E2" stroke-width="1"/>`;
-        svgInner += `<line x1="${pad}" y1="${pad + usableH}" x2="${pad + usableW}" y2="${pad + usableH}" stroke="#EDE8E2" stroke-width="1"/>`;
-
-        function makePolyline(points, color) {
-            if (points.length < 2) return '';
-            return `<polyline points="${points.map(p => p.x + ',' + p.y).join(' ')}" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
-        }
-
-        svgInner += makePolyline(pointsCog, '#E8B86D');
-        svgInner += makePolyline(pointsPhys, '#9CBA7F');
-        svgInner += makePolyline(pointsEmo, '#E8B4BC');
-        svg.innerHTML = svgInner;
-
-        let labelsHtml = '';
-        const step = Math.max(1, Math.floor(daysInMonth / 6));
-        for (let d = 1; d <= daysInMonth; d += step) {
-            labelsHtml += `<span>${d}</span>`;
-        }
-        labels.innerHTML = labelsHtml;
+        renderHistogram();
     }
 
     function updateRhythmDayInfo(year, month) {
-        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(rhythmSelectedDay).padStart(2, '0')}`;
-        const history = JSON.parse(localStorage.getItem('checkins') || '[]');
-        const checkin = history.find(c => c.date === dateStr);
-        const date = new Date(year, month, rhythmSelectedDay);
-        const cycleDay = getCycleDayForDate(date);
-        const phase = getCurrentPhase(cycleDay);
+        var dateStr = year + '-' + String(month + 1).padStart(2, '0') + '-' + String(rhythmSelectedDay).padStart(2, '0');
+        var history = JSON.parse(localStorage.getItem('checkins') || '[]');
+        var checkin = history.find(function(c) { return c.date === dateStr; });
+        var date = new Date(year, month, rhythmSelectedDay);
+        var cycleDay = getCycleDayForDate(date);
+        var phase = getCurrentPhase(cycleDay);
 
         document.getElementById('infoPhase').textContent = phase.emoji + ' ' + phase.title;
         if (checkin) {
-            document.getElementById('infoValues').textContent = `🧠${checkin.cognitive} 💪${checkin.physical} ❤️${checkin.emotional}`;
+            document.getElementById('infoValues').textContent = '🧠' + checkin.cognitive + ' 💪' + checkin.physical + ' ❤️' + checkin.emotional;
         } else {
             document.getElementById('infoValues').textContent = 'Нет данных';
         }
     }
+
+    // ===== ГИСТОГРАММА =====
+    function renderHistogram() {
+        var year = now.getFullYear();
+        var month = now.getMonth();
+        var dateStr = year + '-' + String(month + 1).padStart(2, '0') + '-' + String(rhythmSelectedDay).padStart(2, '0');
+        var history = JSON.parse(localStorage.getItem('checkins') || '[]');
+        var checkin = history.find(function(c) { return c.date === dateStr; });
+
+        var cogVal = checkin ? checkin.cognitive : 0;
+        var physVal = checkin ? checkin.physical : 0;
+        var emoVal = checkin ? checkin.emotional : 0;
+
+        var cogBar = document.getElementById('histoCog');
+        var physBar = document.getElementById('histoPhys');
+        var emoBar = document.getElementById('histoEmo');
+
+        if (cogBar) {
+            cogBar.style.height = (cogVal * 10) + '%';
+            var cogLabel = cogBar.querySelector('.histo-value');
+            if (cogLabel) cogLabel.textContent = '🧠 ' + cogVal;
+        }
+        if (physBar) {
+            physBar.style.height = (physVal * 10) + '%';
+            var physLabel = physBar.querySelector('.histo-value');
+            if (physLabel) physLabel.textContent = '💪 ' + physVal;
+        }
+        if (emoBar) {
+            emoBar.style.height = (emoVal * 10) + '%';
+            var emoLabel = emoBar.querySelector('.histo-value');
+            if (emoLabel) emoLabel.textContent = '❤️ ' + emoVal;
+        }
+
+        updateHistoFilter(activeHistoFilter);
+    }
+
+    function updateHistoFilter(filter) {
+        activeHistoFilter = filter;
+
+        document.querySelectorAll('.histo-filter').forEach(function(btn) {
+            btn.classList.toggle('active', btn.dataset.filter === filter);
+        });
+
+        var histogram = document.getElementById('histogram');
+        var wavesSvg = document.getElementById('wavesSvg');
+        var wavesLabels = document.getElementById('wavesLabels');
+
+        document.querySelectorAll('.histo-bar').forEach(function(bar) {
+            bar.classList.remove('dimmed');
+        });
+
+        if (filter === 'all') {
+            if (histogram) histogram.style.display = 'flex';
+            if (wavesSvg) wavesSvg.style.display = 'none';
+            if (wavesLabels) wavesLabels.style.display = 'none';
+        } else {
+            var barMap = { cognitive: 'histoCog', physical: 'histoPhys', emotional: 'histoEmo' };
+            document.querySelectorAll('.histo-bar').forEach(function(bar) {
+                if (bar.id !== barMap[filter]) {
+                    bar.classList.add('dimmed');
+                }
+            });
+
+            if (histogram) histogram.style.display = 'flex';
+            if (wavesSvg) wavesSvg.style.display = 'block';
+            if (wavesLabels) wavesLabels.style.display = 'flex';
+            renderSingleWave(filter);
+        }
+    }
+
+    function renderSingleWave(filter) {
+        var year = now.getFullYear();
+        var month = now.getMonth();
+        var daysInMonth = new Date(year, month + 1, 0).getDate();
+        var history = JSON.parse(localStorage.getItem('checkins') || '[]');
+        var svg = document.getElementById('wavesSvg');
+        var labels = document.getElementById('wavesLabels');
+        var w = 360;
+        var h = 100;
+        var pad = 20;
+        var usableW = w - 2 * pad;
+        var usableH = h - 2 * pad;
+
+        var keyMap = { cognitive: 'cognitive', physical: 'physical', emotional: 'emotional' };
+        var colorMap = { cognitive: '#E8B86D', physical: '#9CBA7F', emotional: '#E8B4BC' };
+
+        var key = keyMap[filter];
+        var color = colorMap[filter];
+        var points = [];
+
+        for (var d = 1; d <= daysInMonth; d++) {
+            var dateStr = year + '-' + String(month + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+            var checkin = history.find(function(c) { return c.date === dateStr; });
+            var x = pad + (d - 1) / (daysInMonth - 1) * usableW;
+
+            if (checkin && checkin[key]) {
+                points.push({ x: x, y: pad + usableH - (checkin[key] / 10) * usableH });
+            }
+        }
+
+        var svgInner = '';
+        svgInner += '<line x1="' + pad + '" y1="' + pad + '" x2="' + pad + '" y2="' + (pad + usableH) + '" stroke="#EDE8E2" stroke-width="1"/>';
+        svgInner += '<line x1="' + pad + '" y1="' + (pad + usableH) + '" x2="' + (pad + usableW) + '" y2="' + (pad + usableH) + '" stroke="#EDE8E2" stroke-width="1"/>';
+
+        if (points.length >= 2) {
+            var dPath = 'M ' + points[0].x + ' ' + points[0].y;
+            for (var i = 1; i < points.length; i++) {
+                var prev = points[i - 1];
+                var curr = points[i];
+                var cpX = (prev.x + curr.x) / 2;
+                dPath += ' Q ' + prev.x + ' ' + prev.y + ' ' + cpX + ' ' + ((prev.y + curr.y) / 2);
+                dPath += ' Q ' + curr.x + ' ' + curr.y + ' ' + curr.x + ' ' + curr.y;
+            }
+            svgInner += '<path d="' + dPath + '" fill="none" stroke="' + color + '" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>';
+        }
+
+        if (svg) svg.innerHTML = svgInner;
+
+        var labelsHtml = '';
+        var step = Math.max(1, Math.floor(daysInMonth / 6));
+        for (var d = 1; d <= daysInMonth; d += step) {
+            labelsHtml += '<span>' + d + '</span>';
+        }
+        if (labels) labels.innerHTML = labelsHtml;
+    }
+
+    // Подключаем фильтры гистограммы
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('histo-filter')) {
+            var filter = e.target.dataset.filter;
+            updateHistoFilter(filter);
+        }
+    });
 
     // ===== МОДАЛКИ =====
     function openModal() {
@@ -1496,20 +1788,24 @@
     }
 
     function addTask() {
-        const name = document.getElementById('taskNameInput').value.trim();
+        var name = document.getElementById('taskNameInput').value.trim();
         if (!name) {
             showToast('Введи название задачи 🌸');
             return;
         }
-        const project = document.getElementById('taskProjectInput').value;
-        const cognitive = parseInt(document.getElementById('taskCognitive').value);
-        const physical = parseInt(document.getElementById('taskPhysical').value);
-        const moral = parseInt(document.getElementById('taskMoral').value);
-        const cyclic = document.getElementById('taskCyclic').checked;
-        const days = cyclic ? [...document.querySelectorAll('.week-day-chip.active')].map(c => parseInt(c.dataset.day)) : [];
-        const forced = (getTaskStatus({ cognitive, physical, moral, forced: false }) === 'red');
+        var project = document.getElementById('taskProjectInput').value;
+        var cognitive = parseInt(document.getElementById('taskCognitive').value);
+        var physical = parseInt(document.getElementById('taskPhysical').value);
+        var moral = parseInt(document.getElementById('taskMoral').value);
+        var cyclic = document.getElementById('taskCyclic').checked;
+        var activeChips = document.querySelectorAll('.week-day-chip.active');
+        var days = [];
+        if (cyclic) {
+            activeChips.forEach(function(c) { days.push(parseInt(c.dataset.day)); });
+        }
+        var forced = (getTaskStatus({ cognitive: cognitive, physical: physical, moral: moral, forced: false }) === 'red');
 
-        tasks.unshift({ name, project, cognitive, physical, moral, cyclic, days, forced });
+        tasks.unshift({ name: name, project: project, cognitive: cognitive, physical: physical, moral: moral, cyclic: cyclic, days: days, forced: forced });
         closeModal();
         updateUI();
         showToast(forced ? 'Задача добавлена принудительно 🛡️' : 'Задача добавлена ✨');
@@ -1518,14 +1814,14 @@
     document.getElementById('taskCyclic').addEventListener('change', function() {
         document.getElementById('cyclicDays').style.display = this.checked ? 'block' : 'none';
         if (this.checked) {
-            const sel = document.getElementById('weekDaysSelect');
+            var sel = document.getElementById('weekDaysSelect');
             sel.innerHTML = '';
-            ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'].forEach((d, i) => {
-                const chip = document.createElement('button');
+            ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'].forEach(function(d, i) {
+                var chip = document.createElement('button');
                 chip.className = 'week-day-chip';
                 chip.textContent = d;
                 chip.dataset.day = i + 1;
-                chip.addEventListener('click', () => chip.classList.toggle('active'));
+                chip.addEventListener('click', function() { chip.classList.toggle('active'); });
                 sel.appendChild(chip);
             });
         }
@@ -1539,9 +1835,9 @@
     }
 
     function setupCycle() {
-        const date = prompt("Введите первый день последней менструации\n\nНапример: 2026-06-20");
+        var date = prompt("Введите первый день последней менструации\n\nНапример: 2026-06-20");
         if (!date) return;
-        const length = parseInt(prompt("Длина цикла?", cycleLength));
+        var length = parseInt(prompt("Длина цикла?", cycleLength));
         if (length < 15 || length > 90) {
             showToast("Проверь, правильно ли введены даты");
             return;
@@ -1549,7 +1845,7 @@
         lastPeriodDate = new Date(date);
         cycleLength = length;
         demoCycle = false;
-        const diff = Math.floor((new Date() - lastPeriodDate) / 86400000);
+        var diff = Math.floor((new Date() - lastPeriodDate) / 86400000);
         currentDay = ((diff % cycleLength) + cycleLength) % cycleLength + 1;
         document.getElementById("cycleSetupCard").style.display = "none";
         updateUI();
@@ -1563,9 +1859,9 @@
     }
 
     // ===== НАВИГАЦИЯ =====
-    document.querySelectorAll('.nav-item[data-tab]').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const tab = btn.dataset.tab;
+    document.querySelectorAll('.nav-item[data-tab]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var tab = btn.dataset.tab;
             if (tab === 'rhythm') {
                 showRhythmScreen();
                 return;
@@ -1576,9 +1872,8 @@
 
     document.getElementById('rhythmBackBtn').addEventListener('click', hideRhythmScreen);
 
-    // Профиль
-    document.getElementById('profileBtn').addEventListener('click', () => {
-        const newName = prompt('Твоё имя?', userName);
+    document.getElementById('profileBtn').addEventListener('click', function() {
+        var newName = prompt('Твоё имя?', userName);
         if (newName !== null && newName.trim()) {
             userName = newName.trim();
             updateUI();
@@ -1586,9 +1881,8 @@
         }
     });
 
-    // Настройки
-    document.getElementById('settingsBtn').addEventListener('click', () => {
-        const newLength = prompt('Длина цикла (дней)?', cycleLength);
+    document.getElementById('settingsBtn').addEventListener('click', function() {
+        var newLength = prompt('Длина цикла (дней)?', cycleLength);
         if (newLength && parseInt(newLength) >= 21 && parseInt(newLength) <= 45) {
             cycleLength = parseInt(newLength);
             if (currentDay > cycleLength) currentDay = cycleLength;
@@ -1599,50 +1893,33 @@
         }
     });
 
-    document.getElementById('notificationsBtn').addEventListener('click', () => {
+    document.getElementById('notificationsBtn').addEventListener('click', function() {
         showToast('🔔 Уведомления — в следующей версии');
     });
 
     // ===== ОНБОРДИНГ =====
-    const onboardingSlides = [
-        {
-            icon: '🌰🌿🌸🍂',
-            title: 'Твой цикл — твой ритм',
-            text: 'Rootine делит твой менструальный цикл на 4 фазы: Отдыхай, Расти, Расцветай, Заземляйся. Каждая фаза влияет на твою энергию, ум и настроение.'
-        },
-        {
-            icon: '⚡️🧩❤️',
-            title: 'Три ресурса',
-            text: 'Отмечай каждый день уровень физики, ума и моральной нагрузки. Это поможет алгоритму лучше понимать твоё состояние и подбирать задачи.'
-        },
-        {
-            icon: '📋✨',
-            title: 'Умные задачи',
-            text: 'Добавляй задачи с оценкой сложности. Rootine сам подскажет, когда лучше заняться спортом, а когда — сложными переговорами.'
-        }
+    var onboardingSlides = [
+        { icon: '🌰🌿🌸🍂', title: 'Твой цикл — твой ритм', text: 'Rootine делит твой менструальный цикл на 4 фазы: Отдыхай, Расти, Расцветай, Заземляйся. Каждая фаза влияет на твою энергию, ум и настроение.' },
+        { icon: '⚡️🧩❤️', title: 'Три ресурса', text: 'Отмечай каждый день уровень физики, ума и моральной нагрузки. Это поможет алгоритму лучше понимать твоё состояние и подбирать задачи.' },
+        { icon: '📋✨', title: 'Умные задачи', text: 'Добавляй задачи с оценкой сложности. Rootine сам подскажет, когда лучше заняться спортом, а когда — сложными переговорами.' }
     ];
 
-    let currentSlide = 0;
+    var currentSlide = 0;
 
     function renderOnboardingSlide() {
-        const slide = onboardingSlides[currentSlide];
-        document.getElementById('onboardingSlides').innerHTML = `
-            <div class="slide active">
-                <div class="onboarding-slide-icon">${slide.icon}</div>
-                <div class="onboarding-slide-title">${slide.title}</div>
-                <div class="onboarding-slide-text">${slide.text}</div>
-            </div>`;
-        const dots = document.getElementById('onboardingDots');
+        var slide = onboardingSlides[currentSlide];
+        document.getElementById('onboardingSlides').innerHTML = '<div class="slide active"><div class="onboarding-slide-icon">' + slide.icon + '</div><div class="onboarding-slide-title">' + slide.title + '</div><div class="onboarding-slide-text">' + slide.text + '</div></div>';
+        var dots = document.getElementById('onboardingDots');
         dots.innerHTML = '';
-        for (let i = 0; i < onboardingSlides.length; i++) {
-            const dot = document.createElement('div');
+        for (var i = 0; i < onboardingSlides.length; i++) {
+            var dot = document.createElement('div');
             dot.className = 'onboarding-dot' + (i === currentSlide ? ' active' : '');
             dots.appendChild(dot);
         }
         document.getElementById('onboardingNext').textContent = currentSlide < onboardingSlides.length - 1 ? 'Далее' : 'Понятно, начнём!';
     }
 
-    document.getElementById('onboardingNext').addEventListener('click', () => {
+    document.getElementById('onboardingNext').addEventListener('click', function() {
         if (currentSlide < onboardingSlides.length - 1) {
             currentSlide++;
             renderOnboardingSlide();
@@ -1657,17 +1934,17 @@
     }
 
     // ===== СОХРАНЕНИЕ НАСТРОЕНИЯ =====
-    document.getElementById('saveMoodBtn').addEventListener('click', () => {
-        const dateStr = getActiveCheckinDate();
-        const checkin = {
+    document.getElementById('saveMoodBtn').addEventListener('click', function() {
+        var dateStr = getActiveCheckinDate();
+        var checkin = {
             date: dateStr,
             cycleDay: currentDay,
             physical: resources.physical,
             cognitive: resources.cognitive,
             emotional: resources.emotional
         };
-        const history = JSON.parse(localStorage.getItem('checkins') || '[]');
-        const existingIndex = history.findIndex(item => item.date === dateStr);
+        var history = JSON.parse(localStorage.getItem('checkins') || '[]');
+        var existingIndex = history.findIndex(function(item) { return item.date === dateStr; });
         if (existingIndex >= 0) {
             history[existingIndex] = checkin;
         } else {
@@ -1679,7 +1956,7 @@
         showToast('Состояние сохранено 💛');
     });
 
-    document.getElementById('editMoodLink').addEventListener('click', () => {
+    document.getElementById('editMoodLink').addEventListener('click', function() {
         moodSavedForActiveDate = false;
         updateUI();
         showToast('Можешь изменить оценку ✨');
@@ -1693,364 +1970,10 @@
     updateUI();
 
     if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('sw.js').catch(() => {});
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('sw.js').catch(function() {});
         });
     }
-
-    /* ===== УЛУЧШЕННАЯ АДАПТАЦИЯ ===== */
-    
-    /* Базовые ограничения для всех элементов */
-    img, svg, video, canvas {
-        max-width: 100%;
-        height: auto;
-    }
-    
-    /* Toast — чтобы не вылезал */
-    #toast {
-        max-width: 90vw;
-        white-space: normal;
-        text-align: center;
-        word-wrap: break-word;
-    }
-    
-    /* Для экранов меньше 380px */
-    @media (max-width: 380px) {
-        body {
-            padding: 12px 12px 100px;
-        }
-    
-        .week-dot {
-            width: 24px;
-            height: 24px;
-        }
-    
-        .week-day-name {
-            font-size: 9px;
-        }
-    
-        .week-date {
-            font-size: 8px;
-        }
-    
-        .week-day-col {
-            gap: 4px;
-        }
-    
-        .phase-emoji {
-            font-size: 32px;
-        }
-    
-        .phase-name {
-            font-size: 18px;
-        }
-    
-        .phase-card {
-            padding: 18px 16px 16px;
-        }
-    
-        .resource-row {
-            gap: 6px;
-        }
-    
-        .resource-emoji {
-            font-size: 18px;
-            width: 22px;
-        }
-    
-        .resource-label {
-            font-size: 11px;
-            width: 45px;
-        }
-    
-        .resource-value {
-            font-size: 13px;
-            width: 22px;
-        }
-    
-        .resource-thumb {
-            width: 22px;
-            height: 22px;
-            right: -11px;
-            top: -6px;
-        }
-    
-        .tasks-card {
-            padding: 14px;
-        }
-    
-        .task-name {
-            font-size: 12px;
-        }
-    
-        .task-badges {
-            font-size: 9px;
-            gap: 4px;
-        }
-    
-        .nav-item {
-            font-size: 8px;
-            padding: 4px 8px;
-        }
-    
-        .nav-item .nav-emoji {
-            font-size: 18px;
-        }
-    
-        .nav-item.add {
-            top: -28px;
-        }
-    
-        .nav-item.add .nav-emoji {
-            width: 44px;
-            height: 44px;
-            font-size: 22px;
-        }
-    
-        .bottom-nav {
-            padding: 8px 4px 12px;
-            bottom: 12px;
-        }
-    
-        .month-dot-cell .dot-mini {
-            width: 18px;
-            height: 18px;
-        }
-    
-        .month-days-header {
-            font-size: 8px;
-        }
-    
-        .waves-svg {
-            height: 70px;
-        }
-    
-        .rhythm-day-info {
-            padding: 12px 14px;
-            font-size: 12px;
-        }
-    
-        .recommendation {
-            padding: 14px;
-        }
-    
-        .recommendation-icon {
-            font-size: 22px;
-        }
-    
-        .recommendation-text {
-            font-size: 12px;
-        }
-    
-        .modal {
-            padding: 22px 16px 28px;
-        }
-    
-        .modal-title {
-            font-size: 18px;
-        }
-    
-        .modal-input {
-            padding: 12px 14px;
-            font-size: 14px;
-        }
-    
-        .week-calendar {
-            padding: 14px 10px;
-        }
-    }
-    
-    /* Для совсем маленьких экранов (iPhone SE 1-го поколения = 320px) */
-    @media (max-width: 340px) {
-        .week-dot {
-            width: 20px;
-            height: 20px;
-        }
-    
-        .week-row {
-            gap: 1px;
-        }
-    
-        .week-day-col {
-            gap: 2px;
-            padding: 2px 0;
-        }
-    
-        .week-day-name {
-            font-size: 8px;
-        }
-    
-        .week-date {
-            font-size: 7px;
-        }
-    
-        .nav-item {
-            font-size: 7px;
-            padding: 2px 6px;
-        }
-    
-        .nav-item .nav-emoji {
-            font-size: 16px;
-        }
-    
-        .nav-item.add {
-            top: -24px;
-        }
-    
-        .nav-item.add .nav-emoji {
-            width: 38px;
-            height: 38px;
-            font-size: 20px;
-        }
-    
-        .logo {
-            font-size: 20px;
-        }
-    
-        .logo-icon {
-            width: 32px;
-            height: 32px;
-            font-size: 16px;
-        }
-    
-        .icon-btn {
-            width: 36px;
-            height: 36px;
-            font-size: 16px;
-        }
-    
-        .phase-card {
-            padding: 14px 12px 12px;
-        }
-    
-        .phase-emoji {
-            font-size: 28px;
-        }
-    
-        .phase-name {
-            font-size: 16px;
-        }
-    
-        .phase-day {
-            font-size: 12px;
-        }
-    
-        .resources-card {
-            padding: 14px 12px;
-        }
-    
-        .resource-row {
-            gap: 4px;
-            margin-bottom: 10px;
-        }
-    
-        .resource-emoji {
-            font-size: 16px;
-            width: 18px;
-        }
-    
-        .resource-label {
-            font-size: 10px;
-            width: 38px;
-        }
-    
-        .resource-value {
-            font-size: 11px;
-            width: 18px;
-        }
-    
-        .resource-thumb {
-            width: 18px;
-            height: 18px;
-            right: -9px;
-            top: -4px;
-        }
-    
-        .resource-slider-bg {
-            height: 6px;
-        }
-    
-        .add-task-btn {
-            width: 36px !important;
-            height: 36px !important;
-            font-size: 22px !important;
-        }
-    
-        .tasks-title {
-            font-size: 13px;
-        }
-    
-        .task-item {
-            padding: 10px 2px;
-            gap: 8px;
-        }
-    
-        .task-name {
-            font-size: 11px;
-        }
-    
-        .task-project {
-            font-size: 10px;
-        }
-    
-        .task-badges {
-            font-size: 8px;
-            gap: 3px;
-        }
-    
-        .task-dot {
-            width: 10px;
-            height: 10px;
-        }
-    
-        .month-dot-cell .dot-mini {
-            width: 14px;
-            height: 14px;
-        }
-    
-        .month-dot-cell .dot-num {
-            font-size: 7px;
-        }
-    
-        .month-days-header {
-            font-size: 7px;
-        }
-    
-        .waves-svg {
-            height: 60px;
-        }
-    
-        .waves-legend {
-            font-size: 9px;
-            gap: 8px;
-        }
-    
-        .rhythm-day-info {
-            padding: 10px 12px;
-            gap: 6px;
-        }
-    
-        .rhythm-day-info .info-phase {
-            font-size: 11px;
-        }
-    
-        .rhythm-day-info .info-values {
-            font-size: 12px;
-            gap: 6px;
-        }
-    }
-    
-    /* Фикс для iOS Safari — нижний отступ */
-    @supports (padding-bottom: env(safe-area-inset-bottom)) {
-        body {
-            padding-bottom: calc(110px + env(safe-area-inset-bottom));
-        }
-    
-        .bottom-nav {
-            bottom: calc(18px + env(safe-area-inset-bottom));
-        }
-    }
-    
 </script>
 </body>
 </html>
