@@ -721,61 +721,39 @@
             max-width: 90vw;
         }
 
-        /* Нижняя навигация */
+                /* Нижняя навигация — летающая (Telegram-style) */
         .bottom-nav {
             position: fixed;
-            bottom: 0;
+            bottom: 16px;
             left: 50%;
             transform: translateX(-50%);
-            width: calc(100% - 36px);
-            max-width: 394px;
+            width: calc(100% - 48px);
+            max-width: 382px;
             background: var(--card);
-            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+            border-radius: 20px;
             display: flex;
             justify-content: space-around;
-            align-items: flex-end;
-            padding: 10px 6px 20px;
-            box-shadow: 0 -2px 24px rgba(58, 50, 44, 0.1);
+            align-items: center;
+            padding: 8px 6px 10px;
+            box-shadow: 
+                0 2px 12px rgba(58, 50, 44, 0.08),
+                0 0 0 1px rgba(0, 0, 0, 0.04);
             z-index: 100;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
         }
-        
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 3px;
-            font-size: 10px;
-            color: var(--text-secondary);
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 6px 12px;
-            border-radius: 16px;
-            transition: all 0.2s;
-            font-family: var(--font);
-            font-weight: 500;
+
+        /* Градиентная подложка под панелью */
+        .nav-gradient {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(to top, var(--bg) 30%, transparent 100%);
+            pointer-events: none;
+            z-index: 99;
         }
-        .nav-item.active { color: var(--accent); font-weight: 700; }
-        .nav-item .nav-emoji { font-size: 22px; transition: transform 0.2s; }
-        .nav-item:active .nav-emoji { transform: scale(0.85); }
-        .nav-item.add { position: relative; top: -36px; }
-        .nav-item.add .nav-emoji {
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            background-color: #9CBA7F;
-            color: white;
-            border: none;
-            font-size: 26px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-            padding: 0;
-        }
-        .nav-item.add:active .nav-emoji { transform: scale(0.9); }
 
         /* Модалки */
         .modal-overlay {
@@ -1204,7 +1182,6 @@
         <div class="month-name" id="monthName">Июнь 2026</div>
         <button class="month-arrow" id="nextMonth">▶</button>
         </div>
-        <div class="month-name" id="monthName">Июнь 2026</div>
         <div class="month-days-header">
             <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
         </div>
@@ -1531,20 +1508,14 @@
             d.setDate(d.getDate() + off);
             var cycleDay = getCycleDayForDate(d);
 
-            var dotPhase = 'seed';
-            var dayInPhase = 1;
-            for (var j = 0; j < phaseData.length; j++) {
-                if (phaseData[j].days.indexOf(cycleDay) !== -1) {
-                    dotPhase = phaseData[j].id;
-                    dayInPhase = phaseData[j].days.indexOf(cycleDay) + 1;
-                    break;
-                }
-            }
+            var phaseInfo = getPhaseInfo(cycleDay);
+            var colorIndex = getHarmonicColorIndex(phaseInfo.dayInPhase, phaseInfo.totalDays, 20);
+            var dotClass = phaseInfo.id + '-' + colorIndex;
 
             var col = document.createElement('div');
             col.className = 'week-day-col';
             col.innerHTML = '<div class="week-day-name">' + dayNames[(dow + off + 7) % 7] + '</div>' +
-                '<div class="week-dot ' + dotPhase + '-' + dayInPhase + (off === 0 ? ' today' : '') + '"></div>' +
+                '<div class="week-dot ' + dotClass + (off === 0 ? ' today' : '') + '"></div>' +
                 '<div class="week-date">' + d.getDate() + '</div>';
 
             (function(d, cycleDay) {
@@ -1755,7 +1726,7 @@
 
             var cell = document.createElement('div');
             cell.className = 'month-dot-cell' + (d === rhythmSelectedDay ? ' selected' : '');
-            cell.innerHTML = '<div class="dot-mini ' + dotPhase + '-' + dayInPhase + '"></div><div class="dot-num">' + d + '</div>';
+            cell.innerHTML = '<div class="dot-mini ' + dotClass + '"></div><div class="dot-num">' + d + '</div>';
 
             (function(d) {
                 cell.addEventListener('click', function() {
@@ -2020,7 +1991,10 @@
         });
     });
 
-    document.getElementById('rhythmBackBtn').addEventListener('click', hideRhythmScreen);
+    var rhythmBackBtn = document.getElementById('rhythmBackBtn');
+    if (rhythmBackBtn) {
+        rhythmBackBtn.addEventListener('click', hideRhythmScreen);
+    }
 
     document.getElementById('profileBtn').addEventListener('click', function() {
         var newName = prompt('Твоё имя?', userName);
@@ -2335,41 +2309,39 @@
         <div class="modal-handle"></div>
         <div class="modal-title">🩸 Настройка цикла</div>
 
-        <div class="modal-label">Даты последних месячных:</div>
-        <div id="periodDatesList">
-            <input class="modal-input period-date" type="date" id="periodDate1">
-        </div>
-        <button class="add-period-btn" id="addPeriodBtn">+ Добавить дату</button>
+        <div class="modal-label">🗓 Первый день месячных</div>
+        <input class="modal-input" type="date" id="firstPeriodDate">
 
-        <div class="modal-label" style="margin-top:14px;">Длина менструации: <strong id="periodLengthVal">5</strong> дней</div>
+        <div class="modal-label">🗓 Последний день месячных</div>
+        <input class="modal-input" type="date" id="lastPeriodDateInput">
+
+        <div class="modal-label" style="margin-top:8px;">📏 Длина менструации: <strong id="periodLenVal">5</strong> дней</div>
         <div class="slider-pair">
             <span>2</span>
-            <input type="range" min="2" max="10" value="5" id="periodLength" oninput="document.getElementById('periodLengthVal').textContent=this.value">
+            <input type="range" min="2" max="10" value="5" id="periodLenSlider" oninput="document.getElementById('periodLenVal').textContent=this.value">
             <span>10</span>
         </div>
 
-        <div style="margin-top:14px; font-size:14px;">
-            <label style="display:flex;align-items:center;gap:8px;">
-                <input type="checkbox" id="irregularCycle"> У меня нерегулярный цикл
-            </label>
-        </div>
-        <div style="margin-top:8px; font-size:14px;">
-            <label style="display:flex;align-items:center;gap:8px;">
-                <input type="checkbox" id="pregnantCheck"> Я беременна
-            </label>
-        </div>
+        <button class="add-period-btn" id="addMoreDatesBtn" style="margin-top:10px;">📎 Добавить ещё даты для точности</button>
+        <div id="extraDatesContainer" style="display:none; margin-top:8px;"></div>
+
+        <div class="modal-label" style="margin-top:14px;">⚙️ Особые случаи</div>
+        <label style="display:flex;align-items:center;gap:8px;font-size:14px;margin-top:6px;">
+            <input type="checkbox" id="irregularCycle"> У меня нерегулярный цикл
+        </label>
+        <label style="display:flex;align-items:center;gap:8px;font-size:14px;margin-top:4px;">
+            <input type="checkbox" id="pregnantCheck"> Я беременна
+        </label>
 
         <div id="cyclePreview" style="margin-top:14px;padding:12px;background:#F9F7F4;border-radius:12px;font-size:13px;display:none;">
-            📊 <strong>Расчёт:</strong><br>
-            Длина цикла: <strong id="calcCycleLength">—</strong> дней<br>
-            Длина месячных: <strong id="calcPeriodLength">—</strong> дней<br>
-            Следующие месячные: <strong id="calcNextPeriod">—</strong>
+            📊 <strong id="calcResult"></strong>
         </div>
 
-        <button class="modal-save" onclick="saveCycleSetup()">💾 Сохранить настройки</button>
+        <button class="modal-save" onclick="saveCycleSetup()">💾 Сохранить</button>
         <button class="modal-close" onclick="document.getElementById('cycleSetupOverlay').classList.remove('open')">Отмена</button>
     </div>
 </div>
-    
+<!-- Градиентная подложка под навигацией -->
+<div class="nav-gradient"></div>
 </body>
 </html>
