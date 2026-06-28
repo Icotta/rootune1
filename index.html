@@ -114,20 +114,6 @@
             box-shadow: var(--shadow);
         }
 
-        /* Приветствие */
-        .greeting {
-            font-size: 15px;
-            color: var(--text-secondary);
-            margin-bottom: 4px;
-            font-weight: 500;
-        }
-        .username {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 24px;
-            letter-spacing: -0.5px;
-        }
-
         /* Карточка фазы */
         .phase-card {
             background: var(--card);
@@ -153,6 +139,7 @@
             font-size: 22px;
             font-weight: 700;
             margin-bottom: 4px;
+            word-break: break-word;
         }
         .phase-day {
             font-size: 14px;
@@ -210,6 +197,9 @@
             outline: none;
             -webkit-tap-highlight-color: transparent;
             box-shadow: none;
+        }
+        .week-day-col:active {
+            background: #F2F5ED;
         }
         .week-day-name {
             font-size: 11px;
@@ -730,9 +720,6 @@
             body {
                 padding: 14px 14px 105px;
             }
-            .username {
-                font-size: 24px;
-            }
             .week-dot {
                 width: 28px;
                 height: 28px;
@@ -760,15 +747,11 @@
     </div>
 </div>
 
-<!-- Приветствие -->
-<div class="greeting" id="greetingText">☀️ Доброе утро</div>
-<div class="username" id="usernameDisplay">Ева</div>
-
 <!-- Карточка фазы -->
 <div class="phase-card" id="phaseCard">
     <div class="phase-watercolor"></div>
     <span class="phase-emoji" id="phaseEmoji">🌸</span>
-    <div class="phase-name" id="phaseName">Расцветай</div>
+    <div class="phase-name" id="phaseName">Расцветай, Ева</div>
     <div class="phase-day" id="phaseDay">День 16 из 28</div>
 </div>
 
@@ -932,10 +915,10 @@
     ];
 
     const beePhrases = {
-        seed: '🐝 Отдыхай. Сейчас не время для рекордов — закрой старые задачи и дай телу восстановиться💛.',
-        sprout: '🐝 Расти. Самое время начать новые проекты с новой силой!✨️',
-        bloom: '🐝 Расцветай. Ты на пике обаяния — назначай важные встречи и переговоры💅',
-        fruit: '🐝 Заземляйся. Завершай начатое, наводи порядок, никаких импульсивных решений💛',
+        seed: 'Отдыхай. Сейчас не время для рекордов — закрой старые задачи и дай телу восстановиться 💛.',
+        sprout: 'Расти. Самое время начать новые проекты с новой силой! ✨',
+        bloom: 'Расцветай. Ты на пике обаяния — назначай важные встречи и переговоры 💅',
+        fruit: 'Заземляйся. Завершай начатое, наводи порядок, никаких импульсивных решений 💛',
     };
 
     let currentDay = 6;
@@ -994,10 +977,17 @@
         const card = document.getElementById('phaseCard');
         card.className = 'phase-card ' + phase.id;
         document.getElementById('phaseEmoji').textContent = phase.emoji;
-        document.getElementById('phaseName').textContent = phase.title;
+
+        // Имя в заголовке фазы: "Расцветай, Ева" или просто "Расцветай"
+        const phaseNameElement = document.getElementById('phaseName');
+        if (userName && userName.trim() !== '') {
+            phaseNameElement.textContent = phase.title + ', ' + userName;
+        } else {
+            phaseNameElement.textContent = phase.title;
+        }
+
         const shownDay = demoCycle ? 6 : currentDay;
         document.getElementById('phaseDay').textContent = `День ${shownDay} из ${cycleLength} · ${phase.name}`;
-        document.getElementById('usernameDisplay').textContent = userName;
         document.getElementById('recommendationText').textContent = beePhrases[phase.id];
 
         // Календарь
