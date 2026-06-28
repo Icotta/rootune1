@@ -1,0 +1,24 @@
+{
+    "name": "Rootine — твой ритм",
+    "short_name": "Rootine",
+    "description": "Планировщик жизни по фазам цикла. Спорт, питание, работа — в согласии с твоим телом.",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#F4F7F0",
+    "theme_color": "#9CBA7F",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='44' fill='%239CBA7F'/%3E%3Ctext x='96' y='124' font-size='110' text-anchor='middle'%3E🐝%3C/text%3E%3C/svg%3E",
+            "sizes": "192x192",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='100' fill='%239CBA7F'/%3E%3Ctext x='256' y='320' font-size='280' text-anchor='middle'%3E🐝%3C/text%3E%3C/svg%3E",
+            "sizes": "512x512",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ]
+}
