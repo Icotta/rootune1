@@ -411,29 +411,24 @@ function updateUI() {
     const dayNames = ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'];
     
     for (let i = 0; i < 7; i++) {
-    
-        const off = i - 3;
-    
-        const d = new Date(center);
-        d.setDate(d.getDate() + off);
 
-        let cycleDay;
+    const off = i - 3;
 
-        if (demoCycle) {
-        
-            // Сегодня всегда первый день фолликулярной фазы
-            cycleDay = 6 + off;
-        
-        } else {
-        
-            cycleDay =
-                ((currentDay - 1 + off) % cycleLength + cycleLength)
-                % cycleLength + 1;
-        
-        }
-        
-        cycleDay =
-            ((cycleDay - 1 + cycleLength) % cycleLength) + 1;
+    const d = new Date(center);
+    d.setDate(d.getDate() + off);
+
+    let cycleDay;
+
+    if (demoCycle) {
+        // В демо сегодня = 6-й день цикла
+        cycleDay = 6 + off;
+
+        // Чтобы не выйти за пределы цикла
+        cycleDay = ((cycleDay - 1 + cycleLength) % cycleLength) + 1;
+
+    } else {
+        cycleDay = ((currentDay + off - 1 + cycleLength) % cycleLength) + 1;
+    }
     
         let dotPhase = 'seed';
         let dayInPhase = 1;
@@ -441,7 +436,6 @@ function updateUI() {
         for (const p of phaseData) {
             if (p.days.includes(cycleDay)) {
                 dotPhase = p.id;
-                console.log(dotPhase, dayInPhase);
                 dayInPhase = p.days.indexOf(cycleDay) + 1;
                 break;
             }
@@ -696,6 +690,7 @@ function setupCycle() {
 
     lastPeriodDate = new Date(date);
     cycleLength = length;
+    demoCycle = false;
 
     const diff = Math.floor(
         (new Date() - lastPeriodDate) / 86400000
@@ -704,7 +699,8 @@ function setupCycle() {
     currentDay =
         ((diff % cycleLength) + cycleLength) %
         cycleLength + 1;
-
+    
+    demoCycle = false;
     document.getElementById("cycleSetupCard").style.display = "none";
 
     updateUI();
