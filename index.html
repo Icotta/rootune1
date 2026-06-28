@@ -557,6 +557,7 @@
             pointer-events: none;
             transition: opacity 0.3s;
             white-space: nowrap;
+            max-width: 90vw;
         }
 
         /* Нижняя навигация */
@@ -828,13 +829,6 @@
             opacity: 0.25;
         }
 
-        /* Toast */
-        #toast {
-            max-width: 90vw;
-            white-space: normal;
-            text-align: center;
-            word-wrap: break-word;
-        }
 
         /* Адаптив */
         @media (max-width: 380px) {
@@ -931,7 +925,6 @@
         }
     </style>
         
-    </style>
 </head>
 <body>
 
@@ -1086,6 +1079,14 @@
         <svg class="waves-svg" id="wavesSvg" viewBox="0 0 360 100" preserveAspectRatio="none" style="display:none;"></svg>
         <div class="waves-labels" id="wavesLabels" style="display:none;"></div>
     </div>
+
+    <!-- Инфо о выбранном дне -->
+    <div class="rhythm-day-info" id="rhythmDayInfo">
+        <span class="info-phase" id="infoPhase">🌸 Расцветай</span>
+        <span style="color:var(--text-secondary)">·</span>
+        <span class="info-values" id="infoValues">🧠8 💪3 ❤️7</span>
+    </div>
+</div>
 
 <!-- ==================== НИЖНЯЯ НАВИГАЦИЯ ==================== -->
 <div class="bottom-nav" id="bottomNav">
