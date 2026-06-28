@@ -93,6 +93,9 @@ body {font-family: var(--font);background: var(--bg);color: var(--text);max-widt
     border-radius: 14px;
     background: #F2F5ED;
     transition: background 0.2s;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    box-shadow: none;
 }
 
 .week-day-name {
@@ -559,11 +562,9 @@ const defaultTasks = [
 ];
 
 // ===== ФУНКЦИИ =====
-function getCurrentPhase() {
-    for (const phase of phaseData) {
-        if (phase.days.includes(currentDay)) return phase;
-    }
-    return phaseData[3];
+    
+function getCurrentPhase(day = currentDay) {
+    return phaseData.find(p => p.days.includes(day)) || phaseData[3];
 }
 
 function getTaskStatus(task) {
@@ -595,7 +596,7 @@ function updateUI() {
 
     if (demoCycle) {
     
-        phase = phaseData.find(p => p.id === 'sprout');
+        phase = getCurrentPhase();
     
     } else {
     
@@ -673,12 +674,9 @@ function updateUI() {
         col.addEventListener('click', () => {
             centerDate = new Date(d);
             currentDay = cycleDay;
-    
+            demoCycle = false; 
             updateUI();
-    
-            showToast(
-                `День ${currentDay} · ${getCurrentPhase().title}`
-            );
+            showToast(`День ${currentDay} · ${getCurrentPhase().title}`);
         });
     
         row.appendChild(col);
