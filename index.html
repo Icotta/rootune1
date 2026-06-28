@@ -1697,6 +1697,360 @@
             navigator.serviceWorker.register('sw.js').catch(() => {});
         });
     }
+
+    /* ===== УЛУЧШЕННАЯ АДАПТАЦИЯ ===== */
+    
+    /* Базовые ограничения для всех элементов */
+    img, svg, video, canvas {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    /* Toast — чтобы не вылезал */
+    #toast {
+        max-width: 90vw;
+        white-space: normal;
+        text-align: center;
+        word-wrap: break-word;
+    }
+    
+    /* Для экранов меньше 380px */
+    @media (max-width: 380px) {
+        body {
+            padding: 12px 12px 100px;
+        }
+    
+        .week-dot {
+            width: 24px;
+            height: 24px;
+        }
+    
+        .week-day-name {
+            font-size: 9px;
+        }
+    
+        .week-date {
+            font-size: 8px;
+        }
+    
+        .week-day-col {
+            gap: 4px;
+        }
+    
+        .phase-emoji {
+            font-size: 32px;
+        }
+    
+        .phase-name {
+            font-size: 18px;
+        }
+    
+        .phase-card {
+            padding: 18px 16px 16px;
+        }
+    
+        .resource-row {
+            gap: 6px;
+        }
+    
+        .resource-emoji {
+            font-size: 18px;
+            width: 22px;
+        }
+    
+        .resource-label {
+            font-size: 11px;
+            width: 45px;
+        }
+    
+        .resource-value {
+            font-size: 13px;
+            width: 22px;
+        }
+    
+        .resource-thumb {
+            width: 22px;
+            height: 22px;
+            right: -11px;
+            top: -6px;
+        }
+    
+        .tasks-card {
+            padding: 14px;
+        }
+    
+        .task-name {
+            font-size: 12px;
+        }
+    
+        .task-badges {
+            font-size: 9px;
+            gap: 4px;
+        }
+    
+        .nav-item {
+            font-size: 8px;
+            padding: 4px 8px;
+        }
+    
+        .nav-item .nav-emoji {
+            font-size: 18px;
+        }
+    
+        .nav-item.add {
+            top: -28px;
+        }
+    
+        .nav-item.add .nav-emoji {
+            width: 44px;
+            height: 44px;
+            font-size: 22px;
+        }
+    
+        .bottom-nav {
+            padding: 8px 4px 12px;
+            bottom: 12px;
+        }
+    
+        .month-dot-cell .dot-mini {
+            width: 18px;
+            height: 18px;
+        }
+    
+        .month-days-header {
+            font-size: 8px;
+        }
+    
+        .waves-svg {
+            height: 70px;
+        }
+    
+        .rhythm-day-info {
+            padding: 12px 14px;
+            font-size: 12px;
+        }
+    
+        .recommendation {
+            padding: 14px;
+        }
+    
+        .recommendation-icon {
+            font-size: 22px;
+        }
+    
+        .recommendation-text {
+            font-size: 12px;
+        }
+    
+        .modal {
+            padding: 22px 16px 28px;
+        }
+    
+        .modal-title {
+            font-size: 18px;
+        }
+    
+        .modal-input {
+            padding: 12px 14px;
+            font-size: 14px;
+        }
+    
+        .week-calendar {
+            padding: 14px 10px;
+        }
+    }
+    
+    /* Для совсем маленьких экранов (iPhone SE 1-го поколения = 320px) */
+    @media (max-width: 340px) {
+        .week-dot {
+            width: 20px;
+            height: 20px;
+        }
+    
+        .week-row {
+            gap: 1px;
+        }
+    
+        .week-day-col {
+            gap: 2px;
+            padding: 2px 0;
+        }
+    
+        .week-day-name {
+            font-size: 8px;
+        }
+    
+        .week-date {
+            font-size: 7px;
+        }
+    
+        .nav-item {
+            font-size: 7px;
+            padding: 2px 6px;
+        }
+    
+        .nav-item .nav-emoji {
+            font-size: 16px;
+        }
+    
+        .nav-item.add {
+            top: -24px;
+        }
+    
+        .nav-item.add .nav-emoji {
+            width: 38px;
+            height: 38px;
+            font-size: 20px;
+        }
+    
+        .logo {
+            font-size: 20px;
+        }
+    
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            font-size: 16px;
+        }
+    
+        .icon-btn {
+            width: 36px;
+            height: 36px;
+            font-size: 16px;
+        }
+    
+        .phase-card {
+            padding: 14px 12px 12px;
+        }
+    
+        .phase-emoji {
+            font-size: 28px;
+        }
+    
+        .phase-name {
+            font-size: 16px;
+        }
+    
+        .phase-day {
+            font-size: 12px;
+        }
+    
+        .resources-card {
+            padding: 14px 12px;
+        }
+    
+        .resource-row {
+            gap: 4px;
+            margin-bottom: 10px;
+        }
+    
+        .resource-emoji {
+            font-size: 16px;
+            width: 18px;
+        }
+    
+        .resource-label {
+            font-size: 10px;
+            width: 38px;
+        }
+    
+        .resource-value {
+            font-size: 11px;
+            width: 18px;
+        }
+    
+        .resource-thumb {
+            width: 18px;
+            height: 18px;
+            right: -9px;
+            top: -4px;
+        }
+    
+        .resource-slider-bg {
+            height: 6px;
+        }
+    
+        .add-task-btn {
+            width: 36px !important;
+            height: 36px !important;
+            font-size: 22px !important;
+        }
+    
+        .tasks-title {
+            font-size: 13px;
+        }
+    
+        .task-item {
+            padding: 10px 2px;
+            gap: 8px;
+        }
+    
+        .task-name {
+            font-size: 11px;
+        }
+    
+        .task-project {
+            font-size: 10px;
+        }
+    
+        .task-badges {
+            font-size: 8px;
+            gap: 3px;
+        }
+    
+        .task-dot {
+            width: 10px;
+            height: 10px;
+        }
+    
+        .month-dot-cell .dot-mini {
+            width: 14px;
+            height: 14px;
+        }
+    
+        .month-dot-cell .dot-num {
+            font-size: 7px;
+        }
+    
+        .month-days-header {
+            font-size: 7px;
+        }
+    
+        .waves-svg {
+            height: 60px;
+        }
+    
+        .waves-legend {
+            font-size: 9px;
+            gap: 8px;
+        }
+    
+        .rhythm-day-info {
+            padding: 10px 12px;
+            gap: 6px;
+        }
+    
+        .rhythm-day-info .info-phase {
+            font-size: 11px;
+        }
+    
+        .rhythm-day-info .info-values {
+            font-size: 12px;
+            gap: 6px;
+        }
+    }
+    
+    /* Фикс для iOS Safari — нижний отступ */
+    @supports (padding-bottom: env(safe-area-inset-bottom)) {
+        body {
+            padding-bottom: calc(110px + env(safe-area-inset-bottom));
+        }
+    
+        .bottom-nav {
+            bottom: calc(18px + env(safe-area-inset-bottom));
+        }
+    }
+    
 </script>
 </body>
 </html>
