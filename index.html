@@ -2508,13 +2508,17 @@
         }
 
         // Дни из следующего месяца
-        var totalCells = firstDay - 1 + daysInMonth;
-        var remainingCells = 
-            var totalCellsBefore = firstDay - 1 + daysInMonth;
-            var remainingCells = 7 - (totalCellsBefore % 7);
-            if (remainingCells === 7) remainingCells = 0;
+        var totalCellsBefore = firstDay - 1 + daysInMonth;
+        var remainingCells = 7 - (totalCellsBefore % 7);
+        if (remainingCells === 7) remainingCells = 0;
         if (remainingCells < 7) {
-            for (var d = 1; d <= remainingCells; d++) {
+            
+                    // Добиваем до 5 строк (35 ячеек)
+        var totalCellsNow = totalCellsBefore + remainingCells;
+        var cellsNeeded = 35 - totalCellsNow;
+        if (cellsNeeded > 0) {
+            var nextMonthDay = remainingCells + 1;
+            for (var d = nextMonthDay; d < nextMonthDay + cellsNeeded; d++) {
                 var date = new Date(year, month + 1, d);
                 var cycleDay = getCycleDayForDate(date);
                 var phaseInfo = getPhaseInfo(cycleDay);
@@ -2528,10 +2532,7 @@
                 (function(d) {
                     cell.addEventListener('click', function() {
                         rhythmMonth++;
-                        if (rhythmMonth > 11) {
-                            rhythmMonth = 0;
-                            rhythmYear++;
-                        }
+                        if (rhythmMonth > 11) { rhythmMonth = 0; rhythmYear++; }
                         rhythmSelectedDay = d;
                         renderRhythm();
                     });
@@ -2822,20 +2823,6 @@
         }
     }
 
-    // ===== НАСТРОЙКА ЦИКЛА =====
-    function setupCycle() {
-        document.getElementById('cycleSetupOverlay').classList.add('open');
-        document.getElementById('firstPeriodDate').value = '';
-        document.getElementById('lastPeriodDateCalc').textContent = '—';
-        document.getElementById('periodLenSlider').value = 5;
-        document.getElementById('periodLenVal').textContent = '5';
-        periodDates = [];
-        extraPeriodCount = 0;
-        document.getElementById('extraDatesContainer').innerHTML = '';
-        document.getElementById('cyclePreview').style.display = 'none';
-        document.getElementById('irregularCycle').checked = false;
-        document.getElementById('pregnantCheck').checked = false;
-    }
 
     function updateLastPeriodDateCalc() {
         var firstDate = new Date(document.getElementById('firstPeriodDate').value);
