@@ -199,6 +199,38 @@
             transition: background 0.5s;
             filter: blur(4px);
         }
+
+                .recommendation-content {
+            flex: 1;
+            min-width: 0;
+        }
+        .recommendation-tips {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        .rec-tip {
+            font-size: 11px;
+            padding: 6px 10px;
+            border-radius: 12px;
+            background: #F9F7F4;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+        .rec-tip.tip-physical {
+            background: #F0F7ED;
+            color: #5C7A3F;
+        }
+        .rec-tip.tip-cognitive {
+            background: #FFF8ED;
+            color: #A67C42;
+        }
+        .rec-tip.tip-emotional {
+            background: #FFF0F2;
+            color: #B0505A;
+        }
+        
         .phase-card.seed .phase-watercolor {
             background: var(--seed);
         }
@@ -1135,56 +1167,47 @@
         }
 
         /* Гистограмма */
-        .histogram {
+                .histogram {
             display: flex;
-            justify-content: flex-start;
+            justify-content: space-between;
             align-items: flex-end;
             gap: 0;
             height: 120px;
             padding: 0 10px;
             margin-bottom: 16px;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
+            position: relative;
         }
         .histo-day-group {
             display: flex;
-            gap: 2px;
+            justify-content: space-between;
             align-items: flex-end;
             height: 100%;
-            min-width: 100%;
+            width: 100%;
         }
         .histo-day-block {
             display: flex;
             flex-direction: row;
             align-items: flex-end;
-            gap: 1px;
-            flex-shrink: 0;
-            width: auto;
+            gap: 3px;
+            flex: 1;
             height: 100%;
+            justify-content: center;
         }
         .histo-mini-bar {
-            width: 4px;
-            border-radius: 2px 2px 0 0;
+            width: 6px;
+            border-radius: 3px 3px 0 0;
             transition: all 0.3s;
             min-height: 2px;
+            flex-shrink: 0;
         }
-        .histo-mini-bar.cog {
-            background: var(--honey);
-        }
-        .histo-mini-bar.phys {
-            background: var(--sprout);
-        }
-        .histo-mini-bar.emo {
-            background: var(--bloom);
-        }
-        .histo-mini-bar.dimmed {
-            opacity: 0.2;
-        }
-        .histo-day-label {
-            font-size: 7px;
-            color: var(--text-secondary);
-            margin-top: 2px;
-            text-align: center;
+        .waves-svg {
+            position: absolute;
+            top: 0;
+            left: 10px;
+            right: 10px;
+            width: calc(100% - 20px);
+            height: 100%;
+            pointer-events: none;
         }
 
         /* Фильтры */
@@ -1578,7 +1601,14 @@
     <!-- Рекомендация -->
     <div class="recommendation" id="recommendationBox">
         <span class="recommendation-icon">🐝</span>
-        <span class="recommendation-text" id="recommendationText">Расцветай. Ты на пике обаяния — назначай важные встречи и переговоры.</span>
+        <div class="recommendation-content">
+            <div class="recommendation-text" id="recommendationText">Расцветай. Ты на пике обаяния — назначай важные встречи и переговоры.</div>
+            <div class="recommendation-tips" id="recommendationTips">
+                <div class="rec-tip tip-physical">⚡️ <span id="tipPhysical">Силовая тренировка</span></div>
+                <div class="rec-tip tip-cognitive">🧠 <span id="tipCognitive">Сложная задача</span></div>
+                <div class="rec-tip tip-emotional">❤️ <span id="tipEmotional">Встреча с друзьями</span></div>
+            </div>
+        </div>
     </div>
 
     <!-- Задачи -->
@@ -1840,6 +1870,118 @@
         { name: 'Разобрать почту', project: 'Копилка', cognitive: 3, physical: 1, moral: 2, cyclic: false, days: [], forced: false }
     ];
 
+      // ===== БАЗА РЕКОМЕНДАЦИЙ =====
+    var tipDatabase = {
+        physical: {
+            high: [
+                '🔥 Интенсивная тренировка',
+                '🏃‍♀️ HIIT или бег',
+                '💪 Силовая в зале',
+                '🤸‍♀️ Динамичная йога',
+                '🚴‍♀️ Сайклинг или вело',
+                '🥊 Бокс или единоборства',
+                '🏊‍♀️ Плавание на скорость'
+            ],
+            medium: [
+                '🧘‍♀️ Йога или пилатес',
+                '🚶‍♀️ Долгая прогулка',
+                '🏋️‍♀️ Лёгкая силовая',
+                '🤸‍♀️ Растяжка',
+                '🕺 Танцы дома',
+                '🌿 Пешая прогулка',
+                '🏌️‍♀️ Спокойный спорт'
+            ],
+            low: [
+                '🛌 Отдых и восстановление',
+                '🧘‍♀️ Медитация лёжа',
+                '📖 Чтение в постели',
+                '🛁 Тёплая ванна',
+                '😴 Дневной сон',
+                '🌸 Лёгкая растяжка',
+                '🍵 Чай и отдых'
+            ]
+        },
+        cognitive: {
+            high: [
+                '🧩 Сложный проект',
+                '📊 Аналитика и цифры',
+                '📝 Написание текстов',
+                '🎓 Изучение нового',
+                '💼 Переговоры и встречи',
+                '🗂 Планирование месяца',
+                '💻 Программирование'
+            ],
+            medium: [
+                '📧 Разбор почты',
+                '📋 Рутинные задачи',
+                '🎨 Творчество и хобби',
+                '📖 Чтение книги',
+                '✍️ Ведение дневника',
+                '🎧 Подкасты и аудио',
+                '🧹 Уборка и порядок'
+            ],
+            low: [
+                '😌 Ничего не делать',
+                '🎬 Лёгкий фильм',
+                '🛋 Отдых на диване',
+                '🎵 Музыка и релакс',
+                '📱 Соцсети без цели',
+                '☁️ Мечтать и думать',
+                '🕯 Свечи и уют'
+            ]
+        },
+        emotional: {
+            high: [
+                '🎉 Вечеринка с друзьями',
+                '💃 Свидание или танцы',
+                '👯‍♀️ Встреча с подругами',
+                '🎤 Караоке или концерт',
+                '📞 Долгий разговор',
+                '🎭 Театр или кино',
+                '🍽 Ужин в ресторане'
+            ],
+            medium: [
+                '💛 Время с близкими',
+                '🐱 Игры с питомцем',
+                '📝 Дневник благодарности',
+                '🌸 Уход за собой',
+                '🎨 Рисование или handmade',
+                '☕ Кофе с подругой',
+                '🌅 Закат и прогулка'
+            ],
+            low: [
+                '🏠 Посидеть дома',
+                '📖 Книга и плед',
+                '🎧 Любимый плейлист',
+                '🕯 Свечи и тишина',
+                '🧖‍♀️ Спа-вечер дома',
+                '😴 Ранний сон',
+                '🍵 Чай с мятой'
+            ]
+        }
+    };
+
+    function getTipLevel(value) {
+        if (value >= 7) return 'high';
+        if (value >= 4) return 'medium';
+        return 'low';
+    }
+
+    function getRandomTip(category, level) {
+        var tips = tipDatabase[category][level];
+        return tips[Math.floor(Math.random() * tips.length)];
+    }
+
+    function updateRecommendationTips() {
+        var physLevel = getTipLevel(resources.physical);
+        var cogLevel = getTipLevel(resources.cognitive);
+        var emoLevel = getTipLevel(resources.emotional);
+
+        document.getElementById('tipPhysical').textContent = getRandomTip('physical', physLevel);
+        document.getElementById('tipCognitive').textContent = getRandomTip('cognitive', cogLevel);
+        document.getElementById('tipEmotional').textContent = getRandomTip('emotional', emoLevel);
+    }
+
     // ===== УТИЛИТЫ =====
     function getTaskStatus(task) {
         if (task.forced) return 'green';
@@ -2030,6 +2172,7 @@
         var shownDay = demoCycle ? 6 : currentDay;
         document.getElementById('phaseDay').textContent = 'День ' + shownDay + ' из ' + cycleLength + ' · ' + phase.name;
         document.getElementById('recommendationText').textContent = beePhrases[phase.id];
+        updateRecommendationTips();
 
         renderWeekCalendar();
         updateResourceSliders();
@@ -2334,11 +2477,42 @@
             })(d);
 
             grid.appendChild(cell);
+                    // Добиваем до 5 строк (35 ячеек)
+        var totalCells = firstDay - 1 + daysInMonth + remainingCells;
+        var cellsNeeded = 35 - totalCells;
+        if (cellsNeeded > 0) {
+            var nextMonthDay = remainingCells + 1;
+            for (var d = nextMonthDay; d < nextMonthDay + cellsNeeded; d++) {
+                var date = new Date(year, month + 1, d);
+                var cycleDay = getCycleDayForDate(date);
+                var phaseInfo = getPhaseInfo(cycleDay);
+                var colorIndex = getHarmonicColorIndex(phaseInfo.dayInPhase, phaseInfo.totalDays, 20);
+                var dotClass = phaseInfo.id + '-' + colorIndex;
+
+                var cell = document.createElement('div');
+                cell.className = 'month-dot-cell other-month';
+                cell.innerHTML = '<div class="dot-mini ' + dotClass + '"></div><div class="dot-num">' + d + '</div>';
+
+                (function(d) {
+                    cell.addEventListener('click', function() {
+                        rhythmMonth++;
+                        if (rhythmMonth > 11) { rhythmMonth = 0; rhythmYear++; }
+                        rhythmSelectedDay = d;
+                        renderRhythm();
+                    });
+                })(d);
+
+                grid.appendChild(cell);
+            }
+        }
         }
 
         // Дни из следующего месяца
         var totalCells = firstDay - 1 + daysInMonth;
-        var remainingCells = 7 - (totalCells % 7);
+        var remainingCells = 
+            var totalCellsBefore = firstDay - 1 + daysInMonth;
+            var remainingCells = 7 - (totalCellsBefore % 7);
+            if (remainingCells === 7) remainingCells = 0;
         if (remainingCells < 7) {
             for (var d = 1; d <= remainingCells; d++) {
                 var date = new Date(year, month + 1, d);
@@ -2412,6 +2586,32 @@
 
             var block = document.createElement('div');
             block.className = 'histo-day-block';
+            block.innerHTML = '<div class="histo-mini-bar cog" style="height:' + (cogVal * 10) + '%;' + (isSelected ? 'box-shadow:0 0 6px rgba(0,0,0,0.4);' : '') + '"></div>' +
+                '<div class="histo-mini-bar phys" style="height:' + (physVal * 10) + '%;' + (isSelected ? 'box-shadow:0 0 6px rgba(0,0,0,0.4);' : '') + '"></div>' +
+                '<div class="histo-mini-bar emo" style="height:' + (emoVal * 10) + '%;' + (isSelected ? 'box-shadow:0 0 6px rgba(0,0,0,0.4);' : '') + '"></div>' +
+                '<div class="histo-day-label">' + d.getDate() + '</div>';
+            group.appendChild(block);
+        }
+
+        updateHistoFilter(activeHistoFilter);
+    }
+
+        var center = new Date(year, month, rhythmSelectedDay);
+        var startDate = new Date(center);
+        startDate.setDate(startDate.getDate() - 3);
+        var endDate = new Date(center);
+        endDate.setDate(endDate.getDate() + 3);
+
+        for (var d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+            var dateStr = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+            var checkin = history.find(function(c) { return c.date === dateStr; });
+            var cogVal = checkin ? checkin.cognitive : 0;
+            var physVal = checkin ? checkin.physical : 0;
+            var emoVal = checkin ? checkin.emotional : 0;
+            var isSelected = d.getDate() === rhythmSelectedDay && d.getMonth() === month;
+
+            var block = document.createElement('div');
+            block.className = 'histo-day-block';
             block.innerHTML = '<div class="histo-mini-bar cog" style="height:' + (cogVal * 10) + '%;' + (isSelected ? 'box-shadow:0 0 4px rgba(0,0,0,0.3);' : '') + '"></div>' +
                 '<div class="histo-mini-bar phys" style="height:' + (physVal * 10) + '%;' + (isSelected ? 'box-shadow:0 0 4px rgba(0,0,0,0.3);' : '') + '"></div>' +
                 '<div class="histo-mini-bar emo" style="height:' + (emoVal * 10) + '%;' + (isSelected ? 'box-shadow:0 0 4px rgba(0,0,0,0.3);' : '') + '"></div>' +
@@ -2455,7 +2655,7 @@
         }
     }
 
-    function renderSingleWave(filter) {
+        function renderSingleWave(filter) {
         var year = now.getFullYear();
         var month = now.getMonth();
         var history = JSON.parse(localStorage.getItem('checkins') || '[]');
@@ -2463,9 +2663,9 @@
         var labels = document.getElementById('wavesLabels');
         var w = 360;
         var h = 100;
-        var pad = 20;
-        var usableW = w - 2 * pad;
-        var usableH = h - 2 * pad;
+        var pad = 0;
+        var usableW = w;
+        var usableH = h;
 
         var keyMap = { cognitive: 'cognitive', physical: 'physical', emotional: 'emotional' };
         var colorMap = { cognitive: '#E8B86D', physical: '#9CBA7F', emotional: '#E8B4BC' };
@@ -2486,10 +2686,31 @@
             var checkin = history.find(function(c) { return c.date === dateStr; });
             var x = pad + (dayIndex / (totalDays - 1)) * usableW;
             dayIndex++;
-
             if (checkin && checkin[key]) {
-                points.push({ x: x, y: pad + usableH - (checkin[key] / 10) * usableH });
+                points.push({ x: x, y: usableH - (checkin[key] / 10) * usableH });
             }
+        }
+
+        var svgInner = '';
+        if (points.length >= 2) {
+            var dPath = 'M ' + points[0].x + ' ' + points[0].y;
+            for (var i = 1; i < points.length; i++) {
+                var prev = points[i - 1];
+                var curr = points[i];
+                var cpX = (prev.x + curr.x) / 2;
+                dPath += ' Q ' + prev.x + ' ' + prev.y + ' ' + cpX + ' ' + ((prev.y + curr.y) / 2);
+                dPath += ' Q ' + curr.x + ' ' + curr.y + ' ' + curr.x + ' ' + curr.y;
+            }
+            svgInner += '<path d="' + dPath + '" fill="none" stroke="' + color + '" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>';
+        }
+        if (svg) svg.innerHTML = svgInner;
+
+        var labelsHtml = '';
+        for (var d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+            labelsHtml += '<span>' + d.getDate() + '</span>';
+        }
+        if (labels) labels.innerHTML = labelsHtml;
+    }
         }
 
         var svgInner = '';
