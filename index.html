@@ -204,7 +204,7 @@
             position: relative;
         }
 
-                /* ===== МЕНСТРУАЛЬНАЯ (seed) — 20 оттенков ===== */
+        /* ===== МЕНСТРУАЛЬНАЯ (seed) — 20 оттенков ===== */
         .week-dot.seed-1  { background: #f5cfa3; }
         .week-dot.seed-2  { background: #f5cc9f; }
         .week-dot.seed-3  { background: #f6c89c; }
@@ -581,14 +581,14 @@
             box-shadow: var(--shadow-sm);
         }
 
-                .month-nav {
+        .month-nav {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 12px;
             margin-bottom: 14px;
         }
-        
+
         .month-arrow {
             width: 30px;
             height: 30px;
@@ -598,9 +598,14 @@
             font-size: 14px;
             cursor: pointer;
             box-shadow: var(--shadow-sm);
+            transition: all 0.2s;
         }
-        
-        .month-name { text-align: center; font-size: 14px; font-weight: 600; margin-bottom: 14px; color: var(--text); }
+        .month-arrow:active {
+            background: #F2F5ED;
+            transform: scale(0.95);
+        }
+
+        .month-name { text-align: center; font-size: 14px; font-weight: 600; color: var(--text); min-width: 120px; }
         .month-days-header {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -630,6 +635,7 @@
             transform: scale(1.1);
         }
         .month-dot-cell .dot-num { font-size: 9px; color: var(--text-secondary); }
+        .dot-mini.empty { background: transparent; }
 
         /* Волны */
         .waves-card {
@@ -648,12 +654,6 @@
             letter-spacing: 0.5px;
             text-align: center;
         }
-        .waves-legend { display: flex; justify-content: center; gap: 16px; margin-bottom: 10px; font-size: 11px; }
-        .waves-legend span { display: flex; align-items: center; gap: 4px; }
-        .legend-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
-        .legend-dot.cog { background: var(--honey); }
-        .legend-dot.phys { background: var(--sprout); }
-        .legend-dot.emo { background: var(--bloom); }
         .waves-svg { width: 100%; height: 100px; margin-bottom: 8px; }
         .waves-labels { display: flex; justify-content: space-between; font-size: 9px; color: var(--text-secondary); padding: 0 4px; }
 
@@ -691,7 +691,7 @@
             max-width: 90vw;
         }
 
-                /* Нижняя навигация — летающая (Telegram-style) */
+        /* Нижняя навигация — летающая (Telegram-style) */
         .bottom-nav {
             position: fixed;
             bottom: 16px;
@@ -705,7 +705,7 @@
             justify-content: space-around;
             align-items: center;
             padding: 8px 6px 10px;
-            box-shadow: 
+            box-shadow:
                 0 2px 12px rgba(58, 50, 44, 0.08),
                 0 0 0 1px rgba(0, 0, 0, 0.04);
             z-index: 100;
@@ -852,7 +852,6 @@
         .week-day-chip.active { background: var(--accent); color: white; }
 
         /* Гистограмма */
-        
         .histogram {
             display: flex;
             justify-content: flex-start;
@@ -875,16 +874,17 @@
 
         .histo-day-block {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2px;
+            flex-direction: row;
+            align-items: flex-end;
+            gap: 1px;
             flex-shrink: 0;
-            width: 14px;
+            width: auto;
+            height: 100%;
         }
 
         .histo-mini-bar {
-            width: 100%;
-            border-radius: 3px 3px 0 0;
+            width: 4px;
+            border-radius: 2px 2px 0 0;
             transition: all 0.3s;
             min-height: 2px;
         }
@@ -901,7 +901,7 @@
             margin-top: 2px;
             text-align: center;
         }
-        
+
         /* Фильтры */
         .histo-filters {
             display: flex;
@@ -934,11 +934,25 @@
             transform: scale(0.95);
         }
 
-        /* Прозрачность для неактивных столбиков */
-        .histo-bar.dimmed {
-            opacity: 0.25;
+        /* Кнопка добавления дат */
+        .add-period-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #F9F7F4;
+            border: 1.5px dashed #D0CCC4;
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            cursor: pointer;
+            font-family: var(--font);
+            color: var(--text-secondary);
+            transition: all 0.2s;
+            margin-top: 10px;
         }
-
+        .add-period-btn:active {
+            background: #F0EDE8;
+            border-color: var(--accent);
+        }
 
         /* Адаптив */
         @media (max-width: 380px) {
@@ -949,24 +963,16 @@
 
             .histogram {
                 height: 90px;
-                gap: 12px;
-                padding: 0 10px;
+                padding: 0 6px;
             }
-            .histo-bar {
-                max-width: 40px;
-                border-radius: 20px 20px 0 0;
-            }
-            .histo-value {
-                font-size: 10px;
-                top: -16px;
+            .histo-mini-bar {
+                width: 3px;
             }
             .histo-filter {
                 font-size: 10px;
                 padding: 4px 10px;
             }
-            .waves-svg {
-                height: 70px;
-            }
+            .waves-svg { height: 70px; }
             .resource-row { gap: 6px; }
             .resource-emoji { font-size: 18px; width: 22px; }
             .resource-label { font-size: 11px; width: 45px; }
@@ -979,7 +985,11 @@
             .nav-item .nav-emoji { font-size: 18px; }
             .nav-item.add { top: -28px; }
             .nav-item.add .nav-emoji { width: 44px; height: 44px; font-size: 22px; }
-            .bottom-nav { padding: 8px 4px 12px; bottom: 12px; }
+            .bottom-nav {
+                padding: 8px 6px 10px;
+                bottom: 16px;
+                width: calc(100% - 32px);
+            }
             .month-dot-cell .dot-mini { width: 18px; height: 18px; }
             .month-days-header { font-size: 8px; }
             .rhythm-day-info { padding: 12px 14px; font-size: 12px; }
@@ -1026,15 +1036,13 @@
             .month-dot-cell .dot-mini { width: 14px; height: 14px; }
             .month-dot-cell .dot-num { font-size: 7px; }
             .month-days-header { font-size: 7px; }
-            .histogram { height: 70px; gap: 8px; padding: 0 5px; }
-            .histo-bar { max-width: 30px; border-radius: 15px 15px 0 0; }
-            .histo-value { font-size: 8px; top: -14px; }
+            .histogram { height: 70px; padding: 0 4px; }
+            .histo-mini-bar { width: 2px; }
             .histo-filter { font-size: 8px; padding: 3px 8px; }
             .waves-svg { height: 50px; }
             .rhythm-day-info { padding: 10px 12px; gap: 6px; font-size: 12px; }
         }
     </style>
-        
 </head>
 <body>
 
@@ -1148,9 +1156,9 @@
     <!-- Календарь месяца -->
     <div class="month-calendar" id="monthCalendar">
         <div class="month-nav">
-        <button class="month-arrow" id="prevMonth">◀</button>
-        <div class="month-name" id="monthName">Июнь 2026</div>
-        <button class="month-arrow" id="nextMonth">▶</button>
+            <button class="month-arrow" id="prevMonth">◀</button>
+            <div class="month-name" id="monthName">Июнь 2026</div>
+            <button class="month-arrow" id="nextMonth">▶</button>
         </div>
         <div class="month-days-header">
             <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span>
@@ -1158,29 +1166,29 @@
         <div class="month-grid" id="monthGrid"></div>
     </div>
 
-            <!-- Показатели (гистограмма + волны) -->
-        <div class="waves-card">
-            <div class="waves-title">🌊 Показатели за месяц</div>
-    
-            <!-- Линейная гистограмма -->
-            <div class="histogram" id="histogram">
-                <div class="histo-day-group" id="histoDayGroup">
-                    <!-- Заполняется JavaScript -->
-                </div>
+    <!-- Показатели (гистограмма + волны) -->
+    <div class="waves-card">
+        <div class="waves-title">🌊 Показатели за месяц</div>
+
+        <!-- Линейная гистограмма -->
+        <div class="histogram" id="histogram">
+            <div class="histo-day-group" id="histoDayGroup">
+                <!-- Заполняется JavaScript -->
             </div>
-    
-            <!-- Кнопки-фильтры -->
-            <div class="histo-filters" id="histoFilters">
-                <button class="histo-filter active" data-filter="all">Все</button>
-                <button class="histo-filter" data-filter="cognitive">🧠 Разум</button>
-                <button class="histo-filter" data-filter="physical">💪 Тело</button>
-                <button class="histo-filter" data-filter="emotional">❤️ Эмоции</button>
-            </div>
-    
-            <!-- SVG для плавной волны (появляется при фильтрации) -->
-            <svg class="waves-svg" id="wavesSvg" viewBox="0 0 360 100" preserveAspectRatio="none" style="display:none;"></svg>
-            <div class="waves-labels" id="wavesLabels" style="display:none;"></div>
         </div>
+
+        <!-- Кнопки-фильтры -->
+        <div class="histo-filters" id="histoFilters">
+            <button class="histo-filter active" data-filter="all">Все</button>
+            <button class="histo-filter" data-filter="cognitive">🧠 Разум</button>
+            <button class="histo-filter" data-filter="physical">💪 Тело</button>
+            <button class="histo-filter" data-filter="emotional">❤️ Эмоции</button>
+        </div>
+
+        <!-- SVG для плавной волны (появляется при фильтрации) -->
+        <svg class="waves-svg" id="wavesSvg" viewBox="0 0 360 100" preserveAspectRatio="none" style="display:none;"></svg>
+        <div class="waves-labels" id="wavesLabels" style="display:none;"></div>
+    </div>
 
     <!-- Инфо о выбранном дне -->
     <div class="rhythm-day-info" id="rhythmDayInfo">
@@ -1279,17 +1287,17 @@
         <div class="modal-label">🗓 Первый день месячных</div>
         <input class="modal-input" type="date" id="firstPeriodDate">
 
-        <div class="modal-label">🗓 Последний день месячных</div>
-        <input class="modal-input" type="date" id="lastPeriodDateInput">
-
-        <div class="modal-label" style="margin-top:8px;">📏 Длина менструации: <strong id="periodLenVal">5</strong> дней</div>
+        <div class="modal-label" style="margin-top:12px;">📏 Длина менструации: <strong id="periodLenVal">5</strong> дней</div>
         <div class="slider-pair">
             <span>2</span>
-            <input type="range" min="2" max="10" value="5" id="periodLenSlider" oninput="document.getElementById('periodLenVal').textContent=this.value">
+            <input type="range" min="2" max="10" value="5" id="periodLenSlider" oninput="document.getElementById('periodLenVal').textContent=this.value; updateLastPeriodDateCalc();">
             <span>10</span>
         </div>
 
-        <button class="add-period-btn" id="addMoreDatesBtn" style="margin-top:10px;">📎 Добавить ещё даты для точности</button>
+        <div class="modal-label">🗓 Последний день месячных (авто)</div>
+        <div class="modal-input" style="display:flex;align-items:center;justify-content:center;background:#F9F7F4;color:var(--text);font-weight:600;" id="lastPeriodDateCalc">—</div>
+
+        <button class="add-period-btn" id="addMoreDatesBtn" style="margin-top:14px;">📎 Добавить ещё даты для точности</button>
         <div id="extraDatesContainer" style="display:none; margin-top:8px;"></div>
 
         <div class="modal-label" style="margin-top:14px;">⚙️ Особые случаи</div>
@@ -1301,14 +1309,17 @@
         </label>
 
         <div id="cyclePreview" style="margin-top:14px;padding:12px;background:#F9F7F4;border-radius:12px;font-size:13px;display:none;">
-            📊 <strong id="calcResult"></strong>
+            📊 <strong>Расчёт:</strong><br>
+            Длина цикла: <strong id="calcCycleLength">—</strong> дней<br>
+            Длина месячных: <strong id="calcPeriodLength">—</strong> дней<br>
+            Следующие месячные: <strong id="calcNextPeriod">—</strong>
         </div>
 
         <button class="modal-save" onclick="saveCycleSetup()">💾 Сохранить</button>
         <button class="modal-close" onclick="document.getElementById('cycleSetupOverlay').classList.remove('open')">Отмена</button>
     </div>
 </div>
-    
+
 <script>
     // ===== FIREBASE =====
     const firebaseConfig = {
@@ -1326,13 +1337,6 @@
     db.enablePersistence().catch(function() {});
 
     // ===== ДАННЫЕ =====
-    var phaseData = [
-        { id: 'seed', name: 'Менструальная', title: 'Отдыхай', emoji: '🪷', color: '#C8A882', days: [1,2,3,4,5] },
-        { id: 'sprout', name: 'Фолликулярная', title: 'Расти', emoji: '🌱', color: '#9CBA7F', days: [6,7,8,9,10,11,12,13,14] },
-        { id: 'bloom', name: 'Овуляция', title: 'Расцветай', emoji: '🌸', color: '#E8B4BC', days: [15,16,17] },
-        { id: 'fruit', name: 'Лютеиновая', title: 'Заземляйся', emoji: '🍃', color: '#D4956E', days: [18,19,20,21,22,23,24,25,26,27,28] }
-    ];
-
     var beePhrases = {
         seed: 'Отдыхай. Сейчас не время для рекордов — закрой старые задачи и дай телу восстановиться 💛.',
         sprout: 'Расти. Самое время начать новые проекты с новой силой! ✨',
@@ -1353,6 +1357,12 @@
     var rhythmSelectedDay = new Date().getDate();
     var activeHistoFilter = 'all';
     var now = new Date();
+    var rhythmMonth = new Date().getMonth();
+    var rhythmYear = new Date().getFullYear();
+    var periodDates = [];
+    var periodLengthDays = 5;
+    var isIrregular = false;
+    var isPregnant = false;
 
     var defaultTasks = [
         { name: 'Презентация для клиента', project: 'Разум', cognitive: 8, physical: 1, moral: 6, cyclic: false, days: [], forced: false },
@@ -1361,7 +1371,6 @@
     ];
 
     // ===== УТИЛИТЫ =====
-
     function getTaskStatus(task) {
         if (task.forced) return 'green';
         var physMatch = resources.physical >= task.physical;
@@ -1421,16 +1430,78 @@
         }
     }
 
+    function getHarmonicColorIndex(dayInPhase, totalDaysInPhase, totalColors) {
+        if (dayInPhase <= 1) return 1;
+        if (dayInPhase >= totalDaysInPhase) return totalColors;
+        var position = (dayInPhase - 1) / (totalDaysInPhase - 1);
+        var harmonicPoints = [0, 1];
+        var usedColors = [1, totalColors];
+        while (harmonicPoints.length < totalDaysInPhase && harmonicPoints.length < totalColors) {
+            var newPoints = [];
+            var newColors = [];
+            for (var i = 0; i < harmonicPoints.length - 1; i++) {
+                var midPoint = (harmonicPoints[i] + harmonicPoints[i + 1]) / 2;
+                var midColor = Math.round((usedColors[i] + usedColors[i + 1]) / 2);
+                newPoints.push(harmonicPoints[i]);
+                newColors.push(usedColors[i]);
+                newPoints.push(midPoint);
+                newColors.push(midColor);
+            }
+            newPoints.push(harmonicPoints[harmonicPoints.length - 1]);
+            newColors.push(usedColors[usedColors.length - 1]);
+            harmonicPoints = newPoints;
+            usedColors = newColors;
+        }
+        var bestIndex = 1;
+        var bestDist = Math.abs(position - harmonicPoints[0]);
+        for (var i = 0; i < harmonicPoints.length; i++) {
+            var dist = Math.abs(position - harmonicPoints[i]);
+            if (dist < bestDist) {
+                bestDist = dist;
+                bestIndex = usedColors[i];
+            }
+        }
+        return Math.max(1, Math.min(totalColors, bestIndex));
+    }
+
+    function getPhaseInfo(cycleDay) {
+        if (isPregnant) {
+            return { id: 'bloom', name: 'Беременность', title: 'Расти', emoji: '🤰', dayInPhase: cycleDay, totalDays: 280 };
+        }
+        if (demoCycle) {
+            var periodLen = 5;
+            var follicularEnd = 14;
+            var ovulationEnd = 17;
+            var lutealEnd = 28;
+            if (cycleDay <= periodLen) return { id: 'seed', name: 'Менструальная', title: 'Отдыхай', emoji: '🪷', dayInPhase: cycleDay, totalDays: periodLen };
+            if (cycleDay <= follicularEnd) return { id: 'sprout', name: 'Фолликулярная', title: 'Расти', emoji: '🌱', dayInPhase: cycleDay - periodLen, totalDays: follicularEnd - periodLen };
+            if (cycleDay <= ovulationEnd) return { id: 'bloom', name: 'Овуляция', title: 'Расцветай', emoji: '🌸', dayInPhase: cycleDay - follicularEnd, totalDays: ovulationEnd - follicularEnd };
+            if (cycleDay <= lutealEnd) return { id: 'fruit', name: 'Лютеиновая', title: 'Заземляйся', emoji: '🍃', dayInPhase: cycleDay - ovulationEnd, totalDays: lutealEnd - ovulationEnd };
+            return { id: 'seed', name: 'Менструальная', title: 'Отдыхай', emoji: '🪷', dayInPhase: 1, totalDays: periodLen };
+        }
+        var periodLen = periodLengthDays || 5;
+        var follicularEnd = periodLen + Math.round((cycleLength - periodLen - 14) * 0.6);
+        var ovulationEnd = follicularEnd + 3;
+        var lutealEnd = cycleLength;
+        if (cycleDay <= periodLen) return { id: 'seed', name: 'Менструальная', title: 'Отдыхай', emoji: '🪷', dayInPhase: cycleDay, totalDays: periodLen };
+        if (cycleDay <= follicularEnd) return { id: 'sprout', name: 'Фолликулярная', title: 'Расти', emoji: '🌱', dayInPhase: cycleDay - periodLen, totalDays: follicularEnd - periodLen };
+        if (cycleDay <= ovulationEnd) return { id: 'bloom', name: 'Овуляция', title: 'Расцветай', emoji: '🌸', dayInPhase: cycleDay - follicularEnd, totalDays: ovulationEnd - follicularEnd };
+        if (cycleDay <= lutealEnd) return { id: 'fruit', name: 'Лютеиновая', title: 'Заземляйся', emoji: '🍃', dayInPhase: cycleDay - ovulationEnd, totalDays: lutealEnd - ovulationEnd };
+        return { id: 'seed', name: 'Менструальная', title: 'Отдыхай', emoji: '🪷', dayInPhase: 1, totalDays: periodLen };
+    }
+
+    function getCurrentPhase(day) {
+        if (!day) day = currentDay;
+        var info = getPhaseInfo(day);
+        return { id: info.id, name: info.name, title: info.title, emoji: info.emoji, color: '#C8A882' };
+    }
+
     // ===== ПЕРЕКЛЮЧЕНИЕ ЭКРАНОВ =====
     function showTab(tab) {
         document.getElementById('mainScreen').style.display = 'none';
         document.getElementById('rhythmScreen').classList.remove('active');
         document.getElementById('bottomNav').style.display = 'none';
-
-        document.querySelectorAll('.nav-item[data-tab]').forEach(function(b) {
-            b.classList.remove('active');
-        });
-
+        document.querySelectorAll('.nav-item[data-tab]').forEach(function(b) { b.classList.remove('active'); });
         if (tab === 'rhythm') {
             document.getElementById('rhythmScreen').classList.add('active');
             rhythmSelectedDay = new Date().getDate();
@@ -1439,34 +1510,20 @@
             document.getElementById('mainScreen').style.display = 'block';
             document.getElementById('bottomNav').style.display = 'flex';
             var inboxTasks = tasks.filter(function(t) { return t.project === 'Копилка'; });
-            if (inboxTasks.length === 0) {
-                showToast('📥 Копилка пуста — добавляй задачи без проекта');
-            } else {
-                var taskList = inboxTasks.map(function(t) { return '• ' + t.name; }).join('\n');
-                alert('📥 Копилка (' + inboxTasks.length + ' задач):\n\n' + taskList);
-            }
+            if (inboxTasks.length === 0) showToast('📥 Копилка пуста — добавляй задачи без проекта');
+            else alert('📥 Копилка (' + inboxTasks.length + ' задач):\n\n' + inboxTasks.map(function(t) { return '• ' + t.name; }).join('\n'));
         } else if (tab === 'projects') {
             document.getElementById('mainScreen').style.display = 'block';
             document.getElementById('bottomNav').style.display = 'flex';
             var projects = [];
-            tasks.forEach(function(t) {
-                if (projects.indexOf(t.project) === -1) projects.push(t.project);
-            });
-            if (projects.length === 0) {
-                showToast('Пока проектов нет');
-            } else {
-                var projectInfo = projects.map(function(p) {
-                    var count = tasks.filter(function(t) { return t.project === p; }).length;
-                    return '📁 ' + p + ' (' + count + ' задач)';
-                }).join('\n');
-                alert('Проекты:\n\n' + projectInfo);
-            }
+            tasks.forEach(function(t) { if (projects.indexOf(t.project) === -1) projects.push(t.project); });
+            if (projects.length === 0) showToast('Пока проектов нет');
+            else alert('Проекты:\n\n' + projects.map(function(p) { return '📁 ' + p + ' (' + tasks.filter(function(t) { return t.project === p; }).length + ' задач)'; }).join('\n'));
         } else {
             document.getElementById('mainScreen').style.display = 'block';
             document.getElementById('bottomNav').style.display = 'flex';
             updateUI();
         }
-
         var activeBtn = document.querySelector('.nav-item[data-tab="' + tab + '"]');
         if (activeBtn) activeBtn.classList.add('active');
     }
@@ -1477,18 +1534,12 @@
         var card = document.getElementById('phaseCard');
         card.className = 'phase-card ' + phase.id;
         document.getElementById('phaseEmoji').textContent = phase.emoji;
-
         var phaseNameEl = document.getElementById('phaseName');
-        if (userName && userName.trim() !== '') {
-            phaseNameEl.textContent = phase.title + ', ' + userName;
-        } else {
-            phaseNameEl.textContent = phase.title;
-        }
-
+        if (userName && userName.trim() !== '') phaseNameEl.textContent = phase.title + ', ' + userName;
+        else phaseNameEl.textContent = phase.title;
         var shownDay = demoCycle ? 6 : currentDay;
         document.getElementById('phaseDay').textContent = 'День ' + shownDay + ' из ' + cycleLength + ' · ' + phase.name;
         document.getElementById('recommendationText').textContent = beePhrases[phase.id];
-
         renderWeekCalendar();
         updateResourceSliders();
         renderTasks();
@@ -1502,23 +1553,19 @@
         var center = new Date(centerDate);
         var dow = center.getDay();
         var dayNames = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
-
         for (var i = 0; i < 7; i++) {
             var off = i - 3;
             var d = new Date(center);
             d.setDate(d.getDate() + off);
             var cycleDay = getCycleDayForDate(d);
-
             var phaseInfo = getPhaseInfo(cycleDay);
             var colorIndex = getHarmonicColorIndex(phaseInfo.dayInPhase, phaseInfo.totalDays, 20);
             var dotClass = phaseInfo.id + '-' + colorIndex;
-
             var col = document.createElement('div');
             col.className = 'week-day-col';
             col.innerHTML = '<div class="week-day-name">' + dayNames[(dow + off + 7) % 7] + '</div>' +
                 '<div class="week-dot ' + dotClass + (off === 0 ? ' today' : '') + '"></div>' +
                 '<div class="week-date">' + d.getDate() + '</div>';
-
             (function(d, cycleDay) {
                 col.addEventListener('click', function() {
                     centerDate = new Date(d);
@@ -1526,14 +1573,11 @@
                     demoCycle = false;
                     var dateStr = getActiveCheckinDate();
                     moodSavedForActiveDate = isMoodSavedForDate(dateStr);
-                    if (moodSavedForActiveDate) {
-                        loadMoodForDate(dateStr);
-                    }
+                    if (moodSavedForActiveDate) loadMoodForDate(dateStr);
                     updateUI();
                     showToast('День ' + currentDay + ' · ' + getCurrentPhase().title);
                 });
             })(d, cycleDay);
-
             row.appendChild(col);
         }
     }
@@ -1565,43 +1609,27 @@
             if (t.cyclic && t.days.length > 0) return t.days.indexOf(new Date().getDay()) !== -1;
             return true;
         });
-
         if (todayTasks.length === 0) {
             container.innerHTML = '<div class="empty-state"><div class="empty-state-emoji">📋</div><div class="empty-state-text">Пока задач нет.<br>Нажми <strong>+</strong> чтобы добавить</div></div>';
             return;
         }
-
         container.innerHTML = '';
         todayTasks.forEach(function(task) {
             var status = getTaskStatus(task);
             var opacity = getIconOpacity(task.cognitive, task.physical);
             container.innerHTML += '<div class="task-item">' +
                 '<div class="task-dot ' + status + '"></div>' +
-                '<div class="task-info">' +
-                '<div class="task-name">' + escapeHTML(task.name) + (task.cyclic ? ' 🔄' : '') + (task.forced ? ' 🛡️' : '') + '</div>' +
-                '<div class="task-project">' + escapeHTML(task.project) + '</div>' +
-                '</div>' +
-                '<div class="task-badges">' +
-                '<span style="opacity:' + opacity.main + '">🧠' + task.cognitive + '</span>' +
+                '<div class="task-info"><div class="task-name">' + escapeHTML(task.name) + (task.cyclic ? ' 🔄' : '') + (task.forced ? ' 🛡️' : '') + '</div>' +
+                '<div class="task-project">' + escapeHTML(task.project) + '</div></div>' +
+                '<div class="task-badges"><span style="opacity:' + opacity.main + '">🧠' + task.cognitive + '</span>' +
                 '<span style="opacity:' + opacity.other + '">💪' + task.physical + '</span>' +
-                '<span style="opacity:0.4">❤️' + (task.moral || 0) + '</span>' +
-                '</div>' +
-                '</div>';
+                '<span style="opacity:0.4">❤️' + (task.moral || 0) + '</span></div></div>';
         });
     }
 
     // ===== СОХРАНЕНИЕ ДАННЫХ =====
     function saveData() {
-        var data = {
-            currentDay: currentDay,
-            cycleLength: cycleLength,
-            resources: resources,
-            tasks: tasks,
-            userName: userName,
-            isAnonymous: isAnonymous,
-            demoCycle: demoCycle,
-            lastPeriodDate: lastPeriodDate ? lastPeriodDate.toISOString() : null
-        };
+        var data = { currentDay: currentDay, cycleLength: cycleLength, resources: resources, tasks: tasks, userName: userName, isAnonymous: isAnonymous, demoCycle: demoCycle, lastPeriodDate: lastPeriodDate ? lastPeriodDate.toISOString() : null };
         localStorage.setItem('rootine_data', JSON.stringify(data));
     }
 
@@ -1618,12 +1646,8 @@
                 isAnonymous = data.isAnonymous !== undefined ? data.isAnonymous : true;
                 demoCycle = data.demoCycle !== undefined ? data.demoCycle : true;
                 if (data.lastPeriodDate) lastPeriodDate = new Date(data.lastPeriodDate);
-            } catch (e) {
-                resetData();
-            }
-        } else {
-            resetData();
-        }
+            } catch (e) { resetData(); }
+        } else { resetData(); }
         var todayStr = new Date().toISOString().split('T')[0];
         moodSavedForActiveDate = isMoodSavedForDate(todayStr);
     }
@@ -1640,7 +1664,6 @@
         var thumb = document.getElementById(thumbId);
         var val = document.getElementById(valId);
         var dragging = false;
-
         function setValue(clientX) {
             var rect = bg.getBoundingClientRect();
             var pct = (clientX - rect.left) / rect.width;
@@ -1652,28 +1675,10 @@
             val.textContent = v;
             updateUI();
         }
-
-        thumb.addEventListener('pointerdown', function(e) {
-            dragging = true;
-            thumb.setPointerCapture(e.pointerId);
-            e.preventDefault();
-        });
-
-        bg.addEventListener('pointerdown', function(e) {
-            dragging = true;
-            bg.setPointerCapture(e.pointerId);
-            setValue(e.clientX);
-            e.preventDefault();
-        });
-
-        window.addEventListener('pointermove', function(e) {
-            if (!dragging) return;
-            setValue(e.clientX);
-        });
-
-        window.addEventListener('pointerup', function() {
-            dragging = false;
-        });
+        thumb.addEventListener('pointerdown', function(e) { dragging = true; thumb.setPointerCapture(e.pointerId); e.preventDefault(); });
+        bg.addEventListener('pointerdown', function(e) { dragging = true; bg.setPointerCapture(e.pointerId); setValue(e.clientX); e.preventDefault(); });
+        window.addEventListener('pointermove', function(e) { if (!dragging) return; setValue(e.clientX); });
+        window.addEventListener('pointerup', function() { dragging = false; });
     }
 
     // ===== ЭКРАН РИТМА =====
@@ -1682,6 +1687,8 @@
         document.getElementById('rhythmScreen').classList.add('active');
         document.getElementById('bottomNav').style.display = 'none';
         rhythmSelectedDay = new Date().getDate();
+        rhythmMonth = new Date().getMonth();
+        rhythmYear = new Date().getFullYear();
         renderRhythm();
     }
 
@@ -1693,56 +1700,33 @@
     }
 
     function renderRhythm() {
-        now = new Date();
+        now = new Date(rhythmYear, rhythmMonth, 1);
         var year = now.getFullYear();
         var month = now.getMonth();
         var monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
         document.getElementById('monthName').textContent = monthNames[month] + ' ' + year;
-
         var grid = document.getElementById('monthGrid');
         grid.innerHTML = '';
-
         var firstDay = new Date(year, month, 1).getDay() || 7;
         var daysInMonth = new Date(year, month + 1, 0).getDate();
-
         for (var i = 1; i < firstDay; i++) {
             var empty = document.createElement('div');
             empty.className = 'month-dot-cell';
             empty.innerHTML = '<div class="dot-mini empty"></div><div class="dot-num"></div>';
             grid.appendChild(empty);
         }
-
         for (var d = 1; d <= daysInMonth; d++) {
             var date = new Date(year, month, d);
             var cycleDay = getCycleDayForDate(date);
-            var dotPhase = 'seed';
-            var dayInPhase = 1;
-            for (var j = 0; j < phaseData.length; j++) {
-                if (phaseData[j].days.indexOf(cycleDay) !== -1) {
-                    dotPhase = phaseData[j].id;
-                    dayInPhase = phaseData[j].days.indexOf(cycleDay) + 1;
-                    break;
-                }
-            }
-
             var phaseInfo = getPhaseInfo(cycleDay);
             var colorIndex = getHarmonicColorIndex(phaseInfo.dayInPhase, phaseInfo.totalDays, 20);
             var dotClass = phaseInfo.id + '-' + colorIndex;
-
             var cell = document.createElement('div');
             cell.className = 'month-dot-cell' + (d === rhythmSelectedDay ? ' selected' : '');
             cell.innerHTML = '<div class="dot-mini ' + dotClass + '"></div><div class="dot-num">' + d + '</div>';
-
-            (function(d) {
-                cell.addEventListener('click', function() {
-                    rhythmSelectedDay = d;
-                    renderRhythm();
-                });
-            })(d);
-
+            (function(d) { cell.addEventListener('click', function() { rhythmSelectedDay = d; renderRhythm(); }); })(d);
             grid.appendChild(cell);
         }
-
         updateRhythmDayInfo(year, month);
         renderHistogram();
     }
@@ -1754,13 +1738,9 @@
         var date = new Date(year, month, rhythmSelectedDay);
         var cycleDay = getCycleDayForDate(date);
         var phase = getCurrentPhase(cycleDay);
-
         document.getElementById('infoPhase').textContent = phase.emoji + ' ' + phase.title;
-        if (checkin) {
-            document.getElementById('infoValues').textContent = '🧠' + checkin.cognitive + ' 💪' + checkin.physical + ' ❤️' + checkin.emotional;
-        } else {
-            document.getElementById('infoValues').textContent = 'Нет данных';
-        }
+        if (checkin) document.getElementById('infoValues').textContent = '🧠' + checkin.cognitive + ' 💪' + checkin.physical + ' ❤️' + checkin.emotional;
+        else document.getElementById('infoValues').textContent = 'Нет данных';
     }
 
     // ===== ГИСТОГРАММА =====
@@ -1772,14 +1752,12 @@
         var group = document.getElementById('histoDayGroup');
         if (!group) return;
         group.innerHTML = '';
-
         for (var d = 1; d <= daysInMonth; d++) {
             var dateStr = year + '-' + String(month + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
             var checkin = history.find(function(c) { return c.date === dateStr; });
             var cogVal = checkin ? checkin.cognitive : 0;
             var physVal = checkin ? checkin.physical : 0;
             var emoVal = checkin ? checkin.emotional : 0;
-
             var block = document.createElement('div');
             block.className = 'histo-day-block';
             block.innerHTML = '<div class="histo-mini-bar cog" style="height:' + (cogVal * 10) + '%;"></div>' +
@@ -1788,34 +1766,19 @@
                 '<div class="histo-day-label">' + d + '</div>';
             group.appendChild(block);
         }
-
         updateHistoFilter(activeHistoFilter);
     }
 
-        function updateHistoFilter(filter) {
+    function updateHistoFilter(filter) {
         activeHistoFilter = filter;
-
-        document.querySelectorAll('.histo-filter').forEach(function(btn) {
-            btn.classList.toggle('active', btn.dataset.filter === filter);
-        });
-
-        // Замени .histo-bar на .histo-mini-bar
-        document.querySelectorAll('.histo-mini-bar').forEach(function(bar) {
-            bar.classList.remove('dimmed');
-        });
-
+        document.querySelectorAll('.histo-filter').forEach(function(btn) { btn.classList.toggle('active', btn.dataset.filter === filter); });
+        document.querySelectorAll('.histo-mini-bar').forEach(function(bar) { bar.classList.remove('dimmed'); });
         if (filter !== 'all') {
             var typeMap = { cognitive: 'cog', physical: 'phys', emotional: 'emo' };
-            document.querySelectorAll('.histo-mini-bar').forEach(function(bar) {
-                if (!bar.classList.contains(typeMap[filter])) {
-                    bar.classList.add('dimmed');
-                }
-            });
+            document.querySelectorAll('.histo-mini-bar').forEach(function(bar) { if (!bar.classList.contains(typeMap[filter])) bar.classList.add('dimmed'); });
         }
-
         var wavesSvg = document.getElementById('wavesSvg');
         var wavesLabels = document.getElementById('wavesLabels');
-
         if (filter === 'all') {
             if (wavesSvg) wavesSvg.style.display = 'none';
             if (wavesLabels) wavesLabels.style.display = 'none';
@@ -1825,6 +1788,7 @@
             renderSingleWave(filter);
         }
     }
+
     function renderSingleWave(filter) {
         var year = now.getFullYear();
         var month = now.getMonth();
@@ -1832,92 +1796,50 @@
         var history = JSON.parse(localStorage.getItem('checkins') || '[]');
         var svg = document.getElementById('wavesSvg');
         var labels = document.getElementById('wavesLabels');
-        var w = 360;
-        var h = 100;
-        var pad = 20;
-        var usableW = w - 2 * pad;
-        var usableH = h - 2 * pad;
-
+        var w = 360, h = 100, pad = 20, usableW = w - 2 * pad, usableH = h - 2 * pad;
         var keyMap = { cognitive: 'cognitive', physical: 'physical', emotional: 'emotional' };
         var colorMap = { cognitive: '#E8B86D', physical: '#9CBA7F', emotional: '#E8B4BC' };
-
-        var key = keyMap[filter];
-        var color = colorMap[filter];
-        var points = [];
-
+        var key = keyMap[filter], color = colorMap[filter], points = [];
         for (var d = 1; d <= daysInMonth; d++) {
             var dateStr = year + '-' + String(month + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
             var checkin = history.find(function(c) { return c.date === dateStr; });
             var x = pad + (d - 1) / (daysInMonth - 1) * usableW;
-
-            if (checkin && checkin[key]) {
-                points.push({ x: x, y: pad + usableH - (checkin[key] / 10) * usableH });
-            }
+            if (checkin && checkin[key]) points.push({ x: x, y: pad + usableH - (checkin[key] / 10) * usableH });
         }
-
-        var svgInner = '';
-        svgInner += '<line x1="' + pad + '" y1="' + pad + '" x2="' + pad + '" y2="' + (pad + usableH) + '" stroke="#EDE8E2" stroke-width="1"/>';
-        svgInner += '<line x1="' + pad + '" y1="' + (pad + usableH) + '" x2="' + (pad + usableW) + '" y2="' + (pad + usableH) + '" stroke="#EDE8E2" stroke-width="1"/>';
-
+        var svgInner = '<line x1="' + pad + '" y1="' + pad + '" x2="' + pad + '" y2="' + (pad + usableH) + '" stroke="#EDE8E2" stroke-width="1"/>' +
+            '<line x1="' + pad + '" y1="' + (pad + usableH) + '" x2="' + (pad + usableW) + '" y2="' + (pad + usableH) + '" stroke="#EDE8E2" stroke-width="1"/>';
         if (points.length >= 2) {
             var dPath = 'M ' + points[0].x + ' ' + points[0].y;
             for (var i = 1; i < points.length; i++) {
-                var prev = points[i - 1];
-                var curr = points[i];
-                var cpX = (prev.x + curr.x) / 2;
+                var prev = points[i - 1], curr = points[i], cpX = (prev.x + curr.x) / 2;
                 dPath += ' Q ' + prev.x + ' ' + prev.y + ' ' + cpX + ' ' + ((prev.y + curr.y) / 2);
                 dPath += ' Q ' + curr.x + ' ' + curr.y + ' ' + curr.x + ' ' + curr.y;
             }
             svgInner += '<path d="' + dPath + '" fill="none" stroke="' + color + '" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>';
         }
-
         if (svg) svg.innerHTML = svgInner;
-
-        var labelsHtml = '';
-        var step = Math.max(1, Math.floor(daysInMonth / 6));
-        for (var d = 1; d <= daysInMonth; d += step) {
-            labelsHtml += '<span>' + d + '</span>';
-        }
+        var labelsHtml = '', step = Math.max(1, Math.floor(daysInMonth / 6));
+        for (var d = 1; d <= daysInMonth; d += step) labelsHtml += '<span>' + d + '</span>';
         if (labels) labels.innerHTML = labelsHtml;
     }
 
-    // Подключаем фильтры гистограммы
     document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('histo-filter')) {
-            var filter = e.target.dataset.filter;
-            updateHistoFilter(filter);
-        }
+        if (e.target.classList.contains('histo-filter')) updateHistoFilter(e.target.dataset.filter);
     });
 
     // ===== МОДАЛКИ =====
-    function openModal() {
-        document.getElementById('modalOverlay').classList.add('open');
-        document.getElementById('taskNameInput').focus();
-    }
-
+    function openModal() { document.getElementById('modalOverlay').classList.add('open'); document.getElementById('taskNameInput').focus(); }
     function closeModal() {
         document.getElementById('modalOverlay').classList.remove('open');
         document.getElementById('taskNameInput').value = '';
-        document.getElementById('taskCognitive').value = 5;
-        document.getElementById('taskPhysical').value = 5;
-        document.getElementById('taskMoral').value = 5;
-        document.getElementById('taskCyclic').checked = false;
-        document.getElementById('cyclicDays').style.display = 'none';
-        document.getElementById('cogVal').textContent = '5';
-        document.getElementById('physVal').textContent = '5';
-        document.getElementById('moralVal').textContent = '5';
+        document.getElementById('taskCognitive').value = 5; document.getElementById('taskPhysical').value = 5; document.getElementById('taskMoral').value = 5;
+        document.getElementById('taskCyclic').checked = false; document.getElementById('cyclicDays').style.display = 'none';
+        document.getElementById('cogVal').textContent = '5'; document.getElementById('physVal').textContent = '5'; document.getElementById('moralVal').textContent = '5';
     }
-
-    function closeModalOutside(e) {
-        if (e.target === document.getElementById('modalOverlay')) closeModal();
-    }
-
+    function closeModalOutside(e) { if (e.target === document.getElementById('modalOverlay')) closeModal(); }
     function addTask() {
         var name = document.getElementById('taskNameInput').value.trim();
-        if (!name) {
-            showToast('Введи название задачи 🌸');
-            return;
-        }
+        if (!name) { showToast('Введи название задачи 🌸'); return; }
         var project = document.getElementById('taskProjectInput').value;
         var cognitive = parseInt(document.getElementById('taskCognitive').value);
         var physical = parseInt(document.getElementById('taskPhysical').value);
@@ -1925,27 +1847,20 @@
         var cyclic = document.getElementById('taskCyclic').checked;
         var activeChips = document.querySelectorAll('.week-day-chip.active');
         var days = [];
-        if (cyclic) {
-            activeChips.forEach(function(c) { days.push(parseInt(c.dataset.day)); });
-        }
+        if (cyclic) activeChips.forEach(function(c) { days.push(parseInt(c.dataset.day)); });
         var forced = (getTaskStatus({ cognitive: cognitive, physical: physical, moral: moral, forced: false }) === 'red');
-
         tasks.unshift({ name: name, project: project, cognitive: cognitive, physical: physical, moral: moral, cyclic: cyclic, days: days, forced: forced });
-        closeModal();
-        updateUI();
+        closeModal(); updateUI();
         showToast(forced ? 'Задача добавлена принудительно 🛡️' : 'Задача добавлена ✨');
     }
 
     document.getElementById('taskCyclic').addEventListener('change', function() {
         document.getElementById('cyclicDays').style.display = this.checked ? 'block' : 'none';
         if (this.checked) {
-            var sel = document.getElementById('weekDaysSelect');
-            sel.innerHTML = '';
+            var sel = document.getElementById('weekDaysSelect'); sel.innerHTML = '';
             ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'].forEach(function(d, i) {
-                var chip = document.createElement('button');
-                chip.className = 'week-day-chip';
-                chip.textContent = d;
-                chip.dataset.day = i + 1;
+                var chip = document.createElement('button'); chip.className = 'week-day-chip';
+                chip.textContent = d; chip.dataset.day = i + 1;
                 chip.addEventListener('click', function() { chip.classList.toggle('active'); });
                 sel.appendChild(chip);
             });
@@ -1953,77 +1868,108 @@
     });
 
     // ===== АВТОРИЗАЦИЯ =====
-    function startAnonymous() {
-        isAnonymous = true;
-        document.getElementById('authModalOverlay').classList.remove('open');
-        showToast('Данные не сохранятся после выхода 👤');
-    }
+    function startAnonymous() { isAnonymous = true; document.getElementById('authModalOverlay').classList.remove('open'); showToast('Данные не сохранятся после выхода 👤'); }
+    function closeAuthModalOutside(e) { if (e.target === document.getElementById('authModalOverlay')) e.target.classList.remove('open'); }
 
+    // ===== НАСТРОЙКА ЦИКЛА =====
     function setupCycle() {
-        var date = prompt("Введите первый день последней менструации\n\nНапример: 2026-06-20");
-        if (!date) return;
-        var length = parseInt(prompt("Длина цикла?", cycleLength));
-        if (length < 15 || length > 90) {
-            showToast("Проверь, правильно ли введены даты");
-            return;
-        }
-        lastPeriodDate = new Date(date);
-        cycleLength = length;
-        demoCycle = false;
-        var diff = Math.floor((new Date() - lastPeriodDate) / 86400000);
-        currentDay = ((diff % cycleLength) + cycleLength) % cycleLength + 1;
-        document.getElementById("cycleSetupCard").style.display = "none";
-        updateUI();
-        showToast("Цикл настроен 🌱");
+        document.getElementById('cycleSetupOverlay').classList.add('open');
+        document.getElementById('firstPeriodDate').value = '';
+        document.getElementById('lastPeriodDateCalc').textContent = '—';
+        document.getElementById('periodLenSlider').value = 5;
+        document.getElementById('periodLenVal').textContent = '5';
+        periodDates = [];
+        document.getElementById('extraDatesContainer').style.display = 'none';
+        document.getElementById('extraDatesContainer').innerHTML = '';
+        document.getElementById('cyclePreview').style.display = 'none';
+        document.getElementById('irregularCycle').checked = false;
+        document.getElementById('pregnantCheck').checked = false;
     }
 
-    function closeAuthModalOutside(e) {
-        if (e.target === document.getElementById('authModalOverlay')) {
-            e.target.classList.remove('open');
+    function updateLastPeriodDateCalc() {
+        var firstDate = new Date(document.getElementById('firstPeriodDate').value);
+        var periodLen = parseInt(document.getElementById('periodLenSlider').value);
+        if (firstDate && !isNaN(firstDate.getTime()) && periodLen) {
+            var lastDate = new Date(firstDate);
+            lastDate.setDate(lastDate.getDate() + periodLen - 1);
+            document.getElementById('lastPeriodDateCalc').textContent = lastDate.toLocaleDateString('ru-RU');
+        } else {
+            document.getElementById('lastPeriodDateCalc').textContent = '—';
         }
+    }
+
+    document.getElementById('firstPeriodDate').addEventListener('change', updateLastPeriodDateCalc);
+    document.getElementById('periodLenSlider').addEventListener('input', function() {
+        document.getElementById('periodLenVal').textContent = this.value;
+        updateLastPeriodDateCalc();
+    });
+
+    document.getElementById('addMoreDatesBtn').addEventListener('click', function() {
+        var container = document.getElementById('extraDatesContainer');
+        container.style.display = 'block';
+        var idx = container.children.length + 1;
+        var div = document.createElement('div');
+        div.style.marginBottom = '8px';
+        div.innerHTML = '<div class="modal-label">🗓 ' + idx + '-е месячные (следующие)</div><input class="modal-input extra-period-date" type="date" placeholder="Дата следующих месячных">';
+        container.appendChild(div);
+    });
+
+    function saveCycleSetup() {
+        var firstDate = document.getElementById('firstPeriodDate').value;
+        periodLengthDays = parseInt(document.getElementById('periodLenSlider').value);
+        isIrregular = document.getElementById('irregularCycle').checked;
+        isPregnant = document.getElementById('pregnantCheck').checked;
+        if (isPregnant) { cycleLength = 280; demoCycle = false; showToast('Включён режим беременности 🤰'); }
+        else if (firstDate) {
+            lastPeriodDate = new Date(firstDate);
+            var extraDates = document.querySelectorAll('.extra-period-date');
+            var allDates = [firstDate];
+            extraDates.forEach(function(input) { if (input.value) allDates.push(input.value); });
+            allDates.sort();
+            if (allDates.length >= 2) {
+                var totalDiff = 0;
+                for (var i = 1; i < allDates.length; i++) totalDiff += Math.floor((new Date(allDates[i]) - new Date(allDates[i-1])) / 86400000);
+                cycleLength = Math.round(totalDiff / (allDates.length - 1));
+            }
+            demoCycle = false;
+        }
+        document.getElementById('cycleSetupOverlay').classList.remove('open');
+        document.getElementById('cycleSetupCard').style.display = 'none';
+        if (!isPregnant && lastPeriodDate) {
+            var diff = Math.floor((new Date() - lastPeriodDate) / 86400000);
+            currentDay = ((diff % cycleLength) + cycleLength) % cycleLength + 1;
+        }
+        updateUI();
+        showToast('Цикл настроен 🌸');
     }
 
     // ===== НАВИГАЦИЯ =====
     document.querySelectorAll('.nav-item[data-tab]').forEach(function(btn) {
         btn.addEventListener('click', function() {
             var tab = btn.dataset.tab;
-            if (tab === 'rhythm') {
-                showRhythmScreen();
-                return;
-            }
+            if (tab === 'rhythm') { showRhythmScreen(); return; }
             showTab(tab);
         });
     });
 
     var rhythmBackBtn = document.getElementById('rhythmBackBtn');
-    if (rhythmBackBtn) {
-        rhythmBackBtn.addEventListener('click', hideRhythmScreen);
-    }
+    if (rhythmBackBtn) rhythmBackBtn.addEventListener('click', hideRhythmScreen);
+
+    document.getElementById('prevMonth').addEventListener('click', function() { rhythmMonth--; if (rhythmMonth < 0) { rhythmMonth = 11; rhythmYear--; } renderRhythm(); });
+    document.getElementById('nextMonth').addEventListener('click', function() { rhythmMonth++; if (rhythmMonth > 11) { rhythmMonth = 0; rhythmYear++; } renderRhythm(); });
 
     document.getElementById('profileBtn').addEventListener('click', function() {
         var newName = prompt('Твоё имя?', userName);
-        if (newName !== null && newName.trim()) {
-            userName = newName.trim();
-            updateUI();
-            showToast('Имя обновлено 💖');
-        }
+        if (newName !== null && newName.trim()) { userName = newName.trim(); updateUI(); showToast('Имя обновлено 💖'); }
     });
 
     document.getElementById('settingsBtn').addEventListener('click', function() {
         var newLength = prompt('Длина цикла (дней)?', cycleLength);
-        if (newLength && parseInt(newLength) >= 21 && parseInt(newLength) <= 45) {
-            cycleLength = parseInt(newLength);
-            if (currentDay > cycleLength) currentDay = cycleLength;
-            updateUI();
-            showToast('Цикл обновлён 🌸');
-        } else if (newLength) {
-            showToast('Введи число от 21 до 45');
-        }
+        if (newLength && parseInt(newLength) >= 21 && parseInt(newLength) <= 45) { cycleLength = parseInt(newLength); if (currentDay > cycleLength) currentDay = cycleLength; updateUI(); showToast('Цикл обновлён 🌸'); }
+        else if (newLength) showToast('Введи число от 21 до 45');
     });
 
-    document.getElementById('notificationsBtn').addEventListener('click', function() {
-        showToast('🔔 Уведомления — в следующей версии');
-    });
+    document.getElementById('notificationsBtn').addEventListener('click', function() { showToast('🔔 Уведомления — в следующей версии'); });
 
     // ===== ОНБОРДИНГ =====
     var onboardingSlides = [
@@ -2031,281 +1977,36 @@
         { icon: '⚡️🧩❤️', title: 'Три ресурса', text: 'Отмечай каждый день уровень физики, ума и моральной нагрузки. Это поможет алгоритму лучше понимать твоё состояние и подбирать задачи.' },
         { icon: '📋✨', title: 'Умные задачи', text: 'Добавляй задачи с оценкой сложности. Rootine сам подскажет, когда лучше заняться спортом, а когда — сложными переговорами.' }
     ];
-
     var currentSlide = 0;
-
     function renderOnboardingSlide() {
         var slide = onboardingSlides[currentSlide];
         document.getElementById('onboardingSlides').innerHTML = '<div class="slide active"><div class="onboarding-slide-icon">' + slide.icon + '</div><div class="onboarding-slide-title">' + slide.title + '</div><div class="onboarding-slide-text">' + slide.text + '</div></div>';
-        var dots = document.getElementById('onboardingDots');
-        dots.innerHTML = '';
-        for (var i = 0; i < onboardingSlides.length; i++) {
-            var dot = document.createElement('div');
-            dot.className = 'onboarding-dot' + (i === currentSlide ? ' active' : '');
-            dots.appendChild(dot);
-        }
+        var dots = document.getElementById('onboardingDots'); dots.innerHTML = '';
+        for (var i = 0; i < onboardingSlides.length; i++) { var dot = document.createElement('div'); dot.className = 'onboarding-dot' + (i === currentSlide ? ' active' : ''); dots.appendChild(dot); }
         document.getElementById('onboardingNext').textContent = currentSlide < onboardingSlides.length - 1 ? 'Далее' : 'Понятно, начнём!';
     }
-
-    document.getElementById('onboardingNext').addEventListener('click', function() {
-        if (currentSlide < onboardingSlides.length - 1) {
-            currentSlide++;
-            renderOnboardingSlide();
-        } else {
-            closeOnboarding();
-        }
-    });
-
-    function closeOnboarding() {
-        document.getElementById('onboardingOverlay').classList.remove('open');
-        currentSlide = 0;
-    }
+    document.getElementById('onboardingNext').addEventListener('click', function() { if (currentSlide < onboardingSlides.length - 1) { currentSlide++; renderOnboardingSlide(); } else closeOnboarding(); });
+    function closeOnboarding() { document.getElementById('onboardingOverlay').classList.remove('open'); currentSlide = 0; }
 
     // ===== СОХРАНЕНИЕ НАСТРОЕНИЯ =====
     document.getElementById('saveMoodBtn').addEventListener('click', function() {
         var dateStr = getActiveCheckinDate();
-        var checkin = {
-            date: dateStr,
-            cycleDay: currentDay,
-            physical: resources.physical,
-            cognitive: resources.cognitive,
-            emotional: resources.emotional
-        };
+        var checkin = { date: dateStr, cycleDay: currentDay, physical: resources.physical, cognitive: resources.cognitive, emotional: resources.emotional };
         var history = JSON.parse(localStorage.getItem('checkins') || '[]');
         var existingIndex = history.findIndex(function(item) { return item.date === dateStr; });
-        if (existingIndex >= 0) {
-            history[existingIndex] = checkin;
-        } else {
-            history.push(checkin);
-        }
+        if (existingIndex >= 0) history[existingIndex] = checkin; else history.push(checkin);
         localStorage.setItem('checkins', JSON.stringify(history));
-        moodSavedForActiveDate = true;
-        updateUI();
-        showToast('Состояние сохранено 💛');
+        moodSavedForActiveDate = true; updateUI(); showToast('Состояние сохранено 💛');
     });
+    document.getElementById('editMoodLink').addEventListener('click', function() { moodSavedForActiveDate = false; updateUI(); showToast('Можешь изменить оценку ✨'); });
 
-    document.getElementById('editMoodLink').addEventListener('click', function() {
-        moodSavedForActiveDate = false;
-        updateUI();
-        showToast('Можешь изменить оценку ✨');
-    });
-
-        // ===== НАСТРОЙКА ЦИКЛА =====
-    var periodDates = [];
-    var periodLengthDays = 5;
-    var isIrregular = false;
-    var isPregnant = false;
-
-    function setupCycle() {
-        document.getElementById('cycleSetupOverlay').classList.add('open');
-        document.getElementById('periodDate1').value = '';
-        periodDates = [];
-        updatePeriodDatesUI();
-    }
-
-    document.getElementById('addPeriodBtn').addEventListener('click', function() {
-        if (periodDates.length >= 6) {
-            showToast('Максимум 6 дат');
-            return;
-        }
-        periodDates.push('');
-        updatePeriodDatesUI();
-    });
-
-    function updatePeriodDatesUI() {
-        var list = document.getElementById('periodDatesList');
-        list.innerHTML = '';
-        for (var i = 0; i < Math.max(1, periodDates.length); i++) {
-            var input = document.createElement('input');
-            input.className = 'modal-input period-date';
-            input.type = 'date';
-            input.placeholder = 'Дата ' + (i + 1) + '-х месячных';
-            if (i < periodDates.length) input.value = periodDates[i];
-            input.addEventListener('change', function(e) {
-                var idx = Array.from(list.children).indexOf(e.target);
-                periodDates[idx] = e.target.value;
-                updateCyclePreview();
-            });
-            list.appendChild(input);
-        }
-        if (periodDates.length === 0) {
-            var input = document.createElement('input');
-            input.className = 'modal-input period-date';
-            input.type = 'date';
-            input.id = 'periodDate1';
-            input.addEventListener('change', function(e) {
-                periodDates[0] = e.target.value;
-                updateCyclePreview();
-            });
-            list.appendChild(input);
-        }
-    }
-
-    function updateCyclePreview() {
-        var validDates = periodDates.filter(function(d) { return d && d.trim() !== ''; });
-        if (validDates.length < 2) return;
-
-        validDates.sort();
-        var preview = document.getElementById('cyclePreview');
-        preview.style.display = 'block';
-
-        var totalDiff = 0;
-        for (var i = 1; i < validDates.length; i++) {
-            totalDiff += Math.floor((new Date(validDates[i]) - new Date(validDates[i-1])) / 86400000);
-        }
-        var avgCycle = Math.round(totalDiff / (validDates.length - 1));
-        document.getElementById('calcCycleLength').textContent = avgCycle;
-
-        var periodLen = parseInt(document.getElementById('periodLength').value);
-        document.getElementById('calcPeriodLength').textContent = periodLen;
-
-        var lastDate = new Date(validDates[validDates.length - 1]);
-        var nextDate = new Date(lastDate);
-        nextDate.setDate(nextDate.getDate() + avgCycle);
-        document.getElementById('calcNextPeriod').textContent = nextDate.toLocaleDateString('ru-RU');
-    }
-
-    document.getElementById('periodLength').addEventListener('input', updateCyclePreview);
-    document.querySelectorAll('.period-date').forEach(function(input) {
-        input.addEventListener('change', updateCyclePreview);
-    });
-
-    function saveCycleSetup() {
-        var validDates = periodDates.filter(function(d) { return d && d.trim() !== ''; });
-        if (validDates.length >= 2) {
-            lastPeriodDate = new Date(validDates[validDates.length - 1]);
-            var totalDiff = 0;
-            validDates.sort();
-            for (var i = 1; i < validDates.length; i++) {
-                totalDiff += Math.floor((new Date(validDates[i]) - new Date(validDates[i-1])) / 86400000);
-            }
-            cycleLength = Math.round(totalDiff / (validDates.length - 1));
-        }
-        periodLengthDays = parseInt(document.getElementById('periodLength').value);
-        isIrregular = document.getElementById('irregularCycle').checked;
-        isPregnant = document.getElementById('pregnantCheck').checked;
-        demoCycle = false;
-
-        if (isPregnant) {
-            cycleLength = 280;
-            showToast('Включён режим беременности 🤰');
-        }
-
-        document.getElementById('cycleSetupOverlay').classList.remove('open');
-        document.getElementById('cycleSetupCard').style.display = 'none';
-        currentDay = getCycleDayForDate(new Date());
-        updateUI();
-        showToast('Цикл настроен 🌸');
-    }
-
-    // Обновлённый расчёт фаз
-    function getCurrentPhase(day) {
-        if (!day) day = currentDay;
-        if (isPregnant) {
-            return { id: 'bloom', name: 'Беременность', title: 'Расти', emoji: '🤰', color: '#E8B4BC' };
-        }
-
-        var periodLen = periodLengthDays || 5;
-        var follicularEnd = periodLen + Math.round((cycleLength - periodLen - 14) * 0.6);
-        var ovulationEnd = follicularEnd + 3;
-        var lutealEnd = cycleLength;
-
-        if (day <= periodLen) return { id: 'seed', name: 'Менструальная', title: 'Отдыхай', emoji: '🪷', color: '#C8A882' };
-        if (day <= follicularEnd) return { id: 'sprout', name: 'Фолликулярная', title: 'Расти', emoji: '🌱', color: '#9CBA7F' };
-        if (day <= ovulationEnd) return { id: 'bloom', name: 'Овуляция', title: 'Расцветай', emoji: '🌸', color: '#E8B4BC' };
-        if (day <= lutealEnd) return { id: 'fruit', name: 'Лютеиновая', title: 'Заземляйся', emoji: '🍃', color: '#D4956E' };
-        return { id: 'seed', name: 'Менструальная', title: 'Отдыхай', emoji: '🪷', color: '#C8A882' };
-    }
-
-        // ===== РАСПРЕДЕЛЕНИЕ ЦВЕТОВ (метод деления пополам) =====
-    function getHarmonicColorIndex(dayInPhase, totalDaysInPhase, totalColors) {
-        // Всегда 1-й день = цвет №1, последний = цвет №totalColors
-        if (dayInPhase <= 1) return 1;
-        if (dayInPhase >= totalDaysInPhase) return totalColors;
-
-        // Нормализуем позицию дня от 0 до 1
-        var position = (dayInPhase - 1) / (totalDaysInPhase - 1);
-
-        // Строим гармоничные точки методом деления пополам
-        var harmonicPoints = [0, 1]; // начальные точки (первый и последний)
-        var usedColors = [1, totalColors];
-
-        // Добавляем середины, пока не наберём нужное количество
-        while (harmonicPoints.length < totalDaysInPhase && harmonicPoints.length < totalColors) {
-            var newPoints = [];
-            var newColors = [];
-            for (var i = 0; i < harmonicPoints.length - 1; i++) {
-                var midPoint = (harmonicPoints[i] + harmonicPoints[i + 1]) / 2;
-                var midColor = Math.round((usedColors[i] + usedColors[i + 1]) / 2);
-                newPoints.push(harmonicPoints[i]);
-                newColors.push(usedColors[i]);
-                newPoints.push(midPoint);
-                newColors.push(midColor);
-            }
-            newPoints.push(harmonicPoints[harmonicPoints.length - 1]);
-            newColors.push(usedColors[usedColors.length - 1]);
-            harmonicPoints = newPoints;
-            usedColors = newColors;
-        }
-
-        // Находим ближайшую гармоничную точку
-        var bestIndex = 1;
-        var bestDist = Math.abs(position - harmonicPoints[0]);
-        for (var i = 0; i < harmonicPoints.length; i++) {
-            var dist = Math.abs(position - harmonicPoints[i]);
-            if (dist < bestDist) {
-                bestDist = dist;
-                bestIndex = usedColors[i];
-            }
-        }
-        return Math.max(1, Math.min(totalColors, bestIndex));
-    }
-
-    // Обновлённая функция получения фазы с цветом
-    function getPhaseInfo(cycleDay) {
-        if (isPregnant) {
-            return { id: 'bloom', name: 'Беременность', title: 'Расти', emoji: '🤰', color: '#E8B4BC', dayInPhase: cycleDay, totalDays: 280 };
-        }
-
-        var periodLen = periodLengthDays || 5;
-        var follicularEnd = periodLen + Math.round((cycleLength - periodLen - 14) * 0.6);
-        var ovulationEnd = follicularEnd + 3;
-        var lutealEnd = cycleLength;
-
-        if (cycleDay <= periodLen) {
-            return { id: 'seed', name: 'Менструальная', title: 'Отдыхай', emoji: '🪷', dayInPhase: cycleDay, totalDays: periodLen };
-        }
-        if (cycleDay <= follicularEnd) {
-            return { id: 'sprout', name: 'Фолликулярная', title: 'Расти', emoji: '🌱', dayInPhase: cycleDay - periodLen, totalDays: follicularEnd - periodLen };
-        }
-        if (cycleDay <= ovulationEnd) {
-            return { id: 'bloom', name: 'Овуляция', title: 'Расцветай', emoji: '🌸', dayInPhase: cycleDay - follicularEnd, totalDays: ovulationEnd - follicularEnd };
-        }
-        if (cycleDay <= lutealEnd) {
-            return { id: 'fruit', name: 'Лютеиновая', title: 'Заземляйся', emoji: '🍃', dayInPhase: cycleDay - ovulationEnd, totalDays: lutealEnd - ovulationEnd };
-        }
-        return { id: 'seed', name: 'Менструальная', title: 'Отдыхай', emoji: '🪷', dayInPhase: 1, totalDays: periodLen };
-    }
-
-    // Использование в renderWeekCalendar:
-    // Вместо старого кода поиска фазы используй:
-    // var phaseInfo = getPhaseInfo(cycleDay);
-    // var colorIndex = getHarmonicColorIndex(phaseInfo.dayInPhase, phaseInfo.totalDays, 20);
-    // col.innerHTML = '... <div class="week-dot ' + phaseInfo.id + '-' + colorIndex + ' ...';
-    
     // ===== ИНИЦИАЛИЗАЦИЯ =====
     loadData();
     setupSlider('sliderBgPhysical', 'sliderFillPhysical', 'thumbPhysical', 'valPhysical', 'physical');
     setupSlider('sliderBgCognitive', 'sliderFillCognitive', 'thumbCognitive', 'valCognitive', 'cognitive');
     setupSlider('sliderBgEmotional', 'sliderFillEmotional', 'thumbEmotional', 'valEmotional', 'emotional');
     updateUI();
-
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-            navigator.serviceWorker.register('sw.js').catch(function() {});
-        });
-    }
-
+    if ('serviceWorker' in navigator) window.addEventListener('load', function() { navigator.serviceWorker.register('sw.js').catch(function() {}); });
 </script>
 
 <!-- Градиентная подложка под навигацией -->
