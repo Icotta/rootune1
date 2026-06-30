@@ -632,6 +632,52 @@
             saveData();
         }
 
+                function renderWeekCalendar() {
+            var row = document.getElementById('weekRow');
+            row.innerHTML = '';
+            var center = new Date(AppState.centerDate);
+            var dow = center.getDay();
+            var dayNames = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+
+            for (var i = 0; i < 7; i++) {
+                var off = i - 3;
+                var d = new Date(center);
+                d.setDate(d.getDate() + off);
+
+                var cycleDay = getCycleDayForDate(d);
+                var phaseInfo = getPhaseInfo(cycleDay);
+                var colorIndex = getHarmonicColorIndex(phaseInfo.dayInPhase, phaseInfo.totalDays, 5);
+                var dotClass = phaseInfo.id + '-' + colorIndex;
+
+                var col = document.createElement('div');
+                col.className = 'week-day-col';
+                col.innerHTML = '<div class="week-day-name">' + dayNames[(dow + off + 7) % 7] + '</div>' +
+                    '<div class="week-dot ' + dotClass + (off === 0 ? ' today' : '') + '"></div>' +
+                    '<div class="week-date">' + d.getDate() + '</div>';
+
+                (function(d, cycleDay) {
+                    col.addEventListener('click', function() {
+                        AppState.centerDate = new Date(d);
+                        AppState.currentDay = cycleDay;
+                        var dateStr = getActiveCheckinDate();
+                        AppState.moodSavedForActiveDate = isMoodSavedForDate(dateStr);
+                        if (!AppState.moodSavedForActiveDate) {
+                            var preset = getPresetMood(cycleDay);
+                            AppState.resources.physical = preset.p;
+                            AppState.resources.cognitive = preset.c;
+                            AppState.resources.emotional = preset.e;
+                        } else {
+                            loadMoodForDate(dateStr);
+                        }
+                        updateUI();
+                        showToast('День ' + AppState.currentDay + ' · ' + getCurrentPhase().title);
+                    });
+                })(d, cycleDay);
+
+                row.appendChild(col);
+            }
+        }
+        
         function updateRecommendationTips() {
             document.getElementById('tipPhysical').textContent = getRandomTip('physical', getTipLevel(AppState.resources.physical));
             document.getElementById('tipCognitive').textContent = getRandomTip('cognitive', getTipLevel(AppState.resources.cognitive));
