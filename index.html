@@ -647,7 +647,7 @@
             }
         }
 
-        function renderWeekCalendar() {
+                function renderWeekCalendar() {
             var row = document.getElementById('weekRow');
             row.innerHTML = '';
             var center = new Date(AppState.centerDate);
@@ -658,7 +658,17 @@
                 var off = i - 3;
                 var d = new Date(center);
                 d.setDate(d.getDate() + off);
-                var cycleDay = getCycleDayForDate(d);
+
+                // Демо: всегда день 6 + offset, реальный цикл: getCycleDayForDate
+                var cycleDay;
+                if (AppState.demoCycle) {
+                    cycleDay = 6 + off;
+                    if (cycleDay < 1) cycleDay += 28;
+                    if (cycleDay > 28) cycleDay -= 28;
+                } else {
+                    cycleDay = getCycleDayForDate(d);
+                }
+
                 var phaseInfo = getPhaseInfo(cycleDay);
                 var colorIndex = getHarmonicColorIndex(phaseInfo.dayInPhase, phaseInfo.totalDays, 5);
                 var dotClass = phaseInfo.id + '-' + colorIndex;
@@ -673,7 +683,7 @@
                     col.addEventListener('click', function() {
                         AppState.centerDate = new Date(d);
                         AppState.currentDay = cycleDay;
-                        AppState.demoCycle = false;
+                        // НЕ МЕНЯЕМ demoCycle — остаёмся в демо при клике на день
                         var dateStr = getActiveCheckinDate();
                         AppState.moodSavedForActiveDate = isMoodSavedForDate(dateStr);
                         if (!AppState.moodSavedForActiveDate) {
@@ -692,7 +702,6 @@
                 row.appendChild(col);
             }
         }
-
         function renderTasks() {
             var container = document.getElementById('tasksList');
             var todayTasks = AppState.tasks.filter(function(t) {
