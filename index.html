@@ -168,207 +168,1147 @@
 </head>
 <body>
 
-<div id="mainScreen" class="screen active">
-    <div class="header">
-        <div class="logo"><div class="logo-icon" id="profileBtn" title="Профиль и настройки">🐝</div>Rootine</div>
-        <div class="header-actions"><button class="icon-btn" id="feedbackBtn" title="Обратная связь">💬</button></div>
-    </div>
-    <div class="phase-card" id="phaseCard"><div class="phase-watercolor"></div><span class="phase-emoji" id="phaseEmoji">🌸</span><div class="phase-name" id="phaseName">Расцветай, Ева</div><div class="phase-day" id="phaseDay">День 16 из 28</div></div>
-    <div class="week-calendar"><div class="week-label">📅 Твоя неделя</div><div class="week-row" id="weekRow"></div></div>
-    <div id="cycleSetupCard" style="margin-bottom:18px;padding:14px;background:white;border-radius:18px;box-shadow:var(--shadow-sm);text-align:center;font-size:14px;">🌱 Сейчас показывается пример цикла.<br><br><button class="modal-save" style="margin-top:0" onclick="setupCycle()">Настроить цикл под себя</button></div>
-    <div class="resources-card" id="resourcesCard">
-        <div class="saved-header" id="savedHeader"><span class="saved-dot">✓ Сохранено</span><span style="color:var(--text-secondary)">·</span><span class="saved-edit" id="editMoodLink">Изменить</span></div>
-        <div class="resources-title">✨ Как ты себя чувствуешь?</div>
-        <div class="sliders-container">
-            <div class="scale-labels-global"><span>без сил</span><span>полна сил</span></div>
-            <div class="resource-row"><span class="resource-emoji">⚡️</span><span class="resource-label">Тело</span><div class="resource-slider-bg" id="sliderBgPhysical"><div class="resource-slider-fill physical" id="sliderFillPhysical" style="width:50%;"><div class="resource-thumb physical" id="thumbPhysical"></div></div></div><span class="resource-value" id="valPhysical">3</span></div>
-            <div class="resource-row"><span class="resource-emoji">🧩</span><span class="resource-label">Разум</span><div class="resource-slider-bg" id="sliderBgCognitive"><div class="resource-slider-fill cognitive" id="sliderFillCognitive" style="width:50%;"><div class="resource-thumb cognitive" id="thumbCognitive"></div></div></div><span class="resource-value" id="valCognitive">3</span></div>
-            <div class="resource-row"><span class="resource-emoji">❤️</span><span class="resource-label">Эмоции</span><div class="resource-slider-bg" id="sliderBgEmotional"><div class="resource-slider-fill emotional" id="sliderFillEmotional" style="width:50%;"><div class="resource-thumb emotional" id="thumbEmotional"></div></div></div><span class="resource-value" id="valEmotional">3</span></div>
+    <div id="mainScreen" class="screen active">
+        <div class="header">
+            <div class="logo"><div class="logo-icon" id="profileBtn" title="Профиль и настройки">🐝</div>Rootine</div>
+            <div class="header-actions"><button class="icon-btn" id="feedbackBtn" title="Обратная связь">💬</button></div>
         </div>
+        <div class="phase-card" id="phaseCard"><div class="phase-watercolor"></div><span class="phase-emoji" id="phaseEmoji">🌸</span><div class="phase-name" id="phaseName">Расцветай, Ева</div><div class="phase-day" id="phaseDay">День 16 из 28</div></div>
+        <div class="week-calendar"><div class="week-label">📅 Твоя неделя</div><div class="week-row" id="weekRow"></div></div>
+        <div id="cycleSetupCard" style="margin-bottom:18px;padding:14px;background:white;border-radius:18px;box-shadow:var(--shadow-sm);text-align:center;font-size:14px;">🌱 Сейчас показывается пример цикла.<br><br><button class="modal-save" style="margin-top:0" onclick="setupCycle()">Настроить цикл под себя</button></div>
+        <div class="resources-card" id="resourcesCard">
+            <div class="saved-header" id="savedHeader"><span class="saved-dot">✓ Сохранено</span><span style="color:var(--text-secondary)">·</span><span class="saved-edit" id="editMoodLink">Изменить</span></div>
+            <div class="resources-title">✨ Как ты себя чувствуешь?</div>
+            <div class="sliders-container">
+                <div class="scale-labels-global"><span>без сил</span><span>полна сил</span></div>
+                <div class="resource-row"><span class="resource-emoji">⚡️</span><span class="resource-label">Тело</span><div class="resource-slider-bg" id="sliderBgPhysical"><div class="resource-slider-fill physical" id="sliderFillPhysical" style="width:50%;"><div class="resource-thumb physical" id="thumbPhysical"></div></div></div><span class="resource-value" id="valPhysical">3</span></div>
+                <div class="resource-row"><span class="resource-emoji">🧩</span><span class="resource-label">Разум</span><div class="resource-slider-bg" id="sliderBgCognitive"><div class="resource-slider-fill cognitive" id="sliderFillCognitive" style="width:50%;"><div class="resource-thumb cognitive" id="thumbCognitive"></div></div></div><span class="resource-value" id="valCognitive">3</span></div>
+                <div class="resource-row"><span class="resource-emoji">❤️</span><span class="resource-label">Эмоции</span><div class="resource-slider-bg" id="sliderBgEmotional"><div class="resource-slider-fill emotional" id="sliderFillEmotional" style="width:50%;"><div class="resource-thumb emotional" id="thumbEmotional"></div></div></div><span class="resource-value" id="valEmotional">3</span></div>
+            </div>
+        </div>
+        <button id="saveMoodBtn" class="modal-save" style="margin-top:10px;margin-bottom:8px;">Сохранить состояние</button>
+        <div class="recommendation" id="recommendationBox"><span class="recommendation-icon">🐝</span><div class="recommendation-content"><div class="recommendation-text" id="recommendationText">Расцветай. Ты на пике обаяния — назначай важные встречи и переговоры.</div><div class="recommendation-tips"><div class="rec-tip tip-physical">⚡️ <span id="tipPhysical">—</span></div><div class="rec-tip tip-cognitive">🧠 <span id="tipCognitive">—</span></div><div class="rec-tip tip-emotional">❤️ <span id="tipEmotional">—</span></div></div></div></div>
+        <div class="tasks-card"><div class="tasks-header"><span class="tasks-title">📋 Задачи на сегодня</span><button class="add-task-btn" onclick="openModal()" aria-label="Добавить задачу">+</button></div><div id="tasksList"></div></div>
     </div>
-    <button id="saveMoodBtn" class="modal-save" style="margin-top:10px;margin-bottom:8px;">Сохранить состояние</button>
-    <div class="recommendation" id="recommendationBox"><span class="recommendation-icon">🐝</span><div class="recommendation-content"><div class="recommendation-text" id="recommendationText">Расцветай. Ты на пике обаяния — назначай важные встречи и переговоры.</div><div class="recommendation-tips"><div class="rec-tip tip-physical">⚡️ <span id="tipPhysical">—</span></div><div class="rec-tip tip-cognitive">🧠 <span id="tipCognitive">—</span></div><div class="rec-tip tip-emotional">❤️ <span id="tipEmotional">—</span></div></div></div></div>
-    <div class="tasks-card"><div class="tasks-header"><span class="tasks-title">📋 Задачи на сегодня</span><button class="add-task-btn" onclick="openModal()" aria-label="Добавить задачу">+</button></div><div id="tasksList"></div></div>
-</div>
 
-<div class="screen" id="rhythmScreen">
-    <div class="screen-header"><button class="screen-back" id="rhythmBackBtn">←</button><div class="screen-title">📊 Ритм</div></div>
-    <div class="month-calendar"><div class="month-nav"><button class="month-arrow" id="prevMonth">◀</button><div class="month-name" id="monthName">Июнь 2026</div><button class="month-arrow" id="nextMonth">▶</button></div><div class="month-days-header"><span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span></div><div class="month-grid" id="monthGrid"></div></div>
-    <div class="waves-card"><div class="waves-title">🌊 Показатели за неделю</div><div class="histogram" id="histogram"><div class="histo-day-group" id="histoDayGroup"></div><svg class="waves-svg histo-overlay" id="wavesSvg" viewBox="0 0 360 100" preserveAspectRatio="none" style="display:none;"></svg></div><div class="histo-filters"><button class="histo-filter active" data-filter="all">Все</button><button class="histo-filter" data-filter="cognitive">🧠</button><button class="histo-filter" data-filter="physical">💪</button><button class="histo-filter" data-filter="emotional">❤️</button></div><div class="waves-labels" id="wavesLabels" style="display:none;"></div></div>
-    <div class="rhythm-day-info" id="rhythmDayInfo"><span class="info-phase" id="infoPhase">🌸 Расцветай</span><span style="color:var(--text-secondary)">·</span><span class="info-values" id="infoValues">🧠3 💪3 ❤️3</span></div>
-</div>
+    <div class="screen" id="rhythmScreen">
+        <div class="screen-header"><button class="screen-back" id="rhythmBackBtn">←</button><div class="screen-title">📊 Ритм</div></div>
+        <div class="month-calendar"><div class="month-nav"><button class="month-arrow" id="prevMonth">◀</button><div class="month-name" id="monthName">Июнь 2026</div><button class="month-arrow" id="nextMonth">▶</button></div><div class="month-days-header"><span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span></div><div class="month-grid" id="monthGrid"></div></div>
+        <div class="waves-card"><div class="waves-title">🌊 Показатели за неделю</div><div class="histogram" id="histogram"><div class="histo-day-group" id="histoDayGroup"></div><svg class="waves-svg histo-overlay" id="wavesSvg" viewBox="0 0 360 100" preserveAspectRatio="none" style="display:none;"></svg></div><div class="histo-filters"><button class="histo-filter active" data-filter="all">Все</button><button class="histo-filter" data-filter="cognitive">🧠</button><button class="histo-filter" data-filter="physical">💪</button><button class="histo-filter" data-filter="emotional">❤️</button></div><div class="waves-labels" id="wavesLabels" style="display:none;"></div></div>
+        <div class="rhythm-day-info" id="rhythmDayInfo"><span class="info-phase" id="infoPhase">🌸 Расцветай</span><span style="color:var(--text-secondary)">·</span><span class="info-values" id="infoValues">🧠3 💪3 ❤️3</span></div>
+    </div>
 
-<div class="screen" id="inboxScreen"><div class="screen-header"><button class="screen-back" id="inboxBackBtn">←</button><div class="screen-title">📥 Копилка</div><button class="add-task-btn" onclick="openModal()" style="position:static;width:36px;height:36px;font-size:20px;margin-left:auto;">+</button></div><div id="inboxTasksList"></div></div>
-<div class="screen" id="projectsScreen"><div class="screen-header"><button class="screen-back" id="projectsBackBtn">←</button><div class="screen-title">📋 Проекты</div><button class="add-task-btn" onclick="openModal()" style="position:static;width:36px;height:36px;font-size:20px;margin-left:auto;">+</button></div><div id="projectsFolders"></div></div>
-<div class="screen" id="projectDetailScreen"><div class="screen-header"><button class="screen-back" id="projectDetailBackBtn">←</button><div class="screen-title" id="projectDetailTitle">📁 Проект</div><button class="add-task-btn" onclick="openModal()" style="position:static;width:36px;height:36px;font-size:20px;margin-left:auto;">+</button></div><div id="projectDetailTasks"></div></div>
+    <div class="screen" id="inboxScreen"><div class="screen-header"><button class="screen-back" id="inboxBackBtn">←</button><div class="screen-title">📥 Копилка</div><button class="add-task-btn" onclick="openModal()" style="position:static;width:36px;height:36px;font-size:20px;margin-left:auto;">+</button></div><div id="inboxTasksList"></div></div>
+    <div class="screen" id="projectsScreen"><div class="screen-header"><button class="screen-back" id="projectsBackBtn">←</button><div class="screen-title">📋 Проекты</div><button class="add-task-btn" onclick="openModal()" style="position:static;width:36px;height:36px;font-size:20px;margin-left:auto;">+</button></div><div id="projectsFolders"></div></div>
+    <div class="screen" id="projectDetailScreen"><div class="screen-header"><button class="screen-back" id="projectDetailBackBtn">←</button><div class="screen-title" id="projectDetailTitle">📁 Проект</div><button class="add-task-btn" onclick="openModal()" style="position:static;width:36px;height:36px;font-size:20px;margin-left:auto;">+</button></div><div id="projectDetailTasks"></div></div>
 
-<div class="bottom-nav" id="bottomNav">
-    <button class="nav-item active" data-tab="today"><span class="nav-emoji">🏠</span>Сегодня</button>
-    <button class="nav-item" data-tab="projects"><span class="nav-emoji">📋</span>Проекты</button>
-    <button class="nav-item add" onclick="openModal()" aria-label="Добавить задачу"><span class="nav-emoji">+</span></button>
-    <button class="nav-item" data-tab="rhythm"><span class="nav-emoji">📊</span>Ритм</button>
-    <button class="nav-item" data-tab="inbox"><span class="nav-emoji">📥</span>Копилка</button>
-</div>
+    <div class="bottom-nav" id="bottomNav">
+        <button class="nav-item active" data-tab="today"><span class="nav-emoji">🏠</span>Сегодня</button>
+        <button class="nav-item" data-tab="projects"><span class="nav-emoji">📋</span>Проекты</button>
+        <button class="nav-item add" onclick="openModal()" aria-label="Добавить задачу"><span class="nav-emoji">+</span></button>
+        <button class="nav-item" data-tab="rhythm"><span class="nav-emoji">📊</span>Ритм</button>
+        <button class="nav-item" data-tab="inbox"><span class="nav-emoji">📥</span>Копилка</button>
+    </div>
 
-<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)"><div class="modal" onclick="event.stopPropagation()"><div class="modal-handle"></div><div class="modal-title">🌱 Новая задача</div><input class="modal-input" type="text" placeholder="Название задачи" id="taskNameInput" autocomplete="off"><select class="modal-input" id="taskProjectInput"><option value="Копилка">📥 Копилка</option><option value="Разум">🧠 Разум</option><option value="Тело">⚡️ Тело</option><option value="Душа">❤️ Душа</option></select><div class="modal-label">🧠 Умственная нагрузка: <strong id="cogVal">3</strong></div><div class="slider-pair"><span>🌱</span><input type="range" min="1" max="5" value="3" id="taskCognitive" oninput="document.getElementById('cogVal').textContent=this.value"><span>🔥</span></div><div class="scale-labels"><span>легко</span><span>тяжело</span></div><div class="modal-label">💪 Физическая нагрузка: <strong id="physVal">3</strong></div><div class="slider-pair"><span>🌱</span><input type="range" min="1" max="5" value="3" id="taskPhysical" oninput="document.getElementById('physVal').textContent=this.value"><span>🔥</span></div><div class="scale-labels"><span>легко</span><span>тяжело</span></div><div class="modal-label">❤️ Эмоциональная нагрузка: <strong id="moralVal">3</strong></div><div class="slider-pair"><span>🌱</span><input type="range" min="1" max="5" value="3" id="taskMoral" oninput="document.getElementById('moralVal').textContent=this.value"><span>🔥</span></div><div class="scale-labels"><span>легко</span><span>тяжело</span></div><label style="display:flex;align-items:center;gap:8px;margin-top:8px;font-size:14px;"><input type="checkbox" id="taskCyclic"> Повторять еженедельно</label><div id="cyclicDays" style="display:none;margin-top:8px;"><div class="week-days-select" id="weekDaysSelect"></div></div><button class="modal-save" onclick="addTask()">✨ Сохранить задачу</button><button class="modal-close" onclick="closeModal()">Отмена</button></div></div>
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)"><div class="modal" onclick="event.stopPropagation()"><div class="modal-handle"></div><div class="modal-title">🌱 Новая задача</div><input class="modal-input" type="text" placeholder="Название задачи" id="taskNameInput" autocomplete="off"><select class="modal-input" id="taskProjectInput"><option value="Копилка">📥 Копилка</option><option value="Разум">🧠 Разум</option><option value="Тело">⚡️ Тело</option><option value="Душа">❤️ Душа</option></select><div class="modal-label">🧠 Умственная нагрузка: <strong id="cogVal">3</strong></div><div class="slider-pair"><span>🌱</span><input type="range" min="1" max="5" value="3" id="taskCognitive" oninput="document.getElementById('cogVal').textContent=this.value"><span>🔥</span></div><div class="scale-labels"><span>легко</span><span>тяжело</span></div><div class="modal-label">💪 Физическая нагрузка: <strong id="physVal">3</strong></div><div class="slider-pair"><span>🌱</span><input type="range" min="1" max="5" value="3" id="taskPhysical" oninput="document.getElementById('physVal').textContent=this.value"><span>🔥</span></div><div class="scale-labels"><span>легко</span><span>тяжело</span></div><div class="modal-label">❤️ Эмоциональная нагрузка: <strong id="moralVal">3</strong></div><div class="slider-pair"><span>🌱</span><input type="range" min="1" max="5" value="3" id="taskMoral" oninput="document.getElementById('moralVal').textContent=this.value"><span>🔥</span></div><div class="scale-labels"><span>легко</span><span>тяжело</span></div><label style="display:flex;align-items:center;gap:8px;margin-top:8px;font-size:14px;"><input type="checkbox" id="taskCyclic"> Повторять еженедельно</label><div id="cyclicDays" style="display:none;margin-top:8px;"><div class="week-days-select" id="weekDaysSelect"></div></div><button class="modal-save" onclick="addTask()">✨ Сохранить задачу</button><button class="modal-close" onclick="closeModal()">Отмена</button></div></div>
 
-<div class="modal-overlay" id="profileOverlay"><div class="modal" onclick="event.stopPropagation()"><div class="modal-handle"></div><div class="modal-title">🐝 Профиль и настройки</div><div class="modal-label">👤 Имя</div><input class="modal-input" type="text" id="profileNameInput" placeholder="Твоё имя"><div class="modal-label" style="margin-top:12px;">🩸 Цикл</div><button class="modal-save" style="margin-top:0;" onclick="document.getElementById('profileOverlay').classList.remove('open');setupCycle();">Настроить цикл</button><div class="modal-label" style="margin-top:14px;">📥 Напоминать о Копилке раз в <strong id="reminderDaysVal">3</strong> дня</div><div class="slider-pair"><span>1</span><input type="range" min="1" max="7" value="3" id="reminderDaysSlider" oninput="document.getElementById('reminderDaysVal').textContent=this.value"><span>7</span></div><button class="modal-save" onclick="saveProfile()">💾 Сохранить</button><button class="modal-save reset-btn" onclick="resetProfile()">🔄 Сбросить все данные</button><button class="modal-close" onclick="document.getElementById('profileOverlay').classList.remove('open')">Отмена</button></div></div>
+    <div class="modal-overlay" id="profileOverlay"><div class="modal" onclick="event.stopPropagation()"><div class="modal-handle"></div><div class="modal-title">🐝 Профиль и настройки</div><div class="modal-label">👤 Имя</div><input class="modal-input" type="text" id="profileNameInput" placeholder="Твоё имя"><div class="modal-label" style="margin-top:12px;">🩸 Цикл</div><button class="modal-save" style="margin-top:0;" onclick="document.getElementById('profileOverlay').classList.remove('open');setupCycle();">Настроить цикл</button><div class="modal-label" style="margin-top:14px;">📥 Напоминать о Копилке раз в <strong id="reminderDaysVal">3</strong> дня</div><div class="slider-pair"><span>1</span><input type="range" min="1" max="7" value="3" id="reminderDaysSlider" oninput="document.getElementById('reminderDaysVal').textContent=this.value"><span>7</span></div><button class="modal-save" onclick="saveProfile()">💾 Сохранить</button><button class="modal-save reset-btn" onclick="resetProfile()">🔄 Сбросить все данные</button><button class="modal-close" onclick="document.getElementById('profileOverlay').classList.remove('open')">Отмена</button></div></div>
 
-<div class="modal-overlay" id="cycleSetupOverlay"><div class="modal" onclick="event.stopPropagation()"><div class="modal-handle"></div><div class="modal-title">🩸 Настройка цикла</div><div class="modal-label">🗓 Первый день предыдущих месячных</div><input class="modal-input" type="date" id="firstPeriodDate"><div class="modal-label" style="margin-top:12px;">📏 Длина менструации: <strong id="periodLenVal">5</strong> дней</div><div class="slider-pair"><span>2</span><input type="range" min="2" max="10" value="5" id="periodLenSlider" oninput="document.getElementById('periodLenVal').textContent=this.value;updateLastPeriodDateCalc();"><span>10</span></div><div class="modal-label">🗓 Последний день (авто)</div><div class="modal-input" style="display:flex;align-items:center;justify-content:center;background:#F9F7F4;color:var(--text);font-weight:600;" id="lastPeriodDateCalc">—</div><div id="extraDatesContainer" style="margin-top:14px;"></div><button class="add-period-btn" id="addMoreDatesBtn">📎 Добавить ещё даты для точности</button><div class="modal-label" style="margin-top:14px;">⚙️ Особые случаи</div><label style="display:flex;align-items:center;gap:8px;font-size:14px;margin-top:6px;"><input type="checkbox" id="irregularCycle"> У меня нерегулярный цикл</label><label style="display:flex;align-items:center;gap:8px;font-size:14px;margin-top:4px;"><input type="checkbox" id="pregnantCheck"> Я беременна</label><div id="cyclePreview" style="margin-top:14px;padding:12px;background:#F9F7F4;border-radius:12px;font-size:13px;display:none;">📊 <strong>Расчёт:</strong><br>Длина цикла: <strong id="calcCycleLength">—</strong> дней<br>Длина месячных: <strong id="calcPeriodLength">—</strong> дней<br>Следующие месячные: <strong id="calcNextPeriod">—</strong></div><button class="modal-save" onclick="saveCycleSetup()">💾 Сохранить</button><button class="modal-close" onclick="document.getElementById('cycleSetupOverlay').classList.remove('open')">Отмена</button></div></div>
+    <div class="modal-overlay" id="cycleSetupOverlay"><div class="modal" onclick="event.stopPropagation()"><div class="modal-handle"></div><div class="modal-title">🩸 Настройка цикла</div><div class="modal-label">🗓 Первый день предыдущих месячных</div><input class="modal-input" type="date" id="firstPeriodDate"><div class="modal-label" style="margin-top:12px;">📏 Длина менструации: <strong id="periodLenVal">5</strong> дней</div><div class="slider-pair"><span>2</span><input type="range" min="2" max="10" value="5" id="periodLenSlider" oninput="document.getElementById('periodLenVal').textContent=this.value;updateLastPeriodDateCalc();"><span>10</span></div><div class="modal-label">🗓 Последний день (авто)</div><div class="modal-input" style="display:flex;align-items:center;justify-content:center;background:#F9F7F4;color:var(--text);font-weight:600;" id="lastPeriodDateCalc">—</div><div id="extraDatesContainer" style="margin-top:14px;"></div><button class="add-period-btn" id="addMoreDatesBtn">📎 Добавить ещё даты для точности</button><div class="modal-label" style="margin-top:14px;">⚙️ Особые случаи</div><label style="display:flex;align-items:center;gap:8px;font-size:14px;margin-top:6px;"><input type="checkbox" id="irregularCycle"> У меня нерегулярный цикл</label><label style="display:flex;align-items:center;gap:8px;font-size:14px;margin-top:4px;"><input type="checkbox" id="pregnantCheck"> Я беременна</label><div id="cyclePreview" style="margin-top:14px;padding:12px;background:#F9F7F4;border-radius:12px;font-size:13px;display:none;">📊 <strong>Расчёт:</strong><br>Длина цикла: <strong id="calcCycleLength">—</strong> дней<br>Длина месячных: <strong id="calcPeriodLength">—</strong> дней<br>Следующие месячные: <strong id="calcNextPeriod">—</strong></div><button class="modal-save" onclick="saveCycleSetup()">💾 Сохранить</button><button class="modal-close" onclick="document.getElementById('cycleSetupOverlay').classList.remove('open')">Отмена</button></div></div>
 
-<div class="modal-overlay" id="feedbackOverlay"><div class="modal" onclick="event.stopPropagation()"><div class="modal-handle"></div><div class="modal-title">💬 Обратная связь</div><div class="modal-label">Что случилось?</div><select class="modal-input" id="feedbackType"><option value="bug">🐛 Баг</option><option value="feature">💡 Предложение</option><option value="question">❓ Вопрос</option></select><textarea class="modal-input" id="feedbackText" placeholder="Опиши проблему или идею..."></textarea><div class="modal-label" style="font-size:11px;margin-top:4px;">Твоё сообщение увидят другие пользователи. Они смогут поддержать его ❤️</div><button class="modal-save" onclick="submitFeedback()">📨 Отправить</button><button class="modal-close" onclick="document.getElementById('feedbackOverlay').classList.remove('open')">Отмена</button></div></div>
+    <div class="modal-overlay" id="feedbackOverlay"><div class="modal" onclick="event.stopPropagation()"><div class="modal-handle"></div><div class="modal-title">💬 Обратная связь</div><div class="modal-label">Что случилось?</div><select class="modal-input" id="feedbackType"><option value="bug">🐛 Баг</option><option value="feature">💡 Предложение</option><option value="question">❓ Вопрос</option></select><textarea class="modal-input" id="feedbackText" placeholder="Опиши проблему или идею..."></textarea><div class="modal-label" style="font-size:11px;margin-top:4px;">Твоё сообщение увидят другие пользователи. Они смогут поддержать его ❤️</div><button class="modal-save" onclick="submitFeedback()">📨 Отправить</button><button class="modal-close" onclick="document.getElementById('feedbackOverlay').classList.remove('open')">Отмена</button></div></div>
 
-<div id="toast"></div>
+    <div id="toast"></div>
 
-<div class="modal-overlay" id="onboardingOverlay"><div class="modal" style="text-align:center;padding-top:40px;"><div class="onboarding-slides" id="onboardingSlides"></div><div style="display:flex;justify-content:center;gap:8px;margin:20px 0;" id="onboardingDots"></div><button class="modal-save" id="onboardingNext">Далее</button><button class="modal-close" style="position:static;margin:8px auto 0;width:auto;background:transparent;font-size:14px;" onclick="closeOnboarding()">Пропустить</button></div></div>
+    <div class="modal-overlay" id="onboardingOverlay"><div class="modal" style="text-align:center;padding-top:40px;"><div class="onboarding-slides" id="onboardingSlides"></div><div style="display:flex;justify-content:center;gap:8px;margin:20px 0;" id="onboardingDots"></div><button class="modal-save" id="onboardingNext">Далее</button><button class="modal-close" style="position:static;margin:8px auto 0;width:auto;background:transparent;font-size:14px;" onclick="closeOnboarding()">Пропустить</button></div></div>
 
-<div class="disclaimer-i" id="disclaimerI" onclick="document.getElementById('disclaimerTooltip').classList.toggle('visible')">i</div>
-<div class="disclaimer-tooltip" id="disclaimerTooltip">⚠️ Это приложение носит ознакомительный характер и не является медицинской рекомендацией. При любых вопросах обращайтесь к врачу.</div>
+    <div class="disclaimer-i" id="disclaimerI" onclick="document.getElementById('disclaimerTooltip').classList.toggle('visible')">i</div>
+    <div class="disclaimer-tooltip" id="disclaimerTooltip">⚠️ Это приложение носит ознакомительный характер и не является медицинской рекомендацией. При любых вопросах обращайтесь к врачу.</div>
 
-<div id="devResetBtn" style="position:fixed;top:5px;left:5px;width:16px;height:16px;background:#ccc;border-radius:50%;z-index:999;display:none;" onclick="localStorage.clear();location.reload();"></div>
+    <div id="devResetBtn" style="position:fixed;top:5px;left:5px;width:16px;height:16px;background:#ccc;border-radius:50%;z-index:999;display:none;" onclick="localStorage.clear();location.reload();"></div>
 
-<script>
-// ===== FIREBASE =====
-const firebaseConfig={apiKey:"AIzaSyB35WV3HSll5VE334xrMdU2eKPM_dKkfxw",authDomain:"rootine-ce772.firebaseapp.com",projectId:"rootine-ce772",storageBucket:"rootine-ce772.firebasestorage.app",messagingSenderId:"675881814040",appId:"1:675881814040:web:baecf0d66c2edc9fd1db6d",measurementId:"G-NMZ7CX9H6V"};
-firebase.initializeApp(firebaseConfig);
-const auth=firebase.auth(),db=firebase.firestore();
-db.enablePersistence().catch(function(){});
+    <script>
+        // ===== FIREBASE =====
+        const firebaseConfig = {
+            apiKey: "AIzaSyB35WV3HSll5VE334xrMdU2eKPM_dKkfxw",
+            authDomain: "rootine-ce772.firebaseapp.com",
+            projectId: "rootine-ce772",
+            storageBucket: "rootine-ce772.firebasestorage.app",
+            messagingSenderId: "675881814040",
+            appId: "1:675881814040:web:baecf0d66c2edc9fd1db6d",
+            measurementId: "G-NMZ7CX9H6V"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        db.enablePersistence().catch(function() {});
 
-// ===== РЕЖИМ РАЗРАБОТКИ =====
-var DEV_MODE = true;
-if (DEV_MODE) { document.getElementById('devResetBtn').style.display = 'block'; }
+        // ===== РЕЖИМ РАЗРАБОТКИ =====
+        var DEV_MODE = true;
+        if (DEV_MODE) {
+            document.getElementById('devResetBtn').style.display = 'block';
+        }
 
-// ===== СОСТОЯНИЕ =====
-var AppState={currentDay:6,centerDate:new Date(),cycleLength:28,lastPeriodDate:null,demoCycle:true,periodLengthDays:5,isIrregular:false,isPregnant:false,resources:{physical:3,cognitive:3,emotional:3},moodSavedForActiveDate:false,userName:'Ева',isAnonymous:true,tasks:[],rhythmSelectedDay:new Date().getDate(),rhythmMonth:new Date().getMonth(),rhythmYear:new Date().getFullYear(),activeHistoFilter:'all',now:new Date(),currentSlide:0,extraPeriodCount:0,inboxReminderDays:3};
+        // ===== СОСТОЯНИЕ =====
+        var AppState = {
+            currentDay: 6,
+            centerDate: new Date(),
+            cycleLength: 28,
+            lastPeriodDate: null,
+            demoCycle: true,
+            periodLengthDays: 5,
+            isIrregular: false,
+            isPregnant: false,
+            resources: { physical: 3, cognitive: 3, emotional: 3 },
+            moodSavedForActiveDate: false,
+            userName: 'Ева',
+            isAnonymous: true,
+            tasks: [],
+            rhythmSelectedDay: new Date().getDate(),
+            rhythmMonth: new Date().getMonth(),
+            rhythmYear: new Date().getFullYear(),
+            activeHistoFilter: 'all',
+            now: new Date(),
+            currentSlide: 0,
+            extraPeriodCount: 0,
+            inboxReminderDays: 3
+        };
 
-// ===== ДАННЫЕ =====
-var BeePhrases={seed:'Отдыхай. Сейчас не время для рекордов — закрой старые задачи и дай телу восстановиться 💛.',sprout:'Расти. Самое время начать новые проекты с новой силой! ✨',bloom:'Расцветай. Ты на пике обаяния — назначай важные встречи и переговоры 💅',fruit:'Заземляйся. Завершай начатое, наводи порядок, никаких импульсивных решений 💛'};
-var DefaultTasks=[{name:'Презентация для клиента',project:'Разум',cognitive:3,physical:1,moral:2,cyclic:false,days:[],forced:false},{name:'HIIT тренировка',project:'Тело',cognitive:2,physical:5,moral:3,cyclic:true,days:[3,6],forced:false},{name:'Разобрать почту',project:'Копилка',cognitive:2,physical:1,moral:1,cyclic:false,days:[],forced:false}];
-var PresetMoodData={1:{p:2,c:3,e:2},2:{p:2,c:4,e:2},3:{p:3,c:4,e:3},4:{p:3,c:5,e:3},5:{p:3,c:5,e:4},6:{p:4,c:5,e:4},7:{p:4,c:5,e:4},8:{p:5,c:5,e:5},9:{p:5,c:5,e:5},10:{p:5,c:5,e:5},11:{p:5,c:5,e:5},12:{p:5,c:5,e:5},13:{p:4,c:5,e:5},14:{p:4,c:5,e:5},15:{p:4,c:5,e:5},16:{p:4,c:5,e:5},17:{p:4,c:4,e:4},18:{p:3,c:4,e:4},19:{p:3,c:4,e:3},20:{p:3,c:3,e:3},21:{p:2,c:3,e:3},22:{p:2,c:3,e:2},23:{p:2,c:3,e:2},24:{p:1,c:2,e:2},25:{p:1,c:2,e:1},26:{p:1,c:2,e:1},27:{p:1,c:2,e:1},28:{p:1,c:2,e:1}};
-var TipDatabase={physical:{high:['🔥 Интенсивная тренировка','🏃‍♀️ HIIT или бег','💪 Силовая в зале'],medium:['🧘‍♀️ Йога','🚶‍♀️ Прогулка','🏋️‍♀️ Лёгкая силовая'],low:['🛌 Отдых','🧘‍♀️ Медитация','🛁 Ванна']},cognitive:{high:['🧩 Сложный проект','📊 Аналитика','📝 Тексты'],medium:['📧 Почта','📋 Рутина','🎨 Творчество'],low:['😌 Отдых','🎬 Фильм','🎵 Музыка']},emotional:{high:['🎉 Вечеринка','💃 Свидание','👯‍♀️ Встреча'],medium:['💛 Близкие','🐱 Питомец','🌸 Уход'],low:['🏠 Дома','📖 Книга','🕯 Свечи']}};
-var OnboardingSlides=[{icon:'🌰🌿🌸🍂',title:'Твой цикл — твой ритм',text:'Rootine делит цикл на 4 фазы. Каждая влияет на энергию, ум и настроение.'},{icon:'⚡️🧩❤️',title:'Три ресурса',text:'Отмечай уровень тела, ума и эмоций. 1 — без сил, 5 — полна сил.'},{icon:'📋✨',title:'Умные задачи',text:'Добавляй задачи — Rootine подскажет, когда лучше заняться спортом, а когда — переговорами.'}];
+        // ===== ДАННЫЕ =====
+        var BeePhrases = {
+            seed: 'Отдыхай. Сейчас не время для рекордов — закрой старые задачи и дай телу восстановиться 💛.',
+            sprout: 'Расти. Самое время начать новые проекты с новой силой! ✨',
+            bloom: 'Расцветай. Ты на пике обаяния — назначай важные встречи и переговоры 💅',
+            fruit: 'Заземляйся. Завершай начатое, наводи порядок, никаких импульсивных решений 💛'
+        };
 
-// ===== УТИЛИТЫ =====
-function getTaskStatus(task){if(task.forced)return'green';var pm=AppState.resources.physical>=task.physical,cm=AppState.resources.cognitive>=task.cognitive;if(pm&&cm)return'green';if(pm||cm)return'yellow';return'red';}
-function getIconOpacity(mainVal,otherVal){var diff=Math.abs(mainVal-otherVal);if(diff<=1)return{main:1,other:1};if(mainVal>otherVal)return{main:1,other:0.3};return{main:0.3,other:1};}
-function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.style.opacity='1';clearTimeout(t._timeout);t._timeout=setTimeout(function(){t.style.opacity='0';},2000);}
-function escapeHTML(str){var div=document.createElement('div');div.textContent=str;return div.innerHTML;}
-function getCycleDayForDate(date){if(AppState.demoCycle||!AppState.lastPeriodDate){var diff=Math.floor((date-new Date(2026,5,1))/86400000);return((diff%AppState.cycleLength)+AppState.cycleLength)%AppState.cycleLength+1;}var diff=Math.floor((date-AppState.lastPeriodDate)/86400000);return((diff%AppState.cycleLength)+AppState.cycleLength)%AppState.cycleLength+1;}
-function getActiveCheckinDate(){return AppState.centerDate.toISOString().split('T')[0];}
-function isMoodSavedForDate(dateStr){var history=JSON.parse(localStorage.getItem('checkins')||'[]');return history.some(function(item){return item.date===dateStr;});}
-function loadMoodForDate(dateStr){var history=JSON.parse(localStorage.getItem('checkins')||'[]');var checkin=history.find(function(item){return item.date===dateStr;});if(checkin){AppState.resources.physical=checkin.physical;AppState.resources.cognitive=checkin.cognitive;AppState.resources.emotional=checkin.emotional;updateResourceSliders();}}
-function getTipLevel(value){if(value>=4)return'high';if(value>=3)return'medium';return'low';}
-function getRandomTip(category,level){var tips=TipDatabase[category][level];return tips[Math.floor(Math.random()*tips.length)];}
+        var DefaultTasks = [
+            { name: 'Презентация для клиента', project: 'Разум', cognitive: 3, physical: 1, moral: 2, cyclic: false, days: [], forced: false },
+            { name: 'HIIT тренировка', project: 'Тело', cognitive: 2, physical: 5, moral: 3, cyclic: true, days: [3, 6], forced: false },
+            { name: 'Разобрать почту', project: 'Копилка', cognitive: 2, physical: 1, moral: 1, cyclic: false, days: [], forced: false }
+        ];
 
-// ===== ФАЗЫ И ЦВЕТА =====
-function getPhaseInfo(cycleDay){if(AppState.isPregnant)return{id:'bloom',name:'Беременность',title:'Расти',emoji:'🤰',dayInPhase:cycleDay,totalDays:280};if(AppState.demoCycle){var pl=5,fe=14,oe=17,le=28;if(cycleDay<=pl)return{id:'seed',name:'Менструальная',title:'Отдыхай',emoji:'🪷',dayInPhase:cycleDay,totalDays:pl};if(cycleDay<=fe)return{id:'sprout',name:'Фолликулярная',title:'Расти',emoji:'🌱',dayInPhase:cycleDay-pl,totalDays:fe-pl};if(cycleDay<=oe)return{id:'bloom',name:'Овуляция',title:'Расцветай',emoji:'🌸',dayInPhase:cycleDay-fe,totalDays:oe-fe};if(cycleDay<=le)return{id:'fruit',name:'Лютеиновая',title:'Заземляйся',emoji:'🍃',dayInPhase:cycleDay-oe,totalDays:le-oe};return{id:'seed',name:'Менструальная',title:'Отдыхай',emoji:'🪷',dayInPhase:1,totalDays:pl};}var pl=AppState.periodLengthDays||5,fe=pl+Math.round((AppState.cycleLength-pl-14)*0.6),oe=fe+3,le=AppState.cycleLength;if(cycleDay<=pl)return{id:'seed',name:'Менструальная',title:'Отдыхай',emoji:'🪷',dayInPhase:cycleDay,totalDays:pl};if(cycleDay<=fe)return{id:'sprout',name:'Фолликулярная',title:'Расти',emoji:'🌱',dayInPhase:cycleDay-pl,totalDays:fe-pl};if(cycleDay<=oe)return{id:'bloom',name:'Овуляция',title:'Расцветай',emoji:'🌸',dayInPhase:cycleDay-fe,totalDays:oe-fe};if(cycleDay<=le)return{id:'fruit',name:'Лютеиновая',title:'Заземляйся',emoji:'🍃',dayInPhase:cycleDay-oe,totalDays:le-oe};return{id:'seed',name:'Менструальная',title:'Отдыхай',emoji:'🪷',dayInPhase:1,totalDays:pl};}
-function getCurrentPhase(day){if(!day)day=AppState.currentDay;var info=getPhaseInfo(day);return{id:info.id,name:info.name,title:info.title,emoji:info.emoji};}
-function getHarmonicColorIndex(dayInPhase,totalDaysInPhase,totalColors){if(dayInPhase<=1)return 1;if(dayInPhase>=totalDaysInPhase)return totalColors;return Math.max(1,Math.min(totalColors,Math.round((dayInPhase/totalDaysInPhase)*(totalColors-1)+1)));}
-function getPresetMood(cycleDay){if(AppState.demoCycle)return PresetMoodData[cycleDay]||{p:3,c:3,e:3};var pl=AppState.periodLengthDays||5,fe=pl+Math.round((AppState.cycleLength-pl-14)*0.6),oe=fe+3,le=AppState.cycleLength;if(cycleDay<=pl)return{p:Math.round(2+(cycleDay/pl)*2),c:Math.round(3+(cycleDay/pl)*2),e:Math.round(2+(cycleDay/pl)*2)};if(cycleDay<=fe)return{p:Math.round(4+((cycleDay-pl)/(fe-pl))*1),c:5,e:Math.round(4+((cycleDay-pl)/(fe-pl))*1)};if(cycleDay<=oe)return{p:5,c:5,e:5};if(cycleDay<=le)return{p:Math.round(5-((cycleDay-oe)/(le-oe))*4),c:Math.round(5-((cycleDay-oe)/(le-oe))*3),e:Math.round(5-((cycleDay-oe)/(le-oe))*4)};return{p:3,c:3,e:3};}
+        var PresetMoodData = {
+            1: { p: 2, c: 3, e: 2 }, 2: { p: 2, c: 4, e: 2 }, 3: { p: 3, c: 4, e: 3 }, 4: { p: 3, c: 5, e: 3 },
+            5: { p: 3, c: 5, e: 4 }, 6: { p: 4, c: 5, e: 4 }, 7: { p: 4, c: 5, e: 4 }, 8: { p: 5, c: 5, e: 5 },
+            9: { p: 5, c: 5, e: 5 }, 10: { p: 5, c: 5, e: 5 }, 11: { p: 5, c: 5, e: 5 }, 12: { p: 5, c: 5, e: 5 },
+            13: { p: 4, c: 5, e: 5 }, 14: { p: 4, c: 5, e: 5 }, 15: { p: 4, c: 5, e: 5 }, 16: { p: 4, c: 5, e: 5 },
+            17: { p: 4, c: 4, e: 4 }, 18: { p: 3, c: 4, e: 4 }, 19: { p: 3, c: 4, e: 3 }, 20: { p: 3, c: 3, e: 3 },
+            21: { p: 2, c: 3, e: 3 }, 22: { p: 2, c: 3, e: 2 }, 23: { p: 2, c: 3, e: 2 }, 24: { p: 1, c: 2, e: 2 },
+            25: { p: 1, c: 2, e: 1 }, 26: { p: 1, c: 2, e: 1 }, 27: { p: 1, c: 2, e: 1 }, 28: { p: 1, c: 2, e: 1 }
+        };
 
-// ===== СОХРАНЕНИЕ =====
-function saveData(){var data={currentDay:AppState.currentDay,cycleLength:AppState.cycleLength,resources:AppState.resources,tasks:AppState.tasks,userName:AppState.userName,isAnonymous:AppState.isAnonymous,demoCycle:AppState.demoCycle,lastPeriodDate:AppState.lastPeriodDate?AppState.lastPeriodDate.toISOString():null,periodLengthDays:AppState.periodLengthDays,isIrregular:AppState.isIrregular,isPregnant:AppState.isPregnant,inboxReminderDays:AppState.inboxReminderDays};localStorage.setItem('rootine_data',JSON.stringify(data));}
-function loadData(){
-    // Автоконвертация старых данных (10→5)
-    var history=JSON.parse(localStorage.getItem('checkins')||'[]');
-    if(history.some(function(item){return item.physical>5||item.cognitive>5||item.emotional>5;})){
-        localStorage.setItem('checkins',JSON.stringify(history.map(function(item){return{date:item.date,cycleDay:item.cycleDay,physical:Math.round(item.physical/2),cognitive:Math.round(item.cognitive/2),emotional:Math.round(item.emotional/2)};})));
-    }
-    var raw=localStorage.getItem('rootine_data');
-    if(raw){try{var data=JSON.parse(raw);AppState.currentDay=data.currentDay||16;AppState.cycleLength=data.cycleLength||28;AppState.resources=data.resources||{physical:3,cognitive:3,emotional:3};AppState.tasks=data.tasks||[];AppState.userName=data.userName||'Ева';AppState.isAnonymous=data.isAnonymous!==undefined?data.isAnonymous:true;AppState.demoCycle=data.demoCycle!==undefined?data.demoCycle:true;if(data.lastPeriodDate)AppState.lastPeriodDate=new Date(data.lastPeriodDate);AppState.periodLengthDays=data.periodLengthDays||5;AppState.isIrregular=data.isIrregular||false;AppState.isPregnant=data.isPregnant||false;AppState.inboxReminderDays=data.inboxReminderDays||3;}catch(e){resetData();}}else{resetData();}
-    var todayStr=new Date().toISOString().split('T')[0];AppState.moodSavedForActiveDate=isMoodSavedForDate(todayStr);
-    if(!AppState.demoCycle)document.getElementById('cycleSetupCard').style.display='none';
-}
-function resetData(){AppState.tasks=DefaultTasks.map(function(t){return Object.assign({},t);});saveData();}
+        var TipDatabase = {
+            physical: {
+                high: ['🔥 Интенсивная тренировка', '🏃‍♀️ HIIT или бег', '💪 Силовая в зале'],
+                medium: ['🧘‍♀️ Йога', '🚶‍♀️ Прогулка', '🏋️‍♀️ Лёгкая силовая'],
+                low: ['🛌 Отдых', '🧘‍♀️ Медитация', '🛁 Ванна']
+            },
+            cognitive: {
+                high: ['🧩 Сложный проект', '📊 Аналитика', '📝 Тексты'],
+                medium: ['📧 Почта', '📋 Рутина', '🎨 Творчество'],
+                low: ['😌 Отдых', '🎬 Фильм', '🎵 Музыка']
+            },
+            emotional: {
+                high: ['🎉 Вечеринка', '💃 Свидание', '👯‍♀️ Встреча'],
+                medium: ['💛 Близкие', '🐱 Питомец', '🌸 Уход'],
+                low: ['🏠 Дома', '📖 Книга', '🕯 Свечи']
+            }
+        };
 
-// ===== СБРОС ПРОФИЛЯ =====
-function resetProfile(){
-    if(confirm('Точно сбросить все данные? Это удалит имя, настройки цикла, задачи и историю настроения.')){
-        localStorage.removeItem('rootine_data');localStorage.removeItem('checkins');localStorage.removeItem('feedbacks');localStorage.removeItem('onboarding_seen');
-        AppState.currentDay=6;AppState.centerDate=new Date();AppState.cycleLength=28;AppState.lastPeriodDate=null;AppState.demoCycle=true;AppState.periodLengthDays=5;AppState.isIrregular=false;AppState.isPregnant=false;AppState.resources={physical:3,cognitive:3,emotional:3};AppState.moodSavedForActiveDate=false;AppState.userName='Ева';AppState.tasks=DefaultTasks.map(function(t){return Object.assign({},t);});AppState.inboxReminderDays=3;
-        document.getElementById('profileOverlay').classList.remove('open');document.getElementById('cycleSetupCard').style.display='block';
-        updateUI();showToast('Данные сброшены 🔄');
-    }
-}
+        var OnboardingSlides = [
+            { icon: '🌰🌿🌸🍂', title: 'Твой цикл — твой ритм', text: 'Rootine делит цикл на 4 фазы. Каждая влияет на энергию, ум и настроение.' },
+            { icon: '⚡️🧩❤️', title: 'Три ресурса', text: 'Отмечай уровень тела, ума и эмоций. 1 — без сил, 5 — полна сил.' },
+            { icon: '📋✨', title: 'Умные задачи', text: 'Добавляй задачи — Rootine подскажет, когда лучше заняться спортом, а когда — переговорами.' }
+        ];
 
-// ===== СЛАЙДЕРЫ =====
-function updateResourceSliders(){document.getElementById('sliderFillPhysical').style.width=((AppState.resources.physical-1)/4*100)+'%';document.getElementById('sliderFillCognitive').style.width=((AppState.resources.cognitive-1)/4*100)+'%';document.getElementById('sliderFillEmotional').style.width=((AppState.resources.emotional-1)/4*100)+'%';document.getElementById('valPhysical').textContent=AppState.resources.physical;document.getElementById('valCognitive').textContent=AppState.resources.cognitive;document.getElementById('valEmotional').textContent=AppState.resources.emotional;}
-function setupSlider(bgId,fillId,thumbId,valId,key){var bg=document.getElementById(bgId),fill=document.getElementById(fillId),thumb=document.getElementById(thumbId),val=document.getElementById(valId),dragging=false;function setValue(clientX){var rect=bg.getBoundingClientRect(),pct=(clientX-rect.left)/rect.width;pct=Math.max(0,Math.min(1,pct));var v=Math.round(pct*4)+1;if(v===AppState.resources[key])return;AppState.resources[key]=v;fill.style.width=((v-1)/4*100)+'%';val.textContent=v;updateUI();}thumb.addEventListener('pointerdown',function(e){dragging=true;thumb.setPointerCapture(e.pointerId);e.preventDefault();});bg.addEventListener('pointerdown',function(e){dragging=true;bg.setPointerCapture(e.pointerId);setValue(e.clientX);e.preventDefault();});window.addEventListener('pointermove',function(e){if(!dragging)return;setValue(e.clientX);});window.addEventListener('pointerup',function(){dragging=false;});}
+        // ===== УТИЛИТЫ =====
+        function getTaskStatus(task) {
+            if (task.forced) return 'green';
+            var pm = AppState.resources.physical >= task.physical;
+            var cm = AppState.resources.cognitive >= task.cognitive;
+            if (pm && cm) return 'green';
+            if (pm || cm) return 'yellow';
+            return 'red';
+        }
 
-// ===== UI =====
-function updateUI(){var phase=getCurrentPhase(),card=document.getElementById('phaseCard');card.className='phase-card '+phase.id;document.getElementById('phaseEmoji').textContent=phase.emoji;var phaseNameEl=document.getElementById('phaseName');if(AppState.userName&&AppState.userName.trim()!==''){phaseNameEl.textContent=phase.title+', '+AppState.userName;}else{phaseNameEl.textContent=phase.title;}var shownDay=AppState.demoCycle?6:AppState.currentDay;document.getElementById('phaseDay').textContent='День '+shownDay+' из '+AppState.cycleLength+' · '+phase.name;document.getElementById('recommendationText').textContent=BeePhrases[phase.id];updateRecommendationTips();renderWeekCalendar();updateResourceSliders();renderTasks();updateMoodUI();saveData();}
-function updateRecommendationTips(){document.getElementById('tipPhysical').textContent=getRandomTip('physical',getTipLevel(AppState.resources.physical));document.getElementById('tipCognitive').textContent=getRandomTip('cognitive',getTipLevel(AppState.resources.cognitive));document.getElementById('tipEmotional').textContent=getRandomTip('emotional',getTipLevel(AppState.resources.emotional));}
-function updateMoodUI(){var card=document.getElementById('resourcesCard'),saveBtn=document.getElementById('saveMoodBtn');if(AppState.moodSavedForActiveDate){card.classList.add('saved');saveBtn.style.display='none';}else{card.classList.remove('saved');saveBtn.style.display='block';}}
-function renderWeekCalendar(){var row=document.getElementById('weekRow');row.innerHTML='';var center=new Date(AppState.centerDate),dow=center.getDay(),dayNames=['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];for(var i=0;i<7;i++){var off=i-3,d=new Date(center);d.setDate(d.getDate()+off);var cycleDay=getCycleDayForDate(d),phaseInfo=getPhaseInfo(cycleDay),colorIndex=getHarmonicColorIndex(phaseInfo.dayInPhase,phaseInfo.totalDays,5),dotClass=phaseInfo.id+'-'+colorIndex;var col=document.createElement('div');col.className='week-day-col';col.innerHTML='<div class="week-day-name">'+dayNames[(dow+off+7)%7]+'</div><div class="week-dot '+dotClass+(off===0?' today':'')+'"></div><div class="week-date">'+d.getDate()+'</div>';(function(d,cycleDay){col.addEventListener('click',function(){AppState.centerDate=new Date(d);AppState.currentDay=cycleDay;AppState.demoCycle=false;var dateStr=getActiveCheckinDate();AppState.moodSavedForActiveDate=isMoodSavedForDate(dateStr);if(!AppState.moodSavedForActiveDate){var preset=getPresetMood(cycleDay);AppState.resources.physical=preset.p;AppState.resources.cognitive=preset.c;AppState.resources.emotional=preset.e;}else{loadMoodForDate(dateStr);}updateUI();showToast('День '+AppState.currentDay+' · '+getCurrentPhase().title);});})(d,cycleDay);row.appendChild(col);}}
-function renderTasks(){var container=document.getElementById('tasksList');var todayTasks=AppState.tasks.filter(function(t){if(t.cyclic&&t.days.length>0)return t.days.indexOf(new Date().getDay())!==-1;return true;});if(todayTasks.length===0){container.innerHTML='<div class="empty-state"><div class="empty-state-emoji">📋</div><div class="empty-state-text">Пока задач нет.<br>Нажми <strong>+</strong> чтобы добавить</div></div>';return;}container.innerHTML='';todayTasks.forEach(function(task){var status=getTaskStatus(task),opacity=getIconOpacity(task.cognitive,task.physical);container.innerHTML+='<div class="task-item"><div class="task-dot '+status+'"></div><div class="task-info"><div class="task-name">'+escapeHTML(task.name)+(task.cyclic?' 🔄':'')+(task.forced?' 🛡️':'')+'</div><div class="task-project">'+escapeHTML(task.project)+'</div></div><div class="task-badges"><span style="opacity:'+opacity.main+'">🧠'+task.cognitive+'</span><span style="opacity:'+opacity.other+'">💪'+task.physical+'</span><span style="opacity:0.4">❤️'+(task.moral||0)+'</span></div></div>';});}
+        function getIconOpacity(mainVal, otherVal) {
+            var diff = Math.abs(mainVal - otherVal);
+            if (diff <= 1) return { main: 1, other: 1 };
+            if (mainVal > otherVal) return { main: 1, other: 0.3 };
+            return { main: 0.3, other: 1 };
+        }
 
-// ===== ЭКРАНЫ =====
-function hideAllScreens(){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});document.getElementById('bottomNav').style.display='none';}
-function showMainScreen(){hideAllScreens();document.getElementById('mainScreen').classList.add('active');document.getElementById('bottomNav').style.display='flex';updateUI();}
-function showRhythmScreen(){hideAllScreens();document.getElementById('rhythmScreen').classList.add('active');AppState.rhythmSelectedDay=new Date().getDate();renderRhythm();}
-function showInboxScreen(){hideAllScreens();document.getElementById('inboxScreen').classList.add('active');renderInboxTasks();}
-function showProjectsScreen(){hideAllScreens();document.getElementById('projectsScreen').classList.add('active');renderProjectsFolders();}
-function showProjectDetail(projectName){hideAllScreens();document.getElementById('projectDetailScreen').classList.add('active');document.getElementById('projectDetailTitle').textContent='📁 '+projectName;renderProjectDetailTasks(projectName);}
-function renderInboxTasks(){var container=document.getElementById('inboxTasksList'),inboxTasks=AppState.tasks.filter(function(t){return t.project==='Копилка';});if(inboxTasks.length===0){container.innerHTML='<div class="empty-state"><div class="empty-state-emoji">📥</div><div class="empty-state-text">Копилка пуста<br>Добавь задачу без проекта</div></div>';return;}container.innerHTML=inboxTasks.map(function(task){return'<div class="task-item"><div class="task-dot" style="background:#CCC;"></div><div class="task-info"><div class="task-name">'+escapeHTML(task.name)+'</div></div></div>';}).join('');}
-function renderProjectsFolders(){var container=document.getElementById('projectsFolders'),projectNames=['Разум','Тело','Душа','Копилка'];container.innerHTML=projectNames.map(function(p){var count=AppState.tasks.filter(function(t){return t.project===p;}).length,emoji=p==='Разум'?'🧠':p==='Тело'?'⚡️':p==='Душа'?'❤️':'📥';return'<div class="task-item" onclick="showProjectDetail(\''+p+'\')"><span style="font-size:24px;">'+emoji+'</span><div class="task-info"><div class="task-name">'+p+'</div><div class="task-project">'+count+' задач</div></div></div>';}).join('');}
-function renderProjectDetailTasks(projectName){var container=document.getElementById('projectDetailTasks'),projectTasks=AppState.tasks.filter(function(t){return t.project===projectName;});if(projectTasks.length===0){container.innerHTML='<div class="empty-state"><div class="empty-state-emoji">📁</div><div class="empty-state-text">Нет задач в проекте «'+projectName+'»</div></div>';return;}container.innerHTML=projectTasks.map(function(task){return'<div class="task-item"><div class="task-dot" style="background:#CCC;"></div><div class="task-info"><div class="task-name">'+escapeHTML(task.name)+'</div></div></div>';}).join('');}
+        function showToast(msg) {
+            var t = document.getElementById('toast');
+            t.textContent = msg;
+            t.style.opacity = '1';
+            clearTimeout(t._timeout);
+            t._timeout = setTimeout(function() { t.style.opacity = '0'; }, 2000);
+        }
 
-// ===== РИТМ =====
-function renderRhythm(){AppState.now=new Date(AppState.rhythmYear,AppState.rhythmMonth,1);var year=AppState.now.getFullYear(),month=AppState.now.getMonth();document.getElementById('monthName').textContent=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'][month]+' '+year;var grid=document.getElementById('monthGrid');grid.innerHTML='';var firstDay=new Date(year,month,1).getDay()||7,daysInMonth=new Date(year,month+1,0).getDate(),prevMonthDays=new Date(year,month,0).getDate();for(var i=firstDay-1;i>=1;i--){var d=prevMonthDays-i+1;addMonthCell(grid,year,month-1,d,true);}for(var d=1;d<=daysInMonth;d++){addMonthCell(grid,year,month,d,false);}var totalCellsBefore=firstDay-1+daysInMonth,remainingCells=7-(totalCellsBefore%7);if(remainingCells===7)remainingCells=0;for(var d=1;d<=remainingCells;d++){addMonthCell(grid,year,month+1,d,true);}var totalCellsNow=totalCellsBefore+remainingCells,cellsNeeded=35-totalCellsNow;if(cellsNeeded>0){for(var d=remainingCells+1;d<=remainingCells+cellsNeeded;d++){addMonthCell(grid,year,month+1,d,true);}}updateRhythmDayInfo(year,month);renderHistogram();}
-function addMonthCell(grid,year,month,day,isOtherMonth){var date=new Date(year,month,day),cycleDay=getCycleDayForDate(date),phaseInfo=getPhaseInfo(cycleDay),colorIndex=getHarmonicColorIndex(phaseInfo.dayInPhase,phaseInfo.totalDays,5),dotClass=phaseInfo.id+'-'+colorIndex;var cell=document.createElement('div');cell.className='month-dot-cell'+(isOtherMonth?' other-month':'')+(day===AppState.rhythmSelectedDay&&!isOtherMonth?' selected':'');cell.innerHTML='<div class="dot-mini '+dotClass+'"></div><div class="dot-num">'+day+'</div>';(function(day,isOtherMonth){cell.addEventListener('click',function(){if(isOtherMonth){if(day>15){AppState.rhythmMonth--;if(AppState.rhythmMonth<0){AppState.rhythmMonth=11;AppState.rhythmYear--;}}else{AppState.rhythmMonth++;if(AppState.rhythmMonth>11){AppState.rhythmMonth=0;AppState.rhythmYear++;}}}AppState.rhythmSelectedDay=day;renderRhythm();});})(day,isOtherMonth);grid.appendChild(cell);}
-function updateRhythmDayInfo(year,month){var dateStr=year+'-'+String(month+1).padStart(2,'0')+'-'+String(AppState.rhythmSelectedDay).padStart(2,'0'),history=JSON.parse(localStorage.getItem('checkins')||'[]'),checkin=history.find(function(c){return c.date===dateStr;}),date=new Date(year,month,AppState.rhythmSelectedDay),cycleDay=getCycleDayForDate(date),phase=getCurrentPhase(cycleDay);document.getElementById('infoPhase').textContent=phase.emoji+' '+phase.title;document.getElementById('infoValues').textContent=checkin?'🧠'+checkin.cognitive+' 💪'+checkin.physical+' ❤️'+checkin.emotional:'Нет данных';}
-function renderHistogram(){var year=AppState.now.getFullYear(),month=AppState.now.getMonth(),history=JSON.parse(localStorage.getItem('checkins')||'[]'),group=document.getElementById('histoDayGroup');if(!group)return;group.innerHTML='';var center=new Date(year,month,AppState.rhythmSelectedDay),startDate=new Date(center);startDate.setDate(startDate.getDate()-3);var endDate=new Date(center);endDate.setDate(endDate.getDate()+3);for(var d=new Date(startDate);d<=endDate;d.setDate(d.getDate()+1)){var dateStr=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'),checkin=history.find(function(c){return c.date===dateStr;}),cogVal=checkin?checkin.cognitive:0,physVal=checkin?checkin.physical:0,emoVal=checkin?checkin.emotional:0,isSelected=d.getDate()===AppState.rhythmSelectedDay&&d.getMonth()===month;var block=document.createElement('div');block.className='histo-day-block';block.innerHTML='<div class="histo-mini-bar cog" style="height:'+((cogVal-1)/4*100)+'%;'+(isSelected?'box-shadow:0 0 6px rgba(0,0,0,0.4);':'')+'"></div><div class="histo-mini-bar phys" style="height:'+((physVal-1)/4*100)+'%;'+(isSelected?'box-shadow:0 0 6px rgba(0,0,0,0.4);':'')+'"></div><div class="histo-mini-bar emo" style="height:'+((emoVal-1)/4*100)+'%;'+(isSelected?'box-shadow:0 0 6px rgba(0,0,0,0.4);':'')+'"></div><div class="histo-day-label">'+d.getDate()+'</div>';group.appendChild(block);}updateHistoFilter(AppState.activeHistoFilter);}
-function updateHistoFilter(filter){AppState.activeHistoFilter=filter;document.querySelectorAll('.histo-filter').forEach(function(btn){btn.classList.toggle('active',btn.dataset.filter===filter);});document.querySelectorAll('.histo-mini-bar').forEach(function(bar){bar.classList.remove('dimmed');});if(filter!=='all'){var typeMap={cognitive:'cog',physical:'phys',emotional:'emo'};document.querySelectorAll('.histo-mini-bar').forEach(function(bar){if(!bar.classList.contains(typeMap[filter]))bar.classList.add('dimmed');});}var wavesSvg=document.getElementById('wavesSvg'),wavesLabels=document.getElementById('wavesLabels');if(filter==='all'){if(wavesSvg)wavesSvg.style.display='none';if(wavesLabels)wavesLabels.style.display='none';}else{if(wavesSvg)wavesSvg.style.display='block';if(wavesLabels)wavesLabels.style.display='flex';renderSingleWave(filter);}}
-function renderSingleWave(filter){var year=AppState.now.getFullYear(),month=AppState.now.getMonth(),history=JSON.parse(localStorage.getItem('checkins')||'[]'),svg=document.getElementById('wavesSvg'),labels=document.getElementById('wavesLabels'),w=360,h=100,pad=0,usableW=w,usableH=h,keyMap={cognitive:'cognitive',physical:'physical',emotional:'emotional'},colorMap={cognitive:'#E8B86D',physical:'#9CBA7F',emotional:'#E8B4BC'},key=keyMap[filter],color=colorMap[filter],allPoints=[];var center=new Date(year,month,AppState.rhythmSelectedDay),startDate=new Date(center);startDate.setDate(startDate.getDate()-3);var endDate=new Date(center);endDate.setDate(endDate.getDate()+3);var dayIndex=0,totalDays=7;for(var d=new Date(startDate);d<=endDate;d.setDate(d.getDate()+1)){var dateStr=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'),checkin=history.find(function(c){return c.date===dateStr;}),x=pad+(dayIndex/(totalDays-1))*usableW;dayIndex++;if(checkin&&checkin[key]){allPoints.push({x:x,y:usableH-((checkin[key]-1)/4*usableH),value:checkin[key]});}else{allPoints.push({x:x,y:null,value:0});}}var validPoints=allPoints.filter(function(p){return p.y!==null;});var svgInner='';if(validPoints.length>=2){var dPath='M '+validPoints[0].x+' '+validPoints[0].y;for(var i=0;i<validPoints.length-1;i++){var curr=validPoints[i],next=validPoints[i+1],cp1x=curr.x+(next.x-curr.x)/3,cp1y=curr.y,cp2x=next.x-(next.x-curr.x)/3,cp2y=next.y;dPath+=' C '+cp1x+' '+cp1y+', '+cp2x+' '+cp2y+', '+next.x+' '+next.y;}svgInner+='<path d="'+dPath+'" fill="none" stroke="'+color+'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>';for(var i=0;i<validPoints.length;i++){svgInner+='<circle cx="'+validPoints[i].x+'" cy="'+validPoints[i].y+'" r="2.5" fill="'+color+'"/>';}}if(svg)svg.innerHTML=svgInner;var labelsHtml='';for(var d=new Date(startDate);d<=endDate;d.setDate(d.getDate()+1)){labelsHtml+='<span>'+d.getDate()+'</span>';}if(labels)labels.innerHTML=labelsHtml;}
+        function escapeHTML(str) {
+            var div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
 
-// ===== МОДАЛКИ =====
-function openModal(){document.getElementById('modalOverlay').classList.add('open');document.getElementById('taskNameInput').focus();}
-function closeModal(){document.getElementById('modalOverlay').classList.remove('open');document.getElementById('taskNameInput').value='';document.getElementById('taskCognitive').value=3;document.getElementById('taskPhysical').value=3;document.getElementById('taskMoral').value=3;document.getElementById('taskCyclic').checked=false;document.getElementById('cyclicDays').style.display='none';document.getElementById('cogVal').textContent='3';document.getElementById('physVal').textContent='3';document.getElementById('moralVal').textContent='3';}
-function closeModalOutside(e){if(e.target===document.getElementById('modalOverlay'))closeModal();}
-function addTask(){var name=document.getElementById('taskNameInput').value.trim();if(!name){showToast('Введи название задачи 🌸');return;}var project=document.getElementById('taskProjectInput').value,cognitive=parseInt(document.getElementById('taskCognitive').value),physical=parseInt(document.getElementById('taskPhysical').value),moral=parseInt(document.getElementById('taskMoral').value),cyclic=document.getElementById('taskCyclic').checked,activeChips=document.querySelectorAll('.week-day-chip.active'),days=[];if(cyclic)activeChips.forEach(function(c){days.push(parseInt(c.dataset.day));});var forced=(getTaskStatus({cognitive:cognitive,physical:physical,moral:moral,forced:false})==='red');AppState.tasks.unshift({name:name,project:project,cognitive:cognitive,physical:physical,moral:moral,cyclic:cyclic,days:days,forced:forced});closeModal();updateUI();showToast(forced?'Задача добавлена принудительно 🛡️':'Задача добавлена ✨');}
-document.getElementById('taskCyclic').addEventListener('change',function(){document.getElementById('cyclicDays').style.display=this.checked?'block':'none';if(this.checked){var sel=document.getElementById('weekDaysSelect');sel.innerHTML='';['Пн','Вт','Ср','Чт','Пт','Сб','Вс'].forEach(function(d,i){var chip=document.createElement('button');chip.className='week-day-chip';chip.textContent=d;chip.dataset.day=i+1;chip.addEventListener('click',function(){chip.classList.toggle('active');});sel.appendChild(chip);});}});
+        function getCycleDayForDate(date) {
+            if (AppState.demoCycle || !AppState.lastPeriodDate) {
+                // В демо: «первый день цикла» = 5 дней назад от сегодня
+                var demoStart = new Date();
+                demoStart.setDate(demoStart.getDate() - 5);
+                var diff = Math.floor((date - demoStart) / 86400000);
+                return ((diff % 28) + 28) % 28 + 1;
+            }
+            var diff = Math.floor((date - AppState.lastPeriodDate) / 86400000);
+            return ((diff % AppState.cycleLength) + AppState.cycleLength) % AppState.cycleLength + 1;
+        }
 
-// ===== НАСТРОЙКА ЦИКЛА =====
-function setupCycle(){document.getElementById('cycleSetupOverlay').classList.add('open');document.getElementById('firstPeriodDate').value='';document.getElementById('lastPeriodDateCalc').textContent='—';document.getElementById('periodLenSlider').value=5;document.getElementById('periodLenVal').textContent='5';AppState.extraPeriodCount=0;document.getElementById('extraDatesContainer').innerHTML='';document.getElementById('cyclePreview').style.display='none';document.getElementById('irregularCycle').checked=false;document.getElementById('pregnantCheck').checked=false;}
-function updateLastPeriodDateCalc(){var firstDate=new Date(document.getElementById('firstPeriodDate').value),periodLen=parseInt(document.getElementById('periodLenSlider').value);if(firstDate&&!isNaN(firstDate.getTime())&&periodLen){var lastDate=new Date(firstDate);lastDate.setDate(lastDate.getDate()+periodLen-1);document.getElementById('lastPeriodDateCalc').textContent=lastDate.toLocaleDateString('ru-RU');}else{document.getElementById('lastPeriodDateCalc').textContent='—';}}
-document.getElementById('firstPeriodDate').addEventListener('change',updateLastPeriodDateCalc);
-document.getElementById('periodLenSlider').addEventListener('input',function(){document.getElementById('periodLenVal').textContent=this.value;updateLastPeriodDateCalc();});
-document.getElementById('addMoreDatesBtn').addEventListener('click',function(){AppState.extraPeriodCount++;if(AppState.extraPeriodCount>6){showToast('Максимум 6 дополнительных дат');return;}var container=document.getElementById('extraDatesContainer'),monthsAgo=AppState.extraPeriodCount+1,div=document.createElement('div');div.style.marginBottom='12px';div.style.padding='12px';div.style.background='#F9F7F4';div.style.borderRadius='12px';div.innerHTML='<div class="modal-label">🗓 '+monthsAgo+' месяца назад</div><div class="modal-label">Первый день месячных</div><input class="modal-input extra-period-first" type="date" placeholder="Первый день"><div class="modal-label" style="margin-top:8px;">📏 Длина: <strong class="extra-period-len-val">5</strong> дней</div><div class="slider-pair"><span>2</span><input type="range" min="2" max="10" value="5" class="extra-period-slider" oninput="this.parentElement.previousElementSibling.querySelector(\'strong\').textContent=this.value;updateExtraLastDate(this);"><span>10</span></div><div class="modal-label">Последний день (авто)</div><div class="modal-input extra-period-last" style="display:flex;align-items:center;justify-content:center;background:#F9F7F4;color:var(--text);font-weight:600;">—</div>';container.appendChild(div);var slider=div.querySelector('.extra-period-slider'),firstInput=div.querySelector('.extra-period-first');firstInput.addEventListener('change',function(){updateExtraLastDate(slider);});slider.addEventListener('input',function(){updateExtraLastDate(this);});});
-function updateExtraLastDate(slider){var div=slider.parentElement.parentElement,firstInput=div.querySelector('.extra-period-first'),lastDiv=div.querySelector('.extra-period-last'),firstDate=new Date(firstInput.value),periodLen=parseInt(slider.value);if(firstDate&&!isNaN(firstDate.getTime())&&periodLen){var lastDate=new Date(firstDate);lastDate.setDate(lastDate.getDate()+periodLen-1);lastDiv.textContent=lastDate.toLocaleDateString('ru-RU');}else{lastDiv.textContent='—';}}
-function saveCycleSetup(){var firstDate=document.getElementById('firstPeriodDate').value;AppState.periodLengthDays=parseInt(document.getElementById('periodLenSlider').value);AppState.isIrregular=document.getElementById('irregularCycle').checked;AppState.isPregnant=document.getElementById('pregnantCheck').checked;if(AppState.isPregnant){AppState.cycleLength=280;AppState.demoCycle=false;showToast('Включён режим беременности 🤰');}else if(firstDate){AppState.lastPeriodDate=new Date(firstDate);var allDates=[firstDate];document.querySelectorAll('.extra-period-first').forEach(function(input){if(input.value)allDates.push(input.value);});allDates.sort();if(allDates.length>=2){var totalDiff=0;for(var i=1;i<allDates.length;i++)totalDiff+=Math.floor((new Date(allDates[i])-new Date(allDates[i-1]))/86400000);AppState.cycleLength=Math.round(totalDiff/(allDates.length-1));}AppState.demoCycle=false;}if(AppState.isIrregular&&!AppState.isPregnant){showToast('Приложение будет анализировать самочувствие и учиться. Заполняйте шкалы ежедневно 💛');}document.getElementById('cycleSetupOverlay').classList.remove('open');document.getElementById('cycleSetupCard').style.display='none';if(!AppState.isPregnant&&AppState.lastPeriodDate){var diff=Math.floor((new Date()-AppState.lastPeriodDate)/86400000);AppState.currentDay=((diff%AppState.cycleLength)+AppState.cycleLength)%AppState.cycleLength+1;}updateUI();showToast('Цикл сохранён! Изменить можно в ⚙️');}
+        function getActiveCheckinDate() {
+            return AppState.centerDate.toISOString().split('T')[0];
+        }
 
-// ===== ФИДБЕК И ПРОФИЛЬ =====
-function submitFeedback(){var type=document.getElementById('feedbackType').value,text=document.getElementById('feedbackText').value.trim();if(!text){showToast('Напиши сообщение 💬');return;}var feedbacks=JSON.parse(localStorage.getItem('feedbacks')||'[]');feedbacks.push({type:type,text:text,votes:0,date:new Date().toISOString()});localStorage.setItem('feedbacks',JSON.stringify(feedbacks));document.getElementById('feedbackText').value='';document.getElementById('feedbackOverlay').classList.remove('open');showToast('Спасибо! Твоё сообщение опубликовано 💛');}
-function saveProfile(){var name=document.getElementById('profileNameInput').value.trim();if(name){AppState.userName=name;updateUI();}AppState.inboxReminderDays=parseInt(document.getElementById('reminderDaysSlider').value);document.getElementById('profileOverlay').classList.remove('open');saveData();showToast('Настройки сохранены ⚙️');}
+        function isMoodSavedForDate(dateStr) {
+            var history = JSON.parse(localStorage.getItem('checkins') || '[]');
+            return history.some(function(item) { return item.date === dateStr; });
+        }
 
-// ===== ОНБОРДИНГ =====
-function checkFirstVisit(){var hasSeen=localStorage.getItem('onboarding_seen');if(!hasSeen){document.getElementById('onboardingOverlay').classList.add('open');renderOnboardingSlide();}}
-function renderOnboardingSlide(){var slide=OnboardingSlides[AppState.currentSlide];document.getElementById('onboardingSlides').innerHTML='<div class="slide active"><div class="onboarding-slide-icon">'+slide.icon+'</div><div class="onboarding-slide-title">'+slide.title+'</div><div class="onboarding-slide-text">'+slide.text+'</div></div>';var dots=document.getElementById('onboardingDots');dots.innerHTML='';for(var i=0;i<OnboardingSlides.length;i++){var dot=document.createElement('div');dot.className='onboarding-dot'+(i===AppState.currentSlide?' active':'');dots.appendChild(dot);}document.getElementById('onboardingNext').textContent=AppState.currentSlide<OnboardingSlides.length-1?'Далее':'Понятно, начнём!';}
-function closeOnboarding(){document.getElementById('onboardingOverlay').classList.remove('open');AppState.currentSlide=0;localStorage.setItem('onboarding_seen','true');}
-document.getElementById('onboardingNext').addEventListener('click',function(){if(AppState.currentSlide<OnboardingSlides.length-1){AppState.currentSlide++;renderOnboardingSlide();}else{closeOnboarding();}});
+        function loadMoodForDate(dateStr) {
+            var history = JSON.parse(localStorage.getItem('checkins') || '[]');
+            var checkin = history.find(function(item) { return item.date === dateStr; });
+            if (checkin) {
+                AppState.resources.physical = checkin.physical;
+                AppState.resources.cognitive = checkin.cognitive;
+                AppState.resources.emotional = checkin.emotional;
+                updateResourceSliders();
+            }
+        }
 
-// ===== НАВИГАЦИЯ =====
-document.querySelectorAll('.nav-item[data-tab]').forEach(function(btn){btn.addEventListener('click',function(){var tab=btn.dataset.tab;document.querySelectorAll('.nav-item[data-tab]').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');if(tab==='rhythm')showRhythmScreen();else if(tab==='inbox')showInboxScreen();else if(tab==='projects')showProjectsScreen();else showMainScreen();});});
-document.getElementById('rhythmBackBtn').addEventListener('click',showMainScreen);
-document.getElementById('inboxBackBtn').addEventListener('click',showMainScreen);
-document.getElementById('projectsBackBtn').addEventListener('click',showMainScreen);
-document.getElementById('projectDetailBackBtn').addEventListener('click',showProjectsScreen);
-document.getElementById('prevMonth').addEventListener('click',function(){AppState.rhythmMonth--;if(AppState.rhythmMonth<0){AppState.rhythmMonth=11;AppState.rhythmYear--;}renderRhythm();});
-document.getElementById('nextMonth').addEventListener('click',function(){AppState.rhythmMonth++;if(AppState.rhythmMonth>11){AppState.rhythmMonth=0;AppState.rhythmYear++;}renderRhythm();});
-document.getElementById('profileBtn').addEventListener('click',function(){document.getElementById('profileOverlay').classList.add('open');document.getElementById('profileNameInput').value=AppState.userName;document.getElementById('reminderDaysSlider').value=AppState.inboxReminderDays;document.getElementById('reminderDaysVal').textContent=AppState.inboxReminderDays;});
-document.getElementById('feedbackBtn').addEventListener('click',function(){document.getElementById('feedbackOverlay').classList.add('open');});
-document.getElementById('saveMoodBtn').addEventListener('click',function(){var dateStr=getActiveCheckinDate(),checkin={date:dateStr,cycleDay:AppState.currentDay,physical:AppState.resources.physical,cognitive:AppState.resources.cognitive,emotional:AppState.resources.emotional},history=JSON.parse(localStorage.getItem('checkins')||'[]'),existingIndex=history.findIndex(function(item){return item.date===dateStr;});if(existingIndex>=0)history[existingIndex]=checkin;else history.push(checkin);localStorage.setItem('checkins',JSON.stringify(history));AppState.moodSavedForActiveDate=true;updateUI();showToast('Состояние сохранено 💛');});
-document.getElementById('editMoodLink').addEventListener('click',function(){AppState.moodSavedForActiveDate=false;updateUI();showToast('Можешь изменить оценку ✨');});
-document.addEventListener('click',function(e){if(e.target.classList.contains('histo-filter'))updateHistoFilter(e.target.dataset.filter);});
+        function getTipLevel(value) {
+            if (value >= 4) return 'high';
+            if (value >= 3) return 'medium';
+            return 'low';
+        }
 
-// ===== ИНИЦИАЛИЗАЦИЯ =====
-loadData();
-setupSlider('sliderBgPhysical','sliderFillPhysical','thumbPhysical','valPhysical','physical');
-setupSlider('sliderBgCognitive','sliderFillCognitive','thumbCognitive','valCognitive','cognitive');
-setupSlider('sliderBgEmotional','sliderFillEmotional','thumbEmotional','valEmotional','emotional');
-checkFirstVisit();
-updateUI();
-if('serviceWorker' in navigator)window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});
-</script>
+        function getRandomTip(category, level) {
+            var tips = TipDatabase[category][level];
+            return tips[Math.floor(Math.random() * tips.length)];
+        }
+
+        // ===== ФАЗЫ И ЦВЕТА =====
+        function getPhaseInfo(cycleDay) {
+            if (AppState.isPregnant) {
+                return { id: 'bloom', name: 'Беременность', title: 'Расти', emoji: '🤰', dayInPhase: cycleDay, totalDays: 280 };
+            }
+            if (AppState.demoCycle) {
+                var pl = 5, fe = 14, oe = 17, le = 28;
+                if (cycleDay <= pl) return { id: 'seed', name: 'Менструальная', title: 'Отдыхай', emoji: '🪷', dayInPhase: cycleDay, totalDays: pl };
+                if (cycleDay <= fe) return { id: 'sprout', name: 'Фолликулярная', title: 'Расти', emoji: '🌱', dayInPhase: cycleDay - pl, totalDays: fe - pl };
+                if (cycleDay <= oe) return { id: 'bloom', name: 'Овуляция', title: 'Расцветай', emoji: '🌸', dayInPhase: cycleDay - fe, totalDays: oe - fe };
+                if (cycleDay <= le) return { id: 'fruit', name: 'Лютеиновая', title: 'Заземляйся', emoji: '🍃', dayInPhase: cycleDay - oe, totalDays: le - oe };
+                return { id: 'seed', name: 'Менструальная', title: 'Отдыхай', emoji: '🪷', dayInPhase: 1, totalDays: pl };
+            }
+            var pl = AppState.periodLengthDays || 5;
+            var fe = pl + Math.round((AppState.cycleLength - pl - 14) * 0.6);
+            var oe = fe + 3;
+            var le = AppState.cycleLength;
+            if (cycleDay <= pl) return { id: 'seed', name: 'Менструальная', title: 'Отдыхай', emoji: '🪷', dayInPhase: cycleDay, totalDays: pl };
+            if (cycleDay <= fe) return { id: 'sprout', name: 'Фолликулярная', title: 'Расти', emoji: '🌱', dayInPhase: cycleDay - pl, totalDays: fe - pl };
+            if (cycleDay <= oe) return { id: 'bloom', name: 'Овуляция', title: 'Расцветай', emoji: '🌸', dayInPhase: cycleDay - fe, totalDays: oe - fe };
+            if (cycleDay <= le) return { id: 'fruit', name: 'Лютеиновая', title: 'Заземляйся', emoji: '🍃', dayInPhase: cycleDay - oe, totalDays: le - oe };
+            return { id: 'seed', name: 'Менструальная', title: 'Отдыхай', emoji: '🪷', dayInPhase: 1, totalDays: pl };
+        }
+
+        function getCurrentPhase(day) {
+            if (!day) day = AppState.currentDay;
+            var info = getPhaseInfo(day);
+            return { id: info.id, name: info.name, title: info.title, emoji: info.emoji };
+        }
+
+        function getHarmonicColorIndex(dayInPhase, totalDaysInPhase, totalColors) {
+            if (dayInPhase <= 1) return 1;
+            if (dayInPhase >= totalDaysInPhase) return totalColors;
+            return Math.max(1, Math.min(totalColors, Math.round((dayInPhase / totalDaysInPhase) * (totalColors - 1) + 1)));
+        }
+
+        function getPresetMood(cycleDay) {
+            if (AppState.demoCycle) return PresetMoodData[cycleDay] || { p: 3, c: 3, e: 3 };
+            var pl = AppState.periodLengthDays || 5;
+            var fe = pl + Math.round((AppState.cycleLength - pl - 14) * 0.6);
+            var oe = fe + 3;
+            var le = AppState.cycleLength;
+            if (cycleDay <= pl) return { p: Math.round(2 + (cycleDay / pl) * 2), c: Math.round(3 + (cycleDay / pl) * 2), e: Math.round(2 + (cycleDay / pl) * 2) };
+            if (cycleDay <= fe) return { p: Math.round(4 + ((cycleDay - pl) / (fe - pl)) * 1), c: 5, e: Math.round(4 + ((cycleDay - pl) / (fe - pl)) * 1) };
+            if (cycleDay <= oe) return { p: 5, c: 5, e: 5 };
+            if (cycleDay <= le) return { p: Math.round(5 - ((cycleDay - oe) / (le - oe)) * 4), c: Math.round(5 - ((cycleDay - oe) / (le - oe)) * 3), e: Math.round(5 - ((cycleDay - oe) / (le - oe)) * 4) };
+            return { p: 3, c: 3, e: 3 };
+        }
+
+        // ===== СОХРАНЕНИЕ =====
+        function saveData() {
+            var data = {
+                currentDay: AppState.currentDay,
+                cycleLength: AppState.cycleLength,
+                resources: AppState.resources,
+                tasks: AppState.tasks,
+                userName: AppState.userName,
+                isAnonymous: AppState.isAnonymous,
+                demoCycle: AppState.demoCycle,
+                lastPeriodDate: AppState.lastPeriodDate ? AppState.lastPeriodDate.toISOString() : null,
+                periodLengthDays: AppState.periodLengthDays,
+                isIrregular: AppState.isIrregular,
+                isPregnant: AppState.isPregnant,
+                inboxReminderDays: AppState.inboxReminderDays
+            };
+            localStorage.setItem('rootine_data', JSON.stringify(data));
+        }
+
+        function loadData() {
+            // Автоконвертация старых данных (10→5)
+            var history = JSON.parse(localStorage.getItem('checkins') || '[]');
+            if (history.some(function(item) { return item.physical > 5 || item.cognitive > 5 || item.emotional > 5; })) {
+                localStorage.setItem('checkins', JSON.stringify(history.map(function(item) {
+                    return {
+                        date: item.date,
+                        cycleDay: item.cycleDay,
+                        physical: Math.round(item.physical / 2),
+                        cognitive: Math.round(item.cognitive / 2),
+                        emotional: Math.round(item.emotional / 2)
+                    };
+                })));
+            }
+
+            var raw = localStorage.getItem('rootine_data');
+            if (raw) {
+                try {
+                    var data = JSON.parse(raw);
+                    AppState.currentDay = data.currentDay || 16;
+                    AppState.cycleLength = data.cycleLength || 28;
+                    AppState.resources = data.resources || { physical: 3, cognitive: 3, emotional: 3 };
+                    AppState.tasks = data.tasks || [];
+                    AppState.userName = data.userName || 'Ева';
+                    AppState.isAnonymous = data.isAnonymous !== undefined ? data.isAnonymous : true;
+                    AppState.demoCycle = data.demoCycle !== undefined ? data.demoCycle : true;
+                    if (data.lastPeriodDate) AppState.lastPeriodDate = new Date(data.lastPeriodDate);
+                    AppState.periodLengthDays = data.periodLengthDays || 5;
+                    AppState.isIrregular = data.isIrregular || false;
+                    AppState.isPregnant = data.isPregnant || false;
+                    AppState.inboxReminderDays = data.inboxReminderDays || 3;
+                } catch (e) {
+                    resetData();
+                }
+            } else {
+                resetData();
+            }
+
+            // Если демо-режим — всегда день 6
+            if (AppState.demoCycle) {
+                AppState.currentDay = 6;
+                AppState.centerDate = new Date();
+                AppState.cycleLength = 28;
+                AppState.lastPeriodDate = null;
+            }
+
+            var todayStr = new Date().toISOString().split('T')[0];
+            AppState.moodSavedForActiveDate = isMoodSavedForDate(todayStr);
+
+            if (!AppState.demoCycle) {
+                document.getElementById('cycleSetupCard').style.display = 'none';
+            }
+        }
+
+        function resetData() {
+            AppState.tasks = DefaultTasks.map(function(t) { return Object.assign({}, t); });
+            saveData();
+        }
+
+        // ===== СБРОС ПРОФИЛЯ =====
+        function resetProfile() {
+            if (confirm('Точно сбросить все данные? Это удалит имя, настройки цикла, задачи и историю настроения.')) {
+                localStorage.removeItem('rootine_data');
+                localStorage.removeItem('checkins');
+                localStorage.removeItem('feedbacks');
+                localStorage.removeItem('onboarding_seen');
+
+                AppState.currentDay = 6;
+                AppState.centerDate = new Date();
+                AppState.cycleLength = 28;
+                AppState.lastPeriodDate = null;
+                AppState.demoCycle = true;
+                AppState.periodLengthDays = 5;
+                AppState.isIrregular = false;
+                AppState.isPregnant = false;
+                AppState.resources = { physical: 3, cognitive: 3, emotional: 3 };
+                AppState.moodSavedForActiveDate = false;
+                AppState.userName = 'Ева';
+                AppState.tasks = DefaultTasks.map(function(t) { return Object.assign({}, t); });
+                AppState.inboxReminderDays = 3;
+
+                document.getElementById('profileOverlay').classList.remove('open');
+                document.getElementById('cycleSetupCard').style.display = 'block';
+                updateUI();
+                showToast('Данные сброшены 🔄');
+            }
+        }
+
+        // ===== СЛАЙДЕРЫ =====
+        function updateResourceSliders() {
+            document.getElementById('sliderFillPhysical').style.width = ((AppState.resources.physical - 1) / 4 * 100) + '%';
+            document.getElementById('sliderFillCognitive').style.width = ((AppState.resources.cognitive - 1) / 4 * 100) + '%';
+            document.getElementById('sliderFillEmotional').style.width = ((AppState.resources.emotional - 1) / 4 * 100) + '%';
+            document.getElementById('valPhysical').textContent = AppState.resources.physical;
+            document.getElementById('valCognitive').textContent = AppState.resources.cognitive;
+            document.getElementById('valEmotional').textContent = AppState.resources.emotional;
+        }
+
+        function setupSlider(bgId, fillId, thumbId, valId, key) {
+            var bg = document.getElementById(bgId);
+            var fill = document.getElementById(fillId);
+            var thumb = document.getElementById(thumbId);
+            var val = document.getElementById(valId);
+            var dragging = false;
+
+            function setValue(clientX) {
+                var rect = bg.getBoundingClientRect();
+                var pct = (clientX - rect.left) / rect.width;
+                pct = Math.max(0, Math.min(1, pct));
+                var v = Math.round(pct * 4) + 1;
+                if (v === AppState.resources[key]) return;
+                AppState.resources[key] = v;
+                fill.style.width = ((v - 1) / 4 * 100) + '%';
+                val.textContent = v;
+                updateUI();
+            }
+
+            thumb.addEventListener('pointerdown', function(e) {
+                dragging = true;
+                thumb.setPointerCapture(e.pointerId);
+                e.preventDefault();
+            });
+
+            bg.addEventListener('pointerdown', function(e) {
+                dragging = true;
+                bg.setPointerCapture(e.pointerId);
+                setValue(e.clientX);
+                e.preventDefault();
+            });
+
+            window.addEventListener('pointermove', function(e) {
+                if (!dragging) return;
+                setValue(e.clientX);
+            });
+
+            window.addEventListener('pointerup', function() {
+                dragging = false;
+            });
+        }
+
+        // ===== UI =====
+        function updateUI() {
+            var phase = getCurrentPhase();
+            var card = document.getElementById('phaseCard');
+            card.className = 'phase-card ' + phase.id;
+            document.getElementById('phaseEmoji').textContent = phase.emoji;
+
+            var phaseNameEl = document.getElementById('phaseName');
+            if (AppState.userName && AppState.userName.trim() !== '') {
+                phaseNameEl.textContent = phase.title + ', ' + AppState.userName;
+            } else {
+                phaseNameEl.textContent = phase.title;
+            }
+
+            var shownDay = AppState.demoCycle ? 6 : AppState.currentDay;
+            document.getElementById('phaseDay').textContent = 'День ' + shownDay + ' из ' + AppState.cycleLength + ' · ' + phase.name;
+            document.getElementById('recommendationText').textContent = BeePhrases[phase.id];
+            updateRecommendationTips();
+            renderWeekCalendar();
+            updateResourceSliders();
+            renderTasks();
+            updateMoodUI();
+            saveData();
+        }
+
+        function updateRecommendationTips() {
+            document.getElementById('tipPhysical').textContent = getRandomTip('physical', getTipLevel(AppState.resources.physical));
+            document.getElementById('tipCognitive').textContent = getRandomTip('cognitive', getTipLevel(AppState.resources.cognitive));
+            document.getElementById('tipEmotional').textContent = getRandomTip('emotional', getTipLevel(AppState.resources.emotional));
+        }
+
+        function updateMoodUI() {
+            var card = document.getElementById('resourcesCard');
+            var saveBtn = document.getElementById('saveMoodBtn');
+            if (AppState.moodSavedForActiveDate) {
+                card.classList.add('saved');
+                saveBtn.style.display = 'none';
+            } else {
+                card.classList.remove('saved');
+                saveBtn.style.display = 'block';
+            }
+        }
+
+        function renderWeekCalendar() {
+            var row = document.getElementById('weekRow');
+            row.innerHTML = '';
+            var center = new Date(AppState.centerDate);
+            var dow = center.getDay();
+            var dayNames = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+
+            for (var i = 0; i < 7; i++) {
+                var off = i - 3;
+                var d = new Date(center);
+                d.setDate(d.getDate() + off);
+                var cycleDay = getCycleDayForDate(d);
+                var phaseInfo = getPhaseInfo(cycleDay);
+                var colorIndex = getHarmonicColorIndex(phaseInfo.dayInPhase, phaseInfo.totalDays, 5);
+                var dotClass = phaseInfo.id + '-' + colorIndex;
+
+                var col = document.createElement('div');
+                col.className = 'week-day-col';
+                col.innerHTML = '<div class="week-day-name">' + dayNames[(dow + off + 7) % 7] + '</div>' +
+                    '<div class="week-dot ' + dotClass + (off === 0 ? ' today' : '') + '"></div>' +
+                    '<div class="week-date">' + d.getDate() + '</div>';
+
+                (function(d, cycleDay) {
+                    col.addEventListener('click', function() {
+                        AppState.centerDate = new Date(d);
+                        AppState.currentDay = cycleDay;
+                        AppState.demoCycle = false;
+                        var dateStr = getActiveCheckinDate();
+                        AppState.moodSavedForActiveDate = isMoodSavedForDate(dateStr);
+                        if (!AppState.moodSavedForActiveDate) {
+                            var preset = getPresetMood(cycleDay);
+                            AppState.resources.physical = preset.p;
+                            AppState.resources.cognitive = preset.c;
+                            AppState.resources.emotional = preset.e;
+                        } else {
+                            loadMoodForDate(dateStr);
+                        }
+                        updateUI();
+                        showToast('День ' + AppState.currentDay + ' · ' + getCurrentPhase().title);
+                    });
+                })(d, cycleDay);
+
+                row.appendChild(col);
+            }
+        }
+
+        function renderTasks() {
+            var container = document.getElementById('tasksList');
+            var todayTasks = AppState.tasks.filter(function(t) {
+                if (t.cyclic && t.days.length > 0) return t.days.indexOf(new Date().getDay()) !== -1;
+                return true;
+            });
+
+            if (todayTasks.length === 0) {
+                container.innerHTML = '<div class="empty-state"><div class="empty-state-emoji">📋</div><div class="empty-state-text">Пока задач нет.<br>Нажми <strong>+</strong> чтобы добавить</div></div>';
+                return;
+            }
+
+            container.innerHTML = '';
+            todayTasks.forEach(function(task) {
+                var status = getTaskStatus(task);
+                var opacity = getIconOpacity(task.cognitive, task.physical);
+                container.innerHTML += '<div class="task-item">' +
+                    '<div class="task-dot ' + status + '"></div>' +
+                    '<div class="task-info">' +
+                    '<div class="task-name">' + escapeHTML(task.name) + (task.cyclic ? ' 🔄' : '') + (task.forced ? ' 🛡️' : '') + '</div>' +
+                    '<div class="task-project">' + escapeHTML(task.project) + '</div>' +
+                    '</div>' +
+                    '<div class="task-badges">' +
+                    '<span style="opacity:' + opacity.main + '">🧠' + task.cognitive + '</span>' +
+                    '<span style="opacity:' + opacity.other + '">💪' + task.physical + '</span>' +
+                    '<span style="opacity:0.4">❤️' + (task.moral || 0) + '</span>' +
+                    '</div>' +
+                    '</div>';
+            });
+        }
+
+        // ===== ЭКРАНЫ =====
+        function hideAllScreens() {
+            document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
+            document.getElementById('bottomNav').style.display = 'none';
+        }
+
+        function showMainScreen() {
+            hideAllScreens();
+            document.getElementById('mainScreen').classList.add('active');
+            document.getElementById('bottomNav').style.display = 'flex';
+            updateUI();
+        }
+
+        function showRhythmScreen() {
+            hideAllScreens();
+            document.getElementById('rhythmScreen').classList.add('active');
+            AppState.rhythmSelectedDay = new Date().getDate();
+            renderRhythm();
+        }
+
+        function showInboxScreen() {
+            hideAllScreens();
+            document.getElementById('inboxScreen').classList.add('active');
+            renderInboxTasks();
+        }
+
+        function showProjectsScreen() {
+            hideAllScreens();
+            document.getElementById('projectsScreen').classList.add('active');
+            renderProjectsFolders();
+        }
+
+        function showProjectDetail(projectName) {
+            hideAllScreens();
+            document.getElementById('projectDetailScreen').classList.add('active');
+            document.getElementById('projectDetailTitle').textContent = '📁 ' + projectName;
+            renderProjectDetailTasks(projectName);
+        }
+
+        function renderInboxTasks() {
+            var container = document.getElementById('inboxTasksList');
+            var inboxTasks = AppState.tasks.filter(function(t) { return t.project === 'Копилка'; });
+            if (inboxTasks.length === 0) {
+                container.innerHTML = '<div class="empty-state"><div class="empty-state-emoji">📥</div><div class="empty-state-text">Копилка пуста<br>Добавь задачу без проекта</div></div>';
+                return;
+            }
+            container.innerHTML = inboxTasks.map(function(task) {
+                return '<div class="task-item"><div class="task-dot" style="background:#CCC;"></div><div class="task-info"><div class="task-name">' + escapeHTML(task.name) + '</div></div></div>';
+            }).join('');
+        }
+
+        function renderProjectsFolders() {
+            var container = document.getElementById('projectsFolders');
+            var projectNames = ['Разум', 'Тело', 'Душа', 'Копилка'];
+            container.innerHTML = projectNames.map(function(p) {
+                var count = AppState.tasks.filter(function(t) { return t.project === p; }).length;
+                var emoji = p === 'Разум' ? '🧠' : p === 'Тело' ? '⚡️' : p === 'Душа' ? '❤️' : '📥';
+                return '<div class="task-item" onclick="showProjectDetail(\'' + p + '\')"><span style="font-size:24px;">' + emoji + '</span><div class="task-info"><div class="task-name">' + p + '</div><div class="task-project">' + count + ' задач</div></div></div>';
+            }).join('');
+        }
+
+        function renderProjectDetailTasks(projectName) {
+            var container = document.getElementById('projectDetailTasks');
+            var projectTasks = AppState.tasks.filter(function(t) { return t.project === projectName; });
+            if (projectTasks.length === 0) {
+                container.innerHTML = '<div class="empty-state"><div class="empty-state-emoji">📁</div><div class="empty-state-text">Нет задач в проекте «' + projectName + '»</div></div>';
+                return;
+            }
+            container.innerHTML = projectTasks.map(function(task) {
+                return '<div class="task-item"><div class="task-dot" style="background:#CCC;"></div><div class="task-info"><div class="task-name">' + escapeHTML(task.name) + '</div></div></div>';
+            }).join('');
+        }
+
+        // ===== РИТМ =====
+        function renderRhythm() {
+            AppState.now = new Date(AppState.rhythmYear, AppState.rhythmMonth, 1);
+            var year = AppState.now.getFullYear();
+            var month = AppState.now.getMonth();
+            document.getElementById('monthName').textContent = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'][month] + ' ' + year;
+
+            var grid = document.getElementById('monthGrid');
+            grid.innerHTML = '';
+            var firstDay = new Date(year, month, 1).getDay() || 7;
+            var daysInMonth = new Date(year, month + 1, 0).getDate();
+            var prevMonthDays = new Date(year, month, 0).getDate();
+
+            for (var i = firstDay - 1; i >= 1; i--) {
+                var d = prevMonthDays - i + 1;
+                addMonthCell(grid, year, month - 1, d, true);
+            }
+            for (var d = 1; d <= daysInMonth; d++) {
+                addMonthCell(grid, year, month, d, false);
+            }
+
+            var totalCellsBefore = firstDay - 1 + daysInMonth;
+            var remainingCells = 7 - (totalCellsBefore % 7);
+            if (remainingCells === 7) remainingCells = 0;
+            for (var d = 1; d <= remainingCells; d++) {
+                addMonthCell(grid, year, month + 1, d, true);
+            }
+
+            var totalCellsNow = totalCellsBefore + remainingCells;
+            var cellsNeeded = 35 - totalCellsNow;
+            if (cellsNeeded > 0) {
+                for (var d = remainingCells + 1; d <= remainingCells + cellsNeeded; d++) {
+                    addMonthCell(grid, year, month + 1, d, true);
+                }
+            }
+
+            updateRhythmDayInfo(year, month);
+            renderHistogram();
+        }
+
+        function addMonthCell(grid, year, month, day, isOtherMonth) {
+            var date = new Date(year, month, day);
+            var cycleDay = getCycleDayForDate(date);
+            var phaseInfo = getPhaseInfo(cycleDay);
+            var colorIndex = getHarmonicColorIndex(phaseInfo.dayInPhase, phaseInfo.totalDays, 5);
+            var dotClass = phaseInfo.id + '-' + colorIndex;
+
+            var cell = document.createElement('div');
+            cell.className = 'month-dot-cell' + (isOtherMonth ? ' other-month' : '') + (day === AppState.rhythmSelectedDay && !isOtherMonth ? ' selected' : '');
+            cell.innerHTML = '<div class="dot-mini ' + dotClass + '"></div><div class="dot-num">' + day + '</div>';
+
+            (function(day, isOtherMonth) {
+                cell.addEventListener('click', function() {
+                    if (isOtherMonth) {
+                        if (day > 15) {
+                            AppState.rhythmMonth--;
+                            if (AppState.rhythmMonth < 0) { AppState.rhythmMonth = 11; AppState.rhythmYear--; }
+                        } else {
+                            AppState.rhythmMonth++;
+                            if (AppState.rhythmMonth > 11) { AppState.rhythmMonth = 0; AppState.rhythmYear++; }
+                        }
+                    }
+                    AppState.rhythmSelectedDay = day;
+                    renderRhythm();
+                });
+            })(day, isOtherMonth);
+
+            grid.appendChild(cell);
+        }
+
+        function updateRhythmDayInfo(year, month) {
+            var dateStr = year + '-' + String(month + 1).padStart(2, '0') + '-' + String(AppState.rhythmSelectedDay).padStart(2, '0');
+            var history = JSON.parse(localStorage.getItem('checkins') || '[]');
+            var checkin = history.find(function(c) { return c.date === dateStr; });
+            var date = new Date(year, month, AppState.rhythmSelectedDay);
+            var cycleDay = getCycleDayForDate(date);
+            var phase = getCurrentPhase(cycleDay);
+
+            document.getElementById('infoPhase').textContent = phase.emoji + ' ' + phase.title;
+            document.getElementById('infoValues').textContent = checkin ? '🧠' + checkin.cognitive + ' 💪' + checkin.physical + ' ❤️' + checkin.emotional : 'Нет данных';
+        }
+
+        function renderHistogram() {
+            var year = AppState.now.getFullYear();
+            var month = AppState.now.getMonth();
+            var history = JSON.parse(localStorage.getItem('checkins') || '[]');
+            var group = document.getElementById('histoDayGroup');
+            if (!group) return;
+            group.innerHTML = '';
+
+            var center = new Date(year, month, AppState.rhythmSelectedDay);
+            var startDate = new Date(center);
+            startDate.setDate(startDate.getDate() - 3);
+            var endDate = new Date(center);
+            endDate.setDate(endDate.getDate() + 3);
+
+            for (var d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+                var dateStr = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+                var checkin = history.find(function(c) { return c.date === dateStr; });
+                var cogVal = checkin ? checkin.cognitive : 0;
+                var physVal = checkin ? checkin.physical : 0;
+                var emoVal = checkin ? checkin.emotional : 0;
+                var isSelected = d.getDate() === AppState.rhythmSelectedDay && d.getMonth() === month;
+
+                var block = document.createElement('div');
+                block.className = 'histo-day-block';
+                block.innerHTML = '<div class="histo-mini-bar cog" style="height:' + ((cogVal - 1) / 4 * 100) + '%;' + (isSelected ? 'box-shadow:0 0 6px rgba(0,0,0,0.4);' : '') + '"></div>' +
+                    '<div class="histo-mini-bar phys" style="height:' + ((physVal - 1) / 4 * 100) + '%;' + (isSelected ? 'box-shadow:0 0 6px rgba(0,0,0,0.4);' : '') + '"></div>' +
+                    '<div class="histo-mini-bar emo" style="height:' + ((emoVal - 1) / 4 * 100) + '%;' + (isSelected ? 'box-shadow:0 0 6px rgba(0,0,0,0.4);' : '') + '"></div>' +
+                    '<div class="histo-day-label">' + d.getDate() + '</div>';
+                group.appendChild(block);
+            }
+
+            updateHistoFilter(AppState.activeHistoFilter);
+        }
+
+        function updateHistoFilter(filter) {
+            AppState.activeHistoFilter = filter;
+            document.querySelectorAll('.histo-filter').forEach(function(btn) {
+                btn.classList.toggle('active', btn.dataset.filter === filter);
+            });
+            document.querySelectorAll('.histo-mini-bar').forEach(function(bar) {
+                bar.classList.remove('dimmed');
+            });
+            if (filter !== 'all') {
+                var typeMap = { cognitive: 'cog', physical: 'phys', emotional: 'emo' };
+                document.querySelectorAll('.histo-mini-bar').forEach(function(bar) {
+                    if (!bar.classList.contains(typeMap[filter])) bar.classList.add('dimmed');
+                });
+            }
+            var wavesSvg = document.getElementById('wavesSvg');
+            var wavesLabels = document.getElementById('wavesLabels');
+            if (filter === 'all') {
+                if (wavesSvg) wavesSvg.style.display = 'none';
+                if (wavesLabels) wavesLabels.style.display = 'none';
+            } else {
+                if (wavesSvg) wavesSvg.style.display = 'block';
+                if (wavesLabels) wavesLabels.style.display = 'flex';
+                renderSingleWave(filter);
+            }
+        }
+
+        function renderSingleWave(filter) {
+            var year = AppState.now.getFullYear();
+            var month = AppState.now.getMonth();
+            var history = JSON.parse(localStorage.getItem('checkins') || '[]');
+            var svg = document.getElementById('wavesSvg');
+            var labels = document.getElementById('wavesLabels');
+            var w = 360, h = 100, pad = 0, usableW = w, usableH = h;
+            var keyMap = { cognitive: 'cognitive', physical: 'physical', emotional: 'emotional' };
+            var colorMap = { cognitive: '#E8B86D', physical: '#9CBA7F', emotional: '#E8B4BC' };
+            var key = keyMap[filter];
+            var color = colorMap[filter];
+            var allPoints = [];
+
+            var center = new Date(year, month, AppState.rhythmSelectedDay);
+            var startDate = new Date(center);
+            startDate.setDate(startDate.getDate() - 3);
+            var endDate = new Date(center);
+            endDate.setDate(endDate.getDate() + 3);
+
+            var dayIndex = 0, totalDays = 7;
+            for (var d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+                var dateStr = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+                var checkin = history.find(function(c) { return c.date === dateStr; });
+                var x = pad + (dayIndex / (totalDays - 1)) * usableW;
+                dayIndex++;
+                if (checkin && checkin[key]) {
+                    allPoints.push({ x: x, y: usableH - ((checkin[key] - 1) / 4 * usableH), value: checkin[key] });
+                } else {
+                    allPoints.push({ x: x, y: null, value: 0 });
+                }
+            }
+
+            var validPoints = allPoints.filter(function(p) { return p.y !== null; });
+            var svgInner = '';
+            if (validPoints.length >= 2) {
+                var dPath = 'M ' + validPoints[0].x + ' ' + validPoints[0].y;
+                for (var i = 0; i < validPoints.length - 1; i++) {
+                    var curr = validPoints[i];
+                    var next = validPoints[i + 1];
+                    var cp1x = curr.x + (next.x - curr.x) / 3;
+                    var cp1y = curr.y;
+                    var cp2x = next.x - (next.x - curr.x) / 3;
+                    var cp2y = next.y;
+                    dPath += ' C ' + cp1x + ' ' + cp1y + ', ' + cp2x + ' ' + cp2y + ', ' + next.x + ' ' + next.y;
+                }
+                svgInner += '<path d="' + dPath + '" fill="none" stroke="' + color + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>';
+                for (var i = 0; i < validPoints.length; i++) {
+                    svgInner += '<circle cx="' + validPoints[i].x + '" cy="' + validPoints[i].y + '" r="2.5" fill="' + color + '"/>';
+                }
+            }
+            if (svg) svg.innerHTML = svgInner;
+            var labelsHtml = '';
+            for (var d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+                labelsHtml += '<span>' + d.getDate() + '</span>';
+            }
+            if (labels) labels.innerHTML = labelsHtml;
+        }
+
+        // ===== МОДАЛКИ =====
+        function openModal() {
+            document.getElementById('modalOverlay').classList.add('open');
+            document.getElementById('taskNameInput').focus();
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('open');
+            document.getElementById('taskNameInput').value = '';
+            document.getElementById('taskCognitive').value = 3;
+            document.getElementById('taskPhysical').value = 3;
+            document.getElementById('taskMoral').value = 3;
+            document.getElementById('taskCyclic').checked = false;
+            document.getElementById('cyclicDays').style.display = 'none';
+            document.getElementById('cogVal').textContent = '3';
+            document.getElementById('physVal').textContent = '3';
+            document.getElementById('moralVal').textContent = '3';
+        }
+
+        function closeModalOutside(e) {
+            if (e.target === document.getElementById('modalOverlay')) closeModal();
+        }
+
+        function addTask() {
+            var name = document.getElementById('taskNameInput').value.trim();
+            if (!name) { showToast('Введи название задачи 🌸'); return; }
+            var project = document.getElementById('taskProjectInput').value;
+            var cognitive = parseInt(document.getElementById('taskCognitive').value);
+            var physical = parseInt(document.getElementById('taskPhysical').value);
+            var moral = parseInt(document.getElementById('taskMoral').value);
+            var cyclic = document.getElementById('taskCyclic').checked;
+            var activeChips = document.querySelectorAll('.week-day-chip.active');
+            var days = [];
+            if (cyclic) activeChips.forEach(function(c) { days.push(parseInt(c.dataset.day)); });
+            var forced = (getTaskStatus({ cognitive: cognitive, physical: physical, moral: moral, forced: false }) === 'red');
+            AppState.tasks.unshift({ name: name, project: project, cognitive: cognitive, physical: physical, moral: moral, cyclic: cyclic, days: days, forced: forced });
+            closeModal();
+            updateUI();
+            showToast(forced ? 'Задача добавлена принудительно 🛡️' : 'Задача добавлена ✨');
+        }
+
+        document.getElementById('taskCyclic').addEventListener('change', function() {
+            document.getElementById('cyclicDays').style.display = this.checked ? 'block' : 'none';
+            if (this.checked) {
+                var sel = document.getElementById('weekDaysSelect');
+                sel.innerHTML = '';
+                ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'].forEach(function(d, i) {
+                    var chip = document.createElement('button');
+                    chip.className = 'week-day-chip';
+                    chip.textContent = d;
+                    chip.dataset.day = i + 1;
+                    chip.addEventListener('click', function() { chip.classList.toggle('active'); });
+                    sel.appendChild(chip);
+                });
+            }
+        });
+
+        // ===== НАСТРОЙКА ЦИКЛА =====
+        function setupCycle() {
+            document.getElementById('cycleSetupOverlay').classList.add('open');
+            document.getElementById('firstPeriodDate').value = '';
+            document.getElementById('lastPeriodDateCalc').textContent = '—';
+            document.getElementById('periodLenSlider').value = 5;
+            document.getElementById('periodLenVal').textContent = '5';
+            AppState.extraPeriodCount = 0;
+            document.getElementById('extraDatesContainer').innerHTML = '';
+            document.getElementById('cyclePreview').style.display = 'none';
+            document.getElementById('irregularCycle').checked = false;
+            document.getElementById('pregnantCheck').checked = false;
+        }
+
+        function updateLastPeriodDateCalc() {
+            var firstDate = new Date(document.getElementById('firstPeriodDate').value);
+            var periodLen = parseInt(document.getElementById('periodLenSlider').value);
+            if (firstDate && !isNaN(firstDate.getTime()) && periodLen) {
+                var lastDate = new Date(firstDate);
+                lastDate.setDate(lastDate.getDate() + periodLen - 1);
+                document.getElementById('lastPeriodDateCalc').textContent = lastDate.toLocaleDateString('ru-RU');
+            } else {
+                document.getElementById('lastPeriodDateCalc').textContent = '—';
+            }
+        }
+
+        document.getElementById('firstPeriodDate').addEventListener('change', updateLastPeriodDateCalc);
+        document.getElementById('periodLenSlider').addEventListener('input', function() {
+            document.getElementById('periodLenVal').textContent = this.value;
+            updateLastPeriodDateCalc();
+        });
+
+        document.getElementById('addMoreDatesBtn').addEventListener('click', function() {
+            AppState.extraPeriodCount++;
+            if (AppState.extraPeriodCount > 6) { showToast('Максимум 6 дополнительных дат'); return; }
+            var container = document.getElementById('extraDatesContainer');
+            var monthsAgo = AppState.extraPeriodCount + 1;
+            var div = document.createElement('div');
+            div.style.marginBottom = '12px';
+            div.style.padding = '12px';
+            div.style.background = '#F9F7F4';
+            div.style.borderRadius = '12px';
+            div.innerHTML = '<div class="modal-label">🗓 ' + monthsAgo + ' месяца назад</div>' +
+                '<div class="modal-label">Первый день месячных</div>' +
+                '<input class="modal-input extra-period-first" type="date" placeholder="Первый день">' +
+                '<div class="modal-label" style="margin-top:8px;">📏 Длина: <strong class="extra-period-len-val">5</strong> дней</div>' +
+                '<div class="slider-pair"><span>2</span><input type="range" min="2" max="10" value="5" class="extra-period-slider" oninput="this.parentElement.previousElementSibling.querySelector(\'strong\').textContent=this.value;updateExtraLastDate(this);"><span>10</span></div>' +
+                '<div class="modal-label">Последний день (авто)</div>' +
+                '<div class="modal-input extra-period-last" style="display:flex;align-items:center;justify-content:center;background:#F9F7F4;color:var(--text);font-weight:600;">—</div>';
+            container.appendChild(div);
+            var slider = div.querySelector('.extra-period-slider');
+            var firstInput = div.querySelector('.extra-period-first');
+            firstInput.addEventListener('change', function() { updateExtraLastDate(slider); });
+            slider.addEventListener('input', function() { updateExtraLastDate(this); });
+        });
+
+        function updateExtraLastDate(slider) {
+            var div = slider.parentElement.parentElement;
+            var firstInput = div.querySelector('.extra-period-first');
+            var lastDiv = div.querySelector('.extra-period-last');
+            var firstDate = new Date(firstInput.value);
+            var periodLen = parseInt(slider.value);
+            if (firstDate && !isNaN(firstDate.getTime()) && periodLen) {
+                var lastDate = new Date(firstDate);
+                lastDate.setDate(lastDate.getDate() + periodLen - 1);
+                lastDiv.textContent = lastDate.toLocaleDateString('ru-RU');
+            } else {
+                lastDiv.textContent = '—';
+            }
+        }
+
+        function saveCycleSetup() {
+            var firstDate = document.getElementById('firstPeriodDate').value;
+            AppState.periodLengthDays = parseInt(document.getElementById('periodLenSlider').value);
+            AppState.isIrregular = document.getElementById('irregularCycle').checked;
+            AppState.isPregnant = document.getElementById('pregnantCheck').checked;
+
+            if (AppState.isPregnant) {
+                AppState.cycleLength = 280;
+                AppState.demoCycle = false;
+                showToast('Включён режим беременности 🤰');
+            } else if (firstDate) {
+                AppState.lastPeriodDate = new Date(firstDate);
+                var allDates = [firstDate];
+                document.querySelectorAll('.extra-period-first').forEach(function(input) {
+                    if (input.value) allDates.push(input.value);
+                });
+                allDates.sort();
+                if (allDates.length >= 2) {
+                    var totalDiff = 0;
+                    for (var i = 1; i < allDates.length; i++) {
+                        totalDiff += Math.floor((new Date(allDates[i]) - new Date(allDates[i - 1])) / 86400000);
+                    }
+                    AppState.cycleLength = Math.round(totalDiff / (allDates.length - 1));
+                }
+                AppState.demoCycle = false;
+            }
+
+            if (AppState.isIrregular && !AppState.isPregnant) {
+                showToast('Приложение будет анализировать самочувствие и учиться. Заполняйте шкалы ежедневно 💛');
+            }
+
+            document.getElementById('cycleSetupOverlay').classList.remove('open');
+            document.getElementById('cycleSetupCard').style.display = 'none';
+
+            if (!AppState.isPregnant && AppState.lastPeriodDate) {
+                var diff = Math.floor((new Date() - AppState.lastPeriodDate) / 86400000);
+                AppState.currentDay = ((diff % AppState.cycleLength) + AppState.cycleLength) % AppState.cycleLength + 1;
+            }
+            updateUI();
+            showToast('Цикл сохранён! Изменить можно в ⚙️');
+        }
+
+        // ===== ФИДБЕК И ПРОФИЛЬ =====
+        function submitFeedback() {
+            var type = document.getElementById('feedbackType').value;
+            var text = document.getElementById('feedbackText').value.trim();
+            if (!text) { showToast('Напиши сообщение 💬'); return; }
+            var feedbacks = JSON.parse(localStorage.getItem('feedbacks') || '[]');
+            feedbacks.push({ type: type, text: text, votes: 0, date: new Date().toISOString() });
+            localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
+            document.getElementById('feedbackText').value = '';
+            document.getElementById('feedbackOverlay').classList.remove('open');
+            showToast('Спасибо! Твоё сообщение опубликовано 💛');
+        }
+
+        function saveProfile() {
+            var name = document.getElementById('profileNameInput').value.trim();
+            if (name) { AppState.userName = name; updateUI(); }
+            AppState.inboxReminderDays = parseInt(document.getElementById('reminderDaysSlider').value);
+            document.getElementById('profileOverlay').classList.remove('open');
+            saveData();
+            showToast('Настройки сохранены ⚙️');
+        }
+
+        // ===== ОНБОРДИНГ =====
+        function checkFirstVisit() {
+            var hasSeen = localStorage.getItem('onboarding_seen');
+            if (!hasSeen) {
+                document.getElementById('onboardingOverlay').classList.add('open');
+                renderOnboardingSlide();
+            }
+        }
+
+        function renderOnboardingSlide() {
+            var slide = OnboardingSlides[AppState.currentSlide];
+            document.getElementById('onboardingSlides').innerHTML = '<div class="slide active"><div class="onboarding-slide-icon">' + slide.icon + '</div><div class="onboarding-slide-title">' + slide.title + '</div><div class="onboarding-slide-text">' + slide.text + '</div></div>';
+            var dots = document.getElementById('onboardingDots');
+            dots.innerHTML = '';
+            for (var i = 0; i < OnboardingSlides.length; i++) {
+                var dot = document.createElement('div');
+                dot.className = 'onboarding-dot' + (i === AppState.currentSlide ? ' active' : '');
+                dots.appendChild(dot);
+            }
+            document.getElementById('onboardingNext').textContent = AppState.currentSlide < OnboardingSlides.length - 1 ? 'Далее' : 'Понятно, начнём!';
+        }
+
+        function closeOnboarding() {
+            document.getElementById('onboardingOverlay').classList.remove('open');
+            AppState.currentSlide = 0;
+            localStorage.setItem('onboarding_seen', 'true');
+        }
+
+        document.getElementById('onboardingNext').addEventListener('click', function() {
+            if (AppState.currentSlide < OnboardingSlides.length - 1) {
+                AppState.currentSlide++;
+                renderOnboardingSlide();
+            } else {
+                closeOnboarding();
+            }
+        });
+
+        // ===== НАВИГАЦИЯ =====
+        document.querySelectorAll('.nav-item[data-tab]').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var tab = btn.dataset.tab;
+                document.querySelectorAll('.nav-item[data-tab]').forEach(function(b) { b.classList.remove('active'); });
+                btn.classList.add('active');
+                if (tab === 'rhythm') showRhythmScreen();
+                else if (tab === 'inbox') showInboxScreen();
+                else if (tab === 'projects') showProjectsScreen();
+                else showMainScreen();
+            });
+        });
+
+        document.getElementById('rhythmBackBtn').addEventListener('click', showMainScreen);
+        document.getElementById('inboxBackBtn').addEventListener('click', showMainScreen);
+        document.getElementById('projectsBackBtn').addEventListener('click', showMainScreen);
+        document.getElementById('projectDetailBackBtn').addEventListener('click', showProjectsScreen);
+
+        document.getElementById('prevMonth').addEventListener('click', function() {
+            AppState.rhythmMonth--;
+            if (AppState.rhythmMonth < 0) { AppState.rhythmMonth = 11; AppState.rhythmYear--; }
+            renderRhythm();
+        });
+
+        document.getElementById('nextMonth').addEventListener('click', function() {
+            AppState.rhythmMonth++;
+            if (AppState.rhythmMonth > 11) { AppState.rhythmMonth = 0; AppState.rhythmYear++; }
+            renderRhythm();
+        });
+
+        document.getElementById('profileBtn').addEventListener('click', function() {
+            document.getElementById('profileOverlay').classList.add('open');
+            document.getElementById('profileNameInput').value = AppState.userName;
+            document.getElementById('reminderDaysSlider').value = AppState.inboxReminderDays;
+            document.getElementById('reminderDaysVal').textContent = AppState.inboxReminderDays;
+        });
+
+        document.getElementById('feedbackBtn').addEventListener('click', function() {
+            document.getElementById('feedbackOverlay').classList.add('open');
+        });
+
+        document.getElementById('saveMoodBtn').addEventListener('click', function() {
+            var dateStr = getActiveCheckinDate();
+            var checkin = {
+                date: dateStr,
+                cycleDay: AppState.currentDay,
+                physical: AppState.resources.physical,
+                cognitive: AppState.resources.cognitive,
+                emotional: AppState.resources.emotional
+            };
+            var history = JSON.parse(localStorage.getItem('checkins') || '[]');
+            var existingIndex = history.findIndex(function(item) { return item.date === dateStr; });
+            if (existingIndex >= 0) history[existingIndex] = checkin;
+            else history.push(checkin);
+            localStorage.setItem('checkins', JSON.stringify(history));
+            AppState.moodSavedForActiveDate = true;
+            updateUI();
+            showToast('Состояние сохранено 💛');
+        });
+
+        document.getElementById('editMoodLink').addEventListener('click', function() {
+            AppState.moodSavedForActiveDate = false;
+            updateUI();
+            showToast('Можешь изменить оценку ✨');
+        });
+
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('histo-filter')) updateHistoFilter(e.target.dataset.filter);
+        });
+
+        // ===== ИНИЦИАЛИЗАЦИЯ =====
+        loadData();
+        setupSlider('sliderBgPhysical', 'sliderFillPhysical', 'thumbPhysical', 'valPhysical', 'physical');
+        setupSlider('sliderBgCognitive', 'sliderFillCognitive', 'thumbCognitive', 'valCognitive', 'cognitive');
+        setupSlider('sliderBgEmotional', 'sliderFillEmotional', 'thumbEmotional', 'valEmotional', 'emotional');
+        checkFirstVisit();
+        updateUI();
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('sw.js').catch(function() {});
+            });
+        }
+    </script>
 </body>
 </html>
