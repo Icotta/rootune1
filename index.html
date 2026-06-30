@@ -905,7 +905,7 @@ function renderSingleWave(filter) {
     var colorMap = { cognitive: '#E8B86D', physical: '#9CBA7F', emotional: '#E8B4BC' };
     var key = keyMap[filter];
     var color = colorMap[filter];
-    var points = [];
+    var allPoints = [];
 
     var center = new Date(year, month, rhythmSelectedDay);
     var startDate = new Date(center);
@@ -921,57 +921,38 @@ function renderSingleWave(filter) {
         var x = pad + (dayIndex / (totalDays - 1)) * usableW;
         dayIndex++;
         if (checkin && checkin[key]) {
-            points.push({ x: x, y: usableH - (checkin[key] / 10) * usableH });
+            allPoints.push({ x: x, y: usableH - (checkin[key] / 10) * usableH, value: checkin[key] });
+        } else {
+            allPoints.push({ x: x, y: null, value: 0 });
         }
     }
 
+    var validPoints = allPoints.filter(function(p) { return p.y !== null; });
+    
     var svgInner = '';
-    if (points.length >= 2) {
-        // Плавная кривая через все точки (каждые 3 точки = кубическая кривая)
-        var dPath = 'M ' + points[0].x + ' ' + points[0].y;
+    if (validPoints.length >= 2) {
+        // Строим плавную кривую через все ТОЧКИ (верхушки столбиков)
+        var dPath = 'M ' + validPoints[0].x + ' ' + validPoints[0].y;
         
-        // Если точек 2 или больше — используем кубические кривые
-        for (var i = 0; i < points.length - 1; i++) {
-            var curr = points[i];
-            var next = points[i + 1];
+        for (var i = 0; i < validPoints.length - 1; i++) {
+            var curr = validPoints[i];
+            var next = validPoints[i + 1];
             
-            // Вычисляем контрольные точки для плавного скругления
-            var cp1x, cp1y, cp2x, cp2y;
-            
-            if (i === 0 && points.length === 2) {
-                // Только 2 точки — простая кривая
-                cp1x = curr.x + (next.x - curr.x) / 3;
-                cp1y = curr.y;
-                cp2x = next.x - (next.x - curr.x) / 3;
-                cp2y = next.y;
-            } else if (i === 0) {
-                // Первая точка
-                var afterNext = points[i + 2] || next;
-                cp1x = curr.x + (next.x - curr.x) / 3;
-                cp1y = curr.y;
-                cp2x = next.x - (afterNext.x - curr.x) / 6;
-                cp2y = next.y - (afterNext.y - curr.y) / 6;
-            } else if (i === points.length - 2) {
-                // Последняя точка
-                var prev = points[i - 1] || curr;
-                cp1x = curr.x + (next.x - prev.x) / 6;
-                cp1y = curr.y + (next.y - prev.y) / 6;
-                cp2x = next.x - (next.x - curr.x) / 3;
-                cp2y = next.y;
-            } else {
-                // Средние точки
-                var prev = points[i - 1];
-                var afterNext = points[i + 2];
-                cp1x = curr.x + (next.x - prev.x) / 6;
-                cp1y = curr.y + (next.y - prev.y) / 6;
-                cp2x = next.x - (afterNext.x - curr.x) / 6;
-                cp2y = next.y - (afterNext.y - curr.y) / 6;
-            }
+            // Контрольные точки для плавного прохода через каждую точку
+            var cp1x = curr.x + (next.x - curr.x) / 3;
+            var cp1y = curr.y;
+            var cp2x = next.x - (next.x - curr.x) / 3;
+            var cp2y = next.y;
             
             dPath += ' C ' + cp1x + ' ' + cp1y + ', ' + cp2x + ' ' + cp2y + ', ' + next.x + ' ' + next.y;
         }
         
-        svgInner += '<path d="' + dPath + '" fill="none" stroke="' + color + '" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>';
+        svgInner += '<path d="' + dPath + '" fill="none" stroke="' + color + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>';
+        
+        // Добавляем точки на вершинах
+        for (var i = 0; i < validPoints.length; i++) {
+            svgInner += '<circle cx="' + validPoints[i].x + '" cy="' + validPoints[i].y + '" r="2.5" fill="' + color + '"/>';
+        }
     }
 
     if (svg) svg.innerHTML = svgInner;
