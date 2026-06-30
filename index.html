@@ -353,18 +353,21 @@
             return div.innerHTML;
         }
 
-        function getCycleDayForDate(date) {
+                function getCycleDayForDate(date) {
             if (AppState.demoCycle || !AppState.lastPeriodDate) {
-                // В демо: «первый день цикла» = 5 дней назад от сегодня
-                var demoStart = new Date();
-                demoStart.setDate(demoStart.getDate() - 5);
-                var diff = Math.floor((date - demoStart) / 86400000);
-                return ((diff % 28) + 28) % 28 + 1;
+                // Демо: «первый день цикла» = 5 дней назад от СЕГОДНЯ (чтобы сегодня был день 6)
+                var today = new Date();
+                today.setHours(0, 0, 0, 0);
+                var demoStart = new Date(today);
+                demoStart.setDate(today.getDate() - 5);
+                
+                var diff = Math.floor((date.getTime() - demoStart.getTime()) / 86400000);
+                return diff + 1; // день 1 = demoStart, сегодня = день 6
             }
             var diff = Math.floor((date - AppState.lastPeriodDate) / 86400000);
             return ((diff % AppState.cycleLength) + AppState.cycleLength) % AppState.cycleLength + 1;
         }
-
+        
         function getActiveCheckinDate() {
             return AppState.centerDate.toISOString().split('T')[0];
         }
@@ -647,61 +650,20 @@
             }
         }
 
-                function renderWeekCalendar() {
-            var row = document.getElementById('weekRow');
-            row.innerHTML = '';
-            var center = new Date(AppState.centerDate);
-            var dow = center.getDay();
-            var dayNames = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
-
-            for (var i = 0; i < 7; i++) {
-                var off = i - 3;
-                var d = new Date(center);
-                d.setDate(d.getDate() + off);
-
-                // Демо: всегда день 6 + offset, реальный цикл: getCycleDayForDate
-                var cycleDay;
-                if (AppState.demoCycle) {
-                    cycleDay = 6 + off;
-                    if (cycleDay < 1) cycleDay += 28;
-                    if (cycleDay > 28) cycleDay -= 28;
-                } else {
-                    cycleDay = getCycleDayForDate(d);
-                }
-
-                var phaseInfo = getPhaseInfo(cycleDay);
-                var colorIndex = getHarmonicColorIndex(phaseInfo.dayInPhase, phaseInfo.totalDays, 5);
-                var dotClass = phaseInfo.id + '-' + colorIndex;
-
-                var col = document.createElement('div');
-                col.className = 'week-day-col';
-                col.innerHTML = '<div class="week-day-name">' + dayNames[(dow + off + 7) % 7] + '</div>' +
-                    '<div class="week-dot ' + dotClass + (off === 0 ? ' today' : '') + '"></div>' +
-                    '<div class="week-date">' + d.getDate() + '</div>';
-
-                (function(d, cycleDay) {
-                    col.addEventListener('click', function() {
-                        AppState.centerDate = new Date(d);
-                        AppState.currentDay = cycleDay;
-                        // НЕ МЕНЯЕМ demoCycle — остаёмся в демо при клике на день
-                        var dateStr = getActiveCheckinDate();
-                        AppState.moodSavedForActiveDate = isMoodSavedForDate(dateStr);
-                        if (!AppState.moodSavedForActiveDate) {
-                            var preset = getPresetMood(cycleDay);
-                            AppState.resources.physical = preset.p;
-                            AppState.resources.cognitive = preset.c;
-                            AppState.resources.emotional = preset.e;
-                        } else {
-                            loadMoodForDate(dateStr);
-                        }
-                        updateUI();
-                        showToast('День ' + AppState.currentDay + ' · ' + getCurrentPhase().title);
-                    });
-                })(d, cycleDay);
-
-                row.appendChild(col);
+                        function getCycleDayForDate(date) {
+            if (AppState.demoCycle || !AppState.lastPeriodDate) {
+                // Демо: первый день цикла = 5 дней назад, сегодня = день 6
+                var today = new Date();
+                today.setHours(0, 0, 0, 0);
+                var demoStart = new Date(today);
+                demoStart.setDate(today.getDate() - 5);
+                var diff = Math.floor((date.getTime() - demoStart.getTime()) / 86400000);
+                return diff + 1;
             }
+            var diff = Math.floor((date - AppState.lastPeriodDate) / 86400000);
+            return ((diff % AppState.cycleLength) + AppState.cycleLength) % AppState.cycleLength + 1;
         }
+        
         function renderTasks() {
             var container = document.getElementById('tasksList');
             var todayTasks = AppState.tasks.filter(function(t) {
