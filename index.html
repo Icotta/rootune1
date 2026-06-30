@@ -609,6 +609,9 @@
 
         // ===== UI =====
         function updateUI() {
+            if (AppState.demoCycle) {
+                AppState.currentDay = 6;
+            }
             var phase = getCurrentPhase();
             var card = document.getElementById('phaseCard');
             card.className = 'phase-card ' + phase.id;
