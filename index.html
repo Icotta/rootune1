@@ -37,45 +37,17 @@
             --transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1.2);
         }
 
-        .onboarding-slides .slide {
-            display: none;
-        }
-        .onboarding-slides .slide.active {
-            display: block;
-        }
-        .onboarding-slide-icon {
-            font-size: 60px;
-            margin-bottom: 16px;
-        }
-        .onboarding-slide-title {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-        .onboarding-slide-text {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.5;
-        }
-        .onboarding-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #DDD;
-        }
-        .onboarding-dot.active {
-            background: var(--accent);
-        }
+        .onboarding-slides .slide { display: none; }
+        .onboarding-slides .slide.active { display: block; }
+        .onboarding-slide-icon { font-size: 60px; margin-bottom: 16px; }
+        .onboarding-slide-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+        .onboarding-slide-text { font-size: 14px; color: var(--text-secondary); line-height: 1.5; }
+        .onboarding-dot { width: 8px; height: 8px; border-radius: 50%; background: #DDD; }
+        .onboarding-dot.active { background: var(--accent); }
         .add-task-btn svg,
-        .nav-item.add svg {
-            display: block;
-        }
+        .nav-item.add svg { display: block; }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: var(--font);
@@ -93,1435 +65,395 @@
             overflow-x: hidden;
         }
 
-        /* Шапка */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-        }
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+        .logo { font-size: 24px; font-weight: 700; letter-spacing: -0.5px; display: flex; align-items: center; gap: 10px; }
         .logo-icon {
-            width: 38px;
-            height: 38px;
-            background: var(--bloom);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            box-shadow: 0 4px 12px rgba(232, 180, 188, 0.4);
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            width: 38px; height: 38px; background: var(--bloom); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center; font-size: 20px;
+            box-shadow: 0 4px 12px rgba(232, 180, 188, 0.4); cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
         }
-        .logo-icon:active {
-            transform: scale(.93);
-            box-shadow: 0 2px 8px rgba(232, 180, 188, 0.3);
-        }
-        .header-actions {
-            display: flex;
-            gap: 10px;
-        }
+        .logo-icon:active { transform: scale(.93); box-shadow: 0 2px 8px rgba(232, 180, 188, 0.3); }
+        .header-actions { display: flex; gap: 10px; }
         .icon-btn {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            background: var(--card);
-            border: none;
-            font-size: 18px;
-            cursor: pointer;
-            box-shadow: var(--shadow-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.2s, box-shadow 0.2s;
+            width: 42px; height: 42px; border-radius: 50%; background: var(--card); border: none;
+            font-size: 18px; cursor: pointer; box-shadow: var(--shadow-sm); display: flex;
+            align-items: center; justify-content: center; transition: transform 0.2s, box-shadow 0.2s;
         }
-        .icon-btn:active {
-            transform: scale(.93);
-            box-shadow: var(--shadow);
-        }
+        .icon-btn:active { transform: scale(.93); box-shadow: var(--shadow); }
 
-        /* Карточка фазы */
         .phase-card {
-            background: var(--card);
-            border-radius: var(--radius-xl);
-            padding: 24px 24px 20px;
-            margin-bottom: 18px;
-            box-shadow: var(--shadow);
-            position: relative;
-            overflow: hidden;
-            border-left: 5px solid var(--fruit);
-            transition: border-color 0.5s, box-shadow 0.3s;
+            background: var(--card); border-radius: var(--radius-xl); padding: 24px 24px 20px;
+            margin-bottom: 18px; box-shadow: var(--shadow); position: relative; overflow: hidden;
+            border-left: 5px solid var(--fruit); transition: border-color 0.5s, box-shadow 0.3s;
         }
-        .phase-card.seed {
-            border-left-color: var(--seed);
-        }
-        .phase-card.sprout {
-            border-left-color: var(--sprout);
-        }
-        .phase-card.bloom {
-            border-left-color: var(--bloom);
-        }
-        .phase-card.fruit {
-            border-left-color: var(--fruit);
-        }
-        .phase-emoji {
-            font-size: 44px;
-            margin-bottom: 6px;
-            display: block;
-        }
-        .phase-name {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 4px;
-            word-break: break-word;
-        }
-        .phase-day {
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
+        .phase-card.seed { border-left-color: var(--seed); }
+        .phase-card.sprout { border-left-color: var(--sprout); }
+        .phase-card.bloom { border-left-color: var(--bloom); }
+        .phase-card.fruit { border-left-color: var(--fruit); }
+        .phase-emoji { font-size: 44px; margin-bottom: 6px; display: block; }
+        .phase-name { font-size: 22px; font-weight: 700; margin-bottom: 4px; word-break: break-word; }
+        .phase-day { font-size: 14px; color: var(--text-secondary); }
         .phase-watercolor {
-            position: absolute;
-            top: -30px;
-            right: -30px;
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            opacity: 0.1;
-            pointer-events: none;
-            transition: background 0.5s;
-            filter: blur(4px);
+            position: absolute; top: -30px; right: -30px; width: 140px; height: 140px;
+            border-radius: 50%; opacity: 0.1; pointer-events: none; transition: background 0.5s; filter: blur(4px);
         }
+        .phase-card.seed .phase-watercolor { background: var(--seed); }
+        .phase-card.sprout .phase-watercolor { background: var(--sprout); }
+        .phase-card.bloom .phase-watercolor { background: var(--bloom); }
+        .phase-card.fruit .phase-watercolor { background: var(--fruit); }
 
-                .recommendation-content {
-            flex: 1;
-            min-width: 0;
-        }
-        .recommendation-tips {
-            display: flex;
-            gap: 8px;
-            margin-top: 10px;
-            flex-wrap: wrap;
-        }
-        .rec-tip {
-            font-size: 11px;
-            padding: 6px 10px;
-            border-radius: 12px;
-            background: #F9F7F4;
-            white-space: nowrap;
-            font-weight: 500;
-        }
-        .rec-tip.tip-physical {
-            background: #F0F7ED;
-            color: #5C7A3F;
-        }
-        .rec-tip.tip-cognitive {
-            background: #FFF8ED;
-            color: #A67C42;
-        }
-        .rec-tip.tip-emotional {
-            background: #FFF0F2;
-            color: #B0505A;
-        }
-        
-        .phase-card.seed .phase-watercolor {
-            background: var(--seed);
-        }
-        .phase-card.sprout .phase-watercolor {
-            background: var(--sprout);
-        }
-        .phase-card.bloom .phase-watercolor {
-            background: var(--bloom);
-        }
-        .phase-card.fruit .phase-watercolor {
-            background: var(--fruit);
-        }
-
-        /* Календарь недели */
         .week-calendar {
-            background: var(--card);
-            border-radius: var(--radius-lg);
-            padding: 20px 18px;
-            margin-bottom: 18px;
-            box-shadow: var(--shadow-sm);
+            background: var(--card); border-radius: var(--radius-lg); padding: 20px 18px;
+            margin-bottom: 18px; box-shadow: var(--shadow-sm);
         }
         .week-label {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-bottom: 14px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-size: 13px; color: var(--text-secondary); margin-bottom: 14px;
+            font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px;
         }
-        .week-row {
-            display: flex;
-            justify-content: space-between;
-            gap: 2px;
-        }
+        .week-row { display: flex; justify-content: space-between; gap: 2px; }
         .week-day-col {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            padding: 4px 0;
-            border-radius: 14px;
-            background: transparent;
-            transition: background 0.2s;
-            outline: none;
-            -webkit-tap-highlight-color: transparent;
-            box-shadow: none;
+            flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;
+            cursor: pointer; padding: 4px 0; border-radius: 14px; background: transparent;
+            transition: background 0.2s; outline: none; -webkit-tap-highlight-color: transparent; box-shadow: none;
         }
-        .week-day-col:active {
-            background: #F2F5ED;
-        }
-        .week-day-name {
-            font-size: 11px;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
+        .week-day-col:active { background: #F2F5ED; }
+        .week-day-name { font-size: 11px; color: var(--text-secondary); font-weight: 500; }
         .week-dot {
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            transition: all 0.3s;
-            position: relative;
+            width: 34px; height: 34px; border-radius: 50%; transition: all 0.3s; position: relative;
         }
 
-        /* seed — 20 оттенков */
-        .week-dot.seed-1 { background: #f5cfa3; }
-        .week-dot.seed-2 { background: #f5cc9f; }
-        .week-dot.seed-3 { background: #f6c89c; }
-        .week-dot.seed-4 { background: #f6c598; }
-        .week-dot.seed-5 { background: #f6c294; }
-        .week-dot.seed-6 { background: #f7be91; }
-        .week-dot.seed-7 { background: #f7bb8d; }
-        .week-dot.seed-8 { background: #f7b889; }
-        .week-dot.seed-9 { background: #f8b585; }
-        .week-dot.seed-10 { background: #f8b182; }
-        .week-dot.seed-11 { background: #f8ae7e; }
-        .week-dot.seed-12 { background: #f9ab7a; }
-        .week-dot.seed-13 { background: #f9a777; }
-        .week-dot.seed-14 { background: #faa473; }
-        .week-dot.seed-15 { background: #faa16f; }
-        .week-dot.seed-16 { background: #fa9d6c; }
-        .week-dot.seed-17 { background: #fb9a68; }
-        .week-dot.seed-18 { background: #fb9764; }
-        .week-dot.seed-19 { background: #fb9460; }
-        .week-dot.seed-20 { background: #fc905d; }
+        .week-dot.seed-1{background:#f5cfa3}.week-dot.seed-2{background:#f5cc9f}.week-dot.seed-3{background:#f6c89c}.week-dot.seed-4{background:#f6c598}.week-dot.seed-5{background:#f6c294}.week-dot.seed-6{background:#f7be91}.week-dot.seed-7{background:#f7bb8d}.week-dot.seed-8{background:#f7b889}.week-dot.seed-9{background:#f8b585}.week-dot.seed-10{background:#f8b182}.week-dot.seed-11{background:#f8ae7e}.week-dot.seed-12{background:#f9ab7a}.week-dot.seed-13{background:#f9a777}.week-dot.seed-14{background:#faa473}.week-dot.seed-15{background:#faa16f}.week-dot.seed-16{background:#fa9d6c}.week-dot.seed-17{background:#fb9a68}.week-dot.seed-18{background:#fb9764}.week-dot.seed-19{background:#fb9460}.week-dot.seed-20{background:#fc905d}
+        .week-dot.sprout-1{background:#d4e4cc}.week-dot.sprout-2{background:#ccdec5}.week-dot.sprout-3{background:#c3d9be}.week-dot.sprout-4{background:#bbd3b7}.week-dot.sprout-5{background:#b3ceb0}.week-dot.sprout-6{background:#abc8a9}.week-dot.sprout-7{background:#a2c3a2}.week-dot.sprout-8{background:#9abd9b}.week-dot.sprout-9{background:#92b794}.week-dot.sprout-10{background:#8ab28d}.week-dot.sprout-11{background:#81ac86}.week-dot.sprout-12{background:#79a77f}.week-dot.sprout-13{background:#71a177}.week-dot.sprout-14{background:#699c70}.week-dot.sprout-15{background:#609669}.week-dot.sprout-16{background:#589162}.week-dot.sprout-17{background:#508b5b}.week-dot.sprout-18{background:#488554}.week-dot.sprout-19{background:#3f804d}.week-dot.sprout-20{background:#377a46}
+        .week-dot.bloom-1{background:#e8b4bc}.week-dot.bloom-2{background:#e9a9b1}.week-dot.bloom-3{background:#eb9ea6}.week-dot.bloom-4{background:#ec939b}.week-dot.bloom-5{background:#ee8890}.week-dot.bloom-6{background:#ef7d86}.week-dot.bloom-7{background:#f1727b}.week-dot.bloom-8{background:#f26770}.week-dot.bloom-9{background:#f45c65}.week-dot.bloom-10{background:#f5515a}.week-dot.bloom-11{background:#ed4852}.week-dot.bloom-12{background:#e5404a}.week-dot.bloom-13{background:#dd3842}.week-dot.bloom-14{background:#d5303a}.week-dot.bloom-15{background:#cd2832}.week-dot.bloom-16{background:#c5202a}.week-dot.bloom-17{background:#bd1822}.week-dot.bloom-18{background:#b5101a}.week-dot.bloom-19{background:#ad0812}.week-dot.bloom-20{background:#a5000a}
+        .week-dot.fruit-1{background:#f0d5c0}.week-dot.fruit-2{background:#eccfb9}.week-dot.fruit-3{background:#e8cab3}.week-dot.fruit-4{background:#e3c4ac}.week-dot.fruit-5{background:#dfbea5}.week-dot.fruit-6{background:#dbb99e}.week-dot.fruit-7{background:#d7b398}.week-dot.fruit-8{background:#d2ad91}.week-dot.fruit-9{background:#cea78a}.week-dot.fruit-10{background:#caa283}.week-dot.fruit-11{background:#c69c7d}.week-dot.fruit-12{background:#c29676}.week-dot.fruit-13{background:#bd916f}.week-dot.fruit-14{background:#b98b68}.week-dot.fruit-15{background:#b58562}.week-dot.fruit-16{background:#b1805b}.week-dot.fruit-17{background:#ad7a54}.week-dot.fruit-18{background:#a8744d}.week-dot.fruit-19{background:#a46e47}.week-dot.fruit-20{background:#a06940}
 
-        /* sprout — 20 оттенков */
-        .week-dot.sprout-1 { background: #d4e4cc; }
-        .week-dot.sprout-2 { background: #ccdec5; }
-        .week-dot.sprout-3 { background: #c3d9be; }
-        .week-dot.sprout-4 { background: #bbd3b7; }
-        .week-dot.sprout-5 { background: #b3ceb0; }
-        .week-dot.sprout-6 { background: #abc8a9; }
-        .week-dot.sprout-7 { background: #a2c3a2; }
-        .week-dot.sprout-8 { background: #9abd9b; }
-        .week-dot.sprout-9 { background: #92b794; }
-        .week-dot.sprout-10 { background: #8ab28d; }
-        .week-dot.sprout-11 { background: #81ac86; }
-        .week-dot.sprout-12 { background: #79a77f; }
-        .week-dot.sprout-13 { background: #71a177; }
-        .week-dot.sprout-14 { background: #699c70; }
-        .week-dot.sprout-15 { background: #609669; }
-        .week-dot.sprout-16 { background: #589162; }
-        .week-dot.sprout-17 { background: #508b5b; }
-        .week-dot.sprout-18 { background: #488554; }
-        .week-dot.sprout-19 { background: #3f804d; }
-        .week-dot.sprout-20 { background: #377a46; }
-
-        /* bloom — 20 оттенков */
-        .week-dot.bloom-1 { background: #e8b4bc; }
-        .week-dot.bloom-2 { background: #e9a9b1; }
-        .week-dot.bloom-3 { background: #eb9ea6; }
-        .week-dot.bloom-4 { background: #ec939b; }
-        .week-dot.bloom-5 { background: #ee8890; }
-        .week-dot.bloom-6 { background: #ef7d86; }
-        .week-dot.bloom-7 { background: #f1727b; }
-        .week-dot.bloom-8 { background: #f26770; }
-        .week-dot.bloom-9 { background: #f45c65; }
-        .week-dot.bloom-10 { background: #f5515a; }
-        .week-dot.bloom-11 { background: #ed4852; }
-        .week-dot.bloom-12 { background: #e5404a; }
-        .week-dot.bloom-13 { background: #dd3842; }
-        .week-dot.bloom-14 { background: #d5303a; }
-        .week-dot.bloom-15 { background: #cd2832; }
-        .week-dot.bloom-16 { background: #c5202a; }
-        .week-dot.bloom-17 { background: #bd1822; }
-        .week-dot.bloom-18 { background: #b5101a; }
-        .week-dot.bloom-19 { background: #ad0812; }
-        .week-dot.bloom-20 { background: #a5000a; }
-
-        /* fruit — 20 оттенков */
-        .week-dot.fruit-1 { background: #f0d5c0; }
-        .week-dot.fruit-2 { background: #eccfb9; }
-        .week-dot.fruit-3 { background: #e8cab3; }
-        .week-dot.fruit-4 { background: #e3c4ac; }
-        .week-dot.fruit-5 { background: #dfbea5; }
-        .week-dot.fruit-6 { background: #dbb99e; }
-        .week-dot.fruit-7 { background: #d7b398; }
-        .week-dot.fruit-8 { background: #d2ad91; }
-        .week-dot.fruit-9 { background: #cea78a; }
-        .week-dot.fruit-10 { background: #caa283; }
-        .week-dot.fruit-11 { background: #c69c7d; }
-        .week-dot.fruit-12 { background: #c29676; }
-        .week-dot.fruit-13 { background: #bd916f; }
-        .week-dot.fruit-14 { background: #b98b68; }
-        .week-dot.fruit-15 { background: #b58562; }
-        .week-dot.fruit-16 { background: #b1805b; }
-        .week-dot.fruit-17 { background: #ad7a54; }
-        .week-dot.fruit-18 { background: #a8744d; }
-        .week-dot.fruit-19 { background: #a46e47; }
-        .week-dot.fruit-20 { background: #a06940; }
-
-        /* mini dots */
-        .dot-mini.seed-1 { background: #f5cfa3; }
-        .dot-mini.seed-2 { background: #f5cc9f; }
-        .dot-mini.seed-3 { background: #f6c89c; }
-        .dot-mini.seed-4 { background: #f6c598; }
-        .dot-mini.seed-5 { background: #f6c294; }
-        .dot-mini.seed-6 { background: #f7be91; }
-        .dot-mini.seed-7 { background: #f7bb8d; }
-        .dot-mini.seed-8 { background: #f7b889; }
-        .dot-mini.seed-9 { background: #f8b585; }
-        .dot-mini.seed-10 { background: #f8b182; }
-        .dot-mini.seed-11 { background: #f8ae7e; }
-        .dot-mini.seed-12 { background: #f9ab7a; }
-        .dot-mini.seed-13 { background: #f9a777; }
-        .dot-mini.seed-14 { background: #faa473; }
-        .dot-mini.seed-15 { background: #faa16f; }
-        .dot-mini.seed-16 { background: #fa9d6c; }
-        .dot-mini.seed-17 { background: #fb9a68; }
-        .dot-mini.seed-18 { background: #fb9764; }
-        .dot-mini.seed-19 { background: #fb9460; }
-        .dot-mini.seed-20 { background: #fc905d; }
-
-        .dot-mini.sprout-1 { background: #d4e4cc; }
-        .dot-mini.sprout-2 { background: #ccdec5; }
-        .dot-mini.sprout-3 { background: #c3d9be; }
-        .dot-mini.sprout-4 { background: #bbd3b7; }
-        .dot-mini.sprout-5 { background: #b3ceb0; }
-        .dot-mini.sprout-6 { background: #abc8a9; }
-        .dot-mini.sprout-7 { background: #a2c3a2; }
-        .dot-mini.sprout-8 { background: #9abd9b; }
-        .dot-mini.sprout-9 { background: #92b794; }
-        .dot-mini.sprout-10 { background: #8ab28d; }
-        .dot-mini.sprout-11 { background: #81ac86; }
-        .dot-mini.sprout-12 { background: #79a77f; }
-        .dot-mini.sprout-13 { background: #71a177; }
-        .dot-mini.sprout-14 { background: #699c70; }
-        .dot-mini.sprout-15 { background: #609669; }
-        .dot-mini.sprout-16 { background: #589162; }
-        .dot-mini.sprout-17 { background: #508b5b; }
-        .dot-mini.sprout-18 { background: #488554; }
-        .dot-mini.sprout-19 { background: #3f804d; }
-        .dot-mini.sprout-20 { background: #377a46; }
-
-        .dot-mini.bloom-1 { background: #e8b4bc; }
-        .dot-mini.bloom-2 { background: #e9a9b1; }
-        .dot-mini.bloom-3 { background: #eb9ea6; }
-        .dot-mini.bloom-4 { background: #ec939b; }
-        .dot-mini.bloom-5 { background: #ee8890; }
-        .dot-mini.bloom-6 { background: #ef7d86; }
-        .dot-mini.bloom-7 { background: #f1727b; }
-        .dot-mini.bloom-8 { background: #f26770; }
-        .dot-mini.bloom-9 { background: #f45c65; }
-        .dot-mini.bloom-10 { background: #f5515a; }
-        .dot-mini.bloom-11 { background: #ed4852; }
-        .dot-mini.bloom-12 { background: #e5404a; }
-        .dot-mini.bloom-13 { background: #dd3842; }
-        .dot-mini.bloom-14 { background: #d5303a; }
-        .dot-mini.bloom-15 { background: #cd2832; }
-        .dot-mini.bloom-16 { background: #c5202a; }
-        .dot-mini.bloom-17 { background: #bd1822; }
-        .dot-mini.bloom-18 { background: #b5101a; }
-        .dot-mini.bloom-19 { background: #ad0812; }
-        .dot-mini.bloom-20 { background: #a5000a; }
-
-        .dot-mini.fruit-1 { background: #f0d5c0; }
-        .dot-mini.fruit-2 { background: #eccfb9; }
-        .dot-mini.fruit-3 { background: #e8cab3; }
-        .dot-mini.fruit-4 { background: #e3c4ac; }
-        .dot-mini.fruit-5 { background: #dfbea5; }
-        .dot-mini.fruit-6 { background: #dbb99e; }
-        .dot-mini.fruit-7 { background: #d7b398; }
-        .dot-mini.fruit-8 { background: #d2ad91; }
-        .dot-mini.fruit-9 { background: #cea78a; }
-        .dot-mini.fruit-10 { background: #caa283; }
-        .dot-mini.fruit-11 { background: #c69c7d; }
-        .dot-mini.fruit-12 { background: #c29676; }
-        .dot-mini.fruit-13 { background: #bd916f; }
-        .dot-mini.fruit-14 { background: #b98b68; }
-        .dot-mini.fruit-15 { background: #b58562; }
-        .dot-mini.fruit-16 { background: #b1805b; }
-        .dot-mini.fruit-17 { background: #ad7a54; }
-        .dot-mini.fruit-18 { background: #a8744d; }
-        .dot-mini.fruit-19 { background: #a46e47; }
-        .dot-mini.fruit-20 { background: #a06940; }
+        .dot-mini.seed-1{background:#f5cfa3}.dot-mini.seed-2{background:#f5cc9f}.dot-mini.seed-3{background:#f6c89c}.dot-mini.seed-4{background:#f6c598}.dot-mini.seed-5{background:#f6c294}.dot-mini.seed-6{background:#f7be91}.dot-mini.seed-7{background:#f7bb8d}.dot-mini.seed-8{background:#f7b889}.dot-mini.seed-9{background:#f8b585}.dot-mini.seed-10{background:#f8b182}.dot-mini.seed-11{background:#f8ae7e}.dot-mini.seed-12{background:#f9ab7a}.dot-mini.seed-13{background:#f9a777}.dot-mini.seed-14{background:#faa473}.dot-mini.seed-15{background:#faa16f}.dot-mini.seed-16{background:#fa9d6c}.dot-mini.seed-17{background:#fb9a68}.dot-mini.seed-18{background:#fb9764}.dot-mini.seed-19{background:#fb9460}.dot-mini.seed-20{background:#fc905d}
+        .dot-mini.sprout-1{background:#d4e4cc}.dot-mini.sprout-2{background:#ccdec5}.dot-mini.sprout-3{background:#c3d9be}.dot-mini.sprout-4{background:#bbd3b7}.dot-mini.sprout-5{background:#b3ceb0}.dot-mini.sprout-6{background:#abc8a9}.dot-mini.sprout-7{background:#a2c3a2}.dot-mini.sprout-8{background:#9abd9b}.dot-mini.sprout-9{background:#92b794}.dot-mini.sprout-10{background:#8ab28d}.dot-mini.sprout-11{background:#81ac86}.dot-mini.sprout-12{background:#79a77f}.dot-mini.sprout-13{background:#71a177}.dot-mini.sprout-14{background:#699c70}.dot-mini.sprout-15{background:#609669}.dot-mini.sprout-16{background:#589162}.dot-mini.sprout-17{background:#508b5b}.dot-mini.sprout-18{background:#488554}.dot-mini.sprout-19{background:#3f804d}.dot-mini.sprout-20{background:#377a46}
+        .dot-mini.bloom-1{background:#e8b4bc}.dot-mini.bloom-2{background:#e9a9b1}.dot-mini.bloom-3{background:#eb9ea6}.dot-mini.bloom-4{background:#ec939b}.dot-mini.bloom-5{background:#ee8890}.dot-mini.bloom-6{background:#ef7d86}.dot-mini.bloom-7{background:#f1727b}.dot-mini.bloom-8{background:#f26770}.dot-mini.bloom-9{background:#f45c65}.dot-mini.bloom-10{background:#f5515a}.dot-mini.bloom-11{background:#ed4852}.dot-mini.bloom-12{background:#e5404a}.dot-mini.bloom-13{background:#dd3842}.dot-mini.bloom-14{background:#d5303a}.dot-mini.bloom-15{background:#cd2832}.dot-mini.bloom-16{background:#c5202a}.dot-mini.bloom-17{background:#bd1822}.dot-mini.bloom-18{background:#b5101a}.dot-mini.bloom-19{background:#ad0812}.dot-mini.bloom-20{background:#a5000a}
+        .dot-mini.fruit-1{background:#f0d5c0}.dot-mini.fruit-2{background:#eccfb9}.dot-mini.fruit-3{background:#e8cab3}.dot-mini.fruit-4{background:#e3c4ac}.dot-mini.fruit-5{background:#dfbea5}.dot-mini.fruit-6{background:#dbb99e}.dot-mini.fruit-7{background:#d7b398}.dot-mini.fruit-8{background:#d2ad91}.dot-mini.fruit-9{background:#cea78a}.dot-mini.fruit-10{background:#caa283}.dot-mini.fruit-11{background:#c69c7d}.dot-mini.fruit-12{background:#c29676}.dot-mini.fruit-13{background:#bd916f}.dot-mini.fruit-14{background:#b98b68}.dot-mini.fruit-15{background:#b58562}.dot-mini.fruit-16{background:#b1805b}.dot-mini.fruit-17{background:#ad7a54}.dot-mini.fruit-18{background:#a8744d}.dot-mini.fruit-19{background:#a46e47}.dot-mini.fruit-20{background:#a06940}
 
         .week-dot.today {
-            box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--accent);
-            transform: scale(1.08);
+            box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--accent); transform: scale(1.08);
         }
-        .week-date {
-            font-size: 10px;
-            color: var(--text-secondary);
-            margin-top: 2px;
-        }
+        .week-date { font-size: 10px; color: var(--text-secondary); margin-top: 2px; }
 
-        /* Ресурсы */
         .resources-card {
-            background: var(--card);
-            border-radius: var(--radius-lg);
-            padding: 22px 20px;
-            margin-bottom: 18px;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.4s ease;
-            overflow: hidden;
+            background: var(--card); border-radius: var(--radius-lg); padding: 22px 20px;
+            margin-bottom: 18px; box-shadow: var(--shadow-sm); transition: all 0.4s ease; overflow: hidden;
         }
-        .resources-card.saved {
-            padding: 14px 20px;
-        }
+        .resources-card.saved { padding: 14px 20px; }
         .resources-card.saved .resources-title,
         .resources-card.saved .resource-row,
-        .resources-card.saved .sliders-container {
-            display: none;
-        }
-        .saved-header {
-            display: none;
-            align-items: center;
-            gap: 6px;
-            font-size: 14px;
-        }
-        .resources-card.saved .saved-header {
-            display: flex;
-        }
-        .saved-dot {
-            color: var(--accent);
-            font-weight: 700;
-        }
-        .saved-edit {
-            color: var(--accent);
-            cursor: pointer;
-            font-weight: 500;
-            text-decoration: underline;
-        }
-        .saved-edit:hover {
-            opacity: 0.8;
-        }
-        .resources-title {
-            font-size: 15px;
-            font-weight: 600;
-            margin-bottom: 18px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            text-align: center;
-        }
-        .sliders-container {
-            display: block;
-        }
-        .resource-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 14px;
-        }
-        .resource-emoji {
-            font-size: 22px;
-            width: 28px;
-            text-align: center;
-        }
-        .resource-label {
-            font-size: 13px;
-            color: var(--text-secondary);
-            width: 55px;
-            font-weight: 500;
-        }
-        .resource-slider-bg {
-            flex: 1;
-            height: 10px;
-            background: #EDE8E2;
-            border-radius: 10px;
-            position: relative;
-            cursor: pointer;
-            overflow: visible;
-            touch-action: none;
-        }
-        .resource-slider-fill {
-            height: 100%;
-            border-radius: 10px;
-            transition: width 0.35s cubic-bezier(0.25, 0.8, 0.25, 1.2);
-            position: relative;
-        }
-        .resource-slider-fill.physical {
-            background: var(--sprout);
-        }
-        .resource-slider-fill.cognitive {
-            background: var(--honey);
-        }
-        .resource-slider-fill.emotional {
-            background: var(--bloom);
-        }
+        .resources-card.saved .sliders-container { display: none; }
+        .saved-header { display: none; align-items: center; gap: 6px; font-size: 14px; }
+        .resources-card.saved .saved-header { display: flex; }
+        .saved-dot { color: var(--accent); font-weight: 700; }
+        .saved-edit { color: var(--accent); cursor: pointer; font-weight: 500; text-decoration: underline; }
+        .resources-title { font-size: 15px; font-weight: 600; margin-bottom: 18px; display: flex; justify-content: center; align-items: center; gap: 8px; text-align: center; }
+        .resource-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+        .resource-emoji { font-size: 22px; width: 28px; text-align: center; }
+        .resource-label { font-size: 13px; color: var(--text-secondary); width: 55px; font-weight: 500; }
+        .resource-slider-bg { flex: 1; height: 10px; background: #EDE8E2; border-radius: 10px; position: relative; cursor: pointer; overflow: visible; touch-action: none; }
+        .resource-slider-fill { height: 100%; border-radius: 10px; transition: width 0.35s cubic-bezier(0.25,0.8,0.25,1.2); position: relative; }
+        .resource-slider-fill.physical { background: var(--sprout); }
+        .resource-slider-fill.cognitive { background: var(--honey); }
+        .resource-slider-fill.emotional { background: var(--bloom); }
         .resource-thumb {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: white;
-            border: 3px solid;
-            position: absolute;
-            right: -14px;
-            top: -9px;
-            cursor: grab;
-            transition: transform 0.15s, border-color 0.4s, box-shadow 0.2s;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-            z-index: 2;
+            width: 28px; height: 28px; border-radius: 50%; background: white; border: 3px solid;
+            position: absolute; right: -14px; top: -9px; cursor: grab; z-index: 2;
+            transition: transform 0.15s, border-color 0.4s, box-shadow 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.12);
         }
-        .resource-thumb.dragging {
-            transform: scale(1.2);
-            cursor: grabbing;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-        }
-        .resource-thumb.physical {
-            border-color: var(--sprout);
-        }
-        .resource-thumb.cognitive {
-            border-color: var(--honey);
-        }
-        .resource-thumb.emotional {
-            border-color: var(--bloom);
-        }
-        .resource-value {
-            font-size: 15px;
-            font-weight: 700;
-            width: 26px;
-            text-align: right;
-        }
+        .resource-thumb.dragging { transform: scale(1.2); cursor: grabbing; box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+        .resource-thumb.physical { border-color: var(--sprout); }
+        .resource-thumb.cognitive { border-color: var(--honey); }
+        .resource-thumb.emotional { border-color: var(--bloom); }
+        .resource-value { font-size: 15px; font-weight: 700; width: 26px; text-align: right; }
 
-        /* Рекомендация */
         .recommendation {
-            background: var(--card);
-            border-radius: var(--radius-lg);
-            padding: 18px 20px;
-            margin-bottom: 18px;
-            box-shadow: var(--shadow-sm);
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
+            background: var(--card); border-radius: var(--radius-lg); padding: 18px 20px;
+            margin-bottom: 18px; box-shadow: var(--shadow-sm); display: flex; align-items: flex-start; gap: 12px;
         }
-        .recommendation-icon {
-            font-size: 28px;
-            flex-shrink: 0;
-            margin-top: 1px;
+        .recommendation-icon { font-size: 28px; flex-shrink: 0; margin-top: 1px; }
+        .recommendation-content { flex: 1; min-width: 0; }
+        .recommendation-text { font-size: 14px; line-height: 1.6; color: var(--text); }
+        .recommendation-tips { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+        .rec-tip {
+            font-size: 11px; padding: 6px 10px; border-radius: 12px; background: #F9F7F4;
+            white-space: nowrap; font-weight: 500;
         }
-        .recommendation-text {
-            font-size: 14px;
-            line-height: 1.6;
-            color: var(--text);
-        }
+        .rec-tip.tip-physical { background: #F0F7ED; color: #5C7A3F; }
+        .rec-tip.tip-cognitive { background: #FFF8ED; color: #A67C42; }
+        .rec-tip.tip-emotional { background: #FFF0F2; color: #B0505A; }
 
-        /* Задачи */
-        .tasks-card {
-            background: var(--card);
-            border-radius: var(--radius-lg);
-            padding: 20px;
-            margin-bottom: 18px;
-            box-shadow: var(--shadow-sm);
-        }
-        .tasks-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-        .tasks-title {
-            font-size: 15px;
-            font-weight: 600;
-        }
+        .tasks-card { background: var(--card); border-radius: var(--radius-lg); padding: 20px; margin-bottom: 18px; box-shadow: var(--shadow-sm); }
+        .tasks-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .tasks-title { font-size: 15px; font-weight: 600; }
         .add-task-btn {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background-color: #9CBA7F;
-            color: white;
-            border: none;
-            font-size: 26px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-            padding: 0;
-            box-shadow: 0 4px 12px rgba(156, 186, 127, 0.35);
+            width: 44px; height: 44px; border-radius: 50%; background-color: #9CBA7F; color: white;
+            border: none; font-size: 26px; cursor: pointer; display: flex; align-items: center;
+            justify-content: center; line-height: 1; padding: 0; box-shadow: 0 4px 12px rgba(156,186,127,0.35);
         }
-        .add-task-btn:active {
-            transform: scale(0.9);
-            background-color: #7a9a6f;
-        }
+        .add-task-btn:active { transform: scale(0.9); background-color: #7a9a6f; }
         .task-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 14px 4px;
-            border-bottom: 1px solid #F5F1EB;
-            transition: background 0.2s;
-            border-radius: 8px;
+            display: flex; align-items: center; gap: 12px; padding: 14px 4px;
+            border-bottom: 1px solid #F5F1EB; transition: background 0.2s; border-radius: 8px;
         }
-        .task-item:last-child {
-            border-bottom: none;
-        }
-        .task-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-        .task-dot.green {
-            background: #7A9A7E;
-        }
-        .task-dot.yellow {
-            background: #E8B86D;
-        }
-        .task-dot.red {
-            background: #D97C5B;
-        }
-        .task-info {
-            flex: 1;
-            min-width: 0;
-        }
-        .task-name {
-            font-size: 14px;
-            font-weight: 500;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .task-project {
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-        .task-badges {
-            display: flex;
-            gap: 6px;
-            font-size: 11px;
-            color: var(--text-secondary);
-            flex-shrink: 0;
-        }
-        .empty-state {
-            text-align: center;
-            padding: 30px 10px;
-            color: var(--text-secondary);
-        }
-        .empty-state-emoji {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-        .empty-state-text {
-            font-size: 14px;
-            line-height: 1.5;
-        }
+        .task-item:last-child { border-bottom: none; }
+        .task-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+        .task-dot.green { background: #7A9A7E; } .task-dot.yellow { background: #E8B86D; } .task-dot.red { background: #D97C5B; }
+        .task-info { flex: 1; min-width: 0; }
+        .task-name { font-size: 14px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .task-project { font-size: 12px; color: var(--text-secondary); }
+        .task-badges { display: flex; gap: 6px; font-size: 11px; color: var(--text-secondary); flex-shrink: 0; }
+        .empty-state { text-align: center; padding: 30px 10px; color: var(--text-secondary); }
+        .empty-state-emoji { font-size: 40px; margin-bottom: 10px; }
+        .empty-state-text { font-size: 14px; line-height: 1.5; }
 
-        /* Экран ритма */
-        .rhythm-screen {
-            display: none;
-        }
-        .rhythm-screen.active {
-            display: block;
-        }
-        .rhythm-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
+        .rhythm-screen { display: none; }
+        .rhythm-screen.active { display: block; }
+        .rhythm-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
         .rhythm-back {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: var(--card);
-            border: none;
-            font-size: 18px;
-            cursor: pointer;
-            box-shadow: var(--shadow-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 36px; height: 36px; border-radius: 50%; background: var(--card); border: none;
+            font-size: 18px; cursor: pointer; box-shadow: var(--shadow-sm); display: flex;
+            align-items: center; justify-content: center;
         }
-        .rhythm-title {
-            font-size: 18px;
-            font-weight: 700;
-        }
+        .rhythm-title { font-size: 18px; font-weight: 700; }
 
         .month-calendar {
-            background: var(--card);
-            border-radius: var(--radius-lg);
-            padding: 20px 18px;
-            margin-bottom: 18px;
-            box-shadow: var(--shadow-sm);
+            background: var(--card); border-radius: var(--radius-lg); padding: 20px 18px;
+            margin-bottom: 18px; box-shadow: var(--shadow-sm);
         }
-        .month-nav {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 14px;
-        }
+        .month-nav { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 14px; }
         .month-arrow {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: var(--card);
-            border: none;
-            font-size: 14px;
-            cursor: pointer;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.2s;
+            width: 30px; height: 30px; border-radius: 50%; background: var(--card); border: none;
+            font-size: 14px; cursor: pointer; box-shadow: var(--shadow-sm); transition: all 0.2s;
         }
-        .month-arrow:active {
-            background: #F2F5ED;
-            transform: scale(0.95);
-        }
-        .month-name {
-            text-align: center;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text);
-            min-width: 120px;
-        }
+        .month-arrow:active { background: #F2F5ED; transform: scale(0.95); }
+        .month-name { text-align: center; font-size: 14px; font-weight: 600; color: var(--text); min-width: 120px; }
         .month-days-header {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            text-align: center;
-            font-size: 10px;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-            font-weight: 500;
+            display: grid; grid-template-columns: repeat(7, 1fr); text-align: center;
+            font-size: 10px; color: var(--text-secondary); margin-bottom: 8px; font-weight: 500;
         }
-        .month-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 4px 0;
-            text-align: center;
-        }
-        .month-dot-cell {
-            padding: 6px 0;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2px;
-        }
-        .month-dot-cell .dot-mini {
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            transition: all 0.2s;
-        }
-        .month-dot-cell.selected .dot-mini {
-            box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--accent);
-            transform: scale(1.1);
-        }
-        .month-dot-cell .dot-num {
-            font-size: 9px;
-            color: var(--text-secondary);
-        }
-        .month-dot-cell.other-month .dot-mini {
-            opacity: 0.2;
-        }
-        .month-dot-cell.other-month .dot-num {
-            color: #CCC;
-        }
-        .dot-mini.empty {
-            background: transparent;
-        }
+        .month-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px 0; text-align: center; }
+        .month-dot-cell { padding: 6px 0; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+        .month-dot-cell .dot-mini { width: 22px; height: 22px; border-radius: 50%; transition: all 0.2s; }
+        .month-dot-cell.selected .dot-mini { box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--accent); transform: scale(1.1); }
+        .month-dot-cell .dot-num { font-size: 9px; color: var(--text-secondary); }
+        .month-dot-cell.other-month .dot-mini { opacity: 0.2; }
+        .month-dot-cell.other-month .dot-num { color: #CCC; }
+        .dot-mini.empty { background: transparent; }
 
-        /* Волны */
-        .waves-card {
-            background: var(--card);
-            border-radius: var(--radius-lg);
-            padding: 20px 18px;
-            margin-bottom: 18px;
-            box-shadow: var(--shadow-sm);
-        }
+        .waves-card { background: var(--card); border-radius: var(--radius-lg); padding: 20px 18px; margin-bottom: 18px; box-shadow: var(--shadow-sm); }
         .waves-title {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-bottom: 16px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            text-align: center;
+            font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; font-weight: 500;
+            text-transform: uppercase; letter-spacing: 0.5px; text-align: center;
         }
-        .waves-svg {
-            width: 100%;
-            height: 100px;
-            margin-bottom: 8px;
-        }
-        .waves-labels {
-            display: flex;
-            justify-content: space-between;
-            font-size: 9px;
-            color: var(--text-secondary);
-            padding: 0 4px;
-        }
+        .waves-svg { width: 100%; height: 100px; margin-bottom: 8px; }
+        .waves-labels { display: flex; justify-content: space-between; font-size: 9px; color: var(--text-secondary); padding: 0 4px; }
 
-        /* Инфо о дне в ритме */
         .rhythm-day-info {
-            background: var(--card);
-            border-radius: var(--radius-lg);
-            padding: 16px 20px;
-            margin-bottom: 18px;
-            box-shadow: var(--shadow-sm);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            justify-content: center;
+            background: var(--card); border-radius: var(--radius-lg); padding: 16px 20px;
+            margin-bottom: 18px; box-shadow: var(--shadow-sm); display: flex; align-items: center;
+            gap: 12px; justify-content: center;
         }
-        .rhythm-day-info .info-phase {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-        .rhythm-day-info .info-values {
-            display: flex;
-            gap: 10px;
-            font-size: 14px;
-            font-weight: 600;
-        }
+        .rhythm-day-info .info-phase { font-size: 13px; color: var(--text-secondary); }
+        .rhythm-day-info .info-values { display: flex; gap: 10px; font-size: 14px; font-weight: 600; }
 
-        /* Toast вверху */
         #toast {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #3A322C;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 13px;
-            z-index: 300;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
-            white-space: nowrap;
-            max-width: 90vw;
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #3A322C;
+            color: white; padding: 10px 20px; border-radius: 20px; font-size: 13px; z-index: 300;
+            opacity: 0; pointer-events: none; transition: opacity 0.3s; white-space: nowrap; max-width: 90vw;
         }
 
-        /* Нижняя навигация */
         .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            width: 100%;
-            max-width: 430px;
-            margin: 0 auto;
-            background: var(--card);
-            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding: 10px 6px 20px;
-            box-shadow: 0 -2px 24px rgba(58, 50, 44, 0.1);
-            z-index: 100;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            position: fixed; bottom: 0; left: 0; right: 0; width: 100%; max-width: 430px;
+            margin: 0 auto; background: var(--card); border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+            display: flex; justify-content: space-around; align-items: center; padding: 10px 6px 20px;
+            box-shadow: 0 -2px 24px rgba(58,50,44,0.1); z-index: 100;
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
         }
         .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 3px;
-            font-size: 10px;
-            color: var(--text-secondary);
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 6px 12px;
-            border-radius: 16px;
-            transition: all 0.2s;
-            font-family: var(--font);
-            font-weight: 500;
+            display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px;
+            color: var(--text-secondary); background: none; border: none; cursor: pointer;
+            padding: 6px 12px; border-radius: 16px; transition: all 0.2s; font-family: var(--font); font-weight: 500;
         }
-        .nav-item.active {
-            color: var(--accent);
-            font-weight: 700;
-        }
-        .nav-item .nav-emoji {
-            font-size: 22px;
-            transition: transform 0.2s;
-        }
-        .nav-item:active .nav-emoji {
-            transform: scale(0.85);
-        }
-        .nav-item.add {
-            position: relative;
-            top: -36px;
-        }
+        .nav-item.active { color: var(--accent); font-weight: 700; }
+        .nav-item .nav-emoji { font-size: 22px; transition: transform 0.2s; }
+        .nav-item:active .nav-emoji { transform: scale(0.85); }
+        .nav-item.add { position: relative; top: -36px; }
         .nav-item.add .nav-emoji {
-            width: 52px;
-            height: 52px;
-            border-radius: 50%;
-            background-color: #9CBA7F;
-            color: white;
-            border: none;
-            font-size: 26px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-            padding: 0;
+            width: 52px; height: 52px; border-radius: 50%; background-color: #9CBA7F; color: white;
+            border: none; font-size: 26px; display: flex; align-items: center; justify-content: center;
+            line-height: 1; padding: 0;
         }
-        .nav-item.add:active .nav-emoji {
-            transform: scale(0.9);
-        }
+        .nav-item.add:active .nav-emoji { transform: scale(0.9); }
 
-        /* Модалки */
         .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.45);
-            z-index: 200;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
+            position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 200; display: flex;
+            align-items: flex-end; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s;
         }
-        .modal-overlay.open {
-            opacity: 1;
-            pointer-events: auto;
-        }
+        .modal-overlay.open { opacity: 1; pointer-events: auto; }
         .modal {
-            background: white;
-            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-            padding: 28px 22px 36px;
-            width: 100%;
-            max-width: 430px;
-            max-height: 85vh;
-            overflow-y: auto;
-            transform: translateY(40px);
-            transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            background: white; border-radius: var(--radius-xl) var(--radius-xl) 0 0; padding: 28px 22px 36px;
+            width: 100%; max-width: 430px; max-height: 85vh; overflow-y: auto;
+            transform: translateY(40px); transition: transform 0.35s cubic-bezier(0.25,0.8,0.25,1);
         }
-        .modal-overlay.open .modal {
-            transform: translateY(0);
-        }
-        .modal-handle {
-            width: 40px;
-            height: 4px;
-            background: #DDD8D1;
-            border-radius: 2px;
-            margin: 0 auto 22px;
-        }
-        .modal-title {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 22px;
-            letter-spacing: -0.3px;
-        }
+        .modal-overlay.open .modal { transform: translateY(0); }
+        .modal-handle { width: 40px; height: 4px; background: #DDD8D1; border-radius: 2px; margin: 0 auto 22px; }
+        .modal-title { font-size: 22px; font-weight: 700; margin-bottom: 22px; letter-spacing: -0.3px; }
         .modal-input {
-            width: 100%;
-            padding: 15px 16px;
-            border: 1.5px solid #E8E3DC;
-            border-radius: var(--radius-md);
-            font-size: 15px;
-            font-family: var(--font);
-            margin-bottom: 12px;
-            background: #FAFAF8;
-            transition: border-color 0.2s, box-shadow 0.2s;
-            -webkit-appearance: none;
-            appearance: none;
+            width: 100%; padding: 15px 16px; border: 1.5px solid #E8E3DC; border-radius: var(--radius-md);
+            font-size: 15px; font-family: var(--font); margin-bottom: 12px; background: #FAFAF8;
+            transition: border-color 0.2s, box-shadow 0.2s; -webkit-appearance: none; appearance: none;
         }
-        .modal-input:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(212, 165, 165, 0.1);
-        }
+        .modal-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(212,165,165,0.1); }
         select.modal-input {
             cursor: pointer;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238B7E74' fill='none' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 16px center;
-            padding-right: 40px;
+            background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px;
         }
-        .modal-label {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-bottom: 6px;
-            margin-top: 10px;
-            font-weight: 500;
-        }
-        .slider-pair {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 4px;
-        }
-        .slider-pair span {
-            font-size: 12px;
-            color: var(--text-secondary);
-            width: 20px;
-            text-align: center;
-        }
-        .slider-pair input[type="range"] {
-            flex: 1;
-            accent-color: var(--accent);
-            height: 6px;
-            cursor: pointer;
-        }
+        .modal-label { font-size: 13px; color: var(--text-secondary); margin-bottom: 6px; margin-top: 10px; font-weight: 500; }
+        .slider-pair { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+        .slider-pair span { font-size: 12px; color: var(--text-secondary); width: 20px; text-align: center; }
+        .slider-pair input[type="range"] { flex: 1; accent-color: var(--accent); height: 6px; cursor: pointer; }
         .modal-save {
-            width: 100%;
-            padding: 16px;
-            background: var(--accent);
-            color: white;
-            border: none;
-            border-radius: var(--radius-md);
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 24px;
-            transition: background 0.2s, transform 0.15s;
-            font-family: var(--font);
-            letter-spacing: -0.2px;
+            width: 100%; padding: 16px; background: var(--accent); color: white; border: none;
+            border-radius: var(--radius-md); font-size: 16px; font-weight: 600; cursor: pointer;
+            margin-top: 24px; transition: background 0.2s, transform 0.15s; font-family: var(--font); letter-spacing: -0.2px;
         }
-        .modal-save:active {
-            background: #b88;
-            transform: scale(0.98);
-        }
+        .modal-save:active { background: #b88; transform: scale(0.98); }
         .modal-close {
-            position: static;
-            margin: 12px auto 0;
-            width: 100%;
-            background: transparent;
-            font-size: 14px;
-            color: var(--text-secondary);
-            border: none;
-            cursor: pointer;
+            position: static; margin: 12px auto 0; width: 100%; background: transparent;
+            font-size: 14px; color: var(--text-secondary); border: none; cursor: pointer;
         }
 
-        /* Кнопки авторизации */
         .auth-btn {
-            width: 100%;
-            padding: 14px;
-            border: 1.5px solid #E8E3DC;
-            border-radius: var(--radius-md);
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: white;
-            transition: background 0.2s;
+            width: 100%; padding: 14px; border: 1.5px solid #E8E3DC; border-radius: var(--radius-md);
+            font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 10px; display: flex;
+            align-items: center; justify-content: center; gap: 8px; background: white; transition: background 0.2s;
         }
-        .auth-btn.google {
-            border-color: #4285F4;
-            color: #4285F4;
-        }
-        .auth-btn.email {
-            border-color: var(--text);
-            color: var(--text);
-        }
-        .auth-btn.anonymous {
-            background: #F5F2EC;
-            border-color: transparent;
-            color: var(--text-secondary);
-        }
-        .auth-btn:active {
-            background: #f0f0f0;
-        }
+        .auth-btn.google { border-color: #4285F4; color: #4285F4; }
+        .auth-btn.email { border-color: var(--text); color: var(--text); }
+        .auth-btn.anonymous { background: #F5F2EC; border-color: transparent; color: var(--text-secondary); }
+        .auth-btn:active { background: #f0f0f0; }
 
-        /* Недельные дни для повторов */
-        .week-days-select {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
+        .week-days-select { display: flex; gap: 6px; flex-wrap: wrap; }
         .week-day-chip {
-            padding: 6px 10px;
-            border-radius: 20px;
-            background: #F2EFE9;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: none;
-            font-family: var(--font);
+            padding: 6px 10px; border-radius: 20px; background: #F2EFE9; font-size: 12px;
+            cursor: pointer; transition: all 0.2s; border: none; font-family: var(--font);
         }
-        .week-day-chip.active {
-            background: var(--accent);
-            color: white;
+        .week-day-chip.active { background: var(--accent); color: white; }
+
+        .histogram {
+            display: flex; justify-content: space-between; align-items: flex-end; gap: 0;
+            height: 120px; padding: 0 10px; margin-bottom: 16px; position: relative;
+        }
+        .histo-day-group { display: flex; justify-content: space-between; align-items: flex-end; height: 100%; width: 100%; }
+        .histo-day-block { display: flex; flex-direction: row; align-items: flex-end; gap: 3px; flex: 1; height: 100%; justify-content: center; }
+        .histo-mini-bar { width: 6px; border-radius: 3px 3px 0 0; transition: all 0.3s; min-height: 2px; flex-shrink: 0; }
+        .histo-mini-bar.cog { background: var(--honey); }
+        .histo-mini-bar.phys { background: var(--sprout); }
+        .histo-mini-bar.emo { background: var(--bloom); }
+        .histo-mini-bar.dimmed { opacity: 0.2; }
+        .histo-day-label { font-size: 7px; color: var(--text-secondary); margin-top: 2px; text-align: center; }
+        .waves-svg.histo-overlay {
+            position: absolute; top: 0; left: 10px; right: 10px; width: calc(100% - 20px); height: 100%; pointer-events: none;
         }
 
-        /* Гистограмма */
-                .histogram {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            gap: 0;
-            height: 120px;
-            padding: 0 10px;
-            margin-bottom: 16px;
-            position: relative;
-        }
-        .histo-day-group {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            height: 100%;
-            width: 100%;
-        }
-        .histo-day-block {
-            display: flex;
-            flex-direction: row;
-            align-items: flex-end;
-            gap: 3px;
-            flex: 1;
-            height: 100%;
-            justify-content: center;
-        }
-        .histo-mini-bar {
-            width: 6px;
-            border-radius: 3px 3px 0 0;
-            transition: all 0.3s;
-            min-height: 2px;
-            flex-shrink: 0;
-        }
-        .waves-svg {
-            position: absolute;
-            top: 0;
-            left: 10px;
-            right: 10px;
-            width: calc(100% - 20px);
-            height: 100%;
-            pointer-events: none;
-        }
-
-        /* Фильтры */
-        .histo-filters {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 8px;
-        }
+        .histo-filters { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
         .histo-filter {
-            padding: 6px 12px;
-            border-radius: 20px;
-            border: 1.5px solid #E8E3DC;
-            background: white;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: var(--font);
-            font-weight: 500;
-            color: var(--text-secondary);
+            padding: 6px 12px; border-radius: 20px; border: 1.5px solid #E8E3DC; background: white;
+            font-size: 12px; cursor: pointer; transition: all 0.2s; font-family: var(--font); font-weight: 500; color: var(--text-secondary);
         }
-        .histo-filter.active {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-        }
-        .histo-filter:active {
-            transform: scale(0.95);
-        }
+        .histo-filter.active { background: var(--accent); color: white; border-color: var(--accent); }
+        .histo-filter:active { transform: scale(0.95); }
 
-        /* Кнопка добавления дат */
         .add-period-btn {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background: #F9F7F4;
-            border: 1.5px dashed #D0CCC4;
-            border-radius: var(--radius-md);
-            font-size: 14px;
-            cursor: pointer;
-            font-family: var(--font);
-            color: var(--text-secondary);
-            transition: all 0.2s;
-            margin-top: 10px;
+            display: block; width: 100%; padding: 12px; background: #F9F7F4;
+            border: 1.5px dashed #D0CCC4; border-radius: var(--radius-md); font-size: 14px;
+            cursor: pointer; font-family: var(--font); color: var(--text-secondary); transition: all 0.2s; margin-top: 10px;
         }
-        .add-period-btn:active {
-            background: #F0EDE8;
-            border-color: var(--accent);
-        }
+        .add-period-btn:active { background: #F0EDE8; border-color: var(--accent); }
 
-        /* Адаптив */
         @media (max-width: 380px) {
-            body {
-                padding: 14px 14px 105px;
-            }
-            .week-dot {
-                width: 28px;
-                height: 28px;
-            }
-            .phase-emoji {
-                font-size: 36px;
-            }
-            .phase-name {
-                font-size: 19px;
-            }
-            .histogram {
-                height: 90px;
-                padding: 0 6px;
-            }
-            .histo-mini-bar {
-                width: 3px;
-            }
-            .histo-filter {
-                font-size: 10px;
-                padding: 4px 10px;
-            }
-            .waves-svg {
-                height: 70px;
-            }
-            .resource-row {
-                gap: 6px;
-            }
-            .resource-emoji {
-                font-size: 18px;
-                width: 22px;
-            }
-            .resource-label {
-                font-size: 11px;
-                width: 45px;
-            }
-            .resource-value {
-                font-size: 13px;
-                width: 22px;
-            }
-            .resource-thumb {
-                width: 22px;
-                height: 22px;
-                right: -11px;
-                top: -6px;
-            }
-            .tasks-card {
-                padding: 14px;
-            }
-            .task-name {
-                font-size: 12px;
-            }
-            .task-badges {
-                font-size: 9px;
-                gap: 4px;
-            }
-            .nav-item {
-                font-size: 8px;
-                padding: 4px 8px;
-            }
-            .nav-item .nav-emoji {
-                font-size: 18px;
-            }
-            .nav-item.add {
-                top: -28px;
-            }
-            .nav-item.add .nav-emoji {
-                width: 44px;
-                height: 44px;
-                font-size: 22px;
-            }
-            .bottom-nav {
-                padding: 8px 6px 14px;
-            }
-            .month-dot-cell .dot-mini {
-                width: 18px;
-                height: 18px;
-            }
-            .month-days-header {
-                font-size: 8px;
-            }
-            .rhythm-day-info {
-                padding: 12px 14px;
-                font-size: 12px;
-            }
-            .recommendation {
-                padding: 14px;
-            }
-            .recommendation-icon {
-                font-size: 22px;
-            }
-            .recommendation-text {
-                font-size: 12px;
-            }
-            .modal {
-                padding: 22px 16px 28px;
-            }
-            .modal-title {
-                font-size: 18px;
-            }
-            .modal-input {
-                padding: 12px 14px;
-                font-size: 14px;
-            }
-            .week-calendar {
-                padding: 14px 10px;
-            }
+            body { padding: 14px 14px 105px; }
+            .week-dot { width: 28px; height: 28px; }
+            .phase-emoji { font-size: 36px; }
+            .phase-name { font-size: 19px; }
+            .histogram { height: 90px; padding: 0 6px; }
+            .histo-mini-bar { width: 4px; }
+            .histo-filter { font-size: 10px; padding: 4px 10px; }
+            .waves-svg { height: 70px; }
+            .resource-row { gap: 6px; }
+            .resource-emoji { font-size: 18px; width: 22px; }
+            .resource-label { font-size: 11px; width: 45px; }
+            .resource-value { font-size: 13px; width: 22px; }
+            .resource-thumb { width: 22px; height: 22px; right: -11px; top: -6px; }
+            .tasks-card { padding: 14px; }
+            .task-name { font-size: 12px; }
+            .task-badges { font-size: 9px; gap: 4px; }
+            .nav-item { font-size: 8px; padding: 4px 8px; }
+            .nav-item .nav-emoji { font-size: 18px; }
+            .nav-item.add { top: -28px; }
+            .nav-item.add .nav-emoji { width: 44px; height: 44px; font-size: 22px; }
+            .bottom-nav { padding: 8px 6px 14px; }
+            .month-dot-cell .dot-mini { width: 18px; height: 18px; }
+            .month-days-header { font-size: 8px; }
+            .rhythm-day-info { padding: 12px 14px; font-size: 12px; }
+            .recommendation { padding: 14px; }
+            .recommendation-icon { font-size: 22px; }
+            .recommendation-text { font-size: 12px; }
+            .modal { padding: 22px 16px 28px; }
+            .modal-title { font-size: 18px; }
+            .modal-input { padding: 12px 14px; font-size: 14px; }
+            .week-calendar { padding: 14px 10px; }
         }
 
         @media (max-width: 340px) {
-            .week-dot {
-                width: 20px;
-                height: 20px;
-            }
-            .week-row {
-                gap: 1px;
-            }
-            .week-day-col {
-                gap: 2px;
-                padding: 2px 0;
-            }
-            .week-day-name {
-                font-size: 8px;
-            }
-            .week-date {
-                font-size: 7px;
-            }
-            .nav-item {
-                font-size: 7px;
-                padding: 2px 6px;
-            }
-            .nav-item .nav-emoji {
-                font-size: 16px;
-            }
-            .nav-item.add {
-                top: -24px;
-            }
-            .nav-item.add .nav-emoji {
-                width: 38px;
-                height: 38px;
-                font-size: 20px;
-            }
-            .logo {
-                font-size: 20px;
-            }
-            .logo-icon {
-                width: 32px;
-                height: 32px;
-                font-size: 16px;
-            }
-            .icon-btn {
-                width: 36px;
-                height: 36px;
-                font-size: 16px;
-            }
-            .phase-card {
-                padding: 14px 12px 12px;
-            }
-            .phase-emoji {
-                font-size: 28px;
-            }
-            .phase-name {
-                font-size: 16px;
-            }
-            .phase-day {
-                font-size: 12px;
-            }
-            .resources-card {
-                padding: 14px 12px;
-            }
-            .resource-row {
-                gap: 4px;
-                margin-bottom: 10px;
-            }
-            .resource-emoji {
-                font-size: 16px;
-                width: 18px;
-            }
-            .resource-label {
-                font-size: 10px;
-                width: 38px;
-            }
-            .resource-value {
-                font-size: 11px;
-                width: 18px;
-            }
-            .resource-thumb {
-                width: 18px;
-                height: 18px;
-                right: -9px;
-                top: -4px;
-            }
-            .resource-slider-bg {
-                height: 6px;
-            }
-            .add-task-btn {
-                width: 36px !important;
-                height: 36px !important;
-                font-size: 22px !important;
-            }
-            .tasks-title {
-                font-size: 13px;
-            }
-            .task-item {
-                padding: 10px 2px;
-                gap: 8px;
-            }
-            .task-name {
-                font-size: 11px;
-            }
-            .task-project {
-                font-size: 10px;
-            }
-            .task-badges {
-                font-size: 8px;
-                gap: 3px;
-            }
-            .task-dot {
-                width: 10px;
-                height: 10px;
-            }
-            .month-dot-cell .dot-mini {
-                width: 14px;
-                height: 14px;
-            }
-            .month-dot-cell .dot-num {
-                font-size: 7px;
-            }
-            .month-days-header {
-                font-size: 7px;
-            }
-            .histogram {
-                height: 70px;
-                padding: 0 4px;
-            }
-            .histo-mini-bar {
-                width: 2px;
-            }
-            .histo-filter {
-                font-size: 8px;
-                padding: 3px 8px;
-            }
-            .waves-svg {
-                height: 50px;
-            }
-            .rhythm-day-info {
-                padding: 10px 12px;
-                gap: 6px;
-                font-size: 12px;
-            }
+            .week-dot { width: 20px; height: 20px; }
+            .week-row { gap: 1px; }
+            .week-day-col { gap: 2px; padding: 2px 0; }
+            .week-day-name { font-size: 8px; }
+            .week-date { font-size: 7px; }
+            .nav-item { font-size: 7px; padding: 2px 6px; }
+            .nav-item .nav-emoji { font-size: 16px; }
+            .nav-item.add { top: -24px; }
+            .nav-item.add .nav-emoji { width: 38px; height: 38px; font-size: 20px; }
+            .logo { font-size: 20px; }
+            .logo-icon { width: 32px; height: 32px; font-size: 16px; }
+            .icon-btn { width: 36px; height: 36px; font-size: 16px; }
+            .phase-card { padding: 14px 12px 12px; }
+            .phase-emoji { font-size: 28px; }
+            .phase-name { font-size: 16px; }
+            .phase-day { font-size: 12px; }
+            .resources-card { padding: 14px 12px; }
+            .resource-row { gap: 4px; margin-bottom: 10px; }
+            .resource-emoji { font-size: 16px; width: 18px; }
+            .resource-label { font-size: 10px; width: 38px; }
+            .resource-value { font-size: 11px; width: 18px; }
+            .resource-thumb { width: 18px; height: 18px; right: -9px; top: -4px; }
+            .resource-slider-bg { height: 6px; }
+            .add-task-btn { width: 36px !important; height: 36px !important; font-size: 22px !important; }
+            .tasks-title { font-size: 13px; }
+            .task-item { padding: 10px 2px; gap: 8px; }
+            .task-name { font-size: 11px; }
+            .task-project { font-size: 10px; }
+            .task-badges { font-size: 8px; gap: 3px; }
+            .task-dot { width: 10px; height: 10px; }
+            .month-dot-cell .dot-mini { width: 14px; height: 14px; }
+            .month-dot-cell .dot-num { font-size: 7px; }
+            .month-days-header { font-size: 7px; }
+            .histogram { height: 70px; padding: 0 4px; }
+            .histo-mini-bar { width: 3px; }
+            .histo-filter { font-size: 8px; padding: 3px 8px; }
+            .waves-svg { height: 50px; }
+            .rhythm-day-info { padding: 10px 12px; gap: 6px; font-size: 12px; }
         }
     </style>
 </head>
 <body>
 
-<!-- ==================== ОСНОВНОЙ ЭКРАН ==================== -->
 <div id="mainScreen">
-
-    <!-- Шапка -->
     <div class="header">
         <div class="logo">
             <div class="logo-icon" id="profileBtn" title="Профиль">🐝</div>
@@ -1533,7 +465,6 @@
         </div>
     </div>
 
-    <!-- Карточка фазы -->
     <div class="phase-card" id="phaseCard">
         <div class="phase-watercolor"></div>
         <span class="phase-emoji" id="phaseEmoji">🌸</span>
@@ -1541,20 +472,16 @@
         <div class="phase-day" id="phaseDay">День 16 из 28</div>
     </div>
 
-    <!-- Календарь недели -->
     <div class="week-calendar">
         <div class="week-label">📅 Твоя неделя</div>
         <div class="week-row" id="weekRow"></div>
     </div>
 
-    <!-- Настройка цикла -->
-    <div id="cycleSetupCard" style="margin-bottom:18px; padding:14px; background:white; border-radius:18px; box-shadow:var(--shadow-sm); text-align:center; font-size:14px;">
-        🌱 Сейчас показывается пример цикла.
-        <br><br>
+    <div id="cycleSetupCard" style="margin-bottom:18px;padding:14px;background:white;border-radius:18px;box-shadow:var(--shadow-sm);text-align:center;font-size:14px;">
+        🌱 Сейчас показывается пример цикла.<br><br>
         <button class="modal-save" style="margin-top:0" onclick="setupCycle()">Настроить цикл под себя</button>
     </div>
 
-    <!-- Ресурсы -->
     <div class="resources-card" id="resourcesCard">
         <div class="saved-header" id="savedHeader">
             <span class="saved-dot">✓ Сохранено</span>
@@ -1564,8 +491,7 @@
         <div class="resources-title">✨ Как ты себя чувствуешь?</div>
         <div class="sliders-container">
             <div class="resource-row">
-                <span class="resource-emoji">⚡️</span>
-                <span class="resource-label">Тело</span>
+                <span class="resource-emoji">⚡️</span><span class="resource-label">Тело</span>
                 <div class="resource-slider-bg" id="sliderBgPhysical">
                     <div class="resource-slider-fill physical" id="sliderFillPhysical" style="width:70%;">
                         <div class="resource-thumb physical" id="thumbPhysical"></div>
@@ -1574,8 +500,7 @@
                 <span class="resource-value" id="valPhysical">7</span>
             </div>
             <div class="resource-row">
-                <span class="resource-emoji">🧩</span>
-                <span class="resource-label">Разум</span>
+                <span class="resource-emoji">🧩</span><span class="resource-label">Разум</span>
                 <div class="resource-slider-bg" id="sliderBgCognitive">
                     <div class="resource-slider-fill cognitive" id="sliderFillCognitive" style="width:90%;">
                         <div class="resource-thumb cognitive" id="thumbCognitive"></div>
@@ -1584,8 +509,7 @@
                 <span class="resource-value" id="valCognitive">9</span>
             </div>
             <div class="resource-row">
-                <span class="resource-emoji">❤️</span>
-                <span class="resource-label">Эмоции</span>
+                <span class="resource-emoji">❤️</span><span class="resource-label">Эмоции</span>
                 <div class="resource-slider-bg" id="sliderBgEmotional">
                     <div class="resource-slider-fill emotional" id="sliderFillEmotional" style="width:50%;">
                         <div class="resource-thumb emotional" id="thumbEmotional"></div>
@@ -1596,22 +520,20 @@
         </div>
     </div>
 
-    <button id="saveMoodBtn" class="modal-save" style="margin-top:10px; margin-bottom:8px;">Сохранить состояние</button>
+    <button id="saveMoodBtn" class="modal-save" style="margin-top:10px;margin-bottom:8px;">Сохранить состояние</button>
 
-    <!-- Рекомендация -->
     <div class="recommendation" id="recommendationBox">
         <span class="recommendation-icon">🐝</span>
         <div class="recommendation-content">
             <div class="recommendation-text" id="recommendationText">Расцветай. Ты на пике обаяния — назначай важные встречи и переговоры.</div>
             <div class="recommendation-tips" id="recommendationTips">
-                <div class="rec-tip tip-physical">⚡️ <span id="tipPhysical">Силовая тренировка</span></div>
-                <div class="rec-tip tip-cognitive">🧠 <span id="tipCognitive">Сложная задача</span></div>
-                <div class="rec-tip tip-emotional">❤️ <span id="tipEmotional">Встреча с друзьями</span></div>
+                <div class="rec-tip tip-physical">⚡️ <span id="tipPhysical">—</span></div>
+                <div class="rec-tip tip-cognitive">🧠 <span id="tipCognitive">—</span></div>
+                <div class="rec-tip tip-emotional">❤️ <span id="tipEmotional">—</span></div>
             </div>
         </div>
     </div>
 
-    <!-- Задачи -->
     <div class="tasks-card">
         <div class="tasks-header">
             <span class="tasks-title">📋 Задачи на сегодня</span>
@@ -1625,14 +547,12 @@
     </div>
 </div>
 
-<!-- ==================== ЭКРАН РИТМА ==================== -->
 <div class="rhythm-screen" id="rhythmScreen">
     <div class="rhythm-header">
         <button class="rhythm-back" id="rhythmBackBtn">←</button>
         <div class="rhythm-title">📊 Ритм</div>
     </div>
 
-    <!-- Календарь месяца -->
     <div class="month-calendar" id="monthCalendar">
         <div class="month-nav">
             <button class="month-arrow" id="prevMonth">◀</button>
@@ -1645,31 +565,21 @@
         <div class="month-grid" id="monthGrid"></div>
     </div>
 
-    <!-- Показатели (гистограмма + волны) -->
     <div class="waves-card">
         <div class="waves-title">🌊 Показатели за неделю</div>
-
-        <!-- Линейная гистограмма -->
         <div class="histogram" id="histogram">
-            <div class="histo-day-group" id="histoDayGroup">
-                <!-- Заполняется JavaScript -->
-            </div>
+            <div class="histo-day-group" id="histoDayGroup"></div>
+            <svg class="waves-svg histo-overlay" id="wavesSvg" viewBox="0 0 360 100" preserveAspectRatio="none" style="display:none;"></svg>
         </div>
-
-        <!-- Кнопки-фильтры -->
         <div class="histo-filters" id="histoFilters">
             <button class="histo-filter active" data-filter="all">Все</button>
             <button class="histo-filter" data-filter="cognitive">🧠 Разум</button>
             <button class="histo-filter" data-filter="physical">💪 Тело</button>
             <button class="histo-filter" data-filter="emotional">❤️ Эмоции</button>
         </div>
-
-        <!-- SVG для плавной волны (появляется при фильтрации) -->
-        <svg class="waves-svg" id="wavesSvg" viewBox="0 0 360 100" preserveAspectRatio="none" style="display:none;"></svg>
         <div class="waves-labels" id="wavesLabels" style="display:none;"></div>
     </div>
 
-    <!-- Инфо о выбранном дне -->
     <div class="rhythm-day-info" id="rhythmDayInfo">
         <span class="info-phase" id="infoPhase">🌸 Расцветай</span>
         <span style="color:var(--text-secondary)">·</span>
@@ -1677,7 +587,6 @@
     </div>
 </div>
 
-<!-- ==================== ЭКРАН КОПИЛКИ ==================== -->
 <div class="rhythm-screen" id="inboxScreen">
     <div class="rhythm-header">
         <button class="rhythm-back" id="inboxBackBtn">←</button>
@@ -1687,7 +596,6 @@
     <div id="inboxTasksList"></div>
 </div>
 
-<!-- ==================== ЭКРАН ПРОЕКТОВ ==================== -->
 <div class="rhythm-screen" id="projectsScreen">
     <div class="rhythm-header">
         <button class="rhythm-back" id="projectsBackBtn">←</button>
@@ -1697,7 +605,6 @@
     <div id="projectsFolders"></div>
 </div>
 
-<!-- ==================== НИЖНЯЯ НАВИГАЦИЯ ==================== -->
 <div class="bottom-nav" id="bottomNav">
     <button class="nav-item active" data-tab="today"><span class="nav-emoji">🏠</span>Сегодня</button>
     <button class="nav-item" data-tab="projects"><span class="nav-emoji">📋</span>Проекты</button>
@@ -1712,7 +619,6 @@
     <button class="nav-item" data-tab="inbox"><span class="nav-emoji">📥</span>Копилка</button>
 </div>
 
-<!-- ==================== МОДАЛКИ ==================== -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
     <div class="modal" onclick="event.stopPropagation()">
         <div class="modal-handle"></div>
@@ -1725,29 +631,13 @@
             <option value="Душа">❤️ Душа</option>
         </select>
         <div class="modal-label">🧠 Умственная сложность: <strong id="cogVal">5</strong></div>
-        <div class="slider-pair">
-            <span>1</span>
-            <input type="range" min="1" max="10" value="5" id="taskCognitive" oninput="document.getElementById('cogVal').textContent=this.value">
-            <span>10</span>
-        </div>
+        <div class="slider-pair"><span>1</span><input type="range" min="1" max="10" value="5" id="taskCognitive" oninput="document.getElementById('cogVal').textContent=this.value"><span>10</span></div>
         <div class="modal-label">💪 Физическая сложность: <strong id="physVal">5</strong></div>
-        <div class="slider-pair">
-            <span>1</span>
-            <input type="range" min="1" max="10" value="5" id="taskPhysical" oninput="document.getElementById('physVal').textContent=this.value">
-            <span>10</span>
-        </div>
-        <div class="modal-label">❤️ Моральная нагрузка: <strong id="moralVal">5</strong> <span style="opacity:0.6; font-size:11px;">(не влияет на подбор)</span></div>
-        <div class="slider-pair">
-            <span>1</span>
-            <input type="range" min="1" max="10" value="5" id="taskMoral" oninput="document.getElementById('moralVal').textContent=this.value" style="opacity:0.5;">
-            <span>10</span>
-        </div>
-        <label style="display:flex; align-items:center; gap:8px; margin-top:8px; font-size:14px;">
-            <input type="checkbox" id="taskCyclic"> Повторять еженедельно
-        </label>
-        <div id="cyclicDays" style="display:none; margin-top:8px;">
-            <div class="week-days-select" id="weekDaysSelect"></div>
-        </div>
+        <div class="slider-pair"><span>1</span><input type="range" min="1" max="10" value="5" id="taskPhysical" oninput="document.getElementById('physVal').textContent=this.value"><span>10</span></div>
+        <div class="modal-label">❤️ Моральная нагрузка: <strong id="moralVal">5</strong> <span style="opacity:0.6;font-size:11px;">(не влияет на подбор)</span></div>
+        <div class="slider-pair"><span>1</span><input type="range" min="1" max="10" value="5" id="taskMoral" oninput="document.getElementById('moralVal').textContent=this.value" style="opacity:0.5;"><span>10</span></div>
+        <label style="display:flex;align-items:center;gap:8px;margin-top:8px;font-size:14px;"><input type="checkbox" id="taskCyclic"> Повторять еженедельно</label>
+        <div id="cyclicDays" style="display:none;margin-top:8px;"><div class="week-days-select" id="weekDaysSelect"></div></div>
         <button class="modal-save" onclick="addTask()">✨ Сохранить задачу</button>
         <button class="modal-close" onclick="closeModal()">Отмена</button>
     </div>
@@ -1760,45 +650,37 @@
         <button class="auth-btn google" onclick="alert('Google Auth (демо)')">G Войти через Google</button>
         <button class="auth-btn email" onclick="alert('Email Auth (демо)')">✉️ Войти через почту</button>
         <button class="auth-btn anonymous" onclick="startAnonymous()">👤 Попробовать без регистрации</button>
-        <p style="font-size:12px; color:var(--text-secondary); text-align:center; margin-top:12px;">Без регистрации данные не сохранятся после закрытия</p>
+        <p style="font-size:12px;color:var(--text-secondary);text-align:center;margin-top:12px;">Без регистрации данные не сохранятся после закрытия</p>
     </div>
 </div>
 
-<!-- Toast -->
 <div id="toast"></div>
 
-<!-- Онбординг -->
 <div class="modal-overlay" id="onboardingOverlay">
-    <div class="modal" style="text-align:center; padding-top:40px;">
+    <div class="modal" style="text-align:center;padding-top:40px;">
         <div class="onboarding-slides" id="onboardingSlides"></div>
-        <div style="display:flex; justify-content:center; gap:8px; margin:20px 0;" id="onboardingDots"></div>
+        <div style="display:flex;justify-content:center;gap:8px;margin:20px 0;" id="onboardingDots"></div>
         <button class="modal-save" id="onboardingNext">Далее</button>
-        <button class="modal-close" style="position:static; margin:8px auto 0; width:auto; background:transparent; font-size:14px;" onclick="closeOnboarding()">Пропустить</button>
+        <button class="modal-close" style="position:static;margin:8px auto 0;width:auto;background:transparent;font-size:14px;" onclick="closeOnboarding()">Пропустить</button>
     </div>
 </div>
 
-<!-- Модалка настройки цикла -->
 <div class="modal-overlay" id="cycleSetupOverlay">
     <div class="modal" onclick="event.stopPropagation()">
         <div class="modal-handle"></div>
         <div class="modal-title">🩸 Настройка цикла</div>
-
         <div class="modal-label">🗓 Первый день предыдущих месячных</div>
         <input class="modal-input" type="date" id="firstPeriodDate">
-
         <div class="modal-label" style="margin-top:12px;">📏 Длина менструации: <strong id="periodLenVal">5</strong> дней</div>
         <div class="slider-pair">
             <span>2</span>
             <input type="range" min="2" max="10" value="5" id="periodLenSlider" oninput="document.getElementById('periodLenVal').textContent=this.value;updateLastPeriodDateCalc();">
             <span>10</span>
         </div>
-
         <div class="modal-label">🗓 Последний день предыдущих месячных (авто)</div>
         <div class="modal-input" style="display:flex;align-items:center;justify-content:center;background:#F9F7F4;color:var(--text);font-weight:600;" id="lastPeriodDateCalc">—</div>
-
         <div id="extraDatesContainer" style="margin-top:14px;"></div>
         <button class="add-period-btn" id="addMoreDatesBtn" style="margin-top:8px;">📎 Добавить ещё даты для точности</button>
-
         <div class="modal-label" style="margin-top:14px;">⚙️ Особые случаи</div>
         <label style="display:flex;align-items:center;gap:8px;font-size:14px;margin-top:6px;">
             <input type="checkbox" id="irregularCycle"> У меня нерегулярный цикл
@@ -1806,1278 +688,281 @@
         <label style="display:flex;align-items:center;gap:8px;font-size:14px;margin-top:4px;">
             <input type="checkbox" id="pregnantCheck"> Я беременна
         </label>
-
         <div id="cyclePreview" style="margin-top:14px;padding:12px;background:#F9F7F4;border-radius:12px;font-size:13px;display:none;">
             📊 <strong>Расчёт:</strong><br>
             Длина цикла: <strong id="calcCycleLength">—</strong> дней<br>
             Длина месячных: <strong id="calcPeriodLength">—</strong> дней<br>
             Следующие месячные: <strong id="calcNextPeriod">—</strong>
         </div>
-
         <button class="modal-save" onclick="saveCycleSetup()">💾 Сохранить</button>
         <button class="modal-close" onclick="document.getElementById('cycleSetupOverlay').classList.remove('open')">Отмена</button>
     </div>
 </div>
 
 <script>
-    // ===== FIREBASE =====
-    const firebaseConfig = {
-        apiKey: "AIzaSyB35WV3HSll5VE334xrMdU2eKPM_dKkfxw",
-        authDomain: "rootine-ce772.firebaseapp.com",
-        projectId: "rootine-ce772",
-        storageBucket: "rootine-ce772.firebasestorage.app",
-        messagingSenderId: "675881814040",
-        appId: "1:675881814040:web:baecf0d66c2edc9fd1db6d",
-        measurementId: "G-NMZ7CX9H6V"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-    db.enablePersistence().catch(function() {});
+const firebaseConfig={apiKey:"AIzaSyB35WV3HSll5VE334xrMdU2eKPM_dKkfxw",authDomain:"rootine-ce772.firebaseapp.com",projectId:"rootine-ce772",storageBucket:"rootine-ce772.firebasestorage.app",messagingSenderId:"675881814040",appId:"1:675881814040:web:baecf0d66c2edc9fd1db6d",measurementId:"G-NMZ7CX9H6V"};
+firebase.initializeApp(firebaseConfig);
+const auth=firebase.auth(),db=firebase.firestore();
+db.enablePersistence().catch(function(){});
 
-    // ===== ДАННЫЕ =====
-    var beePhrases = {
-        seed: 'Отдыхай. Сейчас не время для рекордов — закрой старые задачи и дай телу восстановиться 💛.',
-        sprout: 'Расти. Самое время начать новые проекты с новой силой! ✨',
-        bloom: 'Расцветай. Ты на пике обаяния — назначай важные встречи и переговоры 💅',
-        fruit: 'Заземляйся. Завершай начатое, наводи порядок, никаких импульсивных решений 💛'
-    };
+var beePhrases={seed:'Отдыхай. Сейчас не время для рекордов — закрой старые задачи и дай телу восстановиться 💛.',sprout:'Расти. Самое время начать новые проекты с новой силой! ✨',bloom:'Расцветай. Ты на пике обаяния — назначай важные встречи и переговоры 💅',fruit:'Заземляйся. Завершай начатое, наводи порядок, никаких импульсивных решений 💛'};
+var currentDay=6,centerDate=new Date(),cycleLength=28,lastPeriodDate=null,demoCycle=true,resources={physical:7,cognitive:9,emotional:5},tasks=[],userName='Ева',isAnonymous=true,moodSavedForActiveDate=false,rhythmSelectedDay=new Date().getDate(),activeHistoFilter='all',now=new Date(),rhythmMonth=new Date().getMonth(),rhythmYear=new Date().getFullYear(),periodDates=[],periodLengthDays=5,isIrregular=false,isPregnant=false,extraPeriodCount=0;
+var defaultTasks=[{name:'Презентация для клиента',project:'Разум',cognitive:8,physical:1,moral:6,cyclic:false,days:[],forced:false},{name:'HIIT тренировка',project:'Тело',cognitive:3,physical:9,moral:3,cyclic:true,days:[3,6],forced:false},{name:'Разобрать почту',project:'Копилка',cognitive:3,physical:1,moral:2,cyclic:false,days:[],forced:false}];
 
-    var currentDay = 6;
-    var centerDate = new Date();
-    var cycleLength = 28;
-    var lastPeriodDate = null;
-    var demoCycle = true;
-    var resources = { physical: 7, cognitive: 9, emotional: 5 };
-    var tasks = [];
-    var userName = 'Ева';
-    var isAnonymous = true;
-    var moodSavedForActiveDate = false;
-    var rhythmSelectedDay = new Date().getDate();
-    var activeHistoFilter = 'all';
-    var now = new Date();
-    var rhythmMonth = new Date().getMonth();
-    var rhythmYear = new Date().getFullYear();
-    var periodDates = [];
-    var periodLengthDays = 5;
-    var isIrregular = false;
-    var isPregnant = false;
-    var extraPeriodCount = 0;
+var tipDatabase={physical:{high:['🔥 Интенсивная тренировка','🏃‍♀️ HIIT или бег','💪 Силовая в зале','🤸‍♀️ Динамичная йога','🚴‍♀️ Сайклинг','🥊 Бокс','🏊‍♀️ Плавание'],medium:['🧘‍♀️ Йога или пилатес','🚶‍♀️ Долгая прогулка','🏋️‍♀️ Лёгкая силовая','🤸‍♀️ Растяжка','🕺 Танцы дома','🌿 Пешая прогулка'],low:['🛌 Отдых и восстановление','🧘‍♀️ Медитация лёжа','📖 Чтение в постели','🛁 Тёплая ванна','😴 Дневной сон','🌸 Лёгкая растяжка']},cognitive:{high:['🧩 Сложный проект','📊 Аналитика и цифры','📝 Написание текстов','🎓 Изучение нового','💼 Переговоры','🗂 Планирование'],medium:['📧 Разбор почты','📋 Рутинные задачи','🎨 Творчество','📖 Чтение книги','✍️ Ведение дневника','🎧 Подкасты'],low:['😌 Ничего не делать','🎬 Лёгкий фильм','🛋 Отдых на диване','🎵 Музыка и релакс','📱 Соцсети','🕯 Свечи и уют']},emotional:{high:['🎉 Вечеринка с друзьями','💃 Свидание или танцы','👯‍♀️ Встреча с подругами','🎤 Караоке','📞 Долгий разговор','🍽 Ужин в ресторане'],medium:['💛 Время с близкими','🐱 Игры с питомцем','📝 Дневник благодарности','🌸 Уход за собой','☕ Кофе с подругой','🌅 Закат и прогулка'],low:['🏠 Посидеть дома','📖 Книга и плед','🎧 Любимый плейлист','🕯 Свечи и тишина','🧖‍♀️ Спа-вечер дома','😴 Ранний сон']}};
 
-    var defaultTasks = [
-        { name: 'Презентация для клиента', project: 'Разум', cognitive: 8, physical: 1, moral: 6, cyclic: false, days: [], forced: false },
-        { name: 'HIIT тренировка', project: 'Тело', cognitive: 3, physical: 9, moral: 3, cyclic: true, days: [3,6], forced: false },
-        { name: 'Разобрать почту', project: 'Копилка', cognitive: 3, physical: 1, moral: 2, cyclic: false, days: [], forced: false }
-    ];
+function getTaskStatus(task){if(task.forced)return'green';var pm=resources.physical>=task.physical,cm=resources.cognitive>=task.cognitive;if(pm&&cm)return'green';if(pm||cm)return'yellow';return'red';}
+function getIconOpacity(mainVal,otherVal){var diff=Math.abs(mainVal-otherVal);if(diff<=1)return{main:1,other:1};if(mainVal>otherVal)return{main:1,other:0.3};return{main:0.3,other:1};}
+function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.style.opacity='1';clearTimeout(t._timeout);t._timeout=setTimeout(function(){t.style.opacity='0';},2000);}
+function escapeHTML(str){var div=document.createElement('div');div.textContent=str;return div.innerHTML;}
+function getCycleDayForDate(date){if(demoCycle||!lastPeriodDate){var diff=Math.floor((date-new Date(2026,5,1))/86400000);return((diff%cycleLength)+cycleLength)%cycleLength+1;}var diff=Math.floor((date-lastPeriodDate)/86400000);return((diff%cycleLength)+cycleLength)%cycleLength+1;}
+function getActiveCheckinDate(){return centerDate.toISOString().split('T')[0];}
+function isMoodSavedForDate(dateStr){var history=JSON.parse(localStorage.getItem('checkins')||'[]');return history.some(function(item){return item.date===dateStr;});}
+function loadMoodForDate(dateStr){var history=JSON.parse(localStorage.getItem('checkins')||'[]');var checkin=history.find(function(item){return item.date===dateStr;});if(checkin){resources.physical=checkin.physical;resources.cognitive=checkin.cognitive;resources.emotional=checkin.emotional;updateResourceSliders();}}
+function getHarmonicColorIndex(dayInPhase,totalDaysInPhase,totalColors){if(dayInPhase<=1)return 1;if(dayInPhase>=totalDaysInPhase)return totalColors;var position=(dayInPhase-1)/(totalDaysInPhase-1);var harmonicPoints=[0,1],usedColors=[1,totalColors];while(harmonicPoints.length<totalDaysInPhase&&harmonicPoints.length<totalColors){var newPoints=[],newColors=[];for(var i=0;i<harmonicPoints.length-1;i++){var midPoint=(harmonicPoints[i]+harmonicPoints[i+1])/2,midColor=Math.round((usedColors[i]+usedColors[i+1])/2);newPoints.push(harmonicPoints[i]);newColors.push(usedColors[i]);newPoints.push(midPoint);newColors.push(midColor);}newPoints.push(harmonicPoints[harmonicPoints.length-1]);newColors.push(usedColors[usedColors.length-1]);harmonicPoints=newPoints;usedColors=newColors;}var bestIndex=1,bestDist=Math.abs(position-harmonicPoints[0]);for(var i=0;i<harmonicPoints.length;i++){var dist=Math.abs(position-harmonicPoints[i]);if(dist<bestDist){bestDist=dist;bestIndex=usedColors[i];}}return Math.max(1,Math.min(totalColors,bestIndex));}
+function getPhaseInfo(cycleDay){if(isPregnant)return{id:'bloom',name:'Беременность',title:'Расти',emoji:'🤰',dayInPhase:cycleDay,totalDays:280};if(demoCycle){var pl=5,fe=14,oe=17,le=28;if(cycleDay<=pl)return{id:'seed',name:'Менструальная',title:'Отдыхай',emoji:'🪷',dayInPhase:cycleDay,totalDays:pl};if(cycleDay<=fe)return{id:'sprout',name:'Фолликулярная',title:'Расти',emoji:'🌱',dayInPhase:cycleDay-pl,totalDays:fe-pl};if(cycleDay<=oe)return{id:'bloom',name:'Овуляция',title:'Расцветай',emoji:'🌸',dayInPhase:cycleDay-fe,totalDays:oe-fe};if(cycleDay<=le)return{id:'fruit',name:'Лютеиновая',title:'Заземляйся',emoji:'🍃',dayInPhase:cycleDay-oe,totalDays:le-oe};return{id:'seed',name:'Менструальная',title:'Отдыхай',emoji:'🪷',dayInPhase:1,totalDays:pl};}var pl=periodLengthDays||5,fe=pl+Math.round((cycleLength-pl-14)*0.6),oe=fe+3,le=cycleLength;if(cycleDay<=pl)return{id:'seed',name:'Менструальная',title:'Отдыхай',emoji:'🪷',dayInPhase:cycleDay,totalDays:pl};if(cycleDay<=fe)return{id:'sprout',name:'Фолликулярная',title:'Расти',emoji:'🌱',dayInPhase:cycleDay-pl,totalDays:fe-pl};if(cycleDay<=oe)return{id:'bloom',name:'Овуляция',title:'Расцветай',emoji:'🌸',dayInPhase:cycleDay-fe,totalDays:oe-fe};if(cycleDay<=le)return{id:'fruit',name:'Лютеиновая',title:'Заземляйся',emoji:'🍃',dayInPhase:cycleDay-oe,totalDays:le-oe};return{id:'seed',name:'Менструальная',title:'Отдыхай',emoji:'🪷',dayInPhase:1,totalDays:pl};}
+function getCurrentPhase(day){if(!day)day=currentDay;var info=getPhaseInfo(day);return{id:info.id,name:info.name,title:info.title,emoji:info.emoji,color:'#C8A882'};}
 
-      // ===== БАЗА РЕКОМЕНДАЦИЙ =====
-    var tipDatabase = {
-        physical: {
-            high: [
-                '🔥 Интенсивная тренировка',
-                '🏃‍♀️ HIIT или бег',
-                '💪 Силовая в зале',
-                '🤸‍♀️ Динамичная йога',
-                '🚴‍♀️ Сайклинг или вело',
-                '🥊 Бокс или единоборства',
-                '🏊‍♀️ Плавание на скорость'
-            ],
-            medium: [
-                '🧘‍♀️ Йога или пилатес',
-                '🚶‍♀️ Долгая прогулка',
-                '🏋️‍♀️ Лёгкая силовая',
-                '🤸‍♀️ Растяжка',
-                '🕺 Танцы дома',
-                '🌿 Пешая прогулка',
-                '🏌️‍♀️ Спокойный спорт'
-            ],
-            low: [
-                '🛌 Отдых и восстановление',
-                '🧘‍♀️ Медитация лёжа',
-                '📖 Чтение в постели',
-                '🛁 Тёплая ванна',
-                '😴 Дневной сон',
-                '🌸 Лёгкая растяжка',
-                '🍵 Чай и отдых'
-            ]
-        },
-        cognitive: {
-            high: [
-                '🧩 Сложный проект',
-                '📊 Аналитика и цифры',
-                '📝 Написание текстов',
-                '🎓 Изучение нового',
-                '💼 Переговоры и встречи',
-                '🗂 Планирование месяца',
-                '💻 Программирование'
-            ],
-            medium: [
-                '📧 Разбор почты',
-                '📋 Рутинные задачи',
-                '🎨 Творчество и хобби',
-                '📖 Чтение книги',
-                '✍️ Ведение дневника',
-                '🎧 Подкасты и аудио',
-                '🧹 Уборка и порядок'
-            ],
-            low: [
-                '😌 Ничего не делать',
-                '🎬 Лёгкий фильм',
-                '🛋 Отдых на диване',
-                '🎵 Музыка и релакс',
-                '📱 Соцсети без цели',
-                '☁️ Мечтать и думать',
-                '🕯 Свечи и уют'
-            ]
-        },
-        emotional: {
-            high: [
-                '🎉 Вечеринка с друзьями',
-                '💃 Свидание или танцы',
-                '👯‍♀️ Встреча с подругами',
-                '🎤 Караоке или концерт',
-                '📞 Долгий разговор',
-                '🎭 Театр или кино',
-                '🍽 Ужин в ресторане'
-            ],
-            medium: [
-                '💛 Время с близкими',
-                '🐱 Игры с питомцем',
-                '📝 Дневник благодарности',
-                '🌸 Уход за собой',
-                '🎨 Рисование или handmade',
-                '☕ Кофе с подругой',
-                '🌅 Закат и прогулка'
-            ],
-            low: [
-                '🏠 Посидеть дома',
-                '📖 Книга и плед',
-                '🎧 Любимый плейлист',
-                '🕯 Свечи и тишина',
-                '🧖‍♀️ Спа-вечер дома',
-                '😴 Ранний сон',
-                '🍵 Чай с мятой'
-            ]
-        }
-    };
+function getTipLevel(value){if(value>=7)return'high';if(value>=4)return'medium';return'low';}
+function getRandomTip(category,level){var tips=tipDatabase[category][level];return tips[Math.floor(Math.random()*tips.length)];}
+function updateRecommendationTips(){document.getElementById('tipPhysical').textContent=getRandomTip('physical',getTipLevel(resources.physical));document.getElementById('tipCognitive').textContent=getRandomTip('cognitive',getTipLevel(resources.cognitive));document.getElementById('tipEmotional').textContent=getRandomTip('emotional',getTipLevel(resources.emotional));}
 
-    function getTipLevel(value) {
-        if (value >= 7) return 'high';
-        if (value >= 4) return 'medium';
-        return 'low';
+function showTab(tab){
+    document.getElementById('mainScreen').style.display='none';
+    document.getElementById('rhythmScreen').classList.remove('active');
+    document.getElementById('inboxScreen').classList.remove('active');
+    document.getElementById('projectsScreen').classList.remove('active');
+    document.getElementById('bottomNav').style.display='none';
+    document.querySelectorAll('.nav-item[data-tab]').forEach(function(b){b.classList.remove('active');});
+    if(tab==='rhythm'){document.getElementById('rhythmScreen').classList.add('active');rhythmSelectedDay=new Date().getDate();renderRhythm();}
+    else if(tab==='inbox'){document.getElementById('inboxScreen').classList.add('active');renderInboxTasks();}
+    else if(tab==='projects'){document.getElementById('projectsScreen').classList.add('active');renderProjectsFolders();}
+    else{document.getElementById('mainScreen').style.display='block';document.getElementById('bottomNav').style.display='flex';updateUI();}
+    var activeBtn=document.querySelector('.nav-item[data-tab="'+tab+'"]');if(activeBtn)activeBtn.classList.add('active');
+}
+
+function showInboxScreen(){document.getElementById('mainScreen').style.display='none';document.getElementById('rhythmScreen').classList.remove('active');document.getElementById('inboxScreen').classList.add('active');document.getElementById('projectsScreen').classList.remove('active');document.getElementById('bottomNav').style.display='none';renderInboxTasks();}
+function showProjectsScreen(){document.getElementById('mainScreen').style.display='none';document.getElementById('rhythmScreen').classList.remove('active');document.getElementById('inboxScreen').classList.remove('active');document.getElementById('projectsScreen').classList.add('active');document.getElementById('bottomNav').style.display='none';renderProjectsFolders();}
+
+function updateUI(){
+    var phase=getCurrentPhase(),card=document.getElementById('phaseCard');card.className='phase-card '+phase.id;
+    document.getElementById('phaseEmoji').textContent=phase.emoji;
+    var phaseNameEl=document.getElementById('phaseName');phaseNameEl.textContent=(userName&&userName.trim())?phase.title+', '+userName:phase.title;
+    var shownDay=demoCycle?6:currentDay;
+    document.getElementById('phaseDay').textContent='День '+shownDay+' из '+cycleLength+' · '+phase.name;
+    document.getElementById('recommendationText').textContent=beePhrases[phase.id];
+    updateRecommendationTips();
+    renderWeekCalendar();updateResourceSliders();renderTasks();updateMoodUI();saveData();
+}
+
+function renderWeekCalendar(){
+    var row=document.getElementById('weekRow');row.innerHTML='';
+    var center=new Date(centerDate),dow=center.getDay(),dayNames=['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+    for(var i=0;i<7;i++){var off=i-3,d=new Date(center);d.setDate(d.getDate()+off);var cycleDay=getCycleDayForDate(d),phaseInfo=getPhaseInfo(cycleDay),colorIndex=getHarmonicColorIndex(phaseInfo.dayInPhase,phaseInfo.totalDays,20),dotClass=phaseInfo.id+'-'+colorIndex;
+        var col=document.createElement('div');col.className='week-day-col';
+        col.innerHTML='<div class="week-day-name">'+dayNames[(dow+off+7)%7]+'</div><div class="week-dot '+dotClass+(off===0?' today':'')+'"></div><div class="week-date">'+d.getDate()+'</div>';
+        (function(d,cycleDay){col.addEventListener('click',function(){centerDate=new Date(d);currentDay=cycleDay;demoCycle=false;var dateStr=getActiveCheckinDate();moodSavedForActiveDate=isMoodSavedForDate(dateStr);if(moodSavedForActiveDate)loadMoodForDate(dateStr);updateUI();showToast('День '+currentDay+' · '+getCurrentPhase().title);});})(d,cycleDay);
+        row.appendChild(col);
+    }
+}
+
+function updateResourceSliders(){
+    document.getElementById('sliderFillPhysical').style.width=resources.physical*10+'%';
+    document.getElementById('sliderFillCognitive').style.width=resources.cognitive*10+'%';
+    document.getElementById('sliderFillEmotional').style.width=resources.emotional*10+'%';
+    document.getElementById('valPhysical').textContent=resources.physical;
+    document.getElementById('valCognitive').textContent=resources.cognitive;
+    document.getElementById('valEmotional').textContent=resources.emotional;
+}
+
+function updateMoodUI(){var card=document.getElementById('resourcesCard'),saveBtn=document.getElementById('saveMoodBtn');if(moodSavedForActiveDate){card.classList.add('saved');saveBtn.style.display='none';}else{card.classList.remove('saved');saveBtn.style.display='block';}}
+
+function renderTasks(){
+    var container=document.getElementById('tasksList');
+    var todayTasks=tasks.filter(function(t){if(t.cyclic&&t.days.length>0)return t.days.indexOf(new Date().getDay())!==-1;return true;});
+    if(todayTasks.length===0){container.innerHTML='<div class="empty-state"><div class="empty-state-emoji">📋</div><div class="empty-state-text">Пока задач нет.<br>Нажми <strong>+</strong> чтобы добавить</div></div>';return;}
+    container.innerHTML='';todayTasks.forEach(function(task){var status=getTaskStatus(task),opacity=getIconOpacity(task.cognitive,task.physical);
+        container.innerHTML+='<div class="task-item"><div class="task-dot '+status+'"></div><div class="task-info"><div class="task-name">'+escapeHTML(task.name)+(task.cyclic?' 🔄':'')+(task.forced?' 🛡️':'')+'</div><div class="task-project">'+escapeHTML(task.project)+'</div></div><div class="task-badges"><span style="opacity:'+opacity.main+'">🧠'+task.cognitive+'</span><span style="opacity:'+opacity.other+'">💪'+task.physical+'</span><span style="opacity:0.4">❤️'+(task.moral||0)+'</span></div></div>';
+    });
+}
+
+function renderInboxTasks(){
+    var container=document.getElementById('inboxTasksList'),inboxTasks=tasks.filter(function(t){return t.project==='Копилка';});
+    if(inboxTasks.length===0){container.innerHTML='<div class="empty-state"><div class="empty-state-emoji">📥</div><div class="empty-state-text">Копилка пуста<br>Добавь задачу без проекта</div></div>';return;}
+    container.innerHTML=inboxTasks.map(function(task){return'<div class="task-item"><div class="task-dot" style="background:#CCC;"></div><div class="task-info"><div class="task-name">'+escapeHTML(task.name)+'</div></div></div>';}).join('');
+}
+
+function renderProjectsFolders(){
+    var container=document.getElementById('projectsFolders'),projectNames=['Разум','Тело','Душа','Копилка'];
+    container.innerHTML=projectNames.map(function(p){var count=tasks.filter(function(t){return t.project===p;}).length,emoji=p==='Разум'?'🧠':p==='Тело'?'⚡️':p==='Душа'?'❤️':'📥';
+        return'<div class="task-item" style="cursor:pointer;"><span style="font-size:24px;">'+emoji+'</span><div class="task-info"><div class="task-name">'+p+'</div><div class="task-project">'+count+' задач</div></div></div>';
+    }).join('');
+}
+
+function saveData(){var data={currentDay:currentDay,cycleLength:cycleLength,resources:resources,tasks:tasks,userName:userName,isAnonymous:isAnonymous,demoCycle:demoCycle,lastPeriodDate:lastPeriodDate?lastPeriodDate.toISOString():null,periodLengthDays:periodLengthDays,isIrregular:isIrregular,isPregnant:isPregnant};localStorage.setItem('rootine_data',JSON.stringify(data));}
+function loadData(){
+    var raw=localStorage.getItem('rootine_data');
+    if(raw){try{var data=JSON.parse(raw);currentDay=data.currentDay||16;cycleLength=data.cycleLength||28;resources=data.resources||{physical:7,cognitive:9,emotional:5};tasks=data.tasks||[];userName=data.userName||'Ева';isAnonymous=data.isAnonymous!==undefined?data.isAnonymous:true;demoCycle=data.demoCycle!==undefined?data.demoCycle:true;if(data.lastPeriodDate)lastPeriodDate=new Date(data.lastPeriodDate);periodLengthDays=data.periodLengthDays||5;isIrregular=data.isIrregular||false;isPregnant=data.isPregnant||false;}catch(e){resetData();}}else{resetData();}
+    var todayStr=new Date().toISOString().split('T')[0];moodSavedForActiveDate=isMoodSavedForDate(todayStr);
+    if(!demoCycle)document.getElementById('cycleSetupCard').style.display='none';
+}
+function resetData(){tasks=defaultTasks.map(function(t){return Object.assign({},t);});saveData();}
+
+function setupSlider(bgId,fillId,thumbId,valId,key){
+    var bg=document.getElementById(bgId),fill=document.getElementById(fillId),thumb=document.getElementById(thumbId),val=document.getElementById(valId),dragging=false;
+    function setValue(clientX){var rect=bg.getBoundingClientRect(),pct=(clientX-rect.left)/rect.width;pct=Math.max(0,Math.min(1,pct));var v=Math.round(pct*10);if(v===resources[key])return;resources[key]=v;fill.style.width=(v*10)+'%';val.textContent=v;updateUI();}
+    thumb.addEventListener('pointerdown',function(e){dragging=true;thumb.setPointerCapture(e.pointerId);e.preventDefault();});
+    bg.addEventListener('pointerdown',function(e){dragging=true;bg.setPointerCapture(e.pointerId);setValue(e.clientX);e.preventDefault();});
+    window.addEventListener('pointermove',function(e){if(!dragging)return;setValue(e.clientX);});
+    window.addEventListener('pointerup',function(){dragging=false;});
+}
+
+function showRhythmScreen(){document.getElementById('mainScreen').style.display='none';document.getElementById('rhythmScreen').classList.add('active');document.getElementById('inboxScreen').classList.remove('active');document.getElementById('projectsScreen').classList.remove('active');document.getElementById('bottomNav').style.display='none';rhythmSelectedDay=new Date().getDate();renderRhythm();}
+function hideRhythmScreen(){document.getElementById('mainScreen').style.display='block';document.getElementById('rhythmScreen').classList.remove('active');document.getElementById('bottomNav').style.display='flex';updateUI();}
+
+function renderRhythm(){
+    now=new Date(rhythmYear,rhythmMonth,1);var year=now.getFullYear(),month=now.getMonth(),monthNames=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+    document.getElementById('monthName').textContent=monthNames[month]+' '+year;
+    var grid=document.getElementById('monthGrid');grid.innerHTML='';
+    var firstDay=new Date(year,month,1).getDay()||7,daysInMonth=new Date(year,month+1,0).getDate(),prevMonthDays=new Date(year,month,0).getDate();
+
+    for(var i=firstDay-1;i>=1;i--){var d=prevMonthDays-i+1,date=new Date(year,month-1,d),cycleDay=getCycleDayForDate(date),phaseInfo=getPhaseInfo(cycleDay),colorIndex=getHarmonicColorIndex(phaseInfo.dayInPhase,phaseInfo.totalDays,20),dotClass=phaseInfo.id+'-'+colorIndex;
+        var cell=document.createElement('div');cell.className='month-dot-cell other-month';
+        cell.innerHTML='<div class="dot-mini '+dotClass+'"></div><div class="dot-num">'+d+'</div>';
+        (function(d){cell.addEventListener('click',function(){rhythmMonth--;if(rhythmMonth<0){rhythmMonth=11;rhythmYear--;}rhythmSelectedDay=d;renderRhythm();});})(d);
+        grid.appendChild(cell);
     }
 
-    function getRandomTip(category, level) {
-        var tips = tipDatabase[category][level];
-        return tips[Math.floor(Math.random() * tips.length)];
+    for(var d=1;d<=daysInMonth;d++){var date=new Date(year,month,d),cycleDay=getCycleDayForDate(date),phaseInfo=getPhaseInfo(cycleDay),colorIndex=getHarmonicColorIndex(phaseInfo.dayInPhase,phaseInfo.totalDays,20),dotClass=phaseInfo.id+'-'+colorIndex;
+        var cell=document.createElement('div');cell.className='month-dot-cell'+(d===rhythmSelectedDay?' selected':'');
+        cell.innerHTML='<div class="dot-mini '+dotClass+'"></div><div class="dot-num">'+d+'</div>';
+        (function(d){cell.addEventListener('click',function(){rhythmSelectedDay=d;renderRhythm();});})(d);
+        grid.appendChild(cell);
     }
 
-    function updateRecommendationTips() {
-        var physLevel = getTipLevel(resources.physical);
-        var cogLevel = getTipLevel(resources.cognitive);
-        var emoLevel = getTipLevel(resources.emotional);
-
-        document.getElementById('tipPhysical').textContent = getRandomTip('physical', physLevel);
-        document.getElementById('tipCognitive').textContent = getRandomTip('cognitive', cogLevel);
-        document.getElementById('tipEmotional').textContent = getRandomTip('emotional', emoLevel);
+    var totalCellsBefore=firstDay-1+daysInMonth,remainingCells=7-(totalCellsBefore%7);
+    if(remainingCells===7)remainingCells=0;
+    for(var d=1;d<=remainingCells;d++){var date=new Date(year,month+1,d),cycleDay=getCycleDayForDate(date),phaseInfo=getPhaseInfo(cycleDay),colorIndex=getHarmonicColorIndex(phaseInfo.dayInPhase,phaseInfo.totalDays,20),dotClass=phaseInfo.id+'-'+colorIndex;
+        var cell=document.createElement('div');cell.className='month-dot-cell other-month';
+        cell.innerHTML='<div class="dot-mini '+dotClass+'"></div><div class="dot-num">'+d+'</div>';
+        (function(d){cell.addEventListener('click',function(){rhythmMonth++;if(rhythmMonth>11){rhythmMonth=0;rhythmYear++;}rhythmSelectedDay=d;renderRhythm();});})(d);
+        grid.appendChild(cell);
     }
 
-    // ===== УТИЛИТЫ =====
-    function getTaskStatus(task) {
-        if (task.forced) return 'green';
-        var physMatch = resources.physical >= task.physical;
-        var cogMatch = resources.cognitive >= task.cognitive;
-        if (physMatch && cogMatch) return 'green';
-        if (physMatch || cogMatch) return 'yellow';
-        return 'red';
-    }
-
-    function getIconOpacity(mainVal, otherVal) {
-        var diff = Math.abs(mainVal - otherVal);
-        if (diff <= 1) return { main: 1, other: 1 };
-        if (mainVal > otherVal) return { main: 1, other: 0.3 };
-        return { main: 0.3, other: 1 };
-    }
-
-    function showToast(msg) {
-        var t = document.getElementById('toast');
-        t.textContent = msg;
-        t.style.opacity = '1';
-        clearTimeout(t._timeout);
-        t._timeout = setTimeout(function() { t.style.opacity = '0'; }, 2000);
-    }
-
-    function escapeHTML(str) {
-        var div = document.createElement('div');
-        div.textContent = str;
-        return div.innerHTML;
-    }
-
-    function getCycleDayForDate(date) {
-        if (demoCycle || !lastPeriodDate) {
-            var diff = Math.floor((date - new Date(2026, 5, 1)) / 86400000);
-            return ((diff % cycleLength) + cycleLength) % cycleLength + 1;
-        }
-        var diff = Math.floor((date - lastPeriodDate) / 86400000);
-        return ((diff % cycleLength) + cycleLength) % cycleLength + 1;
-    }
-
-    function getActiveCheckinDate() {
-        return centerDate.toISOString().split('T')[0];
-    }
-
-    function isMoodSavedForDate(dateStr) {
-        var history = JSON.parse(localStorage.getItem('checkins') || '[]');
-        return history.some(function(item) { return item.date === dateStr; });
-    }
-
-    function loadMoodForDate(dateStr) {
-        var history = JSON.parse(localStorage.getItem('checkins') || '[]');
-        var checkin = history.find(function(item) { return item.date === dateStr; });
-        if (checkin) {
-            resources.physical = checkin.physical;
-            resources.cognitive = checkin.cognitive;
-            resources.emotional = checkin.emotional;
-            updateResourceSliders();
-        }
-    }
-
-    function getHarmonicColorIndex(dayInPhase, totalDaysInPhase, totalColors) {
-        if (dayInPhase <= 1) return 1;
-        if (dayInPhase >= totalDaysInPhase) return totalColors;
-        var position = (dayInPhase - 1) / (totalDaysInPhase - 1);
-        var harmonicPoints = [0, 1];
-        var usedColors = [1, totalColors];
-        while (harmonicPoints.length < totalDaysInPhase && harmonicPoints.length < totalColors) {
-            var newPoints = [];
-            var newColors = [];
-            for (var i = 0; i < harmonicPoints.length - 1; i++) {
-                var midPoint = (harmonicPoints[i] + harmonicPoints[i + 1]) / 2;
-                var midColor = Math.round((usedColors[i] + usedColors[i + 1]) / 2);
-                newPoints.push(harmonicPoints[i]);
-                newColors.push(usedColors[i]);
-                newPoints.push(midPoint);
-                newColors.push(midColor);
-            }
-            newPoints.push(harmonicPoints[harmonicPoints.length - 1]);
-            newColors.push(usedColors[usedColors.length - 1]);
-            harmonicPoints = newPoints;
-            usedColors = newColors;
-        }
-        var bestIndex = 1;
-        var bestDist = Math.abs(position - harmonicPoints[0]);
-        for (var i = 0; i < harmonicPoints.length; i++) {
-            var dist = Math.abs(position - harmonicPoints[i]);
-            if (dist < bestDist) {
-                bestDist = dist;
-                bestIndex = usedColors[i];
-            }
-        }
-        return Math.max(1, Math.min(totalColors, bestIndex));
-    }
-
-    function getPhaseInfo(cycleDay) {
-        if (isPregnant) {
-            return { id: 'bloom', name: 'Беременность', title: 'Расти', emoji: '🤰', dayInPhase: cycleDay, totalDays: 280 };
-        }
-        if (demoCycle) {
-            var periodLen = 5;
-            var follicularEnd = 14;
-            var ovulationEnd = 17;
-            var lutealEnd = 28;
-            if (cycleDay <= periodLen) return { id: 'seed', name: 'Менструальная', title: 'Отдыхай', emoji: '🪷', dayInPhase: cycleDay, totalDays: periodLen };
-            if (cycleDay <= follicularEnd) return { id: 'sprout', name: 'Фолликулярная', title: 'Расти', emoji: '🌱', dayInPhase: cycleDay - periodLen, totalDays: follicularEnd - periodLen };
-            if (cycleDay <= ovulationEnd) return { id: 'bloom', name: 'Овуляция', title: 'Расцветай', emoji: '🌸', dayInPhase: cycleDay - follicularEnd, totalDays: ovulationEnd - follicularEnd };
-            if (cycleDay <= lutealEnd) return { id: 'fruit', name: 'Лютеиновая', title: 'Заземляйся', emoji: '🍃', dayInPhase: cycleDay - ovulationEnd, totalDays: lutealEnd - ovulationEnd };
-            return { id: 'seed', name: 'Менструальная', title: 'Отдыхай', emoji: '🪷', dayInPhase: 1, totalDays: periodLen };
-        }
-        var periodLen = periodLengthDays || 5;
-        var follicularEnd = periodLen + Math.round((cycleLength - periodLen - 14) * 0.6);
-        var ovulationEnd = follicularEnd + 3;
-        var lutealEnd = cycleLength;
-        if (cycleDay <= periodLen) return { id: 'seed', name: 'Менструальная', title: 'Отдыхай', emoji: '🪷', dayInPhase: cycleDay, totalDays: periodLen };
-        if (cycleDay <= follicularEnd) return { id: 'sprout', name: 'Фолликулярная', title: 'Расти', emoji: '🌱', dayInPhase: cycleDay - periodLen, totalDays: follicularEnd - periodLen };
-        if (cycleDay <= ovulationEnd) return { id: 'bloom', name: 'Овуляция', title: 'Расцветай', emoji: '🌸', dayInPhase: cycleDay - follicularEnd, totalDays: ovulationEnd - follicularEnd };
-        if (cycleDay <= lutealEnd) return { id: 'fruit', name: 'Лютеиновая', title: 'Заземляйся', emoji: '🍃', dayInPhase: cycleDay - ovulationEnd, totalDays: lutealEnd - ovulationEnd };
-        return { id: 'seed', name: 'Менструальная', title: 'Отдыхай', emoji: '🪷', dayInPhase: 1, totalDays: periodLen };
-    }
-
-    function getCurrentPhase(day) {
-        if (!day) day = currentDay;
-        var info = getPhaseInfo(day);
-        return { id: info.id, name: info.name, title: info.title, emoji: info.emoji, color: '#C8A882' };
-    }
-
-    // ===== ПЕРЕКЛЮЧЕНИЕ ЭКРАНОВ =====
-    function showTab(tab) {
-        document.getElementById('mainScreen').style.display = 'none';
-        document.getElementById('rhythmScreen').classList.remove('active');
-        document.getElementById('inboxScreen').classList.remove('active');
-        document.getElementById('projectsScreen').classList.remove('active');
-        document.getElementById('bottomNav').style.display = 'none';
-        document.querySelectorAll('.nav-item[data-tab]').forEach(function(b) {
-            b.classList.remove('active');
-        });
-        if (tab === 'rhythm') {
-            document.getElementById('rhythmScreen').classList.add('active');
-            rhythmSelectedDay = new Date().getDate();
-            renderRhythm();
-        } else if (tab === 'inbox') {
-            document.getElementById('inboxScreen').classList.add('active');
-            renderInboxTasks();
-        } else if (tab === 'projects') {
-            document.getElementById('projectsScreen').classList.add('active');
-            renderProjectsFolders();
-        } else {
-            document.getElementById('mainScreen').style.display = 'block';
-            document.getElementById('bottomNav').style.display = 'flex';
-            updateUI();
-        }
-        var activeBtn = document.querySelector('.nav-item[data-tab="' + tab + '"]');
-        if (activeBtn) activeBtn.classList.add('active');
-    }
-
-    function showInboxScreen() {
-        document.getElementById('mainScreen').style.display = 'none';
-        document.getElementById('rhythmScreen').classList.remove('active');
-        document.getElementById('inboxScreen').classList.add('active');
-        document.getElementById('projectsScreen').classList.remove('active');
-        document.getElementById('bottomNav').style.display = 'none';
-        renderInboxTasks();
-    }
-
-    function showProjectsScreen() {
-        document.getElementById('mainScreen').style.display = 'none';
-        document.getElementById('rhythmScreen').classList.remove('active');
-        document.getElementById('inboxScreen').classList.remove('active');
-        document.getElementById('projectsScreen').classList.add('active');
-        document.getElementById('bottomNav').style.display = 'none';
-        renderProjectsFolders();
-    }
-
-    // ===== ОБНОВЛЕНИЕ UI =====
-    function updateUI() {
-        var phase = getCurrentPhase();
-        var card = document.getElementById('phaseCard');
-        card.className = 'phase-card ' + phase.id;
-        document.getElementById('phaseEmoji').textContent = phase.emoji;
-
-        var phaseNameEl = document.getElementById('phaseName');
-        if (userName && userName.trim() !== '') {
-            phaseNameEl.textContent = phase.title + ', ' + userName;
-        } else {
-            phaseNameEl.textContent = phase.title;
-        }
-
-        var shownDay = demoCycle ? 6 : currentDay;
-        document.getElementById('phaseDay').textContent = 'День ' + shownDay + ' из ' + cycleLength + ' · ' + phase.name;
-        document.getElementById('recommendationText').textContent = beePhrases[phase.id];
-        updateRecommendationTips();
-
-        renderWeekCalendar();
-        updateResourceSliders();
-        renderTasks();
-        updateMoodUI();
-        saveData();
-    }
-
-    function renderWeekCalendar() {
-        var row = document.getElementById('weekRow');
-        row.innerHTML = '';
-        var center = new Date(centerDate);
-        var dow = center.getDay();
-        var dayNames = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
-
-        for (var i = 0; i < 7; i++) {
-            var off = i - 3;
-            var d = new Date(center);
-            d.setDate(d.getDate() + off);
-            var cycleDay = getCycleDayForDate(d);
-            var phaseInfo = getPhaseInfo(cycleDay);
-            var colorIndex = getHarmonicColorIndex(phaseInfo.dayInPhase, phaseInfo.totalDays, 20);
-            var dotClass = phaseInfo.id + '-' + colorIndex;
-
-            var col = document.createElement('div');
-            col.className = 'week-day-col';
-            col.innerHTML = '<div class="week-day-name">' + dayNames[(dow + off + 7) % 7] + '</div>' +
-                '<div class="week-dot ' + dotClass + (off === 0 ? ' today' : '') + '"></div>' +
-                '<div class="week-date">' + d.getDate() + '</div>';
-
-            (function(d, cycleDay) {
-                col.addEventListener('click', function() {
-                    centerDate = new Date(d);
-                    currentDay = cycleDay;
-                    demoCycle = false;
-                    var dateStr = getActiveCheckinDate();
-                    moodSavedForActiveDate = isMoodSavedForDate(dateStr);
-                    if (moodSavedForActiveDate) {
-                        loadMoodForDate(dateStr);
-                    }
-                    updateUI();
-                    showToast('День ' + currentDay + ' · ' + getCurrentPhase().title);
-                });
-            })(d, cycleDay);
-
-            row.appendChild(col);
-        }
-    }
-
-    function updateResourceSliders() {
-        document.getElementById('sliderFillPhysical').style.width = resources.physical * 10 + '%';
-        document.getElementById('sliderFillCognitive').style.width = resources.cognitive * 10 + '%';
-        document.getElementById('sliderFillEmotional').style.width = resources.emotional * 10 + '%';
-        document.getElementById('valPhysical').textContent = resources.physical;
-        document.getElementById('valCognitive').textContent = resources.cognitive;
-        document.getElementById('valEmotional').textContent = resources.emotional;
-    }
-
-    function updateMoodUI() {
-        var card = document.getElementById('resourcesCard');
-        var saveBtn = document.getElementById('saveMoodBtn');
-        if (moodSavedForActiveDate) {
-            card.classList.add('saved');
-            saveBtn.style.display = 'none';
-        } else {
-            card.classList.remove('saved');
-            saveBtn.style.display = 'block';
-        }
-    }
-
-    function renderTasks() {
-        var container = document.getElementById('tasksList');
-        var todayTasks = tasks.filter(function(t) {
-            if (t.cyclic && t.days.length > 0) return t.days.indexOf(new Date().getDay()) !== -1;
-            return true;
-        });
-
-        if (todayTasks.length === 0) {
-            container.innerHTML = '<div class="empty-state"><div class="empty-state-emoji">📋</div><div class="empty-state-text">Пока задач нет.<br>Нажми <strong>+</strong> чтобы добавить</div></div>';
-            return;
-        }
-
-        container.innerHTML = '';
-        todayTasks.forEach(function(task) {
-            var status = getTaskStatus(task);
-            var opacity = getIconOpacity(task.cognitive, task.physical);
-            container.innerHTML += '<div class="task-item">' +
-                '<div class="task-dot ' + status + '"></div>' +
-                '<div class="task-info">' +
-                '<div class="task-name">' + escapeHTML(task.name) + (task.cyclic ? ' 🔄' : '') + (task.forced ? ' 🛡️' : '') + '</div>' +
-                '<div class="task-project">' + escapeHTML(task.project) + '</div>' +
-                '</div>' +
-                '<div class="task-badges">' +
-                '<span style="opacity:' + opacity.main + '">🧠' + task.cognitive + '</span>' +
-                '<span style="opacity:' + opacity.other + '">💪' + task.physical + '</span>' +
-                '<span style="opacity:0.4">❤️' + (task.moral || 0) + '</span>' +
-                '</div>' +
-                '</div>';
-        });
-    }
-
-    function renderInboxTasks() {
-        var container = document.getElementById('inboxTasksList');
-        var inboxTasks = tasks.filter(function(t) { return t.project === 'Копилка'; });
-        if (inboxTasks.length === 0) {
-            container.innerHTML = '<div class="empty-state"><div class="empty-state-emoji">📥</div><div class="empty-state-text">Копилка пуста<br>Добавь задачу без проекта</div></div>';
-            return;
-        }
-        container.innerHTML = inboxTasks.map(function(task) {
-            return '<div class="task-item"><div class="task-dot" style="background:#CCC;"></div><div class="task-info"><div class="task-name">' + escapeHTML(task.name) + '</div></div></div>';
-        }).join('');
-    }
-
-    function renderProjectsFolders() {
-        var container = document.getElementById('projectsFolders');
-        var projectNames = ['Разум', 'Тело', 'Душа', 'Копилка'];
-        container.innerHTML = projectNames.map(function(p) {
-            var count = tasks.filter(function(t) { return t.project === p; }).length;
-            var emoji = p === 'Разум' ? '🧠' : p === 'Тело' ? '⚡️' : p === 'Душа' ? '❤️' : '📥';
-            return '<div class="task-item" style="cursor:pointer;">' +
-                '<span style="font-size:24px;">' + emoji + '</span>' +
-                '<div class="task-info">' +
-                '<div class="task-name">' + p + '</div>' +
-                '<div class="task-project">' + count + ' задач</div>' +
-                '</div>' +
-                '</div>';
-        }).join('');
-    }
-
-    // ===== СОХРАНЕНИЕ ДАННЫХ =====
-    function saveData() {
-        var data = {
-            currentDay: currentDay,
-            cycleLength: cycleLength,
-            resources: resources,
-            tasks: tasks,
-            userName: userName,
-            isAnonymous: isAnonymous,
-            demoCycle: demoCycle,
-            lastPeriodDate: lastPeriodDate ? lastPeriodDate.toISOString() : null,
-            periodLengthDays: periodLengthDays,
-            isIrregular: isIrregular,
-            isPregnant: isPregnant
-        };
-        localStorage.setItem('rootine_data', JSON.stringify(data));
-    }
-
-    function loadData() {
-        var raw = localStorage.getItem('rootine_data');
-        if (raw) {
-            try {
-                var data = JSON.parse(raw);
-                currentDay = data.currentDay || 16;
-                cycleLength = data.cycleLength || 28;
-                resources = data.resources || { physical: 7, cognitive: 9, emotional: 5 };
-                tasks = data.tasks || [];
-                userName = data.userName || 'Ева';
-                isAnonymous = data.isAnonymous !== undefined ? data.isAnonymous : true;
-                demoCycle = data.demoCycle !== undefined ? data.demoCycle : true;
-                if (data.lastPeriodDate) lastPeriodDate = new Date(data.lastPeriodDate);
-                periodLengthDays = data.periodLengthDays || 5;
-                isIrregular = data.isIrregular || false;
-                isPregnant = data.isPregnant || false;
-            } catch (e) {
-                resetData();
-            }
-        } else {
-            resetData();
-        }
-        var todayStr = new Date().toISOString().split('T')[0];
-        moodSavedForActiveDate = isMoodSavedForDate(todayStr);
-        if (!demoCycle) {
-            document.getElementById('cycleSetupCard').style.display = 'none';
-        }
-    }
-
-    function resetData() {
-        tasks = defaultTasks.map(function(t) { return Object.assign({}, t); });
-        saveData();
-    }
-
-    // ===== СЛАЙДЕРЫ =====
-    function setupSlider(bgId, fillId, thumbId, valId, key) {
-        var bg = document.getElementById(bgId);
-        var fill = document.getElementById(fillId);
-        var thumb = document.getElementById(thumbId);
-        var val = document.getElementById(valId);
-        var dragging = false;
-
-        function setValue(clientX) {
-            var rect = bg.getBoundingClientRect();
-            var pct = (clientX - rect.left) / rect.width;
-            pct = Math.max(0, Math.min(1, pct));
-            var v = Math.round(pct * 10);
-            if (v === resources[key]) return;
-            resources[key] = v;
-            fill.style.width = (v * 10) + '%';
-            val.textContent = v;
-            updateUI();
-        }
-
-        thumb.addEventListener('pointerdown', function(e) {
-            dragging = true;
-            thumb.setPointerCapture(e.pointerId);
-            e.preventDefault();
-        });
-
-        bg.addEventListener('pointerdown', function(e) {
-            dragging = true;
-            bg.setPointerCapture(e.pointerId);
-            setValue(e.clientX);
-            e.preventDefault();
-        });
-
-        window.addEventListener('pointermove', function(e) {
-            if (!dragging) return;
-            setValue(e.clientX);
-        });
-
-        window.addEventListener('pointerup', function() {
-            dragging = false;
-        });
-    }
-
-    // ===== ЭКРАН РИТМА =====
-    function showRhythmScreen() {
-        document.getElementById('mainScreen').style.display = 'none';
-        document.getElementById('rhythmScreen').classList.add('active');
-        document.getElementById('inboxScreen').classList.remove('active');
-        document.getElementById('projectsScreen').classList.remove('active');
-        document.getElementById('bottomNav').style.display = 'none';
-        rhythmSelectedDay = new Date().getDate();
-        renderRhythm();
-    }
-
-    function hideRhythmScreen() {
-        document.getElementById('mainScreen').style.display = 'block';
-        document.getElementById('rhythmScreen').classList.remove('active');
-        document.getElementById('bottomNav').style.display = 'flex';
-        updateUI();
-    }
-
-    function renderRhythm() {
-        now = new Date(rhythmYear, rhythmMonth, 1);
-        var year = now.getFullYear();
-        var month = now.getMonth();
-        var monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
-        document.getElementById('monthName').textContent = monthNames[month] + ' ' + year;
-
-        var grid = document.getElementById('monthGrid');
-        grid.innerHTML = '';
-
-        var firstDay = new Date(year, month, 1).getDay() || 7;
-        var daysInMonth = new Date(year, month + 1, 0).getDate();
-        var prevMonthDays = new Date(year, month, 0).getDate();
-
-        // Дни из предыдущего месяца
-        for (var i = firstDay - 1; i >= 1; i--) {
-            var d = prevMonthDays - i + 1;
-            var date = new Date(year, month - 1, d);
-            var cycleDay = getCycleDayForDate(date);
-            var phaseInfo = getPhaseInfo(cycleDay);
-            var colorIndex = getHarmonicColorIndex(phaseInfo.dayInPhase, phaseInfo.totalDays, 20);
-            var dotClass = phaseInfo.id + '-' + colorIndex;
-
-            var cell = document.createElement('div');
-            cell.className = 'month-dot-cell other-month';
-            cell.innerHTML = '<div class="dot-mini ' + dotClass + '"></div><div class="dot-num">' + d + '</div>';
-
-            (function(d) {
-                cell.addEventListener('click', function() {
-                    rhythmMonth--;
-                    if (rhythmMonth < 0) {
-                        rhythmMonth = 11;
-                        rhythmYear--;
-                    }
-                    rhythmSelectedDay = d;
-                    renderRhythm();
-                });
-            })(d);
-
+    var totalCellsNow=totalCellsBefore+remainingCells,cellsNeeded=35-totalCellsNow;
+    if(cellsNeeded>0){var nextMonthDay=remainingCells+1;
+        for(var d=nextMonthDay;d<nextMonthDay+cellsNeeded;d++){var date=new Date(year,month+1,d),cycleDay=getCycleDayForDate(date),phaseInfo=getPhaseInfo(cycleDay),colorIndex=getHarmonicColorIndex(phaseInfo.dayInPhase,phaseInfo.totalDays,20),dotClass=phaseInfo.id+'-'+colorIndex;
+            var cell=document.createElement('div');cell.className='month-dot-cell other-month';
+            cell.innerHTML='<div class="dot-mini '+dotClass+'"></div><div class="dot-num">'+d+'</div>';
+            (function(d){cell.addEventListener('click',function(){rhythmMonth++;if(rhythmMonth>11){rhythmMonth=0;rhythmYear++;}rhythmSelectedDay=d;renderRhythm();});})(d);
             grid.appendChild(cell);
         }
-
-        // Дни текущего месяца
-        for (var d = 1; d <= daysInMonth; d++) {
-            var date = new Date(year, month, d);
-            var cycleDay = getCycleDayForDate(date);
-            var phaseInfo = getPhaseInfo(cycleDay);
-            var colorIndex = getHarmonicColorIndex(phaseInfo.dayInPhase, phaseInfo.totalDays, 20);
-            var dotClass = phaseInfo.id + '-' + colorIndex;
-
-            var cell = document.createElement('div');
-            cell.className = 'month-dot-cell' + (d === rhythmSelectedDay ? ' selected' : '');
-            cell.innerHTML = '<div class="dot-mini ' + dotClass + '"></div><div class="dot-num">' + d + '</div>';
-
-            (function(d) {
-                cell.addEventListener('click', function() {
-                    rhythmSelectedDay = d;
-                    renderRhythm();
-                });
-            })(d);
-
-            grid.appendChild(cell);
-                    // Добиваем до 5 строк (35 ячеек)
-        var totalCells = firstDay - 1 + daysInMonth + remainingCells;
-        var cellsNeeded = 35 - totalCells;
-        if (cellsNeeded > 0) {
-            var nextMonthDay = remainingCells + 1;
-            for (var d = nextMonthDay; d < nextMonthDay + cellsNeeded; d++) {
-                var date = new Date(year, month + 1, d);
-                var cycleDay = getCycleDayForDate(date);
-                var phaseInfo = getPhaseInfo(cycleDay);
-                var colorIndex = getHarmonicColorIndex(phaseInfo.dayInPhase, phaseInfo.totalDays, 20);
-                var dotClass = phaseInfo.id + '-' + colorIndex;
-
-                var cell = document.createElement('div');
-                cell.className = 'month-dot-cell other-month';
-                cell.innerHTML = '<div class="dot-mini ' + dotClass + '"></div><div class="dot-num">' + d + '</div>';
-
-                (function(d) {
-                    cell.addEventListener('click', function() {
-                        rhythmMonth++;
-                        if (rhythmMonth > 11) { rhythmMonth = 0; rhythmYear++; }
-                        rhythmSelectedDay = d;
-                        renderRhythm();
-                    });
-                })(d);
-
-                grid.appendChild(cell);
-            }
-        }
-        }
-
-        // Дни из следующего месяца
-        var totalCellsBefore = firstDay - 1 + daysInMonth;
-        var remainingCells = 7 - (totalCellsBefore % 7);
-        if (remainingCells === 7) remainingCells = 0;
-        if (remainingCells < 7) {
-            
-                    // Добиваем до 5 строк (35 ячеек)
-        var totalCellsNow = totalCellsBefore + remainingCells;
-        var cellsNeeded = 35 - totalCellsNow;
-        if (cellsNeeded > 0) {
-            var nextMonthDay = remainingCells + 1;
-            for (var d = nextMonthDay; d < nextMonthDay + cellsNeeded; d++) {
-                var date = new Date(year, month + 1, d);
-                var cycleDay = getCycleDayForDate(date);
-                var phaseInfo = getPhaseInfo(cycleDay);
-                var colorIndex = getHarmonicColorIndex(phaseInfo.dayInPhase, phaseInfo.totalDays, 20);
-                var dotClass = phaseInfo.id + '-' + colorIndex;
-
-                var cell = document.createElement('div');
-                cell.className = 'month-dot-cell other-month';
-                cell.innerHTML = '<div class="dot-mini ' + dotClass + '"></div><div class="dot-num">' + d + '</div>';
-
-                (function(d) {
-                    cell.addEventListener('click', function() {
-                        rhythmMonth++;
-                        if (rhythmMonth > 11) { rhythmMonth = 0; rhythmYear++; }
-                        rhythmSelectedDay = d;
-                        renderRhythm();
-                    });
-                })(d);
-
-                grid.appendChild(cell);
-            }
-        }
-
-        updateRhythmDayInfo(year, month);
-        renderHistogram();
     }
 
-    function updateRhythmDayInfo(year, month) {
-        var dateStr = year + '-' + String(month + 1).padStart(2, '0') + '-' + String(rhythmSelectedDay).padStart(2, '0');
-        var history = JSON.parse(localStorage.getItem('checkins') || '[]');
-        var checkin = history.find(function(c) { return c.date === dateStr; });
-        var date = new Date(year, month, rhythmSelectedDay);
-        var cycleDay = getCycleDayForDate(date);
-        var phase = getCurrentPhase(cycleDay);
+    updateRhythmDayInfo(year,month);renderHistogram();
+}
 
-        document.getElementById('infoPhase').textContent = phase.emoji + ' ' + phase.title;
-        if (checkin) {
-            document.getElementById('infoValues').textContent = '🧠' + checkin.cognitive + ' 💪' + checkin.physical + ' ❤️' + checkin.emotional;
-        } else {
-            document.getElementById('infoValues').textContent = 'Нет данных';
-        }
+function updateRhythmDayInfo(year,month){
+    var dateStr=year+'-'+String(month+1).padStart(2,'0')+'-'+String(rhythmSelectedDay).padStart(2,'0'),history=JSON.parse(localStorage.getItem('checkins')||'[]'),checkin=history.find(function(c){return c.date===dateStr;}),date=new Date(year,month,rhythmSelectedDay),cycleDay=getCycleDayForDate(date),phase=getCurrentPhase(cycleDay);
+    document.getElementById('infoPhase').textContent=phase.emoji+' '+phase.title;
+    document.getElementById('infoValues').textContent=checkin?'🧠'+checkin.cognitive+' 💪'+checkin.physical+' ❤️'+checkin.emotional:'Нет данных';
+}
+
+function renderHistogram(){
+    var year=now.getFullYear(),month=now.getMonth(),history=JSON.parse(localStorage.getItem('checkins')||'[]'),group=document.getElementById('histoDayGroup');if(!group)return;group.innerHTML='';
+    var center=new Date(year,month,rhythmSelectedDay),startDate=new Date(center);startDate.setDate(startDate.getDate()-3);
+    var endDate=new Date(center);endDate.setDate(endDate.getDate()+3);
+    for(var d=new Date(startDate);d<=endDate;d.setDate(d.getDate()+1)){
+        var dateStr=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'),checkin=history.find(function(c){return c.date===dateStr;}),cogVal=checkin?checkin.cognitive:0,physVal=checkin?checkin.physical:0,emoVal=checkin?checkin.emotional:0,isSelected=d.getDate()===rhythmSelectedDay&&d.getMonth()===month;
+        var block=document.createElement('div');block.className='histo-day-block';
+        block.innerHTML='<div class="histo-mini-bar cog" style="height:'+(cogVal*10)+'%;'+(isSelected?'box-shadow:0 0 6px rgba(0,0,0,0.4);':'')+'"></div><div class="histo-mini-bar phys" style="height:'+(physVal*10)+'%;'+(isSelected?'box-shadow:0 0 6px rgba(0,0,0,0.4);':'')+'"></div><div class="histo-mini-bar emo" style="height:'+(emoVal*10)+'%;'+(isSelected?'box-shadow:0 0 6px rgba(0,0,0,0.4);':'')+'"></div><div class="histo-day-label">'+d.getDate()+'</div>';
+        group.appendChild(block);
     }
-
-    // ===== ГИСТОГРАММА =====
-    function renderHistogram() {
-        var year = now.getFullYear();
-        var month = now.getMonth();
-        var history = JSON.parse(localStorage.getItem('checkins') || '[]');
-        var group = document.getElementById('histoDayGroup');
-        if (!group) return;
-        group.innerHTML = '';
-
-        var center = new Date(year, month, rhythmSelectedDay);
-        var startDate = new Date(center);
-        startDate.setDate(startDate.getDate() - 3);
-        var endDate = new Date(center);
-        endDate.setDate(endDate.getDate() + 3);
-
-        for (var d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
-            var dateStr = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
-            var checkin = history.find(function(c) { return c.date === dateStr; });
-            var cogVal = checkin ? checkin.cognitive : 0;
-            var physVal = checkin ? checkin.physical : 0;
-            var emoVal = checkin ? checkin.emotional : 0;
-            var isSelected = d.getDate() === rhythmSelectedDay && d.getMonth() === month;
-
-            var block = document.createElement('div');
-            block.className = 'histo-day-block';
-            block.innerHTML = '<div class="histo-mini-bar cog" style="height:' + (cogVal * 10) + '%;' + (isSelected ? 'box-shadow:0 0 6px rgba(0,0,0,0.4);' : '') + '"></div>' +
-                '<div class="histo-mini-bar phys" style="height:' + (physVal * 10) + '%;' + (isSelected ? 'box-shadow:0 0 6px rgba(0,0,0,0.4);' : '') + '"></div>' +
-                '<div class="histo-mini-bar emo" style="height:' + (emoVal * 10) + '%;' + (isSelected ? 'box-shadow:0 0 6px rgba(0,0,0,0.4);' : '') + '"></div>' +
-                '<div class="histo-day-label">' + d.getDate() + '</div>';
-            group.appendChild(block);
-        }
-
-        updateHistoFilter(activeHistoFilter);
-    }
-
-        var center = new Date(year, month, rhythmSelectedDay);
-        var startDate = new Date(center);
-        startDate.setDate(startDate.getDate() - 3);
-        var endDate = new Date(center);
-        endDate.setDate(endDate.getDate() + 3);
-
-        for (var d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
-            var dateStr = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
-            var checkin = history.find(function(c) { return c.date === dateStr; });
-            var cogVal = checkin ? checkin.cognitive : 0;
-            var physVal = checkin ? checkin.physical : 0;
-            var emoVal = checkin ? checkin.emotional : 0;
-            var isSelected = d.getDate() === rhythmSelectedDay && d.getMonth() === month;
-
-            var block = document.createElement('div');
-            block.className = 'histo-day-block';
-            block.innerHTML = '<div class="histo-mini-bar cog" style="height:' + (cogVal * 10) + '%;' + (isSelected ? 'box-shadow:0 0 4px rgba(0,0,0,0.3);' : '') + '"></div>' +
-                '<div class="histo-mini-bar phys" style="height:' + (physVal * 10) + '%;' + (isSelected ? 'box-shadow:0 0 4px rgba(0,0,0,0.3);' : '') + '"></div>' +
-                '<div class="histo-mini-bar emo" style="height:' + (emoVal * 10) + '%;' + (isSelected ? 'box-shadow:0 0 4px rgba(0,0,0,0.3);' : '') + '"></div>' +
-                '<div class="histo-day-label">' + d.getDate() + '</div>';
-            group.appendChild(block);
-        }
-
-        updateHistoFilter(activeHistoFilter);
-    }
-
-    function updateHistoFilter(filter) {
-        activeHistoFilter = filter;
-
-        document.querySelectorAll('.histo-filter').forEach(function(btn) {
-            btn.classList.toggle('active', btn.dataset.filter === filter);
-        });
-
-        document.querySelectorAll('.histo-mini-bar').forEach(function(bar) {
-            bar.classList.remove('dimmed');
-        });
-
-        if (filter !== 'all') {
-            var typeMap = { cognitive: 'cog', physical: 'phys', emotional: 'emo' };
-            document.querySelectorAll('.histo-mini-bar').forEach(function(bar) {
-                if (!bar.classList.contains(typeMap[filter])) {
-                    bar.classList.add('dimmed');
-                }
-            });
-        }
-
-        var wavesSvg = document.getElementById('wavesSvg');
-        var wavesLabels = document.getElementById('wavesLabels');
-
-        if (filter === 'all') {
-            if (wavesSvg) wavesSvg.style.display = 'none';
-            if (wavesLabels) wavesLabels.style.display = 'none';
-        } else {
-            if (wavesSvg) wavesSvg.style.display = 'block';
-            if (wavesLabels) wavesLabels.style.display = 'flex';
-            renderSingleWave(filter);
-        }
-    }
-
-        function renderSingleWave(filter) {
-        var year = now.getFullYear();
-        var month = now.getMonth();
-        var history = JSON.parse(localStorage.getItem('checkins') || '[]');
-        var svg = document.getElementById('wavesSvg');
-        var labels = document.getElementById('wavesLabels');
-        var w = 360;
-        var h = 100;
-        var pad = 0;
-        var usableW = w;
-        var usableH = h;
-
-        var keyMap = { cognitive: 'cognitive', physical: 'physical', emotional: 'emotional' };
-        var colorMap = { cognitive: '#E8B86D', physical: '#9CBA7F', emotional: '#E8B4BC' };
-        var key = keyMap[filter];
-        var color = colorMap[filter];
-        var points = [];
-
-        var center = new Date(year, month, rhythmSelectedDay);
-        var startDate = new Date(center);
-        startDate.setDate(startDate.getDate() - 3);
-        var endDate = new Date(center);
-        endDate.setDate(endDate.getDate() + 3);
-
-        var dayIndex = 0;
-        var totalDays = 7;
-        for (var d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
-            var dateStr = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
-            var checkin = history.find(function(c) { return c.date === dateStr; });
-            var x = pad + (dayIndex / (totalDays - 1)) * usableW;
-            dayIndex++;
-            if (checkin && checkin[key]) {
-                points.push({ x: x, y: usableH - (checkin[key] / 10) * usableH });
-            }
-        }
-
-        var svgInner = '';
-        if (points.length >= 2) {
-            var dPath = 'M ' + points[0].x + ' ' + points[0].y;
-            for (var i = 1; i < points.length; i++) {
-                var prev = points[i - 1];
-                var curr = points[i];
-                var cpX = (prev.x + curr.x) / 2;
-                dPath += ' Q ' + prev.x + ' ' + prev.y + ' ' + cpX + ' ' + ((prev.y + curr.y) / 2);
-                dPath += ' Q ' + curr.x + ' ' + curr.y + ' ' + curr.x + ' ' + curr.y;
-            }
-            svgInner += '<path d="' + dPath + '" fill="none" stroke="' + color + '" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>';
-        }
-        if (svg) svg.innerHTML = svgInner;
-
-        var labelsHtml = '';
-        for (var d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
-            labelsHtml += '<span>' + d.getDate() + '</span>';
-        }
-        if (labels) labels.innerHTML = labelsHtml;
-    }
-        }
-
-        var svgInner = '';
-        svgInner += '<line x1="' + pad + '" y1="' + pad + '" x2="' + pad + '" y2="' + (pad + usableH) + '" stroke="#EDE8E2" stroke-width="1"/>';
-        svgInner += '<line x1="' + pad + '" y1="' + (pad + usableH) + '" x2="' + (pad + usableW) + '" y2="' + (pad + usableH) + '" stroke="#EDE8E2" stroke-width="1"/>';
-
-        if (points.length >= 2) {
-            var dPath = 'M ' + points[0].x + ' ' + points[0].y;
-            for (var i = 1; i < points.length; i++) {
-                var prev = points[i - 1];
-                var curr = points[i];
-                var cpX = (prev.x + curr.x) / 2;
-                dPath += ' Q ' + prev.x + ' ' + prev.y + ' ' + cpX + ' ' + ((prev.y + curr.y) / 2);
-                dPath += ' Q ' + curr.x + ' ' + curr.y + ' ' + curr.x + ' ' + curr.y;
-            }
-            svgInner += '<path d="' + dPath + '" fill="none" stroke="' + color + '" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>';
-        }
-
-        if (svg) svg.innerHTML = svgInner;
-
-        var labelsHtml = '';
-        for (var d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
-            labelsHtml += '<span>' + d.getDate() + '</span>';
-        }
-        if (labels) labels.innerHTML = labelsHtml;
-    }
-
-    // Подключаем фильтры гистограммы
-    document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('histo-filter')) {
-            var filter = e.target.dataset.filter;
-            updateHistoFilter(filter);
-        }
-    });
-
-    // ===== МОДАЛКИ =====
-    function openModal() {
-        document.getElementById('modalOverlay').classList.add('open');
-        document.getElementById('taskNameInput').focus();
-    }
-
-    function closeModal() {
-        document.getElementById('modalOverlay').classList.remove('open');
-        document.getElementById('taskNameInput').value = '';
-        document.getElementById('taskCognitive').value = 5;
-        document.getElementById('taskPhysical').value = 5;
-        document.getElementById('taskMoral').value = 5;
-        document.getElementById('taskCyclic').checked = false;
-        document.getElementById('cyclicDays').style.display = 'none';
-        document.getElementById('cogVal').textContent = '5';
-        document.getElementById('physVal').textContent = '5';
-        document.getElementById('moralVal').textContent = '5';
-    }
-
-    function closeModalOutside(e) {
-        if (e.target === document.getElementById('modalOverlay')) closeModal();
-    }
-
-    function addTask() {
-        var name = document.getElementById('taskNameInput').value.trim();
-        if (!name) {
-            showToast('Введи название задачи 🌸');
-            return;
-        }
-        var project = document.getElementById('taskProjectInput').value;
-        var cognitive = parseInt(document.getElementById('taskCognitive').value);
-        var physical = parseInt(document.getElementById('taskPhysical').value);
-        var moral = parseInt(document.getElementById('taskMoral').value);
-        var cyclic = document.getElementById('taskCyclic').checked;
-        var activeChips = document.querySelectorAll('.week-day-chip.active');
-        var days = [];
-        if (cyclic) {
-            activeChips.forEach(function(c) { days.push(parseInt(c.dataset.day)); });
-        }
-        var forced = (getTaskStatus({ cognitive: cognitive, physical: physical, moral: moral, forced: false }) === 'red');
-
-        tasks.unshift({ name: name, project: project, cognitive: cognitive, physical: physical, moral: moral, cyclic: cyclic, days: days, forced: forced });
-        closeModal();
-        updateUI();
-        showToast(forced ? 'Задача добавлена принудительно 🛡️' : 'Задача добавлена ✨');
-    }
-
-    document.getElementById('taskCyclic').addEventListener('change', function() {
-        document.getElementById('cyclicDays').style.display = this.checked ? 'block' : 'none';
-        if (this.checked) {
-            var sel = document.getElementById('weekDaysSelect');
-            sel.innerHTML = '';
-            ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'].forEach(function(d, i) {
-                var chip = document.createElement('button');
-                chip.className = 'week-day-chip';
-                chip.textContent = d;
-                chip.dataset.day = i + 1;
-                chip.addEventListener('click', function() { chip.classList.toggle('active'); });
-                sel.appendChild(chip);
-            });
-        }
-    });
-
-    // ===== АВТОРИЗАЦИЯ =====
-    function startAnonymous() {
-        isAnonymous = true;
-        document.getElementById('authModalOverlay').classList.remove('open');
-        showToast('Данные не сохранятся после выхода 👤');
-    }
-
-    function closeAuthModalOutside(e) {
-        if (e.target === document.getElementById('authModalOverlay')) {
-            e.target.classList.remove('open');
-        }
-    }
-
-
-    function updateLastPeriodDateCalc() {
-        var firstDate = new Date(document.getElementById('firstPeriodDate').value);
-        var periodLen = parseInt(document.getElementById('periodLenSlider').value);
-        if (firstDate && !isNaN(firstDate.getTime()) && periodLen) {
-            var lastDate = new Date(firstDate);
-            lastDate.setDate(lastDate.getDate() + periodLen - 1);
-            document.getElementById('lastPeriodDateCalc').textContent = lastDate.toLocaleDateString('ru-RU');
-        } else {
-            document.getElementById('lastPeriodDateCalc').textContent = '—';
-        }
-    }
-
-    document.getElementById('firstPeriodDate').addEventListener('change', updateLastPeriodDateCalc);
-    document.getElementById('periodLenSlider').addEventListener('input', function() {
-        document.getElementById('periodLenVal').textContent = this.value;
-        updateLastPeriodDateCalc();
-    });
-
-    document.getElementById('addMoreDatesBtn').addEventListener('click', function() {
-        extraPeriodCount++;
-        var container = document.getElementById('extraDatesContainer');
-        var monthsAgo = extraPeriodCount + 1;
-        var div = document.createElement('div');
-        div.style.marginBottom = '12px';
-        div.style.padding = '12px';
-        div.style.background = '#F9F7F4';
-        div.style.borderRadius = '12px';
-
-        div.innerHTML = '<div class="modal-label">🗓 ' + monthsAgo + ' месяца назад</div>' +
-            '<div class="modal-label">Первый день месячных</div>' +
-            '<input class="modal-input extra-period-first" type="date" placeholder="Первый день">' +
-            '<div class="modal-label" style="margin-top:8px;">📏 Длина: <strong class="extra-period-len-val">5</strong> дней</div>' +
-            '<div class="slider-pair"><span>2</span><input type="range" min="2" max="10" value="5" class="extra-period-slider" oninput="this.parentElement.previousElementSibling.querySelector(\'strong\').textContent=this.value;updateExtraLastDate(this);"><span>10</span></div>' +
-            '<div class="modal-label">Последний день (авто)</div>' +
-            '<div class="modal-input extra-period-last" style="display:flex;align-items:center;justify-content:center;background:#F9F7F4;color:var(--text);font-weight:600;">—</div>';
-
-        container.appendChild(div);
-
-        var slider = div.querySelector('.extra-period-slider');
-        var firstInput = div.querySelector('.extra-period-first');
-        firstInput.addEventListener('change', function() { updateExtraLastDate(slider); });
-        slider.addEventListener('input', function() { updateExtraLastDate(this); });
-    });
-
-    function updateExtraLastDate(slider) {
-        var div = slider.parentElement.parentElement;
-        var firstInput = div.querySelector('.extra-period-first');
-        var lastDiv = div.querySelector('.extra-period-last');
-        var firstDate = new Date(firstInput.value);
-        var periodLen = parseInt(slider.value);
-        if (firstDate && !isNaN(firstDate.getTime()) && periodLen) {
-            var lastDate = new Date(firstDate);
-            lastDate.setDate(lastDate.getDate() + periodLen - 1);
-            lastDiv.textContent = lastDate.toLocaleDateString('ru-RU');
-        } else {
-            lastDiv.textContent = '—';
-        }
-    }
-
-    function saveCycleSetup() {
-        var firstDate = document.getElementById('firstPeriodDate').value;
-        periodLengthDays = parseInt(document.getElementById('periodLenSlider').value);
-        isIrregular = document.getElementById('irregularCycle').checked;
-        isPregnant = document.getElementById('pregnantCheck').checked;
-
-        if (isPregnant) {
-            cycleLength = 280;
-            demoCycle = false;
-            showToast('Включён режим беременности 🤰');
-        } else if (firstDate) {
-            lastPeriodDate = new Date(firstDate);
-            var allDates = [firstDate];
-            document.querySelectorAll('.extra-period-first').forEach(function(input) {
-                if (input.value) allDates.push(input.value);
-            });
-            allDates.sort();
-            if (allDates.length >= 2) {
-                var totalDiff = 0;
-                for (var i = 1; i < allDates.length; i++) {
-                    totalDiff += Math.floor((new Date(allDates[i]) - new Date(allDates[i-1])) / 86400000);
-                }
-                cycleLength = Math.round(totalDiff / (allDates.length - 1));
-            }
-            demoCycle = false;
-        }
-
-        if (isIrregular && !isPregnant) {
-            showToast('Приложение будет анализировать самочувствие и учиться. Пожалуйста, заполняйте шкалы ежедневно 💛');
-        }
-
-        document.getElementById('cycleSetupOverlay').classList.remove('open');
-        document.getElementById('cycleSetupCard').style.display = 'none';
-
-        if (!isPregnant && lastPeriodDate) {
-            var diff = Math.floor((new Date() - lastPeriodDate) / 86400000);
-            currentDay = ((diff % cycleLength) + cycleLength) % cycleLength + 1;
-        }
-
-        updateUI();
-        showToast('Цикл сохранён! Изменить можно в ⚙️');
-    }
-
-    // ===== НАВИГАЦИЯ =====
-    document.querySelectorAll('.nav-item[data-tab]').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            var tab = btn.dataset.tab;
-            if (tab === 'rhythm') {
-                showRhythmScreen();
-                return;
-            }
-            if (tab === 'inbox') {
-                showInboxScreen();
-                return;
-            }
-            if (tab === 'projects') {
-                showProjectsScreen();
-                return;
-            }
-            showTab(tab);
-        });
-    });
-
-    var rhythmBackBtn = document.getElementById('rhythmBackBtn');
-    if (rhythmBackBtn) {
-        rhythmBackBtn.addEventListener('click', hideRhythmScreen);
-    }
-
-    document.getElementById('inboxBackBtn').addEventListener('click', function() {
-        document.getElementById('inboxScreen').classList.remove('active');
-        document.getElementById('mainScreen').style.display = 'block';
-        document.getElementById('bottomNav').style.display = 'flex';
-        updateUI();
-    });
-
-    document.getElementById('projectsBackBtn').addEventListener('click', function() {
-        document.getElementById('projectsScreen').classList.remove('active');
-        document.getElementById('mainScreen').style.display = 'block';
-        document.getElementById('bottomNav').style.display = 'flex';
-        updateUI();
-    });
-
-    document.getElementById('prevMonth').addEventListener('click', function() {
-        rhythmMonth--;
-        if (rhythmMonth < 0) {
-            rhythmMonth = 11;
-            rhythmYear--;
-        }
-        renderRhythm();
-    });
-
-    document.getElementById('nextMonth').addEventListener('click', function() {
-        rhythmMonth++;
-        if (rhythmMonth > 11) {
-            rhythmMonth = 0;
-            rhythmYear++;
-        }
-        renderRhythm();
-    });
-
-    document.getElementById('profileBtn').addEventListener('click', function() {
-        var newName = prompt('Твоё имя?', userName);
-        if (newName !== null && newName.trim()) {
-            userName = newName.trim();
-            updateUI();
-            showToast('Имя обновлено 💖');
-        }
-    });
-
-    document.getElementById('settingsBtn').addEventListener('click', function() {
-        setupCycle();
-    });
-
-    document.getElementById('notificationsBtn').addEventListener('click', function() {
-        showToast('🔔 Уведомления — в следующей версии');
-    });
-
-    // ===== ОНБОРДИНГ =====
-    var onboardingSlides = [
-        { icon: '🌰🌿🌸🍂', title: 'Твой цикл — твой ритм', text: 'Rootine делит твой менструальный цикл на 4 фазы: Отдыхай, Расти, Расцветай, Заземляйся. Каждая фаза влияет на твою энергию, ум и настроение.' },
-        { icon: '⚡️🧩❤️', title: 'Три ресурса', text: 'Отмечай каждый день уровень физики, ума и моральной нагрузки. Это поможет алгоритму лучше понимать твоё состояние и подбирать задачи.' },
-        { icon: '📋✨', title: 'Умные задачи', text: 'Добавляй задачи с оценкой сложности. Rootine сам подскажет, когда лучше заняться спортом, а когда — сложными переговорами.' }
-    ];
-
-    var currentSlide = 0;
-
-    function renderOnboardingSlide() {
-        var slide = onboardingSlides[currentSlide];
-        document.getElementById('onboardingSlides').innerHTML = '<div class="slide active"><div class="onboarding-slide-icon">' + slide.icon + '</div><div class="onboarding-slide-title">' + slide.title + '</div><div class="onboarding-slide-text">' + slide.text + '</div></div>';
-        var dots = document.getElementById('onboardingDots');
-        dots.innerHTML = '';
-        for (var i = 0; i < onboardingSlides.length; i++) {
-            var dot = document.createElement('div');
-            dot.className = 'onboarding-dot' + (i === currentSlide ? ' active' : '');
-            dots.appendChild(dot);
-        }
-        document.getElementById('onboardingNext').textContent = currentSlide < onboardingSlides.length - 1 ? 'Далее' : 'Понятно, начнём!';
-    }
-
-    document.getElementById('onboardingNext').addEventListener('click', function() {
-        if (currentSlide < onboardingSlides.length - 1) {
-            currentSlide++;
-            renderOnboardingSlide();
-        } else {
-            closeOnboarding();
-        }
-    });
-
-    function closeOnboarding() {
-        document.getElementById('onboardingOverlay').classList.remove('open');
-        currentSlide = 0;
-    }
-
-    // ===== СОХРАНЕНИЕ НАСТРОЕНИЯ =====
-    document.getElementById('saveMoodBtn').addEventListener('click', function() {
-        var dateStr = getActiveCheckinDate();
-        var checkin = {
-            date: dateStr,
-            cycleDay: currentDay,
-            physical: resources.physical,
-            cognitive: resources.cognitive,
-            emotional: resources.emotional
-        };
-        var history = JSON.parse(localStorage.getItem('checkins') || '[]');
-        var existingIndex = history.findIndex(function(item) { return item.date === dateStr; });
-        if (existingIndex >= 0) {
-            history[existingIndex] = checkin;
-        } else {
-            history.push(checkin);
-        }
-        localStorage.setItem('checkins', JSON.stringify(history));
-        moodSavedForActiveDate = true;
-        updateUI();
-        showToast('Состояние сохранено 💛');
-    });
-
-    document.getElementById('editMoodLink').addEventListener('click', function() {
-        moodSavedForActiveDate = false;
-        updateUI();
-        showToast('Можешь изменить оценку ✨');
-    });
-
-    // ===== ИНИЦИАЛИЗАЦИЯ =====
-    loadData();
-    setupSlider('sliderBgPhysical', 'sliderFillPhysical', 'thumbPhysical', 'valPhysical', 'physical');
-    setupSlider('sliderBgCognitive', 'sliderFillCognitive', 'thumbCognitive', 'valCognitive', 'cognitive');
-    setupSlider('sliderBgEmotional', 'sliderFillEmotional', 'thumbEmotional', 'valEmotional', 'emotional');
-    updateUI();
-
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-            navigator.serviceWorker.register('sw.js').catch(function() {});
-        });
-    }
+    updateHistoFilter(activeHistoFilter);
+}
+
+function updateHistoFilter(filter){activeHistoFilter=filter;
+    document.querySelectorAll('.histo-filter').forEach(function(btn){btn.classList.toggle('active',btn.dataset.filter===filter);});
+    document.querySelectorAll('.histo-mini-bar').forEach(function(bar){bar.classList.remove('dimmed');});
+    if(filter!=='all'){var typeMap={cognitive:'cog',physical:'phys',emotional:'emo'};document.querySelectorAll('.histo-mini-bar').forEach(function(bar){if(!bar.classList.contains(typeMap[filter]))bar.classList.add('dimmed');});}
+    var wavesSvg=document.getElementById('wavesSvg'),wavesLabels=document.getElementById('wavesLabels');
+    if(filter==='all'){if(wavesSvg)wavesSvg.style.display='none';if(wavesLabels)wavesLabels.style.display='none';}else{if(wavesSvg)wavesSvg.style.display='block';if(wavesLabels)wavesLabels.style.display='flex';renderSingleWave(filter);}
+}
+
+function renderSingleWave(filter){
+    var year=now.getFullYear(),month=now.getMonth(),history=JSON.parse(localStorage.getItem('checkins')||'[]'),svg=document.getElementById('wavesSvg'),labels=document.getElementById('wavesLabels'),w=360,h=100,pad=0,usableW=w,usableH=h,keyMap={cognitive:'cognitive',physical:'physical',emotional:'emotional'},colorMap={cognitive:'#E8B86D',physical:'#9CBA7F',emotional:'#E8B4BC'},key=keyMap[filter],color=colorMap[filter],points=[];
+    var center=new Date(year,month,rhythmSelectedDay),startDate=new Date(center);startDate.setDate(startDate.getDate()-3);
+    var endDate=new Date(center);endDate.setDate(endDate.getDate()+3);
+    var dayIndex=0,totalDays=7;
+    for(var d=new Date(startDate);d<=endDate;d.setDate(d.getDate()+1)){var dateStr=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'),checkin=history.find(function(c){return c.date===dateStr;}),x=pad+(dayIndex/(totalDays-1))*usableW;dayIndex++;if(checkin&&checkin[key])points.push({x:x,y:usableH-(checkin[key]/10)*usableH});}
+    var svgInner='';
+    if(points.length>=2){var dPath='M '+points[0].x+' '+points[0].y;for(var i=1;i<points.length;i++){var prev=points[i-1],curr=points[i],cpX=(prev.x+curr.x)/2;dPath+=' Q '+prev.x+' '+prev.y+' '+cpX+' '+((prev.y+curr.y)/2);dPath+=' Q '+curr.x+' '+curr.y+' '+curr.x+' '+curr.y;}svgInner+='<path d="'+dPath+'" fill="none" stroke="'+color+'" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>';}
+    if(svg)svg.innerHTML=svgInner;
+    var labelsHtml='';for(var d=new Date(startDate);d<=endDate;d.setDate(d.getDate()+1)){labelsHtml+='<span>'+d.getDate()+'</span>';}if(labels)labels.innerHTML=labelsHtml;
+}
+
+document.addEventListener('click',function(e){if(e.target.classList.contains('histo-filter'))updateHistoFilter(e.target.dataset.filter);});
+
+function openModal(){document.getElementById('modalOverlay').classList.add('open');document.getElementById('taskNameInput').focus();}
+function closeModal(){document.getElementById('modalOverlay').classList.remove('open');document.getElementById('taskNameInput').value='';document.getElementById('taskCognitive').value=5;document.getElementById('taskPhysical').value=5;document.getElementById('taskMoral').value=5;document.getElementById('taskCyclic').checked=false;document.getElementById('cyclicDays').style.display='none';document.getElementById('cogVal').textContent='5';document.getElementById('physVal').textContent='5';document.getElementById('moralVal').textContent='5';}
+function closeModalOutside(e){if(e.target===document.getElementById('modalOverlay'))closeModal();}
+function addTask(){var name=document.getElementById('taskNameInput').value.trim();if(!name){showToast('Введи название задачи 🌸');return;}var project=document.getElementById('taskProjectInput').value,cognitive=parseInt(document.getElementById('taskCognitive').value),physical=parseInt(document.getElementById('taskPhysical').value),moral=parseInt(document.getElementById('taskMoral').value),cyclic=document.getElementById('taskCyclic').checked,activeChips=document.querySelectorAll('.week-day-chip.active'),days=[];if(cyclic)activeChips.forEach(function(c){days.push(parseInt(c.dataset.day));});var forced=(getTaskStatus({cognitive:cognitive,physical:physical,moral:moral,forced:false})==='red');tasks.unshift({name:name,project:project,cognitive:cognitive,physical:physical,moral:moral,cyclic:cyclic,days:days,forced:forced});closeModal();updateUI();showToast(forced?'Задача добавлена принудительно 🛡️':'Задача добавлена ✨');}
+document.getElementById('taskCyclic').addEventListener('change',function(){document.getElementById('cyclicDays').style.display=this.checked?'block':'none';if(this.checked){var sel=document.getElementById('weekDaysSelect');sel.innerHTML='';['Пн','Вт','Ср','Чт','Пт','Сб','Вс'].forEach(function(d,i){var chip=document.createElement('button');chip.className='week-day-chip';chip.textContent=d;chip.dataset.day=i+1;chip.addEventListener('click',function(){chip.classList.toggle('active');});sel.appendChild(chip);});}});
+
+function startAnonymous(){isAnonymous=true;document.getElementById('authModalOverlay').classList.remove('open');showToast('Данные не сохранятся после выхода 👤');}
+function closeAuthModalOutside(e){if(e.target===document.getElementById('authModalOverlay'))e.target.classList.remove('open');}
+
+function setupCycle(){document.getElementById('cycleSetupOverlay').classList.add('open');document.getElementById('firstPeriodDate').value='';document.getElementById('lastPeriodDateCalc').textContent='—';document.getElementById('periodLenSlider').value=5;document.getElementById('periodLenVal').textContent='5';periodDates=[];extraPeriodCount=0;document.getElementById('extraDatesContainer').innerHTML='';document.getElementById('cyclePreview').style.display='none';document.getElementById('irregularCycle').checked=false;document.getElementById('pregnantCheck').checked=false;}
+function updateLastPeriodDateCalc(){var firstDate=new Date(document.getElementById('firstPeriodDate').value),periodLen=parseInt(document.getElementById('periodLenSlider').value);if(firstDate&&!isNaN(firstDate.getTime())&&periodLen){var lastDate=new Date(firstDate);lastDate.setDate(lastDate.getDate()+periodLen-1);document.getElementById('lastPeriodDateCalc').textContent=lastDate.toLocaleDateString('ru-RU');}else{document.getElementById('lastPeriodDateCalc').textContent='—';}}
+document.getElementById('firstPeriodDate').addEventListener('change',updateLastPeriodDateCalc);
+document.getElementById('periodLenSlider').addEventListener('input',function(){document.getElementById('periodLenVal').textContent=this.value;updateLastPeriodDateCalc();});
+
+document.getElementById('addMoreDatesBtn').addEventListener('click',function(){extraPeriodCount++;var container=document.getElementById('extraDatesContainer'),monthsAgo=extraPeriodCount+1,div=document.createElement('div');div.style.marginBottom='12px';div.style.padding='12px';div.style.background='#F9F7F4';div.style.borderRadius='12px';
+    div.innerHTML='<div class="modal-label">🗓 '+monthsAgo+' месяца назад</div><div class="modal-label">Первый день месячных</div><input class="modal-input extra-period-first" type="date" placeholder="Первый день"><div class="modal-label" style="margin-top:8px;">📏 Длина: <strong class="extra-period-len-val">5</strong> дней</div><div class="slider-pair"><span>2</span><input type="range" min="2" max="10" value="5" class="extra-period-slider" oninput="this.parentElement.previousElementSibling.querySelector(\'strong\').textContent=this.value;updateExtraLastDate(this);"><span>10</span></div><div class="modal-label">Последний день (авто)</div><div class="modal-input extra-period-last" style="display:flex;align-items:center;justify-content:center;background:#F9F7F4;color:var(--text);font-weight:600;">—</div>';
+    container.appendChild(div);
+    var slider=div.querySelector('.extra-period-slider'),firstInput=div.querySelector('.extra-period-first');
+    firstInput.addEventListener('change',function(){updateExtraLastDate(slider);});slider.addEventListener('input',function(){updateExtraLastDate(this);});
+});
+
+function updateExtraLastDate(slider){var div=slider.parentElement.parentElement,firstInput=div.querySelector('.extra-period-first'),lastDiv=div.querySelector('.extra-period-last'),firstDate=new Date(firstInput.value),periodLen=parseInt(slider.value);if(firstDate&&!isNaN(firstDate.getTime())&&periodLen){var lastDate=new Date(firstDate);lastDate.setDate(lastDate.getDate()+periodLen-1);lastDiv.textContent=lastDate.toLocaleDateString('ru-RU');}else{lastDiv.textContent='—';}}
+
+function saveCycleSetup(){
+    var firstDate=document.getElementById('firstPeriodDate').value;periodLengthDays=parseInt(document.getElementById('periodLenSlider').value);isIrregular=document.getElementById('irregularCycle').checked;isPregnant=document.getElementById('pregnantCheck').checked;
+    if(isPregnant){cycleLength=280;demoCycle=false;showToast('Включён режим беременности 🤰');}
+    else if(firstDate){lastPeriodDate=new Date(firstDate);var allDates=[firstDate];document.querySelectorAll('.extra-period-first').forEach(function(input){if(input.value)allDates.push(input.value);});allDates.sort();if(allDates.length>=2){var totalDiff=0;for(var i=1;i<allDates.length;i++)totalDiff+=Math.floor((new Date(allDates[i])-new Date(allDates[i-1]))/86400000);cycleLength=Math.round(totalDiff/(allDates.length-1));}demoCycle=false;}
+    if(isIrregular&&!isPregnant){showToast('Приложение будет анализировать самочувствие и учиться. Пожалуйста, заполняйте шкалы ежедневно 💛');}
+    document.getElementById('cycleSetupOverlay').classList.remove('open');document.getElementById('cycleSetupCard').style.display='none';
+    if(!isPregnant&&lastPeriodDate){var diff=Math.floor((new Date()-lastPeriodDate)/86400000);currentDay=((diff%cycleLength)+cycleLength)%cycleLength+1;}
+    updateUI();showToast('Цикл сохранён! Изменить можно в ⚙️');
+}
+
+document.querySelectorAll('.nav-item[data-tab]').forEach(function(btn){btn.addEventListener('click',function(){var tab=btn.dataset.tab;if(tab==='rhythm'){showRhythmScreen();return;}if(tab==='inbox'){showInboxScreen();return;}if(tab==='projects'){showProjectsScreen();return;}showTab(tab);});});
+
+var rhythmBackBtn=document.getElementById('rhythmBackBtn');if(rhythmBackBtn)rhythmBackBtn.addEventListener('click',hideRhythmScreen);
+document.getElementById('inboxBackBtn').addEventListener('click',function(){document.getElementById('inboxScreen').classList.remove('active');document.getElementById('mainScreen').style.display='block';document.getElementById('bottomNav').style.display='flex';updateUI();});
+document.getElementById('projectsBackBtn').addEventListener('click',function(){document.getElementById('projectsScreen').classList.remove('active');document.getElementById('mainScreen').style.display='block';document.getElementById('bottomNav').style.display='flex';updateUI();});
+
+document.getElementById('prevMonth').addEventListener('click',function(){rhythmMonth--;if(rhythmMonth<0){rhythmMonth=11;rhythmYear--;}renderRhythm();});
+document.getElementById('nextMonth').addEventListener('click',function(){rhythmMonth++;if(rhythmMonth>11){rhythmMonth=0;rhythmYear++;}renderRhythm();});
+
+document.getElementById('profileBtn').addEventListener('click',function(){var newName=prompt('Твоё имя?',userName);if(newName!==null&&newName.trim()){userName=newName.trim();updateUI();showToast('Имя обновлено 💖');}});
+document.getElementById('settingsBtn').addEventListener('click',function(){setupCycle();});
+document.getElementById('notificationsBtn').addEventListener('click',function(){showToast('🔔 Уведомления — в следующей версии');});
+
+var onboardingSlides=[{icon:'🌰🌿🌸🍂',title:'Твой цикл — твой ритм',text:'Rootine делит твой менструальный цикл на 4 фазы: Отдыхай, Расти, Расцветай, Заземляйся. Каждая фаза влияет на твою энергию, ум и настроение.'},{icon:'⚡️🧩❤️',title:'Три ресурса',text:'Отмечай каждый день уровень физики, ума и моральной нагрузки. Это поможет алгоритму лучше понимать твоё состояние и подбирать задачи.'},{icon:'📋✨',title:'Умные задачи',text:'Добавляй задачи с оценкой сложности. Rootine сам подскажет, когда лучше заняться спортом, а когда — сложными переговорами.'}],currentSlide=0;
+function renderOnboardingSlide(){var slide=onboardingSlides[currentSlide];document.getElementById('onboardingSlides').innerHTML='<div class="slide active"><div class="onboarding-slide-icon">'+slide.icon+'</div><div class="onboarding-slide-title">'+slide.title+'</div><div class="onboarding-slide-text">'+slide.text+'</div></div>';var dots=document.getElementById('onboardingDots');dots.innerHTML='';for(var i=0;i<onboardingSlides.length;i++){var dot=document.createElement('div');dot.className='onboarding-dot'+(i===currentSlide?' active':'');dots.appendChild(dot);}document.getElementById('onboardingNext').textContent=currentSlide<onboardingSlides.length-1?'Далее':'Понятно, начнём!';}
+document.getElementById('onboardingNext').addEventListener('click',function(){if(currentSlide<onboardingSlides.length-1){currentSlide++;renderOnboardingSlide();}else closeOnboarding();});
+function closeOnboarding(){document.getElementById('onboardingOverlay').classList.remove('open');currentSlide=0;}
+
+document.getElementById('saveMoodBtn').addEventListener('click',function(){var dateStr=getActiveCheckinDate(),checkin={date:dateStr,cycleDay:currentDay,physical:resources.physical,cognitive:resources.cognitive,emotional:resources.emotional},history=JSON.parse(localStorage.getItem('checkins')||'[]'),existingIndex=history.findIndex(function(item){return item.date===dateStr;});if(existingIndex>=0)history[existingIndex]=checkin;else history.push(checkin);localStorage.setItem('checkins',JSON.stringify(history));moodSavedForActiveDate=true;updateUI();showToast('Состояние сохранено 💛');});
+document.getElementById('editMoodLink').addEventListener('click',function(){moodSavedForActiveDate=false;updateUI();showToast('Можешь изменить оценку ✨');});
+
+loadData();
+setupSlider('sliderBgPhysical','sliderFillPhysical','thumbPhysical','valPhysical','physical');
+setupSlider('sliderBgCognitive','sliderFillCognitive','thumbCognitive','valCognitive','cognitive');
+setupSlider('sliderBgEmotional','sliderFillEmotional','thumbEmotional','valEmotional','emotional');
+updateUI();
+if('serviceWorker' in navigator)window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});
 </script>
-
 </body>
 </html>
