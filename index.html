@@ -353,18 +353,13 @@
             return div.innerHTML;
         }
 
-                        function getCycleDayForDate(date) {
+        function getCycleDayForDate(date) {
             if (AppState.demoCycle || !AppState.lastPeriodDate) {
-                // Демо: первый день цикла = 5 дней назад от СЕГОДНЯ
-                var today = new Date();
-                today.setHours(0, 0, 0, 0);
-                var demoStart = new Date(today);
-                demoStart.setDate(today.getDate() - 5);
-                
-                var diff = Math.floor((date.getTime() - demoStart.getTime()) / 86400000);
-                // Правильная обработка отрицательных чисел
-                var cycleDay = ((diff % 28) + 28) % 28 + 1;
-                return cycleDay;
+                // В демо: «первый день цикла» = 5 дней назад от сегодня
+                var demoStart = new Date();
+                demoStart.setDate(demoStart.getDate() - 5);
+                var diff = Math.floor((date - demoStart) / 86400000);
+                return ((diff % 28) + 28) % 28 + 1;
             }
             var diff = Math.floor((date - AppState.lastPeriodDate) / 86400000);
             return ((diff % AppState.cycleLength) + AppState.cycleLength) % AppState.cycleLength + 1;
