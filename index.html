@@ -889,16 +889,98 @@ function updateHistoFilter(filter){activeHistoFilter=filter;
     if(filter==='all'){if(wavesSvg)wavesSvg.style.display='none';if(wavesLabels)wavesLabels.style.display='none';}else{if(wavesSvg)wavesSvg.style.display='block';if(wavesLabels)wavesLabels.style.display='flex';renderSingleWave(filter);}
 }
 
-function renderSingleWave(filter){
-    var year=now.getFullYear(),month=now.getMonth(),history=JSON.parse(localStorage.getItem('checkins')||'[]'),svg=document.getElementById('wavesSvg'),labels=document.getElementById('wavesLabels'),w=360,h=100,pad=0,usableW=w,usableH=h,keyMap={cognitive:'cognitive',physical:'physical',emotional:'emotional'},colorMap={cognitive:'#E8B86D',physical:'#9CBA7F',emotional:'#E8B4BC'},key=keyMap[filter],color=colorMap[filter],points=[];
-    var center=new Date(year,month,rhythmSelectedDay),startDate=new Date(center);startDate.setDate(startDate.getDate()-3);
-    var endDate=new Date(center);endDate.setDate(endDate.getDate()+3);
-    var dayIndex=0,totalDays=7;
-    for(var d=new Date(startDate);d<=endDate;d.setDate(d.getDate()+1)){var dateStr=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'),checkin=history.find(function(c){return c.date===dateStr;}),x=pad+(dayIndex/(totalDays-1))*usableW;dayIndex++;if(checkin&&checkin[key])points.push({x:x,y:usableH-(checkin[key]/10)*usableH});}
-    var svgInner='';
-    if(points.length>=2){var dPath='M '+points[0].x+' '+points[0].y;for(var i=1;i<points.length;i++){var prev=points[i-1],curr=points[i],cpX=(prev.x+curr.x)/2;dPath+=' Q '+prev.x+' '+prev.y+' '+cpX+' '+((prev.y+curr.y)/2);dPath+=' Q '+curr.x+' '+curr.y+' '+curr.x+' '+curr.y;}svgInner+='<path d="'+dPath+'" fill="none" stroke="'+color+'" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>';}
-    if(svg)svg.innerHTML=svgInner;
-    var labelsHtml='';for(var d=new Date(startDate);d<=endDate;d.setDate(d.getDate()+1)){labelsHtml+='<span>'+d.getDate()+'</span>';}if(labels)labels.innerHTML=labelsHtml;
+function renderSingleWave(filter) {
+    var year = now.getFullYear();
+    var month = now.getMonth();
+    var history = JSON.parse(localStorage.getItem('checkins') || '[]');
+    var svg = document.getElementById('wavesSvg');
+    var labels = document.getElementById('wavesLabels');
+    var w = 360;
+    var h = 100;
+    var pad = 0;
+    var usableW = w;
+    var usableH = h;
+
+    var keyMap = { cognitive: 'cognitive', physical: 'physical', emotional: 'emotional' };
+    var colorMap = { cognitive: '#E8B86D', physical: '#9CBA7F', emotional: '#E8B4BC' };
+    var key = keyMap[filter];
+    var color = colorMap[filter];
+    var points = [];
+
+    var center = new Date(year, month, rhythmSelectedDay);
+    var startDate = new Date(center);
+    startDate.setDate(startDate.getDate() - 3);
+    var endDate = new Date(center);
+    endDate.setDate(endDate.getDate() + 3);
+
+    var dayIndex = 0;
+    var totalDays = 7;
+    for (var d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+        var dateStr = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+        var checkin = history.find(function(c) { return c.date === dateStr; });
+        var x = pad + (dayIndex / (totalDays - 1)) * usableW;
+        dayIndex++;
+        if (checkin && checkin[key]) {
+            points.push({ x: x, y: usableH - (checkin[key] / 10) * usableH });
+        }
+    }
+
+    var svgInner = '';
+    if (points.length >= 2) {
+        // Плавная кривая через все точки (каждые 3 точки = кубическая кривая)
+        var dPath = 'M ' + points[0].x + ' ' + points[0].y;
+        
+        // Если точек 2 или больше — используем кубические кривые
+        for (var i = 0; i < points.length - 1; i++) {
+            var curr = points[i];
+            var next = points[i + 1];
+            
+            // Вычисляем контрольные точки для плавного скругления
+            var cp1x, cp1y, cp2x, cp2y;
+            
+            if (i === 0 && points.length === 2) {
+                // Только 2 точки — простая кривая
+                cp1x = curr.x + (next.x - curr.x) / 3;
+                cp1y = curr.y;
+                cp2x = next.x - (next.x - curr.x) / 3;
+                cp2y = next.y;
+            } else if (i === 0) {
+                // Первая точка
+                var afterNext = points[i + 2] || next;
+                cp1x = curr.x + (next.x - curr.x) / 3;
+                cp1y = curr.y;
+                cp2x = next.x - (afterNext.x - curr.x) / 6;
+                cp2y = next.y - (afterNext.y - curr.y) / 6;
+            } else if (i === points.length - 2) {
+                // Последняя точка
+                var prev = points[i - 1] || curr;
+                cp1x = curr.x + (next.x - prev.x) / 6;
+                cp1y = curr.y + (next.y - prev.y) / 6;
+                cp2x = next.x - (next.x - curr.x) / 3;
+                cp2y = next.y;
+            } else {
+                // Средние точки
+                var prev = points[i - 1];
+                var afterNext = points[i + 2];
+                cp1x = curr.x + (next.x - prev.x) / 6;
+                cp1y = curr.y + (next.y - prev.y) / 6;
+                cp2x = next.x - (afterNext.x - curr.x) / 6;
+                cp2y = next.y - (afterNext.y - curr.y) / 6;
+            }
+            
+            dPath += ' C ' + cp1x + ' ' + cp1y + ', ' + cp2x + ' ' + cp2y + ', ' + next.x + ' ' + next.y;
+        }
+        
+        svgInner += '<path d="' + dPath + '" fill="none" stroke="' + color + '" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>';
+    }
+
+    if (svg) svg.innerHTML = svgInner;
+
+    var labelsHtml = '';
+    for (var d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+        labelsHtml += '<span>' + d.getDate() + '</span>';
+    }
+    if (labels) labels.innerHTML = labelsHtml;
 }
 
 document.addEventListener('click',function(e){if(e.target.classList.contains('histo-filter'))updateHistoFilter(e.target.dataset.filter);});
